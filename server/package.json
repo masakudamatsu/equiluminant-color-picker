@@ -1,0 +1,20 @@
+{
+  "name": "Luminance Picker server",
+  "version": "1.0.0",
+  "description": "A GraphQL server that retrieves RGB color codes whose luminance levels are around the level specified by the user",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "color",
+    "luminance",
+    "RGB color codes"
+  ],
+  "author": "Masa Kudamatsu <masakudamatsu@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/masakudamatsu/luminance-picker.git"
+  }
+}
