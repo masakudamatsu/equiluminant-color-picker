@@ -19,5 +19,8 @@
   },
   "dependencies": {
     "graphql-yoga": "^1.18.3"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.4.1"
   }
 }
