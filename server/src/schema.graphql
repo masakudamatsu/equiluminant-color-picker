@@ -1,3 +1,12 @@
 type Query {
   info: String!
+  feed: [ColorCode!]!
+}
+
+type ColorCode {
+  id: ID!
+  red: Int!
+  green: Int!
+  blue: Int!
+  luminance: Float!
 }
