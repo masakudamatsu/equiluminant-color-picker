@@ -18,3 +18,5 @@ yarn.lock
 server/prisma/rgbColorCodes.csv
 
 server/prisma/rgbColorCodes.db
+
+server/prisma/.Rhistory
