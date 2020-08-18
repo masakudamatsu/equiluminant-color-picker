@@ -21,6 +21,7 @@ let colorCodes = [
 const resolvers = {
   Query: {
     info: () => `This is the API of Luminance Picker`,
+    feed: () => colorCodes,
   },
 };
 
