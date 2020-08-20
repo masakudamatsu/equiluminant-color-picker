@@ -1,5 +1,5 @@
 {
-  "name": "Luminance Picker server",
+  "name": "luminance-picker-server",
   "version": "1.0.0",
   "description": "A GraphQL server that retrieves RGB color codes whose luminance levels are around the level specified by the user",
   "main": "src/index.js",

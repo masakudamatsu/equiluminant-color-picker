@@ -1,5 +1,5 @@
 {
-  "name": "Luminance Picker app",
+  "name": "luminance-picker-app",
   "version": "1.0.0",
   "description": "A full-stack web app that shows the list of colors whose luminance equals to the user-selected color",
   "main": "pages/index.js",
