@@ -20,3 +20,5 @@ server/prisma/rgbColorCodes.csv
 server/prisma/rgbColorCodes.db
 
 server/prisma/.Rhistory
+
+app/.next/
