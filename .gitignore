@@ -22,3 +22,6 @@ server/prisma/rgbColorCodes.db
 server/prisma/.Rhistory
 
 app/.next/
+
+cypress/videos
+cypress/screenshots
