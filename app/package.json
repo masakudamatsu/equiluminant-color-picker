@@ -8,6 +8,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest",
+    "test:e2e": "start-server-and-test dev http://localhost:3000 cy:open",
+    "cy:open": "cypress open"
   },
   "keywords": [
     "color",
@@ -43,6 +45,7 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "jest": "^26.4.1",
     "jest-axe": "^3.5.0",
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "start-server-and-test": "^1.11.3"
   }
 }
