@@ -1,5 +1,5 @@
 function HomePage() {
-  return <div>Welcome to Next.js!</div>;
+  return <h1>Luminance Picker</h1>;
 }
 
 export default HomePage;
