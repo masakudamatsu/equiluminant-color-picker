@@ -22,9 +22,9 @@ describe('Landing Page', () => {
     };
     // execute
     colorList.forEach(color => {
-      cy.findByLabelText(/r/i).type(color.red.toString());
-      cy.findByLabelText(/g/i).type(color.green.toString());
-      cy.findByLabelText(/b/i).type(color.blue.toString()).blur();
+      cy.findByLabelText(/r/i).clear().type(color.red.toString());
+      cy.findByLabelText(/g/i).clear().type(color.green.toString());
+      cy.findByLabelText(/b/i).clear().type(color.blue.toString());
       // verify
       cy.findByText(/contrast ratio with pure black/i).contains(
         contrastRatio(color.red, color.green, color.blue),
