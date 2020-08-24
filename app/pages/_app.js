@@ -3,7 +3,20 @@ function MyApp({Component, pageProps}) {
   const [red, setRed] = useState('');
   const [green, setGreen] = useState('');
   const [blue, setBlue] = useState('');
-  return <Component {...pageProps} red={red} green={green} blue={blue} />;
+
+  const handleChangeRed = event => {
+    setRed(event.target.value);
+  };
+
+  return (
+    <Component
+      {...pageProps}
+      red={red}
+      green={green}
+      blue={blue}
+      handleChangeRed={handleChangeRed}
+    />
+  );
 }
 
 export default MyApp;

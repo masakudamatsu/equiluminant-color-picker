@@ -1,5 +1,6 @@
 import React from 'react';
 import {cleanup, render} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
@@ -11,6 +12,31 @@ const exampleColor = {
   green: 222,
   blue: 20,
 };
+
+const mockHandleChangeRed = jest.fn();
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+test('calls handleChangeRed when the user enters a R value', async () => {
+  // set up
+  const {container, getByLabelText} = render(
+    <InputRGB
+      red=""
+      green={exampleColor.green}
+      blue={exampleColor.blue}
+      handleChangeRed={mockHandleChangeRed}
+    />,
+  );
+  const redInputField = getByLabelText(/r/i);
+  const userInput = '21';
+  // execute
+  await userEvent.type(redInputField, userInput);
+
+  // verify
+  expect(mockHandleChangeRed).toHaveBeenCalledTimes(userInput.length);
+});
 
 test('renders correctly', () => {
   const {container} = render(
