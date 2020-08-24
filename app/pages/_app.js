@@ -10,6 +10,9 @@ function MyApp({Component, pageProps}) {
   const handleChangeGreen = event => {
     setGreen(event.target.value);
   };
+  const handleChangeBlue = event => {
+    setBlue(event.target.value);
+  };
 
   return (
     <Component
@@ -19,6 +22,7 @@ function MyApp({Component, pageProps}) {
       blue={blue}
       handleChangeRed={handleChangeRed}
       handleChangeGreen={handleChangeGreen}
+      handleChangeBlue={handleChangeBlue}
     />
   );
 }

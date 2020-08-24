@@ -15,6 +15,7 @@ const exampleColor = {
 
 const mockHandleChangeRed = jest.fn();
 const mockHandleChangeGreen = jest.fn();
+const mockHandleChangeBlue = jest.fn();
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -30,6 +31,7 @@ describe('onChange events', () => {
         blue={exampleColor.blue}
         handleChangeRed={mockHandleChangeRed}
         handleChangeGreen={mockHandleChangeGreen}
+        handleChangeBlue={mockHandleChangeBlue}
       />,
     );
     const redInputField = getByLabelText(/r/i);
@@ -50,6 +52,7 @@ describe('onChange events', () => {
         blue={exampleColor.blue}
         handleChangeRed={mockHandleChangeRed}
         handleChangeGreen={mockHandleChangeGreen}
+        handleChangeBlue={mockHandleChangeBlue}
       />,
     );
     const greenInputField = getByLabelText(/g/i);
@@ -59,6 +62,27 @@ describe('onChange events', () => {
 
     // verify
     expect(mockHandleChangeGreen).toHaveBeenCalledTimes(userInput.length);
+  });
+
+  test('calls handleChangeBlue when the user enters a B value', () => {
+    // set up
+    const {container, getByLabelText} = render(
+      <InputRGB
+        red={exampleColor.red}
+        green={exampleColor.green}
+        blue=""
+        handleChangeRed={mockHandleChangeRed}
+        handleChangeGreen={mockHandleChangeGreen}
+        handleChangeBlue={mockHandleChangeBlue}
+      />,
+    );
+    const blueInputField = getByLabelText(/b/i);
+    const userInput = '121';
+    // execute
+    userEvent.type(blueInputField, userInput);
+
+    // verify
+    expect(mockHandleChangeBlue).toHaveBeenCalledTimes(userInput.length);
   });
 });
 
@@ -70,6 +94,7 @@ test('renders correctly', () => {
       blue={exampleColor.blue}
       handleChangeRed={mockHandleChangeRed}
       handleChangeGreen={mockHandleChangeGreen}
+      handleChangeBlue={mockHandleChangeBlue}
     />,
   );
   expect(container).toMatchInlineSnapshot(`
@@ -124,6 +149,7 @@ test('is accessible', async () => {
       blue={exampleColor.blue}
       handleChangeRed={mockHandleChangeRed}
       handleChangeGreen={mockHandleChangeGreen}
+      handleChangeBlue={mockHandleChangeBlue}
     />,
   );
   const results = await axe(container);
