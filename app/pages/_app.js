@@ -5,13 +5,16 @@ function MyApp({Component, pageProps}) {
   const [blue, setBlue] = useState('');
 
   const handleChangeRed = event => {
-    setRed(event.target.value);
+    const newRedValue = event.target.value;
+    setRed(newRedValue);
   };
   const handleChangeGreen = event => {
-    setGreen(event.target.value);
+    const newGreenValue = event.target.value;
+    setGreen(newGreenValue);
   };
   const handleChangeBlue = event => {
-    setBlue(event.target.value);
+    const newBlueValue = event.target.value;
+    setBlue(newBlueValue);
   };
 
   return (
