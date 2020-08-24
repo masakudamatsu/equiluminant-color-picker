@@ -1,4 +1,4 @@
-function InputRGB() {
+function InputRGB(props) {
   return (
     <form>
       <label htmlFor="red">
@@ -8,6 +8,7 @@ function InputRGB() {
           id="red"
           inputMode="decimal"
           pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
+          value={props.red}
         />
       </label>
       <label htmlFor="green">
@@ -17,6 +18,7 @@ function InputRGB() {
           id="green"
           inputMode="decimal"
           pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
+          value={props.green}
         />
       </label>
       <label htmlFor="blue">
@@ -26,6 +28,7 @@ function InputRGB() {
           id="blue"
           inputMode="decimal"
           pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
+          value={props.blue}
         />
       </label>
     </form>
