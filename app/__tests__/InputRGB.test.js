@@ -21,8 +21,8 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe('onChange events', () => {
-  test('calls handleChangeRed when the user enters a R value', async () => {
+describe('Tests on onChange events', () => {
+  test('calls handleChangeRed when the user enters a R value', () => {
     // set up
     const {container, getByLabelText} = render(
       <InputRGB
@@ -37,13 +37,13 @@ describe('onChange events', () => {
     const redInputField = getByLabelText(/r/i);
     const userInput = '21';
     // execute
-    await userEvent.type(redInputField, userInput);
+    userEvent.type(redInputField, userInput);
 
     // verify
     expect(mockHandleChangeRed).toHaveBeenCalledTimes(userInput.length);
   });
 
-  test('calls handleChangeGreen when the user enters a G value', async () => {
+  test('calls handleChangeGreen when the user enters a G value', () => {
     // set up
     const {container, getByLabelText} = render(
       <InputRGB
@@ -58,7 +58,7 @@ describe('onChange events', () => {
     const greenInputField = getByLabelText(/g/i);
     const userInput = '9';
     // execute
-    await userEvent.type(greenInputField, userInput);
+    userEvent.type(greenInputField, userInput);
 
     // verify
     expect(mockHandleChangeGreen).toHaveBeenCalledTimes(userInput.length);
