@@ -8,34 +8,58 @@ import 'jest-axe/extend-expect';
 import InputRGB from '../components/InputRGB';
 
 const exampleColor = {
-  red: 123,
-  green: 222,
-  blue: 20,
+  red: '123',
+  green: '222',
+  blue: '20',
 };
 
 const mockHandleChangeRed = jest.fn();
+const mockHandleChangeGreen = jest.fn();
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
-test('calls handleChangeRed when the user enters a R value', async () => {
-  // set up
-  const {container, getByLabelText} = render(
-    <InputRGB
-      red=""
-      green={exampleColor.green}
-      blue={exampleColor.blue}
-      handleChangeRed={mockHandleChangeRed}
-    />,
-  );
-  const redInputField = getByLabelText(/r/i);
-  const userInput = '21';
-  // execute
-  await userEvent.type(redInputField, userInput);
+describe('onChange events', () => {
+  test('calls handleChangeRed when the user enters a R value', async () => {
+    // set up
+    const {container, getByLabelText} = render(
+      <InputRGB
+        red=""
+        green={exampleColor.green}
+        blue={exampleColor.blue}
+        handleChangeRed={mockHandleChangeRed}
+        handleChangeGreen={mockHandleChangeGreen}
+      />,
+    );
+    const redInputField = getByLabelText(/r/i);
+    const userInput = '21';
+    // execute
+    await userEvent.type(redInputField, userInput);
 
-  // verify
-  expect(mockHandleChangeRed).toHaveBeenCalledTimes(userInput.length);
+    // verify
+    expect(mockHandleChangeRed).toHaveBeenCalledTimes(userInput.length);
+  });
+
+  test('calls handleChangeGreen when the user enters a G value', async () => {
+    // set up
+    const {container, getByLabelText} = render(
+      <InputRGB
+        red={exampleColor.red}
+        green=""
+        blue={exampleColor.blue}
+        handleChangeRed={mockHandleChangeRed}
+        handleChangeGreen={mockHandleChangeGreen}
+      />,
+    );
+    const greenInputField = getByLabelText(/g/i);
+    const userInput = '9';
+    // execute
+    await userEvent.type(greenInputField, userInput);
+
+    // verify
+    expect(mockHandleChangeGreen).toHaveBeenCalledTimes(userInput.length);
+  });
 });
 
 test('renders correctly', () => {
@@ -44,6 +68,8 @@ test('renders correctly', () => {
       red={exampleColor.red}
       green={exampleColor.green}
       blue={exampleColor.blue}
+      handleChangeRed={mockHandleChangeRed}
+      handleChangeGreen={mockHandleChangeGreen}
     />,
   );
   expect(container).toMatchInlineSnapshot(`
@@ -96,6 +122,8 @@ test('is accessible', async () => {
       red={exampleColor.red}
       green={exampleColor.green}
       blue={exampleColor.blue}
+      handleChangeRed={mockHandleChangeRed}
+      handleChangeGreen={mockHandleChangeGreen}
     />,
   );
   const results = await axe(container);

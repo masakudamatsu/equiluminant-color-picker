@@ -10,6 +10,7 @@ function HomePage(props) {
         green={props.green}
         blue={props.blue}
         handleChangeRed={props.handleChangeRed}
+        handleChangeGreen={props.handleChangeGreen}
       />
       <p>Contrast ratio with pure black: 5.21</p>
     </>
@@ -21,6 +22,7 @@ HomePage.propTypes = {
   green: PropTypes.string.isRequired,
   blue: PropTypes.string.isRequired,
   handleChangeRed: PropTypes.func.isRequired,
+  handleChangeGreen: PropTypes.func.isRequired,
 };
 
 export default HomePage;

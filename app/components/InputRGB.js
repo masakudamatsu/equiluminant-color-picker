@@ -20,6 +20,7 @@ function InputRGB(props) {
           type="text"
           id="green"
           inputMode="decimal"
+          onChange={props.handleChangeGreen}
           pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
           value={props.green}
         />
@@ -43,6 +44,7 @@ InputRGB.propTypes = {
   green: PropTypes.string.isRequired,
   blue: PropTypes.string.isRequired,
   handleChangeRed: PropTypes.func.isRequired,
+  handleChangeGreen: PropTypes.func.isRequired,
 };
 
 export default InputRGB;
