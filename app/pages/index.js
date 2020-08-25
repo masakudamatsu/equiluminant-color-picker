@@ -8,6 +8,8 @@ function HomePage(props) {
   const router = useRouter();
   const handleClick = e => {
     e.preventDefault();
+    const hue = document.querySelector('input[name="hue"]:checked').value;
+    props.getHueRange(hue);
     router.push('/results');
   };
   return (
