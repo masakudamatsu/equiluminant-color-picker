@@ -9,6 +9,9 @@ function Hue(props) {
   );
 }
 
-Hue.propTypes = {};
+Hue.propTypes = {
+  id: PropTypes.string.isRequired,
+  hue: PropTypes.string.isRequired,
+};
 
 export default Hue;

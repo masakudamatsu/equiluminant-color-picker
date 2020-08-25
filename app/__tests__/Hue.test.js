@@ -8,14 +8,21 @@ import 'jest-axe/extend-expect';
 import Hue from '../components/Hue';
 
 test('renders correctly', () => {
-  const {container} = render(<Hue>Red</Hue>);
+  const {container} = render(
+    <Hue id="red" hue="0">
+      Red
+    </Hue>,
+  );
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <label>
+      <label
+        for="red"
+      >
         <input
+          id="red"
           name="hue"
           type="radio"
-          value=""
+          value="0"
         />
         Red
       </label>
@@ -24,7 +31,11 @@ test('renders correctly', () => {
 });
 
 test('is accessible', async () => {
-  const {container} = render(<Hue>Red</Hue>);
+  const {container} = render(
+    <Hue id="red" hue="0">
+      Red
+    </Hue>,
+  );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
   cleanup();
