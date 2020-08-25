@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types';
+import {useRouter} from 'next/router';
+
 import InputRGB from '../components/InputRGB';
 import InputHue from '../components/InputHue';
 
 function HomePage(props) {
+  const router = useRouter();
+  const handleClick = e => {
+    e.preventDefault();
+    router.push('/results');
+  };
   return (
     <>
       <h1>Luminance Picker</h1>
@@ -16,6 +23,9 @@ function HomePage(props) {
       />
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       <InputHue />
+      <button type="submit" onClick={handleClick}>
+        Get equiluminant colors!
+      </button>
     </>
   );
 }
