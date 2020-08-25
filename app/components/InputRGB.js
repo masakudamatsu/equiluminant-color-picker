@@ -3,33 +3,33 @@ import PropTypes from 'prop-types';
 function InputRGB(props) {
   return (
     <form>
-      <label htmlFor="red">
+      <label htmlFor="R">
         R:
         <input
           type="text"
-          id="red"
+          id="R"
           inputMode="decimal"
           onChange={props.handleChangeRed}
           pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
           value={props.red}
         />
       </label>
-      <label htmlFor="green">
+      <label htmlFor="G">
         G:
         <input
           type="text"
-          id="green"
+          id="G"
           inputMode="decimal"
           onChange={props.handleChangeGreen}
           pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
           value={props.green}
         />
       </label>
-      <label htmlFor="blue">
+      <label htmlFor="B">
         B:
         <input
           type="text"
-          id="blue"
+          id="B"
           inputMode="decimal"
           onChange={props.handleChangeBlue}
           pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"

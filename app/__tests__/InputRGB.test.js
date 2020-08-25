@@ -101,11 +101,11 @@ test('renders correctly', () => {
     <div>
       <form>
         <label
-          for="red"
+          for="R"
         >
           R:
           <input
-            id="red"
+            id="R"
             inputmode="decimal"
             pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
             type="text"
@@ -113,11 +113,11 @@ test('renders correctly', () => {
           />
         </label>
         <label
-          for="green"
+          for="G"
         >
           G:
           <input
-            id="green"
+            id="G"
             inputmode="decimal"
             pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
             type="text"
@@ -125,11 +125,11 @@ test('renders correctly', () => {
           />
         </label>
         <label
-          for="blue"
+          for="B"
         >
           B:
           <input
-            id="blue"
+            id="B"
             inputmode="decimal"
             pattern="1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]"
             type="text"
