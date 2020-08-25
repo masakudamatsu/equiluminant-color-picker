@@ -19,8 +19,9 @@ table_rgb_full <- mutate(table_id_only,
        b = ifelse(blue_srgb > 0.03928,
                        ((blue_srgb + 0.055)/1.055)^2.4,
                        blue_srgb / 12.92),
-       luminance = 0.2126*r + 0.7152*g + 0.0722*b
+       luminance = 0.2126*r + 0.7152*g + 0.0722*b,
+       contrast_ratio = round((luminance + 0.05)/0.05, digits = 3),
 )
 
-table_rgb <- select(table_rgb_full, id, red, green, blue, luminance)
+table_rgb <- select(table_rgb_full, id, red, green, blue, contrast_ratio)
 write_csv(table_rgb, "rgbColorCodes.csv")
