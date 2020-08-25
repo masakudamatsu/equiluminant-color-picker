@@ -12,12 +12,12 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <label>
-        Red
         <input
           name="hue"
           type="radio"
           value=""
         />
+        Red
       </label>
     </div>
   `);
