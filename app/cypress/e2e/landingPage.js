@@ -26,4 +26,19 @@ describe('Landing Page', () => {
       );
     });
   });
+
+  it('shows the list of 12 hues to select from', () => {
+    cy.findByLabelText(/red/i);
+    cy.findByLabelText(/orange/i);
+    cy.findByLabelText(/yellow/i);
+    cy.findByLabelText(/chartreuse/i);
+    cy.findByLabelText('Green');
+    cy.findByLabelText('Spring Green');
+    cy.findByLabelText(/cyan/i);
+    cy.findByLabelText(/azure/i);
+    cy.findByLabelText(/blue/i);
+    cy.findByLabelText(/violet/i);
+    cy.findByLabelText(/magenta/i);
+    cy.findByLabelText(/rose/i);
+});
 });
