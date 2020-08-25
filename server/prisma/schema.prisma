@@ -8,9 +8,10 @@ datasource db {
 }
 
 model rgbColorCodes {
-  id        Int   @default(autoincrement()) @id
-  red       Int
-  green     Int
-  blue      Int
-  luminance Float
+  id             Int   @default(autoincrement()) @id
+  red            Int
+  green          Int
+  blue           Int
+  contrast_ratio Float
+  hue            Int?
 }
