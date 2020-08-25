@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import InputRGB from '../components/InputRGB';
+import InputHue from '../components/InputHue';
 
 function HomePage(props) {
   return (
@@ -14,6 +15,7 @@ function HomePage(props) {
         handleChangeBlue={props.handleChangeBlue}
       />
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
+      <InputHue />
     </>
   );
 }
