@@ -22,7 +22,7 @@ test('renders correctly', () => {
             id="red"
             name="hue"
             type="radio"
-            value="red"
+            value="0"
           />
           Red
         </label>
@@ -33,7 +33,7 @@ test('renders correctly', () => {
             id="orange"
             name="hue"
             type="radio"
-            value="orange"
+            value="30"
           />
           Orange
         </label>
@@ -44,7 +44,7 @@ test('renders correctly', () => {
             id="yellow"
             name="hue"
             type="radio"
-            value="yellow"
+            value="60"
           />
           Yellow
         </label>
@@ -55,7 +55,7 @@ test('renders correctly', () => {
             id="chartreuse"
             name="hue"
             type="radio"
-            value="chartreuse"
+            value="90"
           />
           Chartreuse
         </label>
@@ -66,7 +66,7 @@ test('renders correctly', () => {
             id="green"
             name="hue"
             type="radio"
-            value="green"
+            value="120"
           />
           Green
         </label>
@@ -77,7 +77,7 @@ test('renders correctly', () => {
             id="springGreen"
             name="hue"
             type="radio"
-            value="springGreen"
+            value="150"
           />
           Spring Green
         </label>
@@ -88,7 +88,7 @@ test('renders correctly', () => {
             id="cyan"
             name="hue"
             type="radio"
-            value="cyan"
+            value="180"
           />
           Cyan
         </label>
@@ -99,7 +99,7 @@ test('renders correctly', () => {
             id="azure"
             name="hue"
             type="radio"
-            value="azure"
+            value="210"
           />
           Azure
         </label>
@@ -110,7 +110,7 @@ test('renders correctly', () => {
             id="blue"
             name="hue"
             type="radio"
-            value="blue"
+            value="240"
           />
           Blue
         </label>
@@ -121,7 +121,7 @@ test('renders correctly', () => {
             id="violet"
             name="hue"
             type="radio"
-            value="violet"
+            value="270"
           />
           Violet
         </label>
@@ -132,7 +132,7 @@ test('renders correctly', () => {
             id="magenta"
             name="hue"
             type="radio"
-            value="magenta"
+            value="300"
           />
           Magenta
         </label>
@@ -143,7 +143,7 @@ test('renders correctly', () => {
             id="rose"
             name="hue"
             type="radio"
-            value="rose"
+            value="330"
           />
           Rose
         </label>
