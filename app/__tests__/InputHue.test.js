@@ -18,134 +18,134 @@ test('renders correctly', () => {
         <label
           for="red"
         >
-          Red
           <input
             id="red"
             name="hue"
             type="radio"
-            value="red"
+            value="0"
           />
+          Red
         </label>
         <label
           for="orange"
         >
-          Orange
           <input
             id="orange"
             name="hue"
             type="radio"
-            value="orange"
+            value="30"
           />
+          Orange
         </label>
         <label
           for="yellow"
         >
-          Yellow
           <input
             id="yellow"
             name="hue"
             type="radio"
-            value="yellow"
+            value="60"
           />
+          Yellow
         </label>
         <label
           for="chartreuse"
         >
-          Chartreuse
           <input
             id="chartreuse"
             name="hue"
             type="radio"
-            value="chartreuse"
+            value="90"
           />
+          Chartreuse
         </label>
         <label
           for="green"
         >
-          Green
           <input
             id="green"
             name="hue"
             type="radio"
-            value="green"
+            value="120"
           />
+          Green
         </label>
         <label
           for="springGreen"
         >
-          Spring Green
           <input
             id="springGreen"
             name="hue"
             type="radio"
-            value="springGreen"
+            value="150"
           />
+          Spring Green
         </label>
         <label
           for="cyan"
         >
-          Cyan
           <input
             id="cyan"
             name="hue"
             type="radio"
-            value="cyan"
+            value="180"
           />
+          Cyan
         </label>
         <label
           for="azure"
         >
-          Azure
           <input
             id="azure"
             name="hue"
             type="radio"
-            value="azure"
+            value="210"
           />
+          Azure
         </label>
         <label
           for="blue"
         >
-          Blue
           <input
             id="blue"
             name="hue"
             type="radio"
-            value="blue"
+            value="240"
           />
+          Blue
         </label>
         <label
           for="violet"
         >
-          Violet
           <input
             id="violet"
             name="hue"
             type="radio"
-            value="violet"
+            value="270"
           />
+          Violet
         </label>
         <label
           for="magenta"
         >
-          Magenta
           <input
             id="magenta"
             name="hue"
             type="radio"
-            value="magenta"
+            value="300"
           />
+          Magenta
         </label>
         <label
           for="rose"
         >
-          Rose
           <input
             id="rose"
             name="hue"
             type="radio"
-            value="rose"
+            value="330"
           />
+          Rose
         </label>
       </fieldset>
     </div>

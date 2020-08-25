@@ -5,18 +5,42 @@ function InputHue(props) {
   return (
     <fieldset>
       <legend>Hue</legend>
-      <Hue id="red">Red</Hue>
-      <Hue id="orange">Orange</Hue>
-      <Hue id="yellow">Yellow</Hue>
-      <Hue id="chartreuse">Chartreuse</Hue>
-      <Hue id="green">Green</Hue>
-      <Hue id="springGreen">Spring Green</Hue>
-      <Hue id="cyan">Cyan</Hue>
-      <Hue id="azure">Azure</Hue>
-      <Hue id="blue">Blue</Hue>
-      <Hue id="violet">Violet</Hue>
-      <Hue id="magenta">Magenta</Hue>
-      <Hue id="rose">Rose</Hue>
+      <Hue id="red" hue="0">
+        Red
+      </Hue>
+      <Hue id="orange" hue="30">
+        Orange
+      </Hue>
+      <Hue id="yellow" hue="60">
+        Yellow
+      </Hue>
+      <Hue id="chartreuse" hue="90">
+        Chartreuse
+      </Hue>
+      <Hue id="green" hue="120">
+        Green
+      </Hue>
+      <Hue id="springGreen" hue="150">
+        Spring Green
+      </Hue>
+      <Hue id="cyan" hue="180">
+        Cyan
+      </Hue>
+      <Hue id="azure" hue="210">
+        Azure
+      </Hue>
+      <Hue id="blue" hue="240">
+        Blue
+      </Hue>
+      <Hue id="violet" hue="270">
+        Violet
+      </Hue>
+      <Hue id="magenta" hue="300">
+        Magenta
+      </Hue>
+      <Hue id="rose" hue="330">
+        Rose
+      </Hue>
     </fieldset>
   );
 }

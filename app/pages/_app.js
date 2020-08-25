@@ -7,6 +7,10 @@ function MyApp({Component, pageProps}) {
   const [green, setGreen] = useState('');
   const [blue, setBlue] = useState('');
   const [contrastRatio, setContrastRatio] = useState('');
+  const [hueRange, setHueRange] = useState({
+    min: '',
+    max: '',
+  });
 
   const handleChangeRed = event => {
     const newRedValue = event.target.value;
@@ -26,6 +30,11 @@ function MyApp({Component, pageProps}) {
     const newContrastRatio = getContrastRatio(red, green, newBlueValue);
     setContrastRatio(newContrastRatio);
   };
+  const getHueRange = hue => {
+    const min = (Number(hue) - 15).toString();
+    const max = (Number(hue) + 15).toString();
+    setHueRange({min: min, max: max});
+  };
 
   return (
     <Component
@@ -37,6 +46,8 @@ function MyApp({Component, pageProps}) {
       handleChangeGreen={handleChangeGreen}
       handleChangeBlue={handleChangeBlue}
       contrastRatio={contrastRatio}
+      hueRange={hueRange}
+      getHueRange={getHueRange}
     />
   );
 }

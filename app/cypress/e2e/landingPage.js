@@ -1,5 +1,10 @@
 import {getContrastRatio} from '../../utils/helpers';
 
+const colorList = [
+  {red: 123, green: 133, blue: 23},
+  {red: 53, green: 2, blue: 223},
+];
+
 describe('Landing Page', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -10,11 +15,6 @@ describe('Landing Page', () => {
   });
 
   it('shows the contrast ratio to pure black of the user-selected RGB color code', () => {
-    // setup
-    const colorList = [
-      {red: 123, green: 133, blue: 23},
-      {red: 53, green: 2, blue: 223},
-    ];
     // execute
     colorList.forEach(color => {
       cy.findByLabelText('R:').clear().type(color.red.toString());
@@ -40,5 +40,33 @@ describe('Landing Page', () => {
     cy.findByLabelText(/violet/i);
     cy.findByLabelText(/magenta/i);
     cy.findByLabelText(/rose/i);
+  });
 });
+
+describe('Clicking the submit button with all inputs selected', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
+  it('redirects to the results page with the contrast ratio and the hue range shown', () => {
+    // setup
+    const color = colorList[0];
+    cy.findByLabelText('R:').clear().type(color.red.toString());
+    cy.findByLabelText('G:').clear().type(color.green.toString());
+    cy.findByLabelText('B:').clear().type(color.blue.toString());
+
+    cy.findByLabelText(/violet/i).click();
+    const expectedHueRange = [255, 285];
+
+    cy.findByText(/get/i).click();
+
+    // verify
+    cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+    cy.findByText(/contrast ratio with pure black/i).contains(
+      getContrastRatio(color.red, color.green, color.blue),
+    );
+    cy.findByText(/hue range/i).contains(
+      `${expectedHueRange[0]}–${expectedHueRange[1]}`,
+    );
+  });
 });
