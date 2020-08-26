@@ -36,7 +36,7 @@ function Results(props) {
     <>
       <h1>Luminance Picker: Results</h1>
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
-      <p>{`Selected hue range: ${props.hueRange.min}–${props.hueRange.max}`}</p>
+      <p>{`Selected hue: ${props.hue}`}</p>
       <ul>{colorSwatches}</ul>
     </>
   );
@@ -44,7 +44,7 @@ function Results(props) {
 
 Results.propTypes = {
   contrastRatio: PropTypes.string.isRequired,
-  hueRange: PropTypes.object.isRequired,
+  hue: PropTypes.string.isRequired,
 };
 
 export default withUrqlClient(

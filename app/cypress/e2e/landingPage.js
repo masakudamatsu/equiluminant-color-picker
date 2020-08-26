@@ -56,7 +56,7 @@ describe('Clicking the submit button with all inputs selected', () => {
     cy.findByLabelText('B:').clear().type(color.blue.toString());
 
     cy.findByLabelText(/violet/i).click();
-    const expectedHueRange = [255, 285];
+    const expectedHue = '270';
 
     cy.findByText(/get/i).click();
 
@@ -65,8 +65,6 @@ describe('Clicking the submit button with all inputs selected', () => {
     cy.findByText(/contrast ratio with pure black/i).contains(
       getContrastRatio(color.red, color.green, color.blue),
     );
-    cy.findByText(/hue range/i).contains(
-      `${expectedHueRange[0]}–${expectedHueRange[1]}`,
-    );
+    cy.findByText(/hue/i).contains(expectedHue);
   });
 });
