@@ -8,7 +8,7 @@ import Swatch from '../components/Swatch';
 function Results(props) {
   const FEED_QUERY = gql`
     {
-      feed(hue: 270, contrastRatio: 5.21) {
+      feed(hue: ${props.hue}, contrastRatio: ${props.contrastRatio}) {
         red
         green
         blue
