@@ -8,5 +8,6 @@ type ColorCode {
   red: Int!
   green: Int!
   blue: Int!
-  luminance: Float!
+  contrast_ratio: Float!
+  hue: Int
 }
