@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import {withUrqlClient} from 'next-urql';
 import gql from 'graphql-tag';
+import {useQuery} from 'urql';
 
 function Results(props) {
   const FEED_QUERY = gql`
@@ -14,6 +15,17 @@ function Results(props) {
       }
     }
   `;
+  const [result] = useQuery({
+    query: FEED_QUERY,
+  });
+
+  const {data, fetching, error} = result;
+
+  if (fetching) return <div>Fetching</div>;
+  if (error) return <div>Error</div>;
+
+  const colorsToRender = data.feed;
+
   return (
     <>
       <h1>Luminance Picker: Results</h1>
