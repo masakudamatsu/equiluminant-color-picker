@@ -3,6 +3,8 @@ import {withUrqlClient} from 'next-urql';
 import gql from 'graphql-tag';
 import {useQuery} from 'urql';
 
+import Swatch from '../components/Swatch';
+
 function Results(props) {
   const FEED_QUERY = gql`
     {
@@ -26,11 +28,16 @@ function Results(props) {
 
   const colorsToRender = data.feed;
 
+  const colorSwatches = colorsToRender.map((color, i) => (
+    <Swatch r={color.red} g={color.green} b={color.blue} key={`color${i}`} />
+  ));
+
   return (
     <>
       <h1>Luminance Picker: Results</h1>
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       <p>{`Selected hue range: ${props.hueRange.min}–${props.hueRange.max}`}</p>
+      <ul>{colorSwatches}</ul>
     </>
   );
 }

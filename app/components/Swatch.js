@@ -4,16 +4,17 @@ function Swatch(props) {
   const colorCode = `rgb(${props.r}, ${props.g}, ${props.b})`;
   const swatchStyle = {
     backgroundColor: colorCode,
+    marginTop: `1px`,
     paddingTop: '30%',
     width: '30%',
   };
-  return <div style={swatchStyle}>{colorCode}</div>;
+  return <li style={swatchStyle}>{colorCode}</li>;
 }
 
 Swatch.propTypes = {
-  r: PropTypes.string.isRequired,
-  g: PropTypes.string.isRequired,
-  b: PropTypes.string.isRequired,
+  r: PropTypes.number.isRequired,
+  g: PropTypes.number.isRequired,
+  b: PropTypes.number.isRequired,
 };
 
 export default Swatch;
