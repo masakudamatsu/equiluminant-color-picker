@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import {withUrqlClient} from 'next-urql';
 
 function Results(props) {
   return (
@@ -15,4 +16,9 @@ Results.propTypes = {
   hueRange: PropTypes.object.isRequired,
 };
 
-export default Results;
+export default withUrqlClient(
+  (_ssrExchange, ctx) => ({
+    url: 'http://localhost:4000',
+  }),
+  {ssr: true},
+)(Results);
