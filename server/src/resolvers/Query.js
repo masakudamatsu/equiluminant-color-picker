@@ -1,15 +1,24 @@
 async function feed(parent, args, context, info) {
   const where = {
     AND: [
-      { hue: args.hue },
       {
-        contrast_ratio: {
-          gt: args.contrastRatio - 0.005,
+        hue: {
+          gte: args.hue - 7,
+        },
+      },
+      {
+        hue: {
+          lte: args.hue + 7,
         },
       },
       {
         contrast_ratio: {
-          lt: args.contrastRatio + 0.005,
+          gt: args.contrastRatio - 0.001,
+        },
+      },
+      {
+        contrast_ratio: {
+          lt: args.contrastRatio + 0.001,
         },
       },
     ],
