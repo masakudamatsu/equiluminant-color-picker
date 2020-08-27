@@ -14,4 +14,5 @@ model rgbColorCodes {
   blue           Int
   contrast_ratio Float
   hue            Int?
+  chroma         Int
 }

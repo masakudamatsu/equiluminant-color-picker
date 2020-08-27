@@ -28,13 +28,13 @@ table_rgb_full <- mutate(table_id_only,
        min = ifelse( red <= green & red <= blue, red,
                ifelse( green < red & green <= blue, green, blue)
              ),
-       range = max - min,
-       hue = round(ifelse( range == 0, NA,
-               ifelse( max == red & min == blue, 60*(green-min)/range,
-                 ifelse( max == green & min == blue, 60*(2-(red-min)/range),
-                   ifelse( max == green & min == red, 60*(2+(blue-min)/range),
-                     ifelse( max == blue & min == red, 60*(4-(green-min)/range),
-                       ifelse( max == blue & min == green, 60*(4+(red-min)/range), 60*(6-(blue-min)/range))
+       chroma = max - min,
+       hue = round(ifelse( chroma == 0, NA,
+               ifelse( max == red & min == blue, 60*(green-min)/chroma,
+                 ifelse( max == green & min == blue, 60*(2-(red-min)/chroma),
+                   ifelse( max == green & min == red, 60*(2+(blue-min)/chroma),
+                     ifelse( max == blue & min == red, 60*(4-(green-min)/chroma),
+                       ifelse( max == blue & min == green, 60*(4+(red-min)/chroma), 60*(6-(blue-min)/chroma))
                      )
                    )
                  )
@@ -42,5 +42,5 @@ table_rgb_full <- mutate(table_id_only,
              ))
 )
 
-table_rgb <- select(table_rgb_full, id, red, green, blue, contrast_ratio, hue)
+table_rgb <- select(table_rgb_full, id, red, green, blue, contrast_ratio, hue, chroma)
 write_csv(table_rgb, "rgbColorCodes.csv")
