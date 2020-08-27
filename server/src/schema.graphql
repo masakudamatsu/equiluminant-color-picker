@@ -1,6 +1,6 @@
 type Query {
   info: String!
-  feed(greaterThan: Float, lessThan: Float): [ColorCode!]!
+  feed(hue: Int, contrastRatio: Float): [ColorCode!]!
 }
 
 type ColorCode {
@@ -8,5 +8,6 @@ type ColorCode {
   red: Int!
   green: Int!
   blue: Int!
-  luminance: Float!
+  contrast_ratio: Float!
+  hue: Int
 }
