@@ -1,6 +1,10 @@
 type Query {
   info: String!
-  feed(hue: Int, contrastRatio: Float): [ColorCode!]!
+  feed(
+    hue: Int
+    contrastRatio: Float
+    orderBy: ColorCodeOrderByInput
+  ): [ColorCode!]!
 }
 
 type ColorCode {
@@ -10,4 +14,14 @@ type ColorCode {
   blue: Int!
   contrast_ratio: Float!
   hue: Int
+  chroma: Int!
+}
+
+input ColorCodeOrderByInput {
+  chroma: Sort
+}
+
+enum Sort {
+  asc
+  desc
 }
