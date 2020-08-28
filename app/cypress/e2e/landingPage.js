@@ -27,19 +27,31 @@ describe('Landing Page', () => {
     });
   });
 
-  it('shows the list of 12 hues to select from', () => {
-    cy.findByLabelText(/red/i);
-    cy.findByLabelText(/orange/i);
-    cy.findByLabelText(/yellow/i);
-    cy.findByLabelText(/chartreuse/i);
+  it('shows the list of 24 hues to select from', () => {
+    cy.findByLabelText('Red');
+    cy.findByLabelText('Vermilion');
+    cy.findByLabelText('Orange');
+    cy.findByLabelText('Amber');
+    cy.findByLabelText('Yellow');
+    cy.findByLabelText('Yellowish Green');
+    cy.findByLabelText('Chartreuse');
+    cy.findByLabelText('Leaf Green');
     cy.findByLabelText('Green');
+    cy.findByLabelText('Cobalt Green');
     cy.findByLabelText('Spring Green');
-    cy.findByLabelText(/cyan/i);
-    cy.findByLabelText(/azure/i);
-    cy.findByLabelText(/blue/i);
-    cy.findByLabelText(/violet/i);
-    cy.findByLabelText(/magenta/i);
-    cy.findByLabelText(/rose/i);
+    cy.findByLabelText('Turquois Green');
+    cy.findByLabelText('Cyan');
+    cy.findByLabelText('Cerulean Blue');
+    cy.findByLabelText('Azure');
+    cy.findByLabelText('Cobalt Blue');
+    cy.findByLabelText('Blue');
+    cy.findByLabelText('Hyacinth');
+    cy.findByLabelText('Violet');
+    cy.findByLabelText('Purple');
+    cy.findByLabelText('Magenta');
+    cy.findByLabelText('Reddish Purple');
+    cy.findByLabelText('Rose');
+    cy.findByLabelText('Carmine');
   });
 });
 
