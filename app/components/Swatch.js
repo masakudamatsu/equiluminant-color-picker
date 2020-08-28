@@ -5,10 +5,14 @@ function Swatch(props) {
   const swatchStyle = {
     backgroundColor: colorCode,
     marginTop: `1px`,
-    paddingTop: '30%',
-    width: '30%',
+    paddingTop: '100%',
+    width: '100%',
   };
-  return <li style={swatchStyle}>{colorCode}</li>;
+  return (
+    <li>
+      <div style={swatchStyle}></div>
+    </li>
+  );
 }
 
 Swatch.propTypes = {
