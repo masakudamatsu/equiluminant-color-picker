@@ -14,6 +14,7 @@ function Results(props) {
         blue
         contrast_ratio
         hue
+        chroma
       }
     }
   `;
@@ -28,8 +29,23 @@ function Results(props) {
 
   const colorsToRender = data.feed;
 
-  const colorSwatches = colorsToRender.map((color, i) => (
-    <Swatch r={color.red} g={color.green} b={color.blue} key={`color${i}`} />
+  const hueRange = Array.from(Array(15), (_, i) => i - 7); // [-7, -6, ..., -1, 0, 1, ... 6, 7]. See https://stackoverflow.com/a/33352604/11847654
+
+  const colorSwatchColumns = hueRange.map(hue => (
+    <ul
+      style={{listStyle: 'none', marginLeft: '1px', padding: '0', width: '6%'}}
+    >
+      {colorsToRender
+        .filter(color => color.hue === Number(props.hue) + hue)
+        .map((color, i) => (
+          <Swatch
+            r={color.red}
+            g={color.green}
+            b={color.blue}
+            key={`color${hue}-${i}`}
+          />
+        ))}
+    </ul>
   ));
 
   return (
@@ -37,7 +53,7 @@ function Results(props) {
       <h1>Luminance Picker: Results</h1>
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       <p>{`Selected hue: ${props.hue}`}</p>
-      <ul>{colorSwatches}</ul>
+      <div style={{display: `flex`, width: `100%`}}>{colorSwatchColumns}</div>
     </>
   );
 }

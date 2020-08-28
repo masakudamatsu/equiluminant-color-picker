@@ -27,6 +27,17 @@ test('renders correctly', () => {
           Red
         </label>
         <label
+          for="vermilion"
+        >
+          <input
+            id="vermilion"
+            name="hue"
+            type="radio"
+            value="15"
+          />
+          Vermilion
+        </label>
+        <label
           for="orange"
         >
           <input
@@ -36,6 +47,17 @@ test('renders correctly', () => {
             value="30"
           />
           Orange
+        </label>
+        <label
+          for="amber"
+        >
+          <input
+            id="amber"
+            name="hue"
+            type="radio"
+            value="45"
+          />
+          Amber
         </label>
         <label
           for="yellow"
@@ -49,6 +71,17 @@ test('renders correctly', () => {
           Yellow
         </label>
         <label
+          for="yellowishGreen"
+        >
+          <input
+            id="yellowishGreen"
+            name="hue"
+            type="radio"
+            value="75"
+          />
+          Yellowish Green
+        </label>
+        <label
           for="chartreuse"
         >
           <input
@@ -58,6 +91,17 @@ test('renders correctly', () => {
             value="90"
           />
           Chartreuse
+        </label>
+        <label
+          for="leafGreen"
+        >
+          <input
+            id="leafGreen"
+            name="hue"
+            type="radio"
+            value="105"
+          />
+          Leaf Green
         </label>
         <label
           for="green"
@@ -71,6 +115,17 @@ test('renders correctly', () => {
           Green
         </label>
         <label
+          for="cobaltGreen"
+        >
+          <input
+            id="cobaltGreen"
+            name="hue"
+            type="radio"
+            value="135"
+          />
+          Cobalt Green
+        </label>
+        <label
           for="springGreen"
         >
           <input
@@ -80,6 +135,17 @@ test('renders correctly', () => {
             value="150"
           />
           Spring Green
+        </label>
+        <label
+          for="turquoisGreen"
+        >
+          <input
+            id="turquoisGreen"
+            name="hue"
+            type="radio"
+            value="165"
+          />
+          Turquois Green
         </label>
         <label
           for="cyan"
@@ -93,6 +159,17 @@ test('renders correctly', () => {
           Cyan
         </label>
         <label
+          for="ceruleanBlue"
+        >
+          <input
+            id="ceruleanBlue"
+            name="hue"
+            type="radio"
+            value="195"
+          />
+          Cerulean Blue
+        </label>
+        <label
           for="azure"
         >
           <input
@@ -102,6 +179,17 @@ test('renders correctly', () => {
             value="210"
           />
           Azure
+        </label>
+        <label
+          for="cobaltBlue"
+        >
+          <input
+            id="cobaltBlue"
+            name="hue"
+            type="radio"
+            value="225"
+          />
+          Cobalt Blue
         </label>
         <label
           for="blue"
@@ -115,6 +203,17 @@ test('renders correctly', () => {
           Blue
         </label>
         <label
+          for="hyacinth"
+        >
+          <input
+            id="hyacinth"
+            name="hue"
+            type="radio"
+            value="255"
+          />
+          Hyacinth
+        </label>
+        <label
           for="violet"
         >
           <input
@@ -124,6 +223,17 @@ test('renders correctly', () => {
             value="270"
           />
           Violet
+        </label>
+        <label
+          for="purple"
+        >
+          <input
+            id="purple"
+            name="hue"
+            type="radio"
+            value="285"
+          />
+          Purple
         </label>
         <label
           for="magenta"
@@ -137,6 +247,17 @@ test('renders correctly', () => {
           Magenta
         </label>
         <label
+          for="reddishPurple"
+        >
+          <input
+            id="reddishPurple"
+            name="hue"
+            type="radio"
+            value="315"
+          />
+          Reddish Purple
+        </label>
+        <label
           for="rose"
         >
           <input
@@ -146,6 +267,17 @@ test('renders correctly', () => {
             value="330"
           />
           Rose
+        </label>
+        <label
+          for="carmine"
+        >
+          <input
+            id="carmine"
+            name="hue"
+            type="radio"
+            value="345"
+          />
+          Carmine
         </label>
       </fieldset>
     </div>
