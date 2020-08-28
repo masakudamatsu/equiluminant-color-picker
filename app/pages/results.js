@@ -14,6 +14,7 @@ function Results(props) {
         blue
         contrast_ratio
         hue
+        chroma
       }
     }
   `;
