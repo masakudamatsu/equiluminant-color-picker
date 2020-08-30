@@ -10,7 +10,10 @@ function Swatch(props) {
   };
   return (
     <li>
-      <div style={swatchStyle}></div>
+      <div
+        style={swatchStyle}
+        data-testid={`rgb-${props.r}-${props.g}-${props.b}`}
+      ></div>
     </li>
   );
 }

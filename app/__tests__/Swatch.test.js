@@ -14,13 +14,13 @@ const colorList = [
 
 test('shows the color as specified in props', () => {
   colorList.forEach(color => {
-    const {container, getByText} = render(
+    const {container, getByTestId} = render(
       <ul>
         <Swatch r={color.red} g={color.green} b={color.blue} />
       </ul>,
     );
     expect(
-      getByText(`rgb(${color.red}, ${color.green}, ${color.blue})`),
+      getByTestId(`rgb-${color.red}-${color.green}-${color.blue}`),
     ).toHaveStyle(
       `background-color: rgb(${color.red}, ${color.green}, ${color.blue})`,
     );
@@ -40,10 +40,11 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <ul>
-        <li
-          style="background-color: rgb(123, 133, 23); margin-top: 1px; padding-top: 30%; width: 30%;"
-        >
-          rgb(123, 133, 23)
+        <li>
+          <div
+            data-testid="rgb-123-133-23"
+            style="background-color: rgb(123, 133, 23); margin-top: 1px; padding-top: 100%; width: 100%;"
+          />
         </li>
       </ul>
     </div>
