@@ -1,11 +1,15 @@
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {withUrqlClient} from 'next-urql';
 import gql from 'graphql-tag';
 import {useQuery} from 'urql';
 
 import Swatch from '../components/Swatch';
+import ColorCodeDisplay from '../components/ColorCodeDisplay';
 
 function Results(props) {
+  const [clickedColorCode, setClickedColorCode] = useState('');
+
   const FEED_QUERY = gql`
     {
       feed(hue: ${props.hue}, contrastRatio: ${props.contrastRatio}, orderBy: { chroma: desc }) {
@@ -43,6 +47,7 @@ function Results(props) {
             g={color.green}
             b={color.blue}
             key={`color${hue}-${i}`}
+            setClickedColorCode={setClickedColorCode}
           />
         ))}
     </ul>
@@ -53,6 +58,7 @@ function Results(props) {
       <h1>Luminance Picker: Results</h1>
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       <p>{`Selected hue: ${props.hue}`}</p>
+      <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
       <div style={{display: `flex`, width: `100%`}}>{colorSwatchColumns}</div>
     </>
   );
