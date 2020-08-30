@@ -94,20 +94,35 @@ describe('Clicking a particular color swatch', () => {
     cy.findByText(/get/i).click();
   });
 
-  it.only('shows the RGB color code for the clicked color', () => {
+  it('shows the RGB color code for the clicked color', () => {
     // set up
-    const clickedColorCode = {
-      red: 162,
-      green: 84,
-      blue: 252,
-    };
+    const clickedColorCode = [
+      {
+        red: 162,
+        green: 84,
+        blue: 252,
+      },
+      {
+        red: 165,
+        green: 93,
+        blue: 221,
+      },
+    ];
     // execute
     cy.findByTestId(
-      `rgb-${clickedColorCode.red}-${clickedColorCode.green}-${clickedColorCode.blue}`,
+      `rgb-${clickedColorCode[0].red}-${clickedColorCode[0].green}-${clickedColorCode[0].blue}`,
     ).click();
     // verify
     cy.findByText(
-      `rgb(${clickedColorCode.red}, ${clickedColorCode.green}, ${clickedColorCode.blue})`,
+      `rgb(${clickedColorCode[0].red}, ${clickedColorCode[0].green}, ${clickedColorCode[0].blue})`,
+    );
+
+    // execute
+    cy.findByTestId(
+      `rgb-${clickedColorCode[1].red}-${clickedColorCode[1].green}-${clickedColorCode[1].blue}`,
+    ).click();
+    cy.findByText(
+      `rgb(${clickedColorCode[1].red}, ${clickedColorCode[1].green}, ${clickedColorCode[1].blue})`,
     );
   });
 });
