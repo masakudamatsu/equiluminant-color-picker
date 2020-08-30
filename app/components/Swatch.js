@@ -8,9 +8,16 @@ function Swatch(props) {
     paddingTop: '100%',
     width: '100%',
   };
+  const handleClick = event => {
+    props.setClickedColorCode(colorCode);
+  };
   return (
     <li>
-      <div style={swatchStyle}></div>
+      <div
+        style={swatchStyle}
+        data-testid={`rgb-${props.r}-${props.g}-${props.b}`}
+        onClick={handleClick}
+      ></div>
     </li>
   );
 }
@@ -19,6 +26,7 @@ Swatch.propTypes = {
   r: PropTypes.number.isRequired,
   g: PropTypes.number.isRequired,
   b: PropTypes.number.isRequired,
+  setClickedColorCode: PropTypes.func.isRequired,
 };
 
 export default Swatch;

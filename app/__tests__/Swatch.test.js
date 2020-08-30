@@ -12,19 +12,49 @@ const colorList = [
   {red: 53, green: 2, blue: 223},
 ];
 
+const mockSetClickedColorCode = jest.fn();
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 test('shows the color as specified in props', () => {
   colorList.forEach(color => {
-    const {container, getByText} = render(
+    const {container, getByTestId} = render(
       <ul>
-        <Swatch r={color.red} g={color.green} b={color.blue} />
+        <Swatch
+          r={color.red}
+          g={color.green}
+          b={color.blue}
+          setClickedColorCode={mockSetClickedColorCode}
+        />
       </ul>,
     );
     expect(
-      getByText(`rgb(${color.red}, ${color.green}, ${color.blue})`),
+      getByTestId(`rgb-${color.red}-${color.green}-${color.blue}`),
     ).toHaveStyle(
       `background-color: rgb(${color.red}, ${color.green}, ${color.blue})`,
     );
   });
+});
+
+test('calls the setClickedColorCode function when the user clicks', () => {
+  const {container, getByTestId} = render(
+    <ul>
+      <Swatch
+        r={colorList[0].red}
+        g={colorList[0].green}
+        b={colorList[0].blue}
+        setClickedColorCode={mockSetClickedColorCode}
+      />
+    </ul>,
+  );
+  userEvent.click(
+    getByTestId(
+      `rgb-${colorList[0].red}-${colorList[0].green}-${colorList[0].blue}`,
+    ),
+  );
+  expect(mockSetClickedColorCode).toHaveBeenCalledTimes(1);
 });
 
 test('renders correctly', () => {
@@ -34,16 +64,18 @@ test('renders correctly', () => {
         r={colorList[0].red}
         g={colorList[0].green}
         b={colorList[0].blue}
+        setClickedColorCode={mockSetClickedColorCode}
       />
     </ul>,
   );
   expect(container).toMatchInlineSnapshot(`
     <div>
       <ul>
-        <li
-          style="background-color: rgb(123, 133, 23); margin-top: 1px; padding-top: 30%; width: 30%;"
-        >
-          rgb(123, 133, 23)
+        <li>
+          <div
+            data-testid="rgb-123-133-23"
+            style="background-color: rgb(123, 133, 23); margin-top: 1px; padding-top: 100%; width: 100%;"
+          />
         </li>
       </ul>
     </div>
@@ -57,6 +89,7 @@ test('is accessible', async () => {
         r={colorList[0].red}
         g={colorList[0].green}
         b={colorList[0].blue}
+        setClickedColorCode={mockSetClickedColorCode}
       />
     </ul>,
   );
