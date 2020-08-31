@@ -18,7 +18,9 @@ test('renders correctly', () => {
   const {container} = render(<ColorCodeDisplay>{colorCode}</ColorCodeDisplay>);
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <p>
+      <p
+        id="color-code-display"
+      >
         rgb(123, 133, 23)
       </p>
     </div>
