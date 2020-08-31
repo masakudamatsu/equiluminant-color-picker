@@ -125,4 +125,9 @@ describe('Clicking a particular color swatch', () => {
       `rgb(${clickedColorCode[1].red}, ${clickedColorCode[1].green}, ${clickedColorCode[1].blue})`,
     );
   });
+
+  it('allows the user to click the button to copy the color code onto their clipboard', () => {
+    // This feature cannot be tested with Cypress. See https://github.com/cypress-io/cypress/issues/2752
+    // We just verify that the copy button is rendered
+    cy.findByText(/copy/i);
 });

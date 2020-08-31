@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 function ColorCodeDisplay(props) {
-  return <p>{props.children}</p>;
+  return <p id="color-code-display">{props.children}</p>;
 }
 
 ColorCodeDisplay.propTypes = {};
