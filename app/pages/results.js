@@ -6,6 +6,7 @@ import {useQuery} from 'urql';
 
 import Swatch from '../components/Swatch';
 import ColorCodeDisplay from '../components/ColorCodeDisplay';
+import CopyButton from '../components/CopyButton';
 
 function Results(props) {
   const [clickedColorCode, setClickedColorCode] = useState('');
@@ -59,6 +60,7 @@ function Results(props) {
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       <p>{`Selected hue: ${props.hue}`}</p>
       <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
+      <CopyButton />
       <div style={{display: `flex`, width: `100%`}}>{colorSwatchColumns}</div>
     </>
   );
