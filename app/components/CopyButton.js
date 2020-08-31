@@ -1,9 +1,18 @@
 import PropTypes from 'prop-types';
 
 function CopyButton(props) {
-  return <button type="button">Copy the color code</button>;
+  const handleClick = () => {
+    props.copyColorCode();
+  };
+  return (
+    <button type="button" onClick={handleClick}>
+      Copy the color code
+    </button>
+  );
 }
 
-CopyButton.propTypes = {};
+CopyButton.propTypes = {
+  copyColorCode: PropTypes.func.isRequired,
+};
 
 export default CopyButton;

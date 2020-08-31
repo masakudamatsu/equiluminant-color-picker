@@ -7,14 +7,30 @@ import 'jest-axe/extend-expect';
 
 import CopyButton from '../components/CopyButton';
 
+const mockCopyColorCode = jest.fn();
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+test('Clicking the button calls the copyColorCode function', () => {
+  const {container, getByText} = render(
+    <CopyButton copyColorCode={mockCopyColorCode} />,
+  );
+  getByText(/copy/i).click();
+  expect(mockCopyColorCode).toHaveBeenCalledTimes(1);
+});
+
 test('The button element has the type attribute value of button', () => {
-  const {container, getByText} = render(<CopyButton />);
+  const {container, getByText} = render(
+    <CopyButton copyColorCode={mockCopyColorCode} />,
+  );
   const button = getByText(/copy/i);
   expect(button).toHaveAttribute('type', 'button');
 });
 
 test('renders correctly', () => {
-  const {container} = render(<CopyButton />);
+  const {container} = render(<CopyButton copyColorCode={mockCopyColorCode} />);
   expect(container).toMatchInlineSnapshot(`
     <div>
       <button
@@ -27,7 +43,7 @@ test('renders correctly', () => {
 });
 
 test('is accessible', async () => {
-  const {container} = render(<CopyButton />);
+  const {container} = render(<CopyButton copyColorCode={mockCopyColorCode} />);
   const results = await axe(container);
   expect(results).toHaveNoViolations();
   cleanup();
