@@ -15,6 +15,14 @@ function HomePage(props) {
   return (
     <>
       <h1>Luminance Picker</h1>
+      <noscript>
+        For full functionality of this site, it is necessary to enable
+        JavaScript. Here are the{' '}
+        <a href="https://www.enable-javascript.com/">
+          instructions how to enable JavaScript in your web browser
+        </a>
+        .
+      </noscript>
       <InputRGB
         red={props.red}
         green={props.green}
