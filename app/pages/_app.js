@@ -2,6 +2,8 @@ import {useState} from 'react';
 
 import {getContrastRatio} from '../utils/helpers';
 
+import GlobalStyle from '../theme/GlobalStyle';
+
 function MyApp({Component, pageProps}) {
   const [red, setRed] = useState('');
   const [green, setGreen] = useState('');
@@ -32,18 +34,21 @@ function MyApp({Component, pageProps}) {
   };
 
   return (
-    <Component
-      {...pageProps}
-      red={red}
-      green={green}
-      blue={blue}
-      handleChangeRed={handleChangeRed}
-      handleChangeGreen={handleChangeGreen}
-      handleChangeBlue={handleChangeBlue}
-      contrastRatio={contrastRatio}
-      hue={hue}
-      getHue={getHue}
-    />
+    <>
+      <Component
+        {...pageProps}
+        red={red}
+        green={green}
+        blue={blue}
+        handleChangeRed={handleChangeRed}
+        handleChangeGreen={handleChangeGreen}
+        handleChangeBlue={handleChangeBlue}
+        contrastRatio={contrastRatio}
+        hue={hue}
+        getHue={getHue}
+      />
+      <GlobalStyle />
+    </>
   );
 }
 
