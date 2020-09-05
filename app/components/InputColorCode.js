@@ -4,7 +4,12 @@ function InputColorCode(props) {
   return (
     <label htmlFor="inputColorCode">
       CSS color code
-      <input type="text" id="inputColorCode" value={props.inputColorCode} />
+      <input
+        type="text"
+        id="inputColorCode"
+        pattern="#([A-Fa-f\d]{3}){1,2}"
+        value={props.inputColorCode}
+      />
     </label>
   );
 }

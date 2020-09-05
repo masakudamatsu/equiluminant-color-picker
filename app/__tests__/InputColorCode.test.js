@@ -7,6 +7,16 @@ import 'jest-axe/extend-expect';
 
 import InputColorCode from '../components/InputColorCode';
 
+test('accepts HEX color codes', () => {
+  const {container, getByLabelText} = render(<InputColorCode />);
+  const colorCodeField = getByLabelText(/css color code/i);
+  ['#3a5', '#A3C', '#4e2ba5'].forEach(colorCode => {
+    userEvent.clear(colorCodeField);
+    userEvent.type(colorCodeField, colorCode);
+    expect(colorCodeField).toBeValid();
+  });
+});
+
 test('renders correctly', () => {
   const {container} = render(<InputColorCode />);
   expect(container).toMatchInlineSnapshot(`
@@ -17,6 +27,7 @@ test('renders correctly', () => {
         CSS color code
         <input
           id="inputColorCode"
+          pattern="#([A-Fa-f\\\\d]{3}){1,2}"
           type="text"
           value=""
         />
