@@ -7,7 +7,7 @@ function InputColorCode(props) {
       <input
         type="text"
         id="inputColorCode"
-        pattern="#([A-Fa-f\d]{3}){1,2}"
+        pattern="#([A-Fa-f\d]{3}){1,2}|rgb\((1?\d?\d|2[0-4]\d|25[0-5])(,\s*(1?\d?\d|2[0-4]\d|25[0-5])){2}\)"
         value={props.inputColorCode}
       />
     </label>

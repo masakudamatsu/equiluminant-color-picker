@@ -17,6 +17,24 @@ test('accepts HEX color codes', () => {
   });
 });
 
+test('accepts RGB color codes', () => {
+  const {container, getByLabelText} = render(<InputColorCode />);
+  const colorCodeField = getByLabelText(/css color code/i);
+  [
+    'rgb(1, 2, 3)',
+    'rgb(12, 34, 33)',
+    'rgb(133, 144, 122)',
+    'rgb(233, 213, 202)',
+    'rgb(255, 255, 255)',
+  ].forEach(colorCode => {
+    console.log(colorCode);
+    userEvent.clear(colorCodeField);
+    userEvent.type(colorCodeField, colorCode);
+    console.log(colorCodeField.validity.patternMismatch);
+    expect(colorCodeField).toBeValid();
+  });
+});
+
 test('renders correctly', () => {
   const {container} = render(<InputColorCode />);
   expect(container).toMatchInlineSnapshot(`
@@ -27,7 +45,7 @@ test('renders correctly', () => {
         CSS color code
         <input
           id="inputColorCode"
-          pattern="#([A-Fa-f\\\\d]{3}){1,2}"
+          pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)"
           type="text"
           value=""
         />
