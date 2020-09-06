@@ -67,6 +67,9 @@ test('renders correctly', () => {
           type="text"
           value=""
         />
+        <p>
+           e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)
+        </p>
       </label>
     </div>
   `);
