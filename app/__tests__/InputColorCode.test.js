@@ -27,10 +27,8 @@ test('accepts RGB color codes', () => {
     'rgb(233, 213, 202)',
     'rgb(255, 255, 255)',
   ].forEach(colorCode => {
-    console.log(colorCode);
     userEvent.clear(colorCodeField);
     userEvent.type(colorCodeField, colorCode);
-    console.log(colorCodeField.validity.patternMismatch);
     expect(colorCodeField).toBeValid();
   });
 });
@@ -46,10 +44,8 @@ test('accepts HSL color codes', () => {
     'hsl(25, 4%, 2%)',
     'hsl(8, 0%, 0%)',
   ].forEach(colorCode => {
-    console.log(colorCode);
     userEvent.clear(colorCodeField);
     userEvent.type(colorCodeField, colorCode);
-    console.log(colorCodeField.validity.patternMismatch);
     expect(colorCodeField).toBeValid();
   });
 });
