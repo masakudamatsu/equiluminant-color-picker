@@ -53,7 +53,7 @@ test('accepts HSL color codes', () => {
   });
 });
 
-test('shows the error message if the user enters an invalid color code', () => {
+test('shows the error message if the user enters an invalid color code and hides it when the user corrects it', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode />
@@ -66,11 +66,18 @@ test('shows the error message if the user enters an invalid color code', () => {
   const colorCodeField = getByLabelText(/css color code/i);
   ['#sss', 'rgb(300, 300, 300)', 'hsl(371, 300, 125%)'].forEach(
     invalidColorCode => {
+      // Enter an invalid color code
       colorCodeField.focus();
       userEvent.clear(colorCodeField);
       userEvent.type(colorCodeField, invalidColorCode);
       getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
       expect(getByTestId('colorCodeError')).toBeVisible();
+      // Correct the color code
+      colorCodeField.focus();
+      userEvent.clear(colorCodeField);
+      userEvent.type(colorCodeField, 'rgb(234, 222, 21)');
+      getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
+      expect(getByTestId('colorCodeError')).not.toBeVisible();
     },
   );
 });

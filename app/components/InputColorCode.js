@@ -5,8 +5,12 @@ import {ParagraphErrorMessage} from '../theme/style';
 function InputColorCode(props) {
   const [invalid, setInvalid] = useState(false);
   const handleBlur = event => {
-    if (event.target.validity.patternMismatch) {
+    const newInputIsInvalid = event.target.validity.patternMismatch;
+    if (!invalid && newInputIsInvalid) {
       setInvalid(true);
+    }
+    if (invalid && !newInputIsInvalid) {
+      setInvalid(false);
     }
   };
   return (
