@@ -8,17 +8,18 @@ import 'jest-axe/extend-expect';
 import InputColorCode from '../components/InputColorCode';
 
 test('accepts HEX color codes', () => {
-  const {container, getByLabelText} = render(<InputColorCode />);
+  const {container, getByLabelText, getByTestId} = render(<InputColorCode />);
   const colorCodeField = getByLabelText(/css color code/i);
   ['#3a5', '#A3C', '#4e2ba5'].forEach(colorCode => {
     userEvent.clear(colorCodeField);
     userEvent.type(colorCodeField, colorCode);
     expect(colorCodeField).toBeValid();
+    expect(getByTestId('colorCodeError')).not.toBeVisible();
   });
 });
 
 test('accepts RGB color codes', () => {
-  const {container, getByLabelText} = render(<InputColorCode />);
+  const {container, getByLabelText, getByTestId} = render(<InputColorCode />);
   const colorCodeField = getByLabelText(/css color code/i);
   [
     'rgb(1, 2, 3)',
@@ -30,11 +31,12 @@ test('accepts RGB color codes', () => {
     userEvent.clear(colorCodeField);
     userEvent.type(colorCodeField, colorCode);
     expect(colorCodeField).toBeValid();
+    expect(getByTestId('colorCodeError')).not.toBeVisible();
   });
 });
 
 test('accepts HSL color codes', () => {
-  const {container, getByLabelText} = render(<InputColorCode />);
+  const {container, getByLabelText, getByTestId} = render(<InputColorCode />);
   const colorCodeField = getByLabelText(/css color code/i);
   [
     'hsl(360, 100%, 100%)',
@@ -47,8 +49,32 @@ test('accepts HSL color codes', () => {
     userEvent.clear(colorCodeField);
     userEvent.type(colorCodeField, colorCode);
     expect(colorCodeField).toBeValid();
+    expect(getByTestId('colorCodeError')).not.toBeVisible();
   });
 });
+
+test('shows the error message if the user enters an invalid color code', () => {
+  const {container, getByLabelText, getByTestId} = render(
+    <>
+      <InputColorCode />
+      <label htmlFor="dummyInput">
+        Dummy input
+        <input type="text" id="dummyInput" />
+      </label>
+    </>,
+  );
+  const colorCodeField = getByLabelText(/css color code/i);
+  ['#sss', 'rgb(300, 300, 300)', 'hsl(371, 300, 125%)'].forEach(
+    invalidColorCode => {
+      colorCodeField.focus();
+      userEvent.clear(colorCodeField);
+      userEvent.type(colorCodeField, invalidColorCode);
+      getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
+      expect(getByTestId('colorCodeError')).toBeVisible();
+    },
+  );
+});
+
 test('renders correctly', () => {
   const {container} = render(<InputColorCode />);
   expect(container).toMatchInlineSnapshot(`
@@ -67,6 +93,12 @@ test('renders correctly', () => {
            e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)
         </p>
       </label>
+      <p
+        class="style__ParagraphErrorMessage-o0wbpp-0 emkDPN"
+        data-testid="colorCodeError"
+      >
+        Please enter a valid CSS color code
+      </p>
     </div>
   `);
 });
