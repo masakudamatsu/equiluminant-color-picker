@@ -10,7 +10,7 @@ function InputColorCode(props) {
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
   const [invalid, setInvalid] = useState(false);
   const handleBlur = event => {
-    const newInputValue = event.target.value;
+    // Validation
     const newInputIsInvalid = event.target.validity.patternMismatch;
     if (!invalid && newInputIsInvalid) {
       setInvalid(true);
@@ -19,12 +19,12 @@ function InputColorCode(props) {
       setInvalid(false);
     }
     if (!newInputIsInvalid) {
+      // Remove all the whitespaces from the user's input value
+      const newInputValue = event.target.value.trim().replace(/\s/g, '');
+
       const regexRgb = new RegExp(regexRgbText);
       if (regexRgb.test(newInputValue)) {
-        const rgbValues = newInputValue
-          .replace(/\s/g, '')
-          .slice(4, -1)
-          .split(',');
+        const rgbValues = newInputValue.slice(4, -1).split(',');
         props.setRed(rgbValues[0]);
         props.setGreen(rgbValues[1]);
         props.setBlue(rgbValues[2]);
