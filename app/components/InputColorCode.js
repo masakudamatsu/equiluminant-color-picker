@@ -23,6 +23,23 @@ function InputColorCode(props) {
       const newInputValue = event.target.value.trim().replace(/\s/g, '');
       // Convert into RGB code
       let newInputValueRGB;
+      // HEX
+      const regexHex = new RegExp(regexHexText);
+      if (regexHex.test(newInputValue)) {
+        let r, g, b;
+        if (newInputValue.length == 4) {
+          // e.g. #ccc
+          r = '0x' + newInputValue[1] + newInputValue[1];
+          g = '0x' + newInputValue[2] + newInputValue[2];
+          b = '0x' + newInputValue[3] + newInputValue[3];
+        } else {
+          r = '0x' + newInputValue[1] + newInputValue[2];
+          g = '0x' + newInputValue[3] + newInputValue[4];
+          b = '0x' + newInputValue[5] + newInputValue[6];
+        }
+        newInputValueRGB = 'rgb(' + +r + ',' + +g + ',' + +b + ')'; // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Unary_plus
+      }
+      // RGB
       const regexRgb = new RegExp(regexRgbText);
       if (regexRgb.test(newInputValue)) {
         newInputValueRGB = newInputValue;
