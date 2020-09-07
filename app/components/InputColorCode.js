@@ -10,12 +10,25 @@ function InputColorCode(props) {
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
   const [invalid, setInvalid] = useState(false);
   const handleBlur = event => {
+    const newInputValue = event.target.value;
     const newInputIsInvalid = event.target.validity.patternMismatch;
     if (!invalid && newInputIsInvalid) {
       setInvalid(true);
     }
     if (invalid && !newInputIsInvalid) {
       setInvalid(false);
+    }
+    if (!newInputIsInvalid) {
+      const regexRgb = new RegExp(regexRgbText);
+      if (regexRgb.test(newInputValue)) {
+        const rgbValues = newInputValue
+          .replace(/\s/g, '')
+          .slice(4, -1)
+          .split(',');
+        props.setRed(rgbValues[0]);
+        props.setGreen(rgbValues[1]);
+        props.setBlue(rgbValues[2]);
+      }
     }
   };
   return (
@@ -38,6 +51,10 @@ function InputColorCode(props) {
   );
 }
 
-InputColorCode.propTypes = {};
+InputColorCode.propTypes = {
+  setRed: PropTypes.func.isRequired,
+  setGreen: PropTypes.func.isRequired,
+  setBlue: PropTypes.func.isRequired,
+};
 
 export default InputColorCode;

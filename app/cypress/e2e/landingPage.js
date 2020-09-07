@@ -1,8 +1,8 @@
 import {getContrastRatio} from '../../utils/helpers';
 
 const colorList = [
-  {red: 123, green: 133, blue: 23},
-  {red: 53, green: 2, blue: 223},
+  {red: 123, green: 133, blue: 23, rgbCode: 'rgb(123, 133, 23)'},
+  {red: 53, green: 2, blue: 223, rgbCode: 'rgb(53, 2, 223)'},
 ];
 
 describe('Landing Page', () => {
@@ -52,6 +52,25 @@ describe('Landing Page', () => {
     cy.findByLabelText('Reddish Purple');
     cy.findByLabelText('Rose');
     cy.findByLabelText('Carmine');
+  });
+});
+
+describe('Color code input field', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
+  it('Entering a RGB code changes the RGB color code input fields', () => {
+    colorList.forEach(color => {
+      cy.findByLabelText(/css color code/i)
+        .click()
+        .clear()
+        .type(color.rgbCode)
+        .blur();
+      cy.findByLabelText('R:').should('have.value', color.red.toString());
+      cy.findByLabelText('G:').should('have.value', color.green.toString());
+      cy.findByLabelText('B:').should('have.value', color.blue.toString());
+    });
   });
 });
 

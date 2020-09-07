@@ -7,8 +7,21 @@ import 'jest-axe/extend-expect';
 
 import InputColorCode from '../components/InputColorCode';
 
+const mockSetRed = jest.fn();
+const mockSetGreen = jest.fn();
+const mockSetBlue = jest.fn();
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 test('accepts HEX color codes', () => {
-  const {container, getByLabelText, getByTestId} = render(<InputColorCode />);
+  const {container, getByLabelText, getByTestId} = render(
+    <InputColorCode
+      setRed={mockSetRed}
+      setGreen={mockSetGreen}
+      setBlue={mockSetBlue}
+    />,
+  );
   const colorCodeField = getByLabelText(/css color code/i);
   ['#3a5', '#A3C', '#4e2ba5'].forEach(colorCode => {
     userEvent.clear(colorCodeField);
@@ -18,8 +31,20 @@ test('accepts HEX color codes', () => {
   });
 });
 
-test('accepts RGB color codes', () => {
-  const {container, getByLabelText, getByTestId} = render(<InputColorCode />);
+test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions', () => {
+  const {container, getByLabelText, getByTestId} = render(
+    <>
+      <InputColorCode
+        setRed={mockSetRed}
+        setGreen={mockSetGreen}
+        setBlue={mockSetBlue}
+      />
+      <label htmlFor="dummyInput">
+        Dummy input
+        <input type="text" id="dummyInput" />
+      </label>
+    </>,
+  );
   const colorCodeField = getByLabelText(/css color code/i);
   [
     'rgb(1, 2, 3)',
@@ -28,15 +53,32 @@ test('accepts RGB color codes', () => {
     'rgb(233, 213, 202)',
     'rgb(255, 255, 255)',
   ].forEach(colorCode => {
+    // enter color code
+    colorCodeField.focus();
     userEvent.clear(colorCodeField);
     userEvent.type(colorCodeField, colorCode);
+    // verify
     expect(colorCodeField).toBeValid();
     expect(getByTestId('colorCodeError')).not.toBeVisible();
+    // blur
+    getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
+    // verify
+    expect(mockSetRed).toHaveBeenCalledTimes(1);
+    expect(mockSetGreen).toHaveBeenCalledTimes(1);
+    expect(mockSetBlue).toHaveBeenCalledTimes(1);
+    // isolate
+    jest.clearAllMocks();
   });
 });
 
 test('accepts HSL color codes', () => {
-  const {container, getByLabelText, getByTestId} = render(<InputColorCode />);
+  const {container, getByLabelText, getByTestId} = render(
+    <InputColorCode
+      setRed={mockSetRed}
+      setGreen={mockSetGreen}
+      setBlue={mockSetBlue}
+    />,
+  );
   const colorCodeField = getByLabelText(/css color code/i);
   [
     'hsl(360, 100%, 100%)',
@@ -56,7 +98,11 @@ test('accepts HSL color codes', () => {
 test('shows the error message if the user enters an invalid color code and hides it when the user corrects it', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
-      <InputColorCode />
+      <InputColorCode
+        setRed={mockSetRed}
+        setGreen={mockSetGreen}
+        setBlue={mockSetBlue}
+      />
       <label htmlFor="dummyInput">
         Dummy input
         <input type="text" id="dummyInput" />
@@ -83,7 +129,13 @@ test('shows the error message if the user enters an invalid color code and hides
 });
 
 test('renders correctly', () => {
-  const {container} = render(<InputColorCode />);
+  const {container} = render(
+    <InputColorCode
+      setRed={mockSetRed}
+      setGreen={mockSetGreen}
+      setBlue={mockSetBlue}
+    />,
+  );
   expect(container).toMatchInlineSnapshot(`
     <div>
       <label
@@ -111,7 +163,13 @@ test('renders correctly', () => {
 });
 
 test('is accessible', async () => {
-  const {container} = render(<InputColorCode />);
+  const {container} = render(
+    <InputColorCode
+      setRed={mockSetRed}
+      setGreen={mockSetGreen}
+      setBlue={mockSetBlue}
+    />,
+  );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
   cleanup();
