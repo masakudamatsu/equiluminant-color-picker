@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {ParagraphErrorMessage} from '../theme/style';
+import {getRgbFromHex} from '../utils/helpers';
 
 function InputColorCode(props) {
   const regexHexText = '#([A-Fa-f\\d]{3}){1,2}';
@@ -26,18 +27,7 @@ function InputColorCode(props) {
       // HEX
       const regexHex = new RegExp(regexHexText);
       if (regexHex.test(newInputValue)) {
-        let r, g, b;
-        if (newInputValue.length == 4) {
-          // e.g. #ccc
-          r = '0x' + newInputValue[1] + newInputValue[1];
-          g = '0x' + newInputValue[2] + newInputValue[2];
-          b = '0x' + newInputValue[3] + newInputValue[3];
-        } else {
-          r = '0x' + newInputValue[1] + newInputValue[2];
-          g = '0x' + newInputValue[3] + newInputValue[4];
-          b = '0x' + newInputValue[5] + newInputValue[6];
-        }
-        newInputValueRGB = 'rgb(' + +r + ',' + +g + ',' + +b + ')'; // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Unary_plus
+        newInputValueRGB = getRgbFromHex(newInputValue);
       }
       // RGB
       const regexRgb = new RegExp(regexRgbText);
