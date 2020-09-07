@@ -280,6 +280,14 @@ progress {
 [aria-disabled] {
   cursor: default;
 }
+
+/****************************************************************************
+  Custom global style
+*****************************************************************************/
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
 `;
 
 export default GlobalStyle;
