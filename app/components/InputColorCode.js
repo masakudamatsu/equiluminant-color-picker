@@ -21,14 +21,17 @@ function InputColorCode(props) {
     if (!newInputIsInvalid) {
       // Remove all the whitespaces from the user's input value
       const newInputValue = event.target.value.trim().replace(/\s/g, '');
-
+      // Convert into RGB code
+      let newInputValueRGB;
       const regexRgb = new RegExp(regexRgbText);
       if (regexRgb.test(newInputValue)) {
-        const rgbValues = newInputValue.slice(4, -1).split(',');
-        props.setRed(rgbValues[0]);
-        props.setGreen(rgbValues[1]);
-        props.setBlue(rgbValues[2]);
+        newInputValueRGB = newInputValue;
       }
+      // Extract RGB values
+      const rgbValues = newInputValueRGB.slice(4, -1).split(',');
+      props.setRed(rgbValues[0]);
+      props.setGreen(rgbValues[1]);
+      props.setBlue(rgbValues[2]);
     }
   };
   return (
