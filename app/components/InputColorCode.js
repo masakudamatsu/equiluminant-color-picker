@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {ParagraphErrorMessage} from '../theme/style';
-import {getRgbFromHex} from '../utils/helpers';
+import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 
 function InputColorCode(props) {
   const regexHexText = '#([A-Fa-f\\d]{3}){1,2}';
@@ -33,6 +33,11 @@ function InputColorCode(props) {
       const regexRgb = new RegExp(regexRgbText);
       if (regexRgb.test(newInputValue)) {
         newInputValueRGB = newInputValue;
+      }
+      // HSL
+      const regexHsl = new RegExp(regexHslText);
+      if (regexHsl.test(newInputValue)) {
+        newInputValueRGB = getRgbFromHsl(newInputValue);
       }
       // Extract RGB values
       const rgbValues = newInputValueRGB.slice(4, -1).split(',');

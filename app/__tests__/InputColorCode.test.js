@@ -88,11 +88,17 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
 
 test('accepts HSL color codes', () => {
   const {container, getByLabelText, getByTestId} = render(
-    <InputColorCode
-      setRed={mockSetRed}
-      setGreen={mockSetGreen}
-      setBlue={mockSetBlue}
-    />,
+    <>
+      <InputColorCode
+        setRed={mockSetRed}
+        setGreen={mockSetGreen}
+        setBlue={mockSetBlue}
+      />
+      <label htmlFor="dummyInput">
+        Dummy input
+        <input type="text" id="dummyInput" />
+      </label>
+    </>,
   );
   const colorCodeField = getByLabelText(/css color code/i);
   [
@@ -103,10 +109,19 @@ test('accepts HSL color codes', () => {
     'hsl(25, 4%, 2%)',
     'hsl(8, 0%, 0%)',
   ].forEach(colorCode => {
+    colorCodeField.focus();
     userEvent.clear(colorCodeField);
     userEvent.type(colorCodeField, colorCode);
     expect(colorCodeField).toBeValid();
     expect(getByTestId('colorCodeError')).not.toBeVisible();
+    // blur
+    getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
+    // verify
+    expect(mockSetRed).toHaveBeenCalledTimes(1);
+    expect(mockSetGreen).toHaveBeenCalledTimes(1);
+    expect(mockSetBlue).toHaveBeenCalledTimes(1);
+    // isolate
+    jest.clearAllMocks();
   });
 });
 

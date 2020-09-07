@@ -22,3 +22,48 @@ export const getRgbFromHex = hexCode => {
   }
   return 'rgb(' + +r + ',' + +g + ',' + +b + ')'; // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Unary_plus
 };
+
+export const getRgbFromHsl = hslCode => {
+  // https://css-tricks.com/converting-color-spaces-in-javascript/#hsl-to-rgb
+  const hsl = hslCode.slice(4, -1).split(',');
+  let h = hsl[0],
+    s = hsl[1].slice(0, -1) / 100,
+    l = hsl[2].slice(0, -1) / 100;
+
+  let chroma = (1 - Math.abs(2 * l - 1)) * s,
+    middleC = chroma * (1 - Math.abs(((h / 60) % 2) - 1)),
+    minC = l - chroma / 2,
+    r = 0,
+    g = 0,
+    b = 0;
+
+  if (0 <= h && h < 60) {
+    r = chroma;
+    g = middleC;
+    b = 0;
+  } else if (60 <= h && h < 120) {
+    r = middleC;
+    g = chroma;
+    b = 0;
+  } else if (120 <= h && h < 180) {
+    r = 0;
+    g = chroma;
+    b = middleC;
+  } else if (180 <= h && h < 240) {
+    r = 0;
+    g = middleC;
+    b = chroma;
+  } else if (240 <= h && h < 300) {
+    r = middleC;
+    g = 0;
+    b = chroma;
+  } else if (300 <= h && h < 360) {
+    r = chroma;
+    g = 0;
+    b = middleC;
+  }
+  r = Math.round((r + minC) * 255);
+  g = Math.round((g + minC) * 255);
+  b = Math.round((b + minC) * 255);
+  return 'rgb(' + r + ',' + g + ',' + b + ')'; // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Unary_plus
+};

@@ -2,18 +2,20 @@ import {getContrastRatio} from '../../utils/helpers';
 
 const colorList = [
   {
-    red: 123,
-    green: 133,
+    red: 126,
+    green: 135,
     blue: 23,
-    rgbCode: 'rgb(123, 133, 23)',
-    hexCode: '#7b8517',
+    rgbCode: 'rgb(126, 135, 23)',
+    hexCode: '#7e8717',
+    hslCode: 'hsl(65, 71%, 31%)',
   },
   {
-    red: 53,
+    red: 54,
     green: 2,
-    blue: 223,
-    rgbCode: 'rgb(53, 2, 223)',
-    hexCode: '#3502df',
+    blue: 222,
+    rgbCode: 'rgb(54, 2, 222)',
+    hexCode: '#3602de',
+    hslCode: 'hsl(254, 98%, 44%)',
   },
 ];
 
@@ -91,6 +93,19 @@ describe('Color code input field', () => {
         .click()
         .clear()
         .type(color.hexCode)
+        .blur();
+      cy.findByLabelText('R:').should('have.value', color.red.toString());
+      cy.findByLabelText('G:').should('have.value', color.green.toString());
+      cy.findByLabelText('B:').should('have.value', color.blue.toString());
+    });
+  });
+
+  it('Entering a HSL code changes the RGB color code input fields', () => {
+    colorList.forEach(color => {
+      cy.findByLabelText(/css color code/i)
+        .click()
+        .clear()
+        .type(color.hslCode)
         .blur();
       cy.findByLabelText('R:').should('have.value', color.red.toString());
       cy.findByLabelText('G:').should('have.value', color.green.toString());
