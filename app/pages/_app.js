@@ -40,6 +40,9 @@ function MyApp({Component, pageProps}) {
         red={red}
         green={green}
         blue={blue}
+        setRed={setRed}
+        setGreen={setGreen}
+        setBlue={setBlue}
         handleChangeRed={handleChangeRed}
         handleChangeGreen={handleChangeGreen}
         handleChangeBlue={handleChangeBlue}

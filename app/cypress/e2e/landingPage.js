@@ -1,8 +1,22 @@
 import {getContrastRatio} from '../../utils/helpers';
 
 const colorList = [
-  {red: 123, green: 133, blue: 23},
-  {red: 53, green: 2, blue: 223},
+  {
+    red: 126,
+    green: 135,
+    blue: 23,
+    rgbCode: 'rgb(126, 135, 23)',
+    hexCode: '#7e8717',
+    hslCode: 'hsl(65, 71%, 31%)',
+  },
+  {
+    red: 54,
+    green: 2,
+    blue: 222,
+    rgbCode: 'rgb(54, 2, 222)',
+    hexCode: '#3602de',
+    hslCode: 'hsl(254, 98%, 44%)',
+  },
 ];
 
 describe('Landing Page', () => {
@@ -55,6 +69,51 @@ describe('Landing Page', () => {
   });
 });
 
+describe('Color code input field', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
+  it('Entering a RGB code changes the RGB color code input fields', () => {
+    colorList.forEach(color => {
+      cy.findByLabelText(/css color code/i)
+        .click()
+        .clear()
+        .type(color.rgbCode)
+        .blur();
+      cy.findByLabelText('R:').should('have.value', color.red.toString());
+      cy.findByLabelText('G:').should('have.value', color.green.toString());
+      cy.findByLabelText('B:').should('have.value', color.blue.toString());
+    });
+  });
+
+  it('Entering a HEX code changes the RGB color code input fields', () => {
+    colorList.forEach(color => {
+      cy.findByLabelText(/css color code/i)
+        .click()
+        .clear()
+        .type(color.hexCode)
+        .blur();
+      cy.findByLabelText('R:').should('have.value', color.red.toString());
+      cy.findByLabelText('G:').should('have.value', color.green.toString());
+      cy.findByLabelText('B:').should('have.value', color.blue.toString());
+    });
+  });
+
+  it('Entering a HSL code changes the RGB color code input fields', () => {
+    colorList.forEach(color => {
+      cy.findByLabelText(/css color code/i)
+        .click()
+        .clear()
+        .type(color.hslCode)
+        .blur();
+      cy.findByLabelText('R:').should('have.value', color.red.toString());
+      cy.findByLabelText('G:').should('have.value', color.green.toString());
+      cy.findByLabelText('B:').should('have.value', color.blue.toString());
+    });
+  });
+});
+
 describe('Clicking the submit button with all inputs selected', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -79,55 +138,4 @@ describe('Clicking the submit button with all inputs selected', () => {
     );
     cy.findByText(/hue/i).contains(expectedHue);
   });
-});
-
-describe('Clicking a particular color swatch', () => {
-  beforeEach(() => {
-    cy.visit('/');
-    const color = colorList[0];
-    cy.findByLabelText('R:').clear().type(color.red.toString());
-    cy.findByLabelText('G:').clear().type(color.green.toString());
-    cy.findByLabelText('B:').clear().type(color.blue.toString());
-
-    cy.findByLabelText(/violet/i).click();
-
-    cy.findByText(/get/i).click();
-  });
-
-  it('shows the RGB color code for the clicked color', () => {
-    // set up
-    const clickedColorCode = [
-      {
-        red: 162,
-        green: 84,
-        blue: 252,
-      },
-      {
-        red: 165,
-        green: 93,
-        blue: 221,
-      },
-    ];
-    // execute
-    cy.findByTestId(
-      `rgb-${clickedColorCode[0].red}-${clickedColorCode[0].green}-${clickedColorCode[0].blue}`,
-    ).click();
-    // verify
-    cy.findByText(
-      `rgb(${clickedColorCode[0].red}, ${clickedColorCode[0].green}, ${clickedColorCode[0].blue})`,
-    );
-
-    // execute
-    cy.findByTestId(
-      `rgb-${clickedColorCode[1].red}-${clickedColorCode[1].green}-${clickedColorCode[1].blue}`,
-    ).click();
-    cy.findByText(
-      `rgb(${clickedColorCode[1].red}, ${clickedColorCode[1].green}, ${clickedColorCode[1].blue})`,
-    );
-  });
-
-  it('allows the user to click the button to copy the color code onto their clipboard', () => {
-    // This feature cannot be tested with Cypress. See https://github.com/cypress-io/cypress/issues/2752
-    // We just verify that the copy button is rendered
-    cy.findByText(/copy/i);
 });

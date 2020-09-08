@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
+import InputColorCode from '../components/InputColorCode';
 import InputRGB from '../components/InputRGB';
 import InputHue from '../components/InputHue';
 
@@ -23,6 +24,11 @@ function HomePage(props) {
         </a>
         .
       </noscript>
+      <InputColorCode
+        setRed={props.setRed}
+        setGreen={props.setGreen}
+        setBlue={props.setBlue}
+      />
       <InputRGB
         red={props.red}
         green={props.green}
