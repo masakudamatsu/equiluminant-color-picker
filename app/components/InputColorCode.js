@@ -11,6 +11,10 @@ function InputColorCode(props) {
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
   const [invalid, setInvalid] = useState(false);
   const handleBlur = event => {
+    // When nothing is entered
+    if (!event.target.value) {
+      return;
+    }
     // Validation
     const newInputIsInvalid = event.target.validity.patternMismatch;
     if (!invalid && newInputIsInvalid) {

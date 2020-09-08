@@ -14,6 +14,30 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
+test('Blurring without entering any text does not show the error message or call the setRed, setGreen, and setBlue functions', () => {
+  const {container, getByLabelText, getByTestId} = render(
+    <>
+      <InputColorCode
+        setRed={mockSetRed}
+        setGreen={mockSetGreen}
+        setBlue={mockSetBlue}
+      />
+      <label htmlFor="dummyInput">
+        Dummy input
+        <input type="text" id="dummyInput" />
+      </label>
+    </>,
+  );
+  const colorCodeField = getByLabelText(/css color code/i);
+  colorCodeField.focus();
+  getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
+  // verify
+  expect(getByTestId('colorCodeError')).not.toBeVisible();
+  expect(mockSetRed).not.toHaveBeenCalled();
+  expect(mockSetGreen).not.toHaveBeenCalled();
+  expect(mockSetBlue).not.toHaveBeenCalled();
+});
+
 test('accepts HEX color codes and calls setRed, setGreen, and setBlue functions', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
