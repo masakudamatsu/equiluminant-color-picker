@@ -61,7 +61,7 @@ describe('Color code input field', () => {
     cy.visit('/');
   });
 
-  it('Entering a RGB code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the background color for legibility if necessary', () => {
+  it('Entering a RGB code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the color scheme for legibility if necessary', () => {
     colorList.forEach((color, index) => {
       cy.findByLabelText(/css color code/i)
         .click()
@@ -84,7 +84,7 @@ describe('Color code input field', () => {
     });
   });
 
-  it('Entering a HEX code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the background color for legibility if necessary', () => {
+  it('Entering a HEX code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the color scheme for legibility if necessary', () => {
     colorList.forEach((color, index) => {
       cy.findByLabelText(/css color code/i)
         .click()
@@ -107,7 +107,7 @@ describe('Color code input field', () => {
     });
   });
 
-  it('Entering a HSL code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the background color for legibility if necessary', () => {
+  it('Entering a HSL code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the color scheme for legibility if necessary', () => {
     colorList.forEach((color, index) => {
       cy.findByLabelText(/css color code/i)
         .click()
@@ -148,7 +148,7 @@ describe('RGB value input fields', () => {
     });
   });
 
-  it('changes the background color depending on the luminance level of the user-selected RGB color code', () => {
+  it('changes the color scheme depending on the luminance level of the user-selected RGB color code', () => {
     // execute
     colorList.forEach((color, index) => {
       cy.findByLabelText('R:').clear().type(color.red.toString());

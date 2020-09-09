@@ -289,6 +289,7 @@ progress {
 body {
   background-color: ${props =>
     props.darkMode ? color.darkMode.background : color.background};
+  color: ${props => (props.darkMode ? color.darkMode.font : color.font)};
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
