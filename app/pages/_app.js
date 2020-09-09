@@ -10,10 +10,16 @@ function MyApp({Component, pageProps}) {
   const [blue, setBlue] = useState('');
   const [contrastRatio, setContrastRatio] = useState('');
   const [hue, setHue] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
 
   const updateContrastRatio = (red, green, blue) => {
     const newContrastRatio = getContrastRatio(red, green, blue);
     setContrastRatio(newContrastRatio);
+    if (Number(newContrastRatio) > Math.sqrt(21)) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
   };
 
   const handleChangeRed = event => {
@@ -53,7 +59,7 @@ function MyApp({Component, pageProps}) {
         hue={hue}
         getHue={getHue}
       />
-      <GlobalStyle />
+      <GlobalStyle darkMode={darkMode} />
     </>
   );
 }

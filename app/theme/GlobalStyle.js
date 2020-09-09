@@ -1,5 +1,7 @@
 import {createGlobalStyle} from 'styled-components';
 
+import color from './color';
+
 const GlobalStyle = createGlobalStyle`
 /*!
  * ress.css • v3.0.1
@@ -285,6 +287,8 @@ progress {
   Custom global style
 *****************************************************************************/
 body {
+  background-color: ${props =>
+    props.darkMode ? color.darkMode.background : color.background};
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
