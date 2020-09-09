@@ -1,25 +1,16 @@
-// ***********************************************
-// This example commands.js shows you how to
+import color from '../../theme/color';
+const darkModeBackgroundColor = `${color.darkMode.background}`;
 // create various custom commands and overwrite
-// existing commands.
+const normalBackgroundColor = `${color.background}`;
+
+Cypress.Commands.add('checkDarkModeColorScheme', () => {
+  cy.get('body')
+    .should('have.css', 'background-color', darkModeBackgroundColor)
 //
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
+});
+
+Cypress.Commands.add('checkNormalColorScheme', () => {
+  cy.get('body')
+    .should('have.css', 'background-color', normalBackgroundColor)
 //
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+});

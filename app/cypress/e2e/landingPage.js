@@ -1,8 +1,4 @@
 import {getContrastRatio} from '../../utils/helpers';
-import color from '../../theme/color';
-
-const darkModeBackgroundColor = `${color.darkMode.background}`;
-const normalBackgroundColor = `${color.background}`;
 
 const colorList = [
   {
@@ -80,18 +76,10 @@ describe('Color code input field', () => {
         getContrastRatio(color.red, color.green, color.blue),
       );
       if (index === 0) {
-        cy.get('body').should(
-          'have.css',
-          'background-color',
-          darkModeBackgroundColor,
-        );
+        cy.checkDarkModeColorScheme();
       }
       if (index === 1) {
-        cy.get('body').should(
-          'have.css',
-          'background-color',
-          normalBackgroundColor,
-        );
+        cy.checkNormalColorScheme();
       }
     });
   });
@@ -111,18 +99,10 @@ describe('Color code input field', () => {
         getContrastRatio(color.red, color.green, color.blue),
       );
       if (index === 0) {
-        cy.get('body').should(
-          'have.css',
-          'background-color',
-          darkModeBackgroundColor,
-        );
+        cy.checkDarkModeColorScheme();
       }
       if (index === 1) {
-        cy.get('body').should(
-          'have.css',
-          'background-color',
-          normalBackgroundColor,
-        );
+        cy.checkNormalColorScheme();
       }
     });
   });
@@ -142,18 +122,10 @@ describe('Color code input field', () => {
         getContrastRatio(color.red, color.green, color.blue),
       );
       if (index === 0) {
-        cy.get('body').should(
-          'have.css',
-          'background-color',
-          darkModeBackgroundColor,
-        );
+        cy.checkDarkModeColorScheme();
       }
       if (index === 1) {
-        cy.get('body').should(
-          'have.css',
-          'background-color',
-          normalBackgroundColor,
-        );
+        cy.checkNormalColorScheme();
       }
     });
   });
@@ -189,18 +161,10 @@ describe('RGB value input fields', () => {
       );
       // verify
       if (index === 0) {
-        cy.get('body').should(
-          'have.css',
-          'background-color',
-          darkModeBackgroundColor,
-        );
+        cy.checkDarkModeColorScheme();
       }
       if (index === 1) {
-        cy.get('body').should(
-          'have.css',
-          'background-color',
-          normalBackgroundColor,
-        );
+        cy.checkNormalColorScheme();
       }
     });
   });
