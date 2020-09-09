@@ -50,6 +50,7 @@ function InputColorCode(props) {
       props.setRed(rgbValues[0]);
       props.setGreen(rgbValues[1]);
       props.setBlue(rgbValues[2]);
+      props.updateContrastRatio(rgbValues[0], rgbValues[1], rgbValues[2]);
     }
   };
   return (
@@ -76,6 +77,7 @@ InputColorCode.propTypes = {
   setRed: PropTypes.func.isRequired,
   setGreen: PropTypes.func.isRequired,
   setBlue: PropTypes.func.isRequired,
+  updateContrastRatio: PropTypes.func.isRequired,
 };
 
 export default InputColorCode;

@@ -61,7 +61,7 @@ describe('Color code input field', () => {
     cy.visit('/');
   });
 
-  it('Entering a RGB code changes the RGB color code input fields', () => {
+  it('Entering a RGB code changes the RGB color code input fields and shows its contrast ratio to pure black', () => {
     colorList.forEach(color => {
       cy.findByLabelText(/css color code/i)
         .click()
@@ -71,10 +71,14 @@ describe('Color code input field', () => {
       cy.findByLabelText('R:').should('have.value', color.red.toString());
       cy.findByLabelText('G:').should('have.value', color.green.toString());
       cy.findByLabelText('B:').should('have.value', color.blue.toString());
+      // verify
+      cy.findByText(/contrast ratio with pure black/i).contains(
+        getContrastRatio(color.red, color.green, color.blue),
+      );
     });
   });
 
-  it('Entering a HEX code changes the RGB color code input fields', () => {
+  it('Entering a HEX code changes the RGB color code input fields and shows its contrast ratio to pure black', () => {
     colorList.forEach(color => {
       cy.findByLabelText(/css color code/i)
         .click()
@@ -84,10 +88,14 @@ describe('Color code input field', () => {
       cy.findByLabelText('R:').should('have.value', color.red.toString());
       cy.findByLabelText('G:').should('have.value', color.green.toString());
       cy.findByLabelText('B:').should('have.value', color.blue.toString());
+      // verify
+      cy.findByText(/contrast ratio with pure black/i).contains(
+        getContrastRatio(color.red, color.green, color.blue),
+      );
     });
   });
 
-  it('Entering a HSL code changes the RGB color code input fields', () => {
+  it('Entering a HSL code changes the RGB color code input fields and shows its contrast ratio to pure black', () => {
     colorList.forEach(color => {
       cy.findByLabelText(/css color code/i)
         .click()
@@ -97,6 +105,10 @@ describe('Color code input field', () => {
       cy.findByLabelText('R:').should('have.value', color.red.toString());
       cy.findByLabelText('G:').should('have.value', color.green.toString());
       cy.findByLabelText('B:').should('have.value', color.blue.toString());
+      // verify
+      cy.findByText(/contrast ratio with pure black/i).contains(
+        getContrastRatio(color.red, color.green, color.blue),
+      );
     });
     });
 });
