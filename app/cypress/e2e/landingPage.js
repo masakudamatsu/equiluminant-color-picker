@@ -28,19 +28,6 @@ describe('Landing Page', () => {
     cy.get('h1').should('have.text', 'Luminance Picker');
   });
 
-  it('shows the contrast ratio to pure black of the user-selected RGB color code', () => {
-    // execute
-    colorList.forEach(color => {
-      cy.findByLabelText('R:').clear().type(color.red.toString());
-      cy.findByLabelText('G:').clear().type(color.green.toString());
-      cy.findByLabelText('B:').clear().type(color.blue.toString());
-      // verify
-      cy.findByText(/contrast ratio with pure black/i).contains(
-        getContrastRatio(color.red, color.green, color.blue),
-      );
-    });
-  });
-
   it('shows the list of 24 hues to select from', () => {
     cy.findByLabelText('Red');
     cy.findByLabelText('Vermilion');
@@ -111,7 +98,25 @@ describe('Color code input field', () => {
       cy.findByLabelText('G:').should('have.value', color.green.toString());
       cy.findByLabelText('B:').should('have.value', color.blue.toString());
     });
-  });
+    });
+});
+
+describe('RGB value input fields', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    });
+  it('show the contrast ratio to pure black of the user-selected RGB color code', () => {
+    // execute
+    colorList.forEach(color => {
+      cy.findByLabelText('R:').clear().type(color.red.toString());
+      cy.findByLabelText('G:').clear().type(color.green.toString());
+      cy.findByLabelText('B:').clear().type(color.blue.toString());
+      // verify
+      cy.findByText(/contrast ratio with pure black/i).contains(
+        getContrastRatio(color.red, color.green, color.blue),
+      );
+});
+});
 });
 
 describe('Clicking the submit button with all inputs selected', () => {
