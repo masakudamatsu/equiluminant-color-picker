@@ -11,23 +11,25 @@ function MyApp({Component, pageProps}) {
   const [contrastRatio, setContrastRatio] = useState('');
   const [hue, setHue] = useState('');
 
+  const updateContrastRatio = (red, green, blue) => {
+    const newContrastRatio = getContrastRatio(red, green, blue);
+    setContrastRatio(newContrastRatio);
+  };
+
   const handleChangeRed = event => {
     const newRedValue = event.target.value;
     setRed(newRedValue);
-    const newContrastRatio = getContrastRatio(newRedValue, green, blue);
-    setContrastRatio(newContrastRatio);
+    updateContrastRatio(newRedValue, green, blue);
   };
   const handleChangeGreen = event => {
     const newGreenValue = event.target.value;
     setGreen(newGreenValue);
-    const newContrastRatio = getContrastRatio(red, newGreenValue, blue);
-    setContrastRatio(newContrastRatio);
+    updateContrastRatio(red, newGreenValue, blue);
   };
   const handleChangeBlue = event => {
     const newBlueValue = event.target.value;
     setBlue(newBlueValue);
-    const newContrastRatio = getContrastRatio(red, green, newBlueValue);
-    setContrastRatio(newContrastRatio);
+    updateContrastRatio(red, green, newBlueValue);
   };
   const getHue = hue => {
     setHue(hue);
