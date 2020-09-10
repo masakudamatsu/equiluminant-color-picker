@@ -10,17 +10,20 @@ import InputColorCode from '../components/InputColorCode';
 const mockSetRed = jest.fn();
 const mockSetGreen = jest.fn();
 const mockSetBlue = jest.fn();
+const mockUpdateContrastRatio = jest.fn();
+
 afterEach(() => {
   jest.clearAllMocks();
 });
 
-test('Blurring without entering any text does not show the error message or call the setRed, setGreen, and setBlue functions', () => {
+test('Blurring without entering any text does not show the error message or call any functions', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
+        updateContrastRatio={mockUpdateContrastRatio}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -36,15 +39,17 @@ test('Blurring without entering any text does not show the error message or call
   expect(mockSetRed).not.toHaveBeenCalled();
   expect(mockSetGreen).not.toHaveBeenCalled();
   expect(mockSetBlue).not.toHaveBeenCalled();
+  expect(mockUpdateContrastRatio).not.toHaveBeenCalled();
 });
 
-test('accepts HEX color codes and calls setRed, setGreen, and setBlue functions', () => {
+test('accepts HEX color codes and calls functions', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
+        updateContrastRatio={mockUpdateContrastRatio}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -65,6 +70,7 @@ test('accepts HEX color codes and calls setRed, setGreen, and setBlue functions'
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
+    expect(mockUpdateContrastRatio).toHaveBeenCalledTimes(1);
     // isolate
     jest.clearAllMocks();
   });
@@ -77,6 +83,7 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
+        updateContrastRatio={mockUpdateContrastRatio}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -105,6 +112,7 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
+    expect(mockUpdateContrastRatio).toHaveBeenCalledTimes(1);
     // isolate
     jest.clearAllMocks();
   });
@@ -117,6 +125,7 @@ test('accepts HSL color codes', () => {
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
+        updateContrastRatio={mockUpdateContrastRatio}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -144,6 +153,7 @@ test('accepts HSL color codes', () => {
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
+    expect(mockUpdateContrastRatio).toHaveBeenCalledTimes(1);
     // isolate
     jest.clearAllMocks();
   });
@@ -156,6 +166,7 @@ test('shows the error message if the user enters an invalid color code and hides
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
+        updateContrastRatio={mockUpdateContrastRatio}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -188,6 +199,7 @@ test('renders correctly', () => {
       setRed={mockSetRed}
       setGreen={mockSetGreen}
       setBlue={mockSetBlue}
+      updateContrastRatio={mockUpdateContrastRatio}
     />,
   );
   expect(container).toMatchInlineSnapshot(`
@@ -222,6 +234,7 @@ test('is accessible', async () => {
       setRed={mockSetRed}
       setGreen={mockSetGreen}
       setBlue={mockSetBlue}
+      updateContrastRatio={mockUpdateContrastRatio}
     />,
   );
   const results = await axe(container);

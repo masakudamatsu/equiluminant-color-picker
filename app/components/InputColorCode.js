@@ -4,12 +4,14 @@ import {ParagraphErrorMessage} from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 
 function InputColorCode(props) {
+  const [invalid, setInvalid] = useState(false);
+
   const regexHexText = '#([A-Fa-f\\d]{3}){1,2}';
   const regexRgbText =
     'rgb\\((1?\\d?\\d|2[0-4]\\d|25[0-5])(,\\s*(1?\\d?\\d|2[0-4]\\d|25[0-5])){2}\\)';
   const regexHslText =
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
-  const [invalid, setInvalid] = useState(false);
+
   const handleBlur = event => {
     // When nothing is entered
     if (!event.target.value) {
@@ -48,6 +50,7 @@ function InputColorCode(props) {
       props.setRed(rgbValues[0]);
       props.setGreen(rgbValues[1]);
       props.setBlue(rgbValues[2]);
+      props.updateContrastRatio(rgbValues[0], rgbValues[1], rgbValues[2]);
     }
   };
   return (
@@ -74,6 +77,7 @@ InputColorCode.propTypes = {
   setRed: PropTypes.func.isRequired,
   setGreen: PropTypes.func.isRequired,
   setBlue: PropTypes.func.isRequired,
+  updateContrastRatio: PropTypes.func.isRequired,
 };
 
 export default InputColorCode;

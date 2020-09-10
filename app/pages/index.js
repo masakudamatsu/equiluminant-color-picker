@@ -28,6 +28,7 @@ function HomePage(props) {
         setRed={props.setRed}
         setGreen={props.setGreen}
         setBlue={props.setBlue}
+        updateContrastRatio={props.updateContrastRatio}
       />
       <InputRGB
         red={props.red}
@@ -54,6 +55,7 @@ HomePage.propTypes = {
   handleChangeGreen: PropTypes.func.isRequired,
   handleChangeBlue: PropTypes.func.isRequired,
   contrastRatio: PropTypes.string.isRequired,
+  updateContrastRatio: PropTypes.func.isRequired,
 };
 
 export default HomePage;
