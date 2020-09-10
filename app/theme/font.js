@@ -4,6 +4,8 @@ const xHeightPx = {
   desktop: 10, // Medium.com and Dev.to
 };
 
+const modularScale = 2;
+
 // # of pixels for 1rem
 const oneRemPx = 16;
 
