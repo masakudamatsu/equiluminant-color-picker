@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
+import {SideMarginSetter} from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
 import InputRGB from '../components/InputRGB';
 import InputHue from '../components/InputHue';
@@ -14,7 +15,7 @@ function HomePage(props) {
     router.push('/results');
   };
   return (
-    <>
+    <SideMarginSetter>
       <h1>Luminance Picker</h1>
       <noscript>
         For full functionality of this site, it is necessary to enable
@@ -43,7 +44,7 @@ function HomePage(props) {
       <button type="submit" onClick={handleClick}>
         Get equiluminant colors!
       </button>
-    </>
+    </SideMarginSetter>
   );
 }
 

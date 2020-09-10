@@ -33,6 +33,10 @@ const font = {
       ).toFixed(4),
     },
   },
+  sideMarginPx: {
+    // in pixel, because we do not want it to be enlarged when the user increases the font size.
+    mobile: xHeightPx.mobile * Math.pow(modularScale, 1),
+  },
 };
 
 export default font;
