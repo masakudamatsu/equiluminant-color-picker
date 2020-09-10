@@ -1,6 +1,7 @@
 import {createGlobalStyle} from 'styled-components';
 
 import color from './color';
+import font from './font';
 
 const GlobalStyle = createGlobalStyle`
 /*!
@@ -289,7 +290,8 @@ progress {
 body {
   background-color: ${color.background};
   color: ${props => (props.darkMode ? color.darkMode.font : color.font)};
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: ${font.body.family};
+  font-size: ${font.body.size.mobile}rem;
   position: relative;
 
   &::after {
@@ -304,6 +306,7 @@ body {
     transition: opacity 300ms;
     z-index: -1;
   }
+
 }
 
 input {
