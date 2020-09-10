@@ -291,7 +291,6 @@ body {
   color: ${props => (props.darkMode ? color.darkMode.font : color.font)};
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   position: relative;
-  z-index: 1;
 
   &::after {
     background-color: ${color.darkMode.background};
@@ -302,6 +301,7 @@ body {
     left: 0;
     right: 0;
     top: 0;
+    transition: opacity 300ms;
     z-index: -1;
   }
 }
