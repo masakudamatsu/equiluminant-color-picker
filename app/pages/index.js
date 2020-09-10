@@ -26,6 +26,9 @@ function HomePage(props) {
         .
       </noscript>
       <InputColorCode
+        red={props.red}
+        green={props.green}
+        blue={props.blue}
         setRed={props.setRed}
         setGreen={props.setGreen}
         setBlue={props.setBlue}

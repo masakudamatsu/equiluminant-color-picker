@@ -13,7 +13,12 @@ function InputColorCode(props) {
   const regexHslText =
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
 
+  // Generate the RGB color code
   let backgroundColor = color.darkMode.background;
+  if (props.red && props.green && props.blue) {
+    backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
+  }
+
   const handleBlur = event => {
     // When nothing is entered
     if (!event.target.value) {
@@ -76,6 +81,9 @@ function InputColorCode(props) {
 }
 
 InputColorCode.propTypes = {
+  red: PropTypes.string.isRequired,
+  green: PropTypes.string.isRequired,
+  blue: PropTypes.string.isRequired,
   setRed: PropTypes.func.isRequired,
   setGreen: PropTypes.func.isRequired,
   setBlue: PropTypes.func.isRequired,
