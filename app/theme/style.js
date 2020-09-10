@@ -7,6 +7,11 @@ export const ParagraphErrorMessage = styled.p`
 `;
 
 // Div elements for styling
+export const ColorCodeField = styled.div`
+  padding: ${font.sideMarginPx.mobile}px;
+  width: 100%;
+`;
+
 export const SideMarginSetter = styled.div`
   margin: ${font.sideMarginPx.mobile}px;
 `;

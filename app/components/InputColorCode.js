@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
-import {ParagraphErrorMessage} from '../theme/style';
+import {ColorCodeField, ParagraphErrorMessage} from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 
 function InputColorCode(props) {
@@ -54,7 +54,7 @@ function InputColorCode(props) {
     }
   };
   return (
-    <>
+    <ColorCodeField>
       <label htmlFor="inputColorCode">
         CSS color code
         <input
@@ -69,7 +69,7 @@ function InputColorCode(props) {
       <ParagraphErrorMessage data-testid="colorCodeError" error={invalid}>
         Please enter a valid CSS color code
       </ParagraphErrorMessage>
-    </>
+    </ColorCodeField>
   );
 }
 
