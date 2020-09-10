@@ -287,10 +287,27 @@ progress {
   Custom global style
 *****************************************************************************/
 body {
-  background-color: ${props =>
-    props.darkMode ? color.darkMode.background : color.background};
+  background-color: ${color.background};
   color: ${props => (props.darkMode ? color.darkMode.font : color.font)};
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  position: relative;
+  z-index: 1;
+
+  &::after {
+    background-color: ${color.darkMode.background};
+    bottom: 0;
+    content:"";
+    opacity: ${props => (props.darkMode ? 1 : 0)};
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+}
+
+input {
+  color: inherit; /* Prevent Chrome from applying "internal-light-dark" to override the body element's color property */
 }
 
 `;
