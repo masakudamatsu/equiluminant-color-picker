@@ -2,6 +2,7 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {ColorCodeField, ParagraphErrorMessage} from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
+import color from '../theme/color';
 
 function InputColorCode(props) {
   const [invalid, setInvalid] = useState(false);
@@ -12,6 +13,7 @@ function InputColorCode(props) {
   const regexHslText =
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
 
+  let backgroundColor = color.darkMode.background;
   const handleBlur = event => {
     // When nothing is entered
     if (!event.target.value) {
@@ -54,7 +56,7 @@ function InputColorCode(props) {
     }
   };
   return (
-    <ColorCodeField>
+    <ColorCodeField backgroundColor={backgroundColor} darkMode={props.darkMode}>
       <label htmlFor="inputColorCode">
         CSS color code
         <input
@@ -78,6 +80,7 @@ InputColorCode.propTypes = {
   setGreen: PropTypes.func.isRequired,
   setBlue: PropTypes.func.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
+  darkMode: PropTypes.bool.isRequired,
 };
 
 export default InputColorCode;
