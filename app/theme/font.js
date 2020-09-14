@@ -18,18 +18,26 @@ const sfProText = {
   descender: 494,
 }; // obtained from opentype.js
 
+// Convert x-height into font-size
+const getFontSizeRemFromXHeightPx = (xHeightPx, scale, fontMetrics) => {
+  const xHeightRem = (xHeightPx * Math.pow(modularScale, scale)) / oneRemPx;
+  return xHeightRem * (fontMetrics.unitsPerEm / fontMetrics.xHeight);
+};
+
 const font = {
   body: {
     family:
       "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
     size: {
-      mobile: (
-        (xHeightPx.mobile * (sfProText.unitsPerEm / sfProText.xHeight)) /
-        oneRemPx
+      mobile: getFontSizeRemFromXHeightPx(
+        xHeightPx.mobile,
+        0,
+        sfProText,
       ).toFixed(4),
-      desktop: (
-        (xHeightPx.desktop * (sfProText.unitsPerEm / sfProText.xHeight)) /
-        oneRemPx
+      desktop: getFontSizeRemFromXHeightPx(
+        xHeightPx.desktop,
+        0,
+        sfProText,
       ).toFixed(4),
     },
   },
