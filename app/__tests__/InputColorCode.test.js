@@ -205,24 +205,31 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
-        class="style__ColorCodeField-o0wbpp-1 hHfKSq"
+        class="style__ColorCodeField-o0wbpp-3 kWKvfU"
       >
-        <label
-          for="inputColorCode"
+        <div
+          class="style__InputWrapper-o0wbpp-4 ftwTjR"
         >
-          CSS color code
+          <label
+            class="style__Label-o0wbpp-1 gTkDFd"
+            for="inputColorCode"
+          >
+            CSS color code
+          </label>
           <input
+            autocomplete="off"
+            class="style__Input-o0wbpp-0 cOZJWa"
             id="inputColorCode"
             pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
             type="text"
             value=""
           />
-          <p>
-             e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)
-          </p>
-        </label>
+        </div>
+        <p>
+           e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)
+        </p>
         <p
-          class="style__ParagraphErrorMessage-o0wbpp-0 emkDPN"
+          class="style__ParagraphErrorMessage-o0wbpp-2 kjHuZT"
           data-testid="colorCodeError"
         >
           Please enter a valid CSS color code
