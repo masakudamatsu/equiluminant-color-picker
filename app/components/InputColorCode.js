@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
+  Abbr,
   ColorCodeField,
   Input,
   InputWrapper,
@@ -69,9 +70,12 @@ function InputColorCode(props) {
   return (
     <ColorCodeField backgroundColor={backgroundColor} darkMode={props.darkMode}>
       <InputWrapper>
-        <Label htmlFor="inputColorCode">CSS color code</Label>
+        <Label htmlFor="inputColorCode">
+          Enter <Abbr>css</Abbr> color code
+        </Label>
         <Input
           type="text"
+          darkMode={props.darkMode}
           error={invalid}
           id="inputColorCode"
           onBlur={handleBlur}
@@ -81,7 +85,7 @@ function InputColorCode(props) {
       </InputWrapper>
       <p> e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)</p>
       <ParagraphErrorMessage data-testid="colorCodeError" error={invalid}>
-        Please enter a valid CSS color code
+        Please enter a valid <Abbr>css</Abbr> color code
       </ParagraphErrorMessage>
     </ColorCodeField>
   );

@@ -3,6 +3,15 @@ import color from './color';
 import font from './font';
 
 // HTML elements
+export const Abbr = styled.abbr`
+  font-feature-settings: 'smcp';
+  letter-spacing: 0.01em; /* following Flexible Typesetting */
+  @supports (font-variant-caps: small-caps) {
+    font-variant-caps: small-caps;
+    font-feature-settings: normal;
+  }
+`;
+
 export const Input = styled.input.attrs(props => ({
   autoComplete: 'off', // to remove Webkit browser's default style that cannot be overriden. See https://stackoverflow.com/questions/2338102/override-browser-form-filling-and-input-highlighting-with-html-css
 }))`
