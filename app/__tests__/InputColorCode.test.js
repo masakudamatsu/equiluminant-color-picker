@@ -24,6 +24,7 @@ test('Blurring without entering any text does not show the error message or call
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -50,6 +51,7 @@ test('accepts HEX color codes and calls functions', () => {
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -84,6 +86,7 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -126,6 +129,7 @@ test('accepts HSL color codes', () => {
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -167,6 +171,7 @@ test('shows the error message if the user enters an invalid color code and hides
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -200,25 +205,32 @@ test('renders correctly', () => {
       setGreen={mockSetGreen}
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
+      darkMode={false}
     />,
   );
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
-        class="style__ColorCodeField-o0wbpp-3 kWKvfU"
+        class="style__ColorCodeField-o0wbpp-4 eUmOzx"
       >
         <div
-          class="style__InputWrapper-o0wbpp-4 ftwTjR"
+          class="style__InputWrapper-o0wbpp-5 jehpaT"
         >
           <label
-            class="style__Label-o0wbpp-1 gTkDFd"
+            class="style__Label-o0wbpp-2 ceFqsh"
             for="inputColorCode"
           >
-            CSS color code
+            Enter 
+            <abbr
+              class="style__Abbr-o0wbpp-0 kYbBqH"
+            >
+              css
+            </abbr>
+             color code
           </label>
           <input
             autocomplete="off"
-            class="style__Input-o0wbpp-0 cOZJWa"
+            class="style__Input-o0wbpp-1 dltcsz"
             id="inputColorCode"
             pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
             type="text"
@@ -229,10 +241,16 @@ test('renders correctly', () => {
            e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)
         </p>
         <p
-          class="style__ParagraphErrorMessage-o0wbpp-2 kjHuZT"
+          class="style__ParagraphErrorMessage-o0wbpp-3 hZUrVm"
           data-testid="colorCodeError"
         >
-          Please enter a valid CSS color code
+          Please enter a valid 
+          <abbr
+            class="style__Abbr-o0wbpp-0 kYbBqH"
+          >
+            css
+          </abbr>
+           color code
         </p>
       </div>
     </div>
@@ -246,6 +264,7 @@ test('is accessible', async () => {
       setGreen={mockSetGreen}
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
+      darkMode={false}
     />,
   );
   const results = await axe(container);
