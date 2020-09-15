@@ -292,6 +292,7 @@ body {
   color: ${props => (props.darkMode ? color.darkMode.font : color.font)};
   font-family: ${font.body.family};
   font-size: ${font.body.size.mobile}rem;
+  font-weight: ${font.body.weight};
   position: relative;
 
   &::after {
