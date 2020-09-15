@@ -31,7 +31,7 @@ const getFontSizeFromXheight = (baseXheight, scale, fontMetrics) => {
 const font = {
   body: {
     family:
-      "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
     size: {
       mobile: getFontSizeFromXheight(baseXheight.mobile, 0, sfProText).toFixed(
         4,
