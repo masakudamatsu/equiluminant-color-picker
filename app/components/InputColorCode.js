@@ -107,6 +107,7 @@ function InputColorCode(props) {
         <VerticalSpacer />
         <ParagraphErrorMessage
           data-testid="colorCodeError"
+          darkMode={props.darkMode}
           error={invalid}
         >
           Please enter a valid <Abbr>css</Abbr> color code

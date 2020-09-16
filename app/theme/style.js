@@ -104,6 +104,7 @@ export const ListItemInputValueExample = styled.li`
 `;
 
 export const ParagraphErrorMessage = styled.p`
+  color: ${props => (props.darkMode ? color.alert : color.darkMode.alert)};
   font-size: ${layout.label.fontSize.mobile}rem;
   visibility: ${props => (props.error ? 'visible' : 'hidden')};
   ${textCrop.bodyText.capHeight}
@@ -134,7 +135,6 @@ export const InputDescriptionWrapper = styled.div`
 `;
 
 export const InputExamplesWrapper = styled.div`
-  color: grey;
   display: flex;
   font-size: ${layout.label.fontSize.mobile}rem;
   justify-content: flex-start;
