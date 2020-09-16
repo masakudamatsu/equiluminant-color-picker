@@ -112,6 +112,7 @@ const layout = {
     },
   },
   input: {
+    borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},
     fontSize: {
       mobile: fontSize.input.mobile.toFixed(4),

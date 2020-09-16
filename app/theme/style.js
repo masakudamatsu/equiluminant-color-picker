@@ -61,7 +61,7 @@ export const Input = styled.input.attrs(props => ({
   }};
   border-style: solid;
   border-width: ${layout.input.borderWidthPx.normal.toFixed()}px;
-  border-radius: 4px;
+  border-radius: ${layout.input.borderRadiusPx.toFixed()}px;
   font-size: ${layout.input.fontSize.mobile}rem;
   height: 100%;
   padding: ${layout.input.paddingTopPx.mobile.toFixed(4)}px
@@ -123,6 +123,7 @@ export const UnorderedListInputValueExamples = styled.ul`
 // Div elements for styling
 export const ColorCodeField = styled.div`
   background-color: ${props => props.backgroundColor};
+  border-radius: ${layout.input.borderRadiusPx + 2}px;
   color: ${props => (props.darkMode ? color.font : color.darkMode.font)};
   padding: ${layout.colorCodeField.paddingPx.mobile.toFixed(4)}px;
   width: 100%;
