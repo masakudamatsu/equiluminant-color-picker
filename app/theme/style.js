@@ -54,9 +54,9 @@ export const Input = styled.input.attrs(props => ({
   background-color: inherit;
   border-color: ${props => {
     if (props.darkMode) {
-      return props.error ? 'red' : color.font;
+      return props.error ? color.alert : color.font;
     } else {
-      return props.error ? 'yellow' : color.darkMode.font;
+      return props.error ? color.darkMode.alert : color.darkMode.font;
     }
   }};
   border-style: solid;

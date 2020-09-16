@@ -9,10 +9,18 @@ const whiteAA = 'rgb(209, 209, 209)';
 // 4.5:1 contrast ratio to threshold rgb(117 ,117. 117)
 const whiteAAA = 'rgb(253, 253, 253)';
 
+// Alert text
+const alertColor = {
+  light: 'red',
+  dark: 'yellow',
+};
+
 const color = {
+  alert: alertColor.light,
   background: whiteAA,
   font: blackAA,
   darkMode: {
+    alert: alertColor.dark,
     background: blackAA,
     font: whiteAA,
   },
