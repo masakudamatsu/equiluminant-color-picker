@@ -63,7 +63,7 @@ describe('Color code input field', () => {
 
   it('Entering a RGB code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the color scheme for legibility if necessary', () => {
     colorList.forEach((color, index) => {
-      cy.findByLabelText(/css color code/i)
+      cy.findByLabelText(/color code/i)
         .click()
         .clear()
         .type(color.rgbCode)
