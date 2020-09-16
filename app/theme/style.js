@@ -95,8 +95,26 @@ export const Label = styled.label`
   ${textCrop.bodyText.capHeight}
 `;
 
+export const ListItemInputValueExample = styled.li`
+  ${textCrop.bodyText.capHeight}
+
+  &:not(:first-child) {
+    padding-top: ${layout.label.verticalSpacePx.mobile}px;
+  }
+`;
+
 export const ParagraphErrorMessage = styled.p`
   visibility: ${props => (props.error ? 'visible' : 'hidden')};
+`;
+
+export const ParagraphInputExamples = styled.p`
+  ${textCrop.bodyText.capHeight}
+`;
+
+export const UnorderedListInputValueExamples = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style: none;
 `;
 
 // Div elements for styling
@@ -107,6 +125,17 @@ export const ColorCodeField = styled.div`
   width: 100%;
 `;
 
+export const InputExamplesWrapper = styled.div`
+  color: grey;
+  display: flex;
+  font-size: ${layout.label.fontSize.mobile}rem;
+  justify-content: flex-start;
+  padding-left: ${(
+    layout.label.horizontalSpacePx.mobile + layout.input.borderWidthPx.normal
+  ).toFixed(4)}px;
+  padding-top: ${layout.label.verticalSpacePx.mobile}px;
+`;
+
 export const InputWrapper = styled.div`
   background-color: inherit;
   position: relative;
@@ -115,4 +144,9 @@ export const InputWrapper = styled.div`
 
 export const SideMarginSetter = styled.div`
   margin: ${layout.sideMarginPx.mobile}px;
+`;
+
+// div elements for spacing
+export const HorizontalSpacer = styled.div`
+  width: ${layout.label.horizontalSpacePx.mobile}px;
 `;

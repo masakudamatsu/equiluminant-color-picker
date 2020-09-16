@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import {
   Abbr,
   ColorCodeField,
+  HorizontalSpacer,
   Input,
+  InputExamplesWrapper,
   InputWrapper,
   Label,
+  ListItemInputValueExample,
   ParagraphErrorMessage,
+  ParagraphInputExamples,
+  UnorderedListInputValueExamples,
 } from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import color from '../theme/color';
@@ -83,7 +88,19 @@ function InputColorCode(props) {
           value={props.inputColorCode}
         />
       </InputWrapper>
-      <p> e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)</p>
+      <InputExamplesWrapper>
+        <ParagraphInputExamples>Examples:</ParagraphInputExamples>
+        <HorizontalSpacer />
+        <UnorderedListInputValueExamples>
+          <ListItemInputValueExample>
+            rgb(66, 135, 245)
+          </ListItemInputValueExample>
+          <ListItemInputValueExample>
+            hsl(217, 90%, 61%)
+          </ListItemInputValueExample>
+          <ListItemInputValueExample>#4287f5</ListItemInputValueExample>
+        </UnorderedListInputValueExamples>
+      </InputExamplesWrapper>
       <ParagraphErrorMessage data-testid="colorCodeError" error={invalid}>
         Please enter a valid <Abbr>css</Abbr> color code
       </ParagraphErrorMessage>
