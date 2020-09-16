@@ -5,6 +5,7 @@ import {
   ColorCodeField,
   HorizontalSpacer,
   Input,
+  InputDescriptionWrapper,
   InputExamplesWrapper,
   InputWrapper,
   Label,
@@ -12,6 +13,7 @@ import {
   ParagraphErrorMessage,
   ParagraphInputExamples,
   UnorderedListInputValueExamples,
+  VerticalSpacer,
 } from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import color from '../theme/color';
@@ -88,22 +90,28 @@ function InputColorCode(props) {
           value={props.inputColorCode}
         />
       </InputWrapper>
-      <InputExamplesWrapper>
-        <ParagraphInputExamples>Examples:</ParagraphInputExamples>
-        <HorizontalSpacer />
-        <UnorderedListInputValueExamples>
-          <ListItemInputValueExample>
-            rgb(66, 135, 245)
-          </ListItemInputValueExample>
-          <ListItemInputValueExample>
-            hsl(217, 90%, 61%)
-          </ListItemInputValueExample>
-          <ListItemInputValueExample>#4287f5</ListItemInputValueExample>
-        </UnorderedListInputValueExamples>
-      </InputExamplesWrapper>
-      <ParagraphErrorMessage data-testid="colorCodeError" error={invalid}>
-        Please enter a valid <Abbr>css</Abbr> color code
-      </ParagraphErrorMessage>
+      <InputDescriptionWrapper>
+        <InputExamplesWrapper>
+          <ParagraphInputExamples>Examples:</ParagraphInputExamples>
+          <HorizontalSpacer />
+          <UnorderedListInputValueExamples>
+            <ListItemInputValueExample>
+              rgb(66, 135, 245)
+            </ListItemInputValueExample>
+            <ListItemInputValueExample>
+              hsl(217, 90%, 61%)
+            </ListItemInputValueExample>
+            <ListItemInputValueExample>#4287f5</ListItemInputValueExample>
+          </UnorderedListInputValueExamples>
+        </InputExamplesWrapper>
+        <VerticalSpacer />
+        <ParagraphErrorMessage
+          data-testid="colorCodeError"
+          error={invalid}
+        >
+          Please enter a valid <Abbr>css</Abbr> color code
+        </ParagraphErrorMessage>
+      </InputDescriptionWrapper>
     </ColorCodeField>
   );
 }

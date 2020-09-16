@@ -104,7 +104,9 @@ export const ListItemInputValueExample = styled.li`
 `;
 
 export const ParagraphErrorMessage = styled.p`
+  font-size: ${layout.label.fontSize.mobile}rem;
   visibility: ${props => (props.error ? 'visible' : 'hidden')};
+  ${textCrop.bodyText.capHeight}
 `;
 
 export const ParagraphInputExamples = styled.p`
@@ -121,8 +123,14 @@ export const UnorderedListInputValueExamples = styled.ul`
 export const ColorCodeField = styled.div`
   background-color: ${props => props.backgroundColor};
   color: ${props => (props.darkMode ? color.font : color.darkMode.font)};
-  padding: ${layout.colorCodeField.paddingPx.mobile}px;
+  padding: ${layout.colorCodeField.paddingPx.mobile.toFixed(4)}px;
   width: 100%;
+`;
+
+export const InputDescriptionWrapper = styled.div`
+  padding-left: ${(
+    layout.label.horizontalSpacePx.mobile + layout.input.borderWidthPx.normal
+  ).toFixed(4)}px;
 `;
 
 export const InputExamplesWrapper = styled.div`
@@ -130,9 +138,6 @@ export const InputExamplesWrapper = styled.div`
   display: flex;
   font-size: ${layout.label.fontSize.mobile}rem;
   justify-content: flex-start;
-  padding-left: ${(
-    layout.label.horizontalSpacePx.mobile + layout.input.borderWidthPx.normal
-  ).toFixed(4)}px;
   padding-top: ${layout.label.verticalSpacePx.mobile}px;
 `;
 
@@ -149,4 +154,8 @@ export const SideMarginSetter = styled.div`
 // div elements for spacing
 export const HorizontalSpacer = styled.div`
   width: ${layout.label.horizontalSpacePx.mobile}px;
+`;
+
+export const VerticalSpacer = styled.div`
+  height: ${layout.label.verticalSpacePx.mobile}px;
 `;

@@ -108,7 +108,7 @@ const layout = {
   },
   colorCodeField: {
     paddingPx: {
-      mobile: (baseXheight.mobile * oneRemPx).toFixed(4),
+      mobile: baseXheight.mobile * oneRemPx,
     },
   },
   input: {
