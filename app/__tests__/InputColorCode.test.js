@@ -24,6 +24,7 @@ test('Blurring without entering any text does not show the error message or call
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -50,6 +51,7 @@ test('accepts HEX color codes and calls functions', () => {
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -84,6 +86,7 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -126,6 +129,7 @@ test('accepts HSL color codes', () => {
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -167,6 +171,7 @@ test('shows the error message if the user enters an invalid color code and hides
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -200,30 +205,89 @@ test('renders correctly', () => {
       setGreen={mockSetGreen}
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
+      darkMode={false}
     />,
   );
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <label
-        for="inputColorCode"
+      <div
+        class="style__ColorCodeField-o0wbpp-7 fPpMlL"
       >
-        CSS color code
-        <input
-          id="inputColorCode"
-          pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
-          type="text"
-          value=""
-        />
-        <p>
-           e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)
-        </p>
-      </label>
-      <p
-        class="style__ParagraphErrorMessage-o0wbpp-0 emkDPN"
-        data-testid="colorCodeError"
-      >
-        Please enter a valid CSS color code
-      </p>
+        <div
+          class="style__InputWrapper-o0wbpp-10 gUBLYr"
+        >
+          <label
+            class="style__Label-o0wbpp-2 higCQm"
+            for="inputColorCode"
+          >
+            Enter 
+            <abbr
+              class="style__Abbr-o0wbpp-0 kYbBqH"
+            >
+              css
+            </abbr>
+             color code
+          </label>
+          <input
+            autocomplete="off"
+            class="style__Input-o0wbpp-1 cUuAZK"
+            id="inputColorCode"
+            pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="style__InputDescriptionWrapper-o0wbpp-8 bZvtsw"
+        >
+          <div
+            class="style__InputExamplesWrapper-o0wbpp-9 hkIgCN"
+          >
+            <p
+              class="style__ParagraphInputExamples-o0wbpp-5 ebJNkg"
+            >
+              Examples:
+            </p>
+            <div
+              class="style__HorizontalSpacer-o0wbpp-12 eAjaws"
+            />
+            <ul
+              class="style__UnorderedListInputValueExamples-o0wbpp-6 fQAynv"
+            >
+              <li
+                class="style__ListItemInputValueExample-o0wbpp-3 dnFfkh"
+              >
+                rgb(66, 135, 245)
+              </li>
+              <li
+                class="style__ListItemInputValueExample-o0wbpp-3 dnFfkh"
+              >
+                hsl(217, 90%, 61%)
+              </li>
+              <li
+                class="style__ListItemInputValueExample-o0wbpp-3 dnFfkh"
+              >
+                #4287f5
+              </li>
+            </ul>
+          </div>
+          <div
+            class="style__VerticalSpacer-o0wbpp-13 gOfQyE"
+          />
+          <p
+            class="style__ParagraphErrorMessage-o0wbpp-4 fAiYhU"
+            data-testid="colorCodeError"
+          >
+            Please enter a valid 
+            <abbr
+              class="style__Abbr-o0wbpp-0 kYbBqH"
+            >
+              css
+            </abbr>
+             color code
+          </p>
+        </div>
+      </div>
     </div>
   `);
 });
@@ -235,6 +299,7 @@ test('is accessible', async () => {
       setGreen={mockSetGreen}
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
+      darkMode={false}
     />,
   );
   const results = await axe(container);

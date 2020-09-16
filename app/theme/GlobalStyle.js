@@ -2,6 +2,7 @@ import {createGlobalStyle} from 'styled-components';
 
 import color from './color';
 import font from './font';
+import layout from './layout';
 
 const GlobalStyle = createGlobalStyle`
 /*!
@@ -291,7 +292,9 @@ body {
   background-color: ${color.background};
   color: ${props => (props.darkMode ? color.darkMode.font : color.font)};
   font-family: ${font.body.family};
-  font-size: ${font.body.size.mobile}rem;
+  font-size: ${layout.body.fontSize.mobile}rem;
+  font-weight: ${font.body.weight};
+  line-height: ${layout.body.lineHeight};
   position: relative;
 
   &::after {

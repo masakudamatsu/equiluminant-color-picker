@@ -1,5 +1,6 @@
-// Copied from: https://github.com/vercel/next.js/blob/canary/examples/with-styled-components/pages/_document.js (1 Sep, 2020)
-import Document from 'next/document';
+// Based on (1) https://nextjs.org/docs/advanced-features/custom-document (15 Sep, 2020) (for using Google Fonts) and (2) https://github.com/vercel/next.js/blob/canary/examples/with-styled-components/pages/_document.js (1 Sep, 2020) for using styled-components
+
+import Document, {Html, Head, Main, NextScript} from 'next/document';
 import {ServerStyleSheet} from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -26,5 +27,22 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <Html>
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }

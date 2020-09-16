@@ -1,7 +1,22 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
-import {ParagraphErrorMessage} from '../theme/style';
+import {
+  Abbr,
+  ColorCodeField,
+  HorizontalSpacer,
+  Input,
+  InputDescriptionWrapper,
+  InputExamplesWrapper,
+  InputWrapper,
+  Label,
+  ListItemInputValueExample,
+  ParagraphErrorMessage,
+  ParagraphInputExamples,
+  UnorderedListInputValueExamples,
+  VerticalSpacer,
+} from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
+import color from '../theme/color';
 
 function InputColorCode(props) {
   const [invalid, setInvalid] = useState(false);
@@ -11,6 +26,12 @@ function InputColorCode(props) {
     'rgb\\((1?\\d?\\d|2[0-4]\\d|25[0-5])(,\\s*(1?\\d?\\d|2[0-4]\\d|25[0-5])){2}\\)';
   const regexHslText =
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
+
+  // Generate the RGB color code
+  let backgroundColor = color.darkMode.background;
+  if (props.red && props.green && props.blue) {
+    backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
+  }
 
   const handleBlur = event => {
     // When nothing is entered
@@ -54,30 +75,57 @@ function InputColorCode(props) {
     }
   };
   return (
-    <>
-      <label htmlFor="inputColorCode">
-        CSS color code
-        <input
+    <ColorCodeField backgroundColor={backgroundColor} darkMode={props.darkMode}>
+      <InputWrapper>
+        <Label htmlFor="inputColorCode">
+          Enter <Abbr>css</Abbr> color code
+        </Label>
+        <Input
           type="text"
+          darkMode={props.darkMode}
+          error={invalid}
           id="inputColorCode"
           onBlur={handleBlur}
           pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
           value={props.inputColorCode}
         />
-        <p> e.g. #4287f5, rgb(66, 135, 245), or hsl(217, 90%, 61%)</p>
-      </label>
-      <ParagraphErrorMessage data-testid="colorCodeError" error={invalid}>
-        Please enter a valid CSS color code
-      </ParagraphErrorMessage>
-    </>
+      </InputWrapper>
+      <InputDescriptionWrapper>
+        <InputExamplesWrapper>
+          <ParagraphInputExamples>Examples:</ParagraphInputExamples>
+          <HorizontalSpacer />
+          <UnorderedListInputValueExamples>
+            <ListItemInputValueExample>
+              rgb(66, 135, 245)
+            </ListItemInputValueExample>
+            <ListItemInputValueExample>
+              hsl(217, 90%, 61%)
+            </ListItemInputValueExample>
+            <ListItemInputValueExample>#4287f5</ListItemInputValueExample>
+          </UnorderedListInputValueExamples>
+        </InputExamplesWrapper>
+        <VerticalSpacer />
+        <ParagraphErrorMessage
+          data-testid="colorCodeError"
+          darkMode={props.darkMode}
+          error={invalid}
+        >
+          Please enter a valid <Abbr>css</Abbr> color code
+        </ParagraphErrorMessage>
+      </InputDescriptionWrapper>
+    </ColorCodeField>
   );
 }
 
 InputColorCode.propTypes = {
+  red: PropTypes.string.isRequired,
+  green: PropTypes.string.isRequired,
+  blue: PropTypes.string.isRequired,
   setRed: PropTypes.func.isRequired,
   setGreen: PropTypes.func.isRequired,
   setBlue: PropTypes.func.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
+  darkMode: PropTypes.bool.isRequired,
 };
 
 export default InputColorCode;
