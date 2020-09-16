@@ -112,7 +112,7 @@ const layout = {
     },
   },
   input: {
-    borderWidthPx: 2,
+    borderWidthPx: {normal: 1, active: 2},
     fontSize: {
       mobile: fontSize.input.mobile.toFixed(4),
     },

@@ -52,8 +52,15 @@ export const Input = styled.input.attrs(props => ({
   autoComplete: 'off', // to remove Webkit browser's default style that cannot be overriden. See https://stackoverflow.com/questions/2338102/override-browser-form-filling-and-input-highlighting-with-html-css
 }))`
   background-color: inherit;
-  border: ${layout.input.borderWidthPx.toFixed()}px solid white;
-  border-color: ${props => (props.error ? 'red' : 'grey')};
+  border-color: ${props => {
+    if (props.darkMode) {
+      return props.error ? 'red' : color.font;
+    } else {
+      return props.error ? 'yellow' : color.darkMode.font;
+    }
+  }};
+  border-style: solid;
+  border-width: ${layout.input.borderWidthPx.normal.toFixed()}px;
   border-radius: 4px;
   font-size: ${layout.input.fontSize.mobile}rem;
   height: 100%;
@@ -61,12 +68,13 @@ export const Input = styled.input.attrs(props => ({
     ${layout.label.horizontalSpacePx.mobile.toFixed(4)}px
     ${layout.input.paddingBottomPx.mobile.toFixed(4)}px;
   text-align: center;
-  width: 100%;
+  width: auto;
 
   &:active,
   &:hover,
   &:focus {
-    border-color: white;
+    border-width: ${layout.input.borderWidthPx.active.toFixed()}px;
+    margin: -${(layout.input.borderWidthPx.active - layout.input.borderWidthPx.normal).toFixed()}px;
     outline: none;
   }
 `;
@@ -76,13 +84,13 @@ export const Label = styled.label`
   position: absolute;
   top: ${(
     layout.label.verticalSpacePx.mobile +
-    layout.input.borderWidthPx +
+    layout.input.borderWidthPx.normal +
     2
   ).toFixed(
     4,
   )}px; /* For some reason, the label element will be placed 2px above the edge of its wrapper div. We fix this by adding 2px. */
   left: ${(
-    layout.label.horizontalSpacePx.mobile + layout.input.borderWidthPx
+    layout.label.horizontalSpacePx.mobile + layout.input.borderWidthPx.normal
   ).toFixed(4)}px;
   ${textCrop.bodyText.capHeight}
 `;
