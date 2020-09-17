@@ -123,7 +123,6 @@ export const UnorderedListInputValueExamples = styled.ul`
 // Div elements for styling
 export const ColorCodeField = styled.div`
   background-color: ${props => props.backgroundColor};
-  border-radius: ${layout.input.borderRadiusPx + 2}px;
   color: ${props => (props.darkMode ? color.font : color.darkMode.font)};
   padding: ${layout.colorCodeField.paddingPx.mobile.toFixed(4)}px;
   width: 100%;
