@@ -62,13 +62,17 @@ export const Input = styled.input.attrs(props => ({
   border-style: solid;
   border-width: ${layout.input.borderWidthPx.normal.toFixed()}px;
   border-radius: ${layout.input.borderRadiusPx.toFixed()}px;
-  font-size: ${layout.input.fontSize.mobile}rem;
-  height: 100%;
-  padding: ${layout.input.paddingTopPx.mobile.toFixed(4)}px
-    ${layout.label.horizontalSpacePx.mobile.toFixed(4)}px
+  font-size: ${layout.input.fontSize.mobile.toFixed(4)}rem;
+  height: 100%; /* Without this, 10px will be added up for some reason */
+  padding: ${(
+      layout.input.paddingTopPx.mobile +
+      layout.label.capHeightPx.mobile +
+      layout.label.paddingPx.mobile
+    ).toFixed(4)}px
+    ${layout.label.paddingPx.mobile.toFixed(4)}px
     ${layout.input.paddingBottomPx.mobile.toFixed(4)}px;
-  text-align: center;
-  width: auto;
+  text-align: left;
+  width: auto; /* To fix the layout when thickening the border upon active state */
 
   &:active,
   &:hover,
@@ -80,17 +84,17 @@ export const Input = styled.input.attrs(props => ({
 `;
 
 export const Label = styled.label`
-  font-size: ${layout.label.fontSize.mobile}rem;
+  font-size: ${layout.label.fontSize.mobile.toFixed(4)}rem;
   position: absolute;
   top: ${(
-    layout.label.verticalSpacePx.mobile +
+    layout.label.paddingPx.mobile +
     layout.input.borderWidthPx.normal +
     2
   ).toFixed(
     4,
   )}px; /* For some reason, the label element will be placed 2px above the edge of its wrapper div. We fix this by adding 2px. */
   left: ${(
-    layout.label.horizontalSpacePx.mobile + layout.input.borderWidthPx.normal
+    layout.label.paddingPx.mobile + layout.input.borderWidthPx.normal
   ).toFixed(4)}px;
   ${textCrop.bodyText.capHeight}
 `;
@@ -99,7 +103,7 @@ export const ListItemInputValueExample = styled.li`
   ${textCrop.bodyText.capHeight}
 
   &:not(:first-child) {
-    padding-top: ${layout.label.verticalSpacePx.mobile}px;
+    padding-top: ${layout.label.paddingPx.mobile}px;
   }
 `;
 
@@ -130,7 +134,7 @@ export const ColorCodeField = styled.div`
 
 export const InputDescriptionWrapper = styled.div`
   padding-left: ${(
-    layout.label.horizontalSpacePx.mobile + layout.input.borderWidthPx.normal
+    layout.label.paddingPx.mobile + layout.input.borderWidthPx.normal
   ).toFixed(4)}px;
 `;
 
@@ -138,7 +142,7 @@ export const InputExamplesWrapper = styled.div`
   display: flex;
   font-size: ${layout.label.fontSize.mobile}rem;
   justify-content: flex-start;
-  padding-top: ${layout.label.verticalSpacePx.mobile}px;
+  padding-top: ${layout.label.paddingPx.mobile}px;
 `;
 
 export const InputWrapper = styled.div`
@@ -153,9 +157,9 @@ export const SideMarginSetter = styled.div`
 
 // div elements for spacing
 export const HorizontalSpacer = styled.div`
-  width: ${layout.label.horizontalSpacePx.mobile}px;
+  width: ${layout.label.paddingPx.mobile}px;
 `;
 
 export const VerticalSpacer = styled.div`
-  height: ${layout.label.verticalSpacePx.mobile}px;
+  height: ${layout.label.paddingPx.mobile}px;
 `;

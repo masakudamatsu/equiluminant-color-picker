@@ -292,7 +292,7 @@ body {
   background-color: ${color.background};
   color: ${props => (props.darkMode ? color.darkMode.font : color.font)};
   font-family: ${font.body.family};
-  font-size: ${layout.body.fontSize.mobile}rem;
+  font-size: ${layout.body.fontSize.mobile.toFixed(4)}rem;
   font-weight: ${font.body.weight};
   line-height: ${layout.body.lineHeight};
   position: relative;
