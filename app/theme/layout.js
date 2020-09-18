@@ -100,7 +100,10 @@ const layout = {
     fontSize: {
       mobile: fontSizeForXheightToBe(baseXheight.mobile, Roboto),
     },
-    lineHeight: lineHeightEm.bodyText,
+    lineHeight: {
+      mobile: baseXheight.mobile * (1 + scaleRatio),
+      desktop: baseXheight.desktop * (1 + scaleRatio),
+    }, // in Rem. To be converted in Em in GlobalStyle.js, to make explicit its dependence on font-size
   },
   colorCodeField: {
     paddingPx: {

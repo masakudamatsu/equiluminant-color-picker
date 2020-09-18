@@ -294,7 +294,9 @@ body {
   font-family: ${font.body.family};
   font-size: ${layout.body.fontSize.mobile.toFixed(4)}rem;
   font-weight: ${font.body.weight};
-  line-height: ${layout.body.lineHeight};
+  line-height: ${(
+    layout.body.lineHeight.mobile / layout.body.fontSize.mobile
+  ).toFixed(4)};
   position: relative;
 
   &::after {
