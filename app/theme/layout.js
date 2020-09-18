@@ -16,15 +16,6 @@ const modularScale = power => {
 };
 console.log(modularScale(1));
 
-// Font metrics
-const sfProText = {
-  unitsPerEm: 2048,
-  xHeight: 1078,
-  capHeight: 1443,
-  ascender: 1950,
-  descender: 494,
-}; // obtained from opentype.js
-
 // const Roboto = {
 //   unitsPerEm: 1000, // 2048,
 //   xHeight: 530, // 1082,
