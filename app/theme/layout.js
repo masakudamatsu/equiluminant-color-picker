@@ -33,13 +33,13 @@ const Roboto = {
 }; // Measured by myself, by setting font-size: 100px
 
 // Convert x-height into font-size
-const getFontSizeFromXheight = (xHeight, fontMetrics) => {
+const fontSizeForXheightToBe = (xHeight, fontMetrics) => {
   const xHeightToFontSizeRatio = fontMetrics.xHeight / fontMetrics.unitsPerEm;
   return xHeight / xHeightToFontSizeRatio;
 };
 
 // Convert cap-height into font-size
-const getFontSizeFromCapHeight = (capHeight, fontMetrics) => {
+const fontSizeForCapHeightToBe = (capHeight, fontMetrics) => {
   const capHeightToFontSizeRatio =
     fontMetrics.capHeight / fontMetrics.unitsPerEm;
   return capHeight / capHeightToFontSizeRatio;
@@ -72,7 +72,7 @@ const lineHeight = {
 const lineHeightEm = {
   bodyText:
     lineHeight.bodyText.desktop /
-    getFontSizeFromXheight(baseXheight.desktop, 0, Roboto),
+    fontSizeForXheightToBe(baseXheight.desktop, Roboto),
 };
 
 const getTextCropBottom = (fontMetrics, lineHeightEm) => {
@@ -98,7 +98,7 @@ const getTextCropTopCap = (fontMetrics, lineHeightEm) => {
 const layout = {
   body: {
     fontSize: {
-      mobile: getFontSizeFromXheight(baseXheight.mobile, Roboto),
+      mobile: fontSizeForXheightToBe(baseXheight.mobile, Roboto),
     },
     lineHeight: lineHeightEm.bodyText,
   },
@@ -111,7 +111,7 @@ const layout = {
     borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},
     fontSize: {
-      mobile: getFontSizeFromCapHeight(
+      mobile: fontSizeForCapHeightToBe(
         baseXheight.mobile * modularScale(1),
         Roboto,
       ),
@@ -120,7 +120,7 @@ const layout = {
       mobile:
         (baseXheight.mobile * modularScale(1) -
           getTextCropBottom(Roboto, 1) *
-            getFontSizeFromCapHeight(
+            fontSizeForCapHeightToBe(
               baseXheight.mobile * modularScale(1),
               Roboto,
             )) *
@@ -131,7 +131,7 @@ const layout = {
       mobile:
         (baseXheight.mobile * modularScale(1) -
           getTextCropTopCap(Roboto, 1) *
-            getFontSizeFromCapHeight(
+            fontSizeForCapHeightToBe(
               baseXheight.mobile * modularScale(1),
               Roboto,
             )) *
@@ -143,7 +143,7 @@ const layout = {
       mobile: baseXheight.mobile * oneRemPx,
     },
     fontSize: {
-      mobile: getFontSizeFromCapHeight(baseXheight.mobile, Roboto),
+      mobile: fontSizeForCapHeightToBe(baseXheight.mobile, Roboto),
     },
     paddingPx: {
       // in pixel, because we do not want it to be enlarged when the user increases the font size.
