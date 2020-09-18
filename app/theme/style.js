@@ -156,10 +156,10 @@ export const SideMarginSetter = styled.div`
 `;
 
 // div elements for spacing
-export const HorizontalSpacer = styled.div`
+export const SpacerHorizontal = styled.div`
   width: ${layout.label.paddingPx.mobile}px;
 `;
 
-export const VerticalSpacer = styled.div`
+export const SpacerVertical = styled.div`
   height: ${layout.label.paddingPx.mobile}px;
 `;

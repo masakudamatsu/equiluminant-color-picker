@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Abbr,
   ColorCodeField,
-  HorizontalSpacer,
+  SpacerHorizontal,
   Input,
   InputDescriptionWrapper,
   InputExamplesWrapper,
@@ -13,7 +13,7 @@ import {
   ParagraphErrorMessage,
   ParagraphInputExamples,
   UnorderedListInputValueExamples,
-  VerticalSpacer,
+  SpacerVertical,
 } from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import color from '../theme/color';
@@ -93,7 +93,7 @@ function InputColorCode(props) {
       <InputDescriptionWrapper>
         <InputExamplesWrapper>
           <ParagraphInputExamples>Examples:</ParagraphInputExamples>
-          <HorizontalSpacer />
+          <SpacerHorizontal />
           <UnorderedListInputValueExamples>
             <ListItemInputValueExample>
               rgb(66, 135, 245)
@@ -104,7 +104,7 @@ function InputColorCode(props) {
             <ListItemInputValueExample>#4287f5</ListItemInputValueExample>
           </UnorderedListInputValueExamples>
         </InputExamplesWrapper>
-        <VerticalSpacer />
+        <SpacerVertical />
         <ParagraphErrorMessage
           data-testid="colorCodeError"
           darkMode={props.darkMode}
