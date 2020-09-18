@@ -11,7 +11,7 @@ import {
   Label,
   ListItemInputValueExample,
   ParagraphErrorMessage,
-  ParagraphInputExamples,
+  Paragraph,
   UnorderedListInputValueExamples,
   SpacerVertical,
 } from '../theme/style';
@@ -92,7 +92,7 @@ function InputColorCode(props) {
       </InputWrapper>
       <InputDescriptionWrapper>
         <InputExamplesWrapper>
-          <ParagraphInputExamples>Examples:</ParagraphInputExamples>
+          <Paragraph>Examples:</Paragraph>
           <SpacerHorizontal />
           <UnorderedListInputValueExamples>
             <ListItemInputValueExample>

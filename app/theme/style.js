@@ -107,15 +107,14 @@ export const ListItemInputValueExample = styled.li`
   }
 `;
 
-export const ParagraphErrorMessage = styled.p`
-  color: ${props => (props.darkMode ? color.alert : color.darkMode.alert)};
-  font-size: ${layout.label.fontSize.mobile}rem;
-  visibility: ${props => (props.error ? 'visible' : 'hidden')};
+export const Paragraph = styled.p`
   ${textCrop.bodyText.capHeight}
 `;
 
-export const ParagraphInputExamples = styled.p`
-  ${textCrop.bodyText.capHeight}
+export const ParagraphErrorMessage = styled(Paragraph)`
+  color: ${props => (props.darkMode ? color.alert : color.darkMode.alert)};
+  font-size: ${layout.label.fontSize.mobile}rem;
+  visibility: ${props => (props.error ? 'visible' : 'hidden')};
 `;
 
 export const UnorderedListInputValueExamples = styled.ul`
