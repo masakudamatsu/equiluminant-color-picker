@@ -28,7 +28,7 @@ function InputColorCode(props) {
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
 
   // Generate the RGB color code
-  let backgroundColor = color.darkMode.background;
+  let backgroundColor = color.body.font.lightMode;
   if (props.red && props.green && props.blue) {
     backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
   }

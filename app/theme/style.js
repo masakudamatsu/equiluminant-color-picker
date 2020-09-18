@@ -54,9 +54,13 @@ export const Input = styled.input.attrs(props => ({
   background-color: inherit;
   border-color: ${props => {
     if (props.darkMode) {
-      return props.error ? color.alert : color.font;
+      return props.error
+        ? color.paragraphErrorMessage.font.forLightColor
+        : color.body.background.darkMode;
     } else {
-      return props.error ? color.darkMode.alert : color.darkMode.font;
+      return props.error
+        ? color.paragraphErrorMessage.font.forDarkColor
+        : color.body.background.lightMode;
     }
   }};
   border-style: solid;
@@ -112,7 +116,10 @@ export const Paragraph = styled.p`
 `;
 
 export const ParagraphErrorMessage = styled(Paragraph)`
-  color: ${props => (props.darkMode ? color.alert : color.darkMode.alert)};
+  color: ${props =>
+    props.darkMode
+      ? color.paragraphErrorMessage.font.forLightColor
+      : color.paragraphErrorMessage.font.forDarkColor};
   font-size: ${layout.label.fontSize.mobile}rem;
   visibility: ${props => (props.error ? 'visible' : 'hidden')};
 `;
@@ -126,7 +133,10 @@ export const UnorderedListInputValueExamples = styled.ul`
 // Div elements for styling
 export const ColorCodeField = styled.div`
   background-color: ${props => props.backgroundColor};
-  color: ${props => (props.darkMode ? color.font : color.darkMode.font)};
+  color: ${props =>
+    props.darkMode
+      ? color.body.background.darkMode
+      : color.body.background.lightMode};
   padding: ${layout.label.paddingPx.mobile.toFixed(4)}px;
   width: 100%;
 `;
