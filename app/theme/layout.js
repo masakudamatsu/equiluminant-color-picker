@@ -10,16 +10,11 @@ const baseXheight = {
   desktop: 10 / oneRemPx, // Medium.com and Dev.to
 };
 
-const modularScale = 2;
-
-// Font metrics
-const sfProText = {
-  unitsPerEm: 2048,
-  xHeight: 1078,
-  capHeight: 1443,
-  ascender: 1950,
-  descender: 494,
-}; // obtained from opentype.js
+const scaleRatio = 2;
+const modularScale = power => {
+  return Math.pow(scaleRatio, power);
+};
+console.log(modularScale(1));
 
 // const Roboto = {
 //   unitsPerEm: 1000, // 2048,
@@ -38,45 +33,30 @@ const Roboto = {
 }; // Measured by myself, by setting font-size: 100px
 
 // Convert x-height into font-size
-const getFontSizeFromXheight = (baseXheight, scale, fontMetrics) => {
-  const xHeight = baseXheight * Math.pow(modularScale, scale);
+const fontSizeForXheightToBe = (xHeight, fontMetrics) => {
   const xHeightToFontSizeRatio = fontMetrics.xHeight / fontMetrics.unitsPerEm;
   return xHeight / xHeightToFontSizeRatio;
 };
 
 // Convert cap-height into font-size
-const getFontSizeFromCapHeight = (baseCapHeight, scale, fontMetrics) => {
-  const capHeight = baseCapHeight * Math.pow(modularScale, scale);
+const fontSizeForCapHeightToBe = (capHeight, fontMetrics) => {
   const capHeightToFontSizeRatio =
     fontMetrics.capHeight / fontMetrics.unitsPerEm;
   return capHeight / capHeightToFontSizeRatio;
 };
 
-// Font size
-const fontSize = {
-  bodyText: {
-    mobile: getFontSizeFromXheight(baseXheight.mobile, 0, Roboto),
-  },
-  input: {
-    mobile: getFontSizeFromCapHeight(baseXheight.mobile, 1, Roboto),
-  },
-  label: {
-    mobile: getFontSizeFromCapHeight(baseXheight.mobile, 0, Roboto),
-  },
-};
-
 const lineHeight = {
   // in rem
   bodyText: {
-    mobile: baseXheight.mobile * (1 + modularScale),
-    desktop: baseXheight.desktop * (1 + modularScale),
+    mobile: baseXheight.mobile * (1 + scaleRatio),
+    desktop: baseXheight.desktop * (1 + scaleRatio),
   },
 };
 
 const lineHeightEm = {
   bodyText:
     lineHeight.bodyText.desktop /
-    getFontSizeFromXheight(baseXheight.desktop, 0, Roboto),
+    fontSizeForXheightToBe(baseXheight.desktop, Roboto),
 };
 
 const getTextCropBottom = (fontMetrics, lineHeightEm) => {
@@ -102,51 +82,59 @@ const getTextCropTopCap = (fontMetrics, lineHeightEm) => {
 const layout = {
   body: {
     fontSize: {
-      mobile: fontSize.bodyText.mobile.toFixed(4),
+      mobile: fontSizeForXheightToBe(baseXheight.mobile, Roboto),
     },
-    lineHeight: lineHeightEm.bodyText,
-  },
-  colorCodeField: {
-    paddingPx: {
-      mobile: baseXheight.mobile * oneRemPx,
-    },
+    lineHeight: {
+      mobile: baseXheight.mobile * (1 + scaleRatio),
+      desktop: baseXheight.desktop * (1 + scaleRatio),
+    }, // in Rem. To be converted in Em in GlobalStyle.js, to make explicit its dependence on font-size
   },
   input: {
     borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},
     fontSize: {
-      mobile: fontSize.input.mobile.toFixed(4),
+      mobile: fontSizeForCapHeightToBe(
+        baseXheight.mobile * modularScale(1),
+        Roboto,
+      ),
     },
     paddingBottomPx: {
       mobile:
-        (baseXheight.mobile * Math.pow(modularScale, 1) -
-          getTextCropBottom(Roboto, 1) * fontSize.input.mobile) *
+        (baseXheight.mobile * modularScale(1) -
+          getTextCropBottom(Roboto, 1) *
+            fontSizeForCapHeightToBe(
+              baseXheight.mobile * modularScale(1),
+              Roboto,
+            )) *
         oneRemPx,
     },
     paddingTopPx: {
       // Input field's text box does not include line-height, it seems.
       mobile:
-        (baseXheight.mobile * (2 + Math.pow(modularScale, 1)) -
-          getTextCropTopCap(Roboto, 1) * fontSize.input.mobile) *
+        (baseXheight.mobile * modularScale(1) -
+          getTextCropTopCap(Roboto, 1) *
+            fontSizeForCapHeightToBe(
+              baseXheight.mobile * modularScale(1),
+              Roboto,
+            )) *
         oneRemPx,
     },
   },
   label: {
-    fontSize: {
-      mobile: fontSize.label.mobile.toFixed(4),
-    },
-    verticalSpacePx: {
-      // in pixel, because we do not want it to be enlarged when the user increases the font size.
+    capHeightPx: {
       mobile: baseXheight.mobile * oneRemPx,
     },
-    horizontalSpacePx: {
+    fontSize: {
+      mobile: fontSizeForCapHeightToBe(baseXheight.mobile, Roboto),
+    },
+    paddingPx: {
       // in pixel, because we do not want it to be enlarged when the user increases the font size.
       mobile: baseXheight.mobile * oneRemPx,
     },
   },
   sideMarginPx: {
     // in pixel, because we do not want it to be enlarged when the user increases the font size.
-    mobile: baseXheight.mobile * Math.pow(modularScale, 1) * oneRemPx,
+    mobile: baseXheight.mobile * modularScale(1) * oneRemPx,
   },
   textCrop: {
     bodyText: {

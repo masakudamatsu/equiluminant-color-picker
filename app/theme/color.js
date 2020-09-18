@@ -11,18 +11,27 @@ const whiteAAA = 'rgb(253, 253, 253)';
 
 // Alert text
 const alertColor = {
-  light: 'red',
-  dark: 'yellow',
+  forLightColor: 'red',
+  forDarkColor: 'yellow',
 };
 
+// Assign color to each element
 const color = {
-  alert: alertColor.light,
-  background: whiteAA,
-  font: blackAA,
-  darkMode: {
-    alert: alertColor.dark,
-    background: blackAA,
-    font: whiteAA,
+  body: {
+    background: {
+      lightMode: whiteAA,
+      darkMode: blackAA,
+    },
+    font: {
+      lightMode: blackAA,
+      darkMode: whiteAA,
+    },
+  },
+  paragraphErrorMessage: {
+    font: {
+      forDarkColor: alertColor.forDarkColor,
+      forLightColor: alertColor.forLightColor,
+    },
   },
 };
 

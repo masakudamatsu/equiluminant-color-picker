@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Abbr,
   ColorCodeField,
-  HorizontalSpacer,
+  SpacerHorizontal,
   Input,
   InputDescriptionWrapper,
   InputExamplesWrapper,
@@ -11,9 +11,9 @@ import {
   Label,
   ListItemInputValueExample,
   ParagraphErrorMessage,
-  ParagraphInputExamples,
+  Paragraph,
   UnorderedListInputValueExamples,
-  VerticalSpacer,
+  SpacerVertical,
 } from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import color from '../theme/color';
@@ -28,7 +28,7 @@ function InputColorCode(props) {
     'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
 
   // Generate the RGB color code
-  let backgroundColor = color.darkMode.background;
+  let backgroundColor = color.body.font.lightMode;
   if (props.red && props.green && props.blue) {
     backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
   }
@@ -92,8 +92,8 @@ function InputColorCode(props) {
       </InputWrapper>
       <InputDescriptionWrapper>
         <InputExamplesWrapper>
-          <ParagraphInputExamples>Examples:</ParagraphInputExamples>
-          <HorizontalSpacer />
+          <Paragraph>Examples:</Paragraph>
+          <SpacerHorizontal />
           <UnorderedListInputValueExamples>
             <ListItemInputValueExample>
               rgb(66, 135, 245)
@@ -104,7 +104,7 @@ function InputColorCode(props) {
             <ListItemInputValueExample>#4287f5</ListItemInputValueExample>
           </UnorderedListInputValueExamples>
         </InputExamplesWrapper>
-        <VerticalSpacer />
+        <SpacerVertical />
         <ParagraphErrorMessage
           data-testid="colorCodeError"
           darkMode={props.darkMode}

@@ -289,16 +289,19 @@ progress {
   Custom global style
 *****************************************************************************/
 body {
-  background-color: ${color.background};
-  color: ${props => (props.darkMode ? color.darkMode.font : color.font)};
+  background-color: ${color.body.background.lightMode};
+  color: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
   font-family: ${font.body.family};
-  font-size: ${layout.body.fontSize.mobile}rem;
+  font-size: ${layout.body.fontSize.mobile.toFixed(4)}rem;
   font-weight: ${font.body.weight};
-  line-height: ${layout.body.lineHeight};
+  line-height: ${(
+    layout.body.lineHeight.mobile / layout.body.fontSize.mobile
+  ).toFixed(4)};
   position: relative;
 
   &::after {
-    background-color: ${color.darkMode.background};
+    background-color: ${color.body.background.darkMode};
     bottom: 0;
     content:"";
     opacity: ${props => (props.darkMode ? 1 : 0)};
