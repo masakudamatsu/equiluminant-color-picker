@@ -45,22 +45,6 @@ const fontSizeForCapHeightToBe = (capHeight, fontMetrics) => {
   return capHeight / capHeightToFontSizeRatio;
 };
 
-// Font size
-const fontSize = {
-  bodyText: {
-    mobile: getFontSizeFromXheight(baseXheight.mobile, Roboto),
-  },
-  input: {
-    mobile: getFontSizeFromCapHeight(
-      baseXheight.mobile * modularScale(1),
-      Roboto,
-    ),
-  },
-  label: {
-    mobile: getFontSizeFromCapHeight(baseXheight.mobile, Roboto),
-  },
-};
-
 const lineHeight = {
   // in rem
   bodyText: {
