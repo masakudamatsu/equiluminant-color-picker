@@ -128,7 +128,7 @@ export const UnorderedListInputValueExamples = styled.ul`
 export const ColorCodeField = styled.div`
   background-color: ${props => props.backgroundColor};
   color: ${props => (props.darkMode ? color.font : color.darkMode.font)};
-  padding: ${layout.colorCodeField.paddingPx.mobile.toFixed(4)}px;
+  padding: ${layout.label.paddingPx.mobile.toFixed(4)}px;
   width: 100%;
 `;
 

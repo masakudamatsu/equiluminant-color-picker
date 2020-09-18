@@ -105,11 +105,6 @@ const layout = {
       desktop: baseXheight.desktop * (1 + scaleRatio),
     }, // in Rem. To be converted in Em in GlobalStyle.js, to make explicit its dependence on font-size
   },
-  colorCodeField: {
-    paddingPx: {
-      mobile: baseXheight.mobile * oneRemPx,
-    },
-  },
   input: {
     borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},
