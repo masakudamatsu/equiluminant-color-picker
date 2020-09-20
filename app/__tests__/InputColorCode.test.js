@@ -16,10 +16,19 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
+const initialRGBcode = {
+  red: '',
+  green: '',
+  blue: '',
+};
+
 test('Blurring without entering any text does not show the error message or call any functions', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode
+        red={initialRGBcode.red}
+        green={initialRGBcode.green}
+        blue={initialRGBcode.blue}
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
@@ -47,6 +56,9 @@ test('accepts HEX color codes and calls functions', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode
+        red={initialRGBcode.red}
+        green={initialRGBcode.green}
+        blue={initialRGBcode.blue}
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
@@ -82,6 +94,9 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode
+        red={initialRGBcode.red}
+        green={initialRGBcode.green}
+        blue={initialRGBcode.blue}
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
@@ -125,6 +140,9 @@ test('accepts HSL color codes', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode
+        red={initialRGBcode.red}
+        green={initialRGBcode.green}
+        blue={initialRGBcode.blue}
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
@@ -167,6 +185,9 @@ test('shows the error message if the user enters an invalid color code and hides
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode
+        red={initialRGBcode.red}
+        green={initialRGBcode.green}
+        blue={initialRGBcode.blue}
         setRed={mockSetRed}
         setGreen={mockSetGreen}
         setBlue={mockSetBlue}
@@ -201,6 +222,9 @@ test('shows the error message if the user enters an invalid color code and hides
 test('renders correctly', () => {
   const {container} = render(
     <InputColorCode
+      red={initialRGBcode.red}
+      green={initialRGBcode.green}
+      blue={initialRGBcode.blue}
       setRed={mockSetRed}
       setGreen={mockSetGreen}
       setBlue={mockSetBlue}
@@ -295,6 +319,9 @@ test('renders correctly', () => {
 test('is accessible', async () => {
   const {container} = render(
     <InputColorCode
+      red={initialRGBcode.red}
+      green={initialRGBcode.green}
+      blue={initialRGBcode.blue}
       setRed={mockSetRed}
       setGreen={mockSetGreen}
       setBlue={mockSetBlue}
