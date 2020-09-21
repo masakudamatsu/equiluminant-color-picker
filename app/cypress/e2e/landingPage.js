@@ -174,9 +174,22 @@ describe('Clicking one of the 12 hue swatches', () => {
       .blur();
   });
 
-  it.only('redirects to the results page and shows the swatches of equiluminant colors with the contrast ratio and the hue shown', () => {
-    // setup
-    cy.findByTestId('Red').click();
+  hueList.forEach((hue, index) => {
+    it(`redirects to the results page and shows the swatches of equiluminant colors with the contrast ratio and the hue shown: ${hue}`, () => {
+      // setup
+      cy.findByTestId(hue).click();
+      const expectedHue = (index * 30).toFixed();
+      // verify
+      cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+      cy.findByText(/contrast ratio with pure black/i).contains(
+        getContrastRatio(
+          colorList[0].red,
+          colorList[0].green,
+          colorList[0].blue,
+        ),
+      );
+      cy.findByText(/hue/i).contains(expectedHue);
+    });
   });
 });
 

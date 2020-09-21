@@ -23,8 +23,16 @@ const ButtonHueSwatch = styled.button`
 `;
 
 function HueSwatch(props) {
+  const handleClick = event => {
+    props.getHue(props.hue);
+    props.handleSubmit(event);
+  };
   return (
-    <ButtonHueSwatch data-testid={props.title}>
+    <ButtonHueSwatch
+      data-testid={props.title}
+      onClick={handleClick}
+      type="submit"
+    >
       <Svg hue={props.hue} viewBox="0 0 10 10" aria-labelledby="colorName">
         <title id="colorName">{props.title}</title>
         <rect x="0" y="0" width="10" height="10" />
@@ -34,6 +42,8 @@ function HueSwatch(props) {
 }
 
 HueSwatch.propTypes = {
+  getHue: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   hue: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
