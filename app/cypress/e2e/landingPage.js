@@ -19,6 +19,21 @@ const colorList = [
   },
 ];
 
+const hueList = [
+  'Red',
+  'Orange',
+  'Yellow',
+  'Chartreuse',
+  'Green',
+  'SpringGreen',
+  'Cyan',
+  'Azure',
+  'Blue',
+  'Violet',
+  'Magenta',
+  'Rose',
+];
+
 describe('Landing Page', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -29,18 +44,9 @@ describe('Landing Page', () => {
   });
 
   it('shows the list of 12 hues to select from', () => {
-    cy.findByTitle('Red');
-    cy.findByTitle('Orange');
-    cy.findByTitle('Yellow');
-    cy.findByTitle('Chartreuse');
-    cy.findByTitle('Green');
-    cy.findByTitle('SpringGreen');
-    cy.findByTitle('Cyan');
-    cy.findByTitle('Azure');
-    cy.findByTitle('Blue');
-    cy.findByTitle('Violet');
-    cy.findByTitle('Magenta');
-    cy.findByTitle('Rose');
+    hueList.forEach(hue => {
+      cy.findByTitle(hue);
+    });
   });
 });
 
