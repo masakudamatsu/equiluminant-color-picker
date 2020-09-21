@@ -174,6 +174,7 @@ export const SpacerVertical = styled.div`
 `;
 
 export const FlexboxVertical = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

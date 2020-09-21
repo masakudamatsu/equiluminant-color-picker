@@ -158,6 +158,22 @@ describe('RGB value input fields', () => {
   });
 });
 
+describe('Clicking one of the 12 hue swatches', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].rgbCode)
+      .blur();
+  });
+
+  it.only('redirects to the results page and shows the swatches of equiluminant colors with the contrast ratio and the hue shown', () => {
+    // setup
+    cy.findByTestId('Red').click();
+  });
+});
+
 describe('Clicking the submit button with all inputs selected', () => {
   beforeEach(() => {
     cy.visit('/');

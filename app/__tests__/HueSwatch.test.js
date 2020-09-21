@@ -24,8 +24,9 @@ test('renders correctly', () => {
   const {container} = render(<HueSwatch hue="0" title="Red" />);
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <div
-        class="HueSwatch__SvgWrapper-r09t4l-1 bwNWQA"
+      <button
+        class="HueSwatch__ButtonHueSwatch-r09t4l-1 fXIrO"
+        data-testid="Red"
       >
         <svg
           aria-labelledby="colorName"
@@ -44,7 +45,7 @@ test('renders correctly', () => {
             y="0"
           />
         </svg>
-      </div>
+      </button>
     </div>
   `);
 });
