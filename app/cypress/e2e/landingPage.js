@@ -28,31 +28,19 @@ describe('Landing Page', () => {
     cy.get('h1').should('have.text', 'Luminance Picker');
   });
 
-  it('shows the list of 24 hues to select from', () => {
-    cy.findByLabelText('Red');
-    cy.findByLabelText('Vermilion');
-    cy.findByLabelText('Orange');
-    cy.findByLabelText('Amber');
-    cy.findByLabelText('Yellow');
-    cy.findByLabelText('Yellowish Green');
-    cy.findByLabelText('Chartreuse');
-    cy.findByLabelText('Leaf Green');
-    cy.findByLabelText('Green');
-    cy.findByLabelText('Cobalt Green');
-    cy.findByLabelText('Spring Green');
-    cy.findByLabelText('Turquois Green');
-    cy.findByLabelText('Cyan');
-    cy.findByLabelText('Cerulean Blue');
-    cy.findByLabelText('Azure');
-    cy.findByLabelText('Cobalt Blue');
-    cy.findByLabelText('Blue');
-    cy.findByLabelText('Hyacinth');
-    cy.findByLabelText('Violet');
-    cy.findByLabelText('Purple');
-    cy.findByLabelText('Magenta');
-    cy.findByLabelText('Reddish Purple');
-    cy.findByLabelText('Rose');
-    cy.findByLabelText('Carmine');
+  it('shows the list of 12 hues to select from', () => {
+    cy.findByTitle('Red');
+    cy.findByTitle('Orange');
+    cy.findByTitle('Yellow');
+    cy.findByTitle('Chartreuse');
+    cy.findByTitle('Green');
+    cy.findByTitle('SpringGreen');
+    cy.findByTitle('Cyan');
+    cy.findByTitle('Azure');
+    cy.findByTitle('Blue');
+    cy.findByTitle('Violet');
+    cy.findByTitle('Magenta');
+    cy.findByTitle('Rose');
   });
 });
 

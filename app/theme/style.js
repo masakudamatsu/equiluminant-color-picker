@@ -172,3 +172,17 @@ export const SpacerHorizontal = styled.div`
 export const SpacerVertical = styled.div`
   height: ${layout.label.paddingPx.mobile}px;
 `;
+
+export const FlexboxVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32%;
+`;
+
+export const FlexboxHorizontal = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`;
