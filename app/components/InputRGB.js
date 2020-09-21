@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 function InputRGB(props) {
   return (
-    <form>
+    <>
       <label htmlFor="R">
         R:
         <input
@@ -36,7 +36,7 @@ function InputRGB(props) {
           value={props.blue}
         />
       </label>
-    </form>
+    </>
   );
 }
 
