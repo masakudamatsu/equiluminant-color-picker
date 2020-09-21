@@ -1,8 +1,8 @@
 import color from '../../theme/color';
-const darkModeBackgroundColor = `${color.darkMode.background}`;
-const darkModeFontColor = `${color.darkMode.font}`;
-const normalBackgroundColor = `${color.background}`;
-const normalFontColor = `${color.font}`;
+const darkModeBackgroundColor = `${color.body.background.darkMode}`;
+const darkModeFontColor = `${color.body.font.darkMode}`;
+const normalBackgroundColor = `${color.body.background.lightMode}`;
+const normalFontColor = `${color.body.font.lightMode}`;
 
 Cypress.Commands.add('checkDarkModeColorScheme', () => {
   cy.get('body')

@@ -19,6 +19,21 @@ const colorList = [
   },
 ];
 
+const hueList = [
+  'Red',
+  'Orange',
+  'Yellow',
+  'Chartreuse',
+  'Green',
+  'SpringGreen',
+  'Cyan',
+  'Azure',
+  'Blue',
+  'Violet',
+  'Magenta',
+  'Rose',
+];
+
 describe('Landing Page', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -28,31 +43,10 @@ describe('Landing Page', () => {
     cy.get('h1').should('have.text', 'Luminance Picker');
   });
 
-  it('shows the list of 24 hues to select from', () => {
-    cy.findByLabelText('Red');
-    cy.findByLabelText('Vermilion');
-    cy.findByLabelText('Orange');
-    cy.findByLabelText('Amber');
-    cy.findByLabelText('Yellow');
-    cy.findByLabelText('Yellowish Green');
-    cy.findByLabelText('Chartreuse');
-    cy.findByLabelText('Leaf Green');
-    cy.findByLabelText('Green');
-    cy.findByLabelText('Cobalt Green');
-    cy.findByLabelText('Spring Green');
-    cy.findByLabelText('Turquois Green');
-    cy.findByLabelText('Cyan');
-    cy.findByLabelText('Cerulean Blue');
-    cy.findByLabelText('Azure');
-    cy.findByLabelText('Cobalt Blue');
-    cy.findByLabelText('Blue');
-    cy.findByLabelText('Hyacinth');
-    cy.findByLabelText('Violet');
-    cy.findByLabelText('Purple');
-    cy.findByLabelText('Magenta');
-    cy.findByLabelText('Reddish Purple');
-    cy.findByLabelText('Rose');
-    cy.findByLabelText('Carmine');
+  it('shows the list of 12 hues to select from', () => {
+    hueList.forEach(hue => {
+      cy.findByTitle(hue);
+    });
   });
 });
 
@@ -166,6 +160,35 @@ describe('RGB value input fields', () => {
       // if (index === 1) {
       //   cy.checkNormalColorScheme();
       // }
+    });
+  });
+});
+
+describe('Clicking one of the 12 hue swatches', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].rgbCode)
+      .blur();
+  });
+
+  hueList.forEach((hue, index) => {
+    it(`redirects to the results page and shows the swatches of equiluminant colors with the contrast ratio and the hue shown: ${hue}`, () => {
+      // setup
+      cy.findByTestId(hue).click();
+      const expectedHue = (index * 30).toFixed();
+      // verify
+      cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+      cy.findByText(/contrast ratio with pure black/i).contains(
+        getContrastRatio(
+          colorList[0].red,
+          colorList[0].green,
+          colorList[0].blue,
+        ),
+      );
+      cy.findByText(/hue/i).contains(expectedHue);
     });
   });
 });
