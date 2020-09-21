@@ -87,6 +87,7 @@ HomePage.propTypes = {
   contrastRatio: PropTypes.string.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
+  getHue: PropTypes.func.isRequired,
 };
 
 export default HomePage;
