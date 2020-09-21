@@ -14,7 +14,6 @@ const scaleRatio = 2;
 const modularScale = power => {
   return Math.pow(scaleRatio, power);
 };
-console.log(modularScale(1));
 
 // const Roboto = {
 //   unitsPerEm: 1000, // 2048,
