@@ -25,3 +25,7 @@ app/.next/
 
 cypress/videos
 cypress/screenshots
+
+app/public/EuclidFlex-Regular-WebTrial.woff
+
+app/public/EuclidTriangle-Regular-WebTrial.woff
