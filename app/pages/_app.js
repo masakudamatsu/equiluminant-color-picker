@@ -1,6 +1,7 @@
 import {useState} from 'react';
 
 import {getContrastRatio} from '../utils/helpers';
+import color from '../theme/color';
 
 import GlobalStyle from '../theme/GlobalStyle';
 
@@ -12,10 +13,17 @@ function MyApp({Component, pageProps}) {
   const [hue, setHue] = useState('');
   const [darkMode, setDarkMode] = useState(false);
 
+  const [backgroundOverlay, setBackgroundOverlay] = useState(false);
+
+  const [backgroundColor, setBackgroundColor] = useState(
+    color.html.background.initial,
+  );
+  const [backgroundOverlayColor, setBackgroundOverlayColor] = useState('');
+
   const updateContrastRatio = (red, green, blue) => {
     const newContrastRatio = getContrastRatio(red, green, blue);
     setContrastRatio(newContrastRatio);
-    if (Number(newContrastRatio) > Math.sqrt(21)) {
+    if (Number(newContrastRatio) < Math.sqrt(21)) {
       setDarkMode(true);
     } else {
       setDarkMode(false);
@@ -59,8 +67,17 @@ function MyApp({Component, pageProps}) {
         darkMode={darkMode}
         hue={hue}
         getHue={getHue}
+        backgroundOverlay={backgroundOverlay}
+        setBackgroundOverlay={setBackgroundOverlay}
+        setBackgroundColor={setBackgroundColor}
+        setBackgroundOverlayColor={setBackgroundOverlayColor}
       />
-      <GlobalStyle darkMode={darkMode} />
+      <GlobalStyle
+        darkMode={darkMode}
+        backgroundColor={backgroundColor}
+        backgroundOverlay={backgroundOverlay}
+        backgroundOverlayColor={backgroundOverlayColor}
+      />
     </>
   );
 }

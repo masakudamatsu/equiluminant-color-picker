@@ -44,6 +44,10 @@ function HomePage(props) {
           setBlue={props.setBlue}
           updateContrastRatio={props.updateContrastRatio}
           darkMode={props.darkMode}
+          backgroundOverlay={props.backgroundOverlay}
+          setBackgroundOverlay={props.setBackgroundOverlay}
+          setBackgroundColor={props.setBackgroundColor}
+          setBackgroundOverlayColor={props.setBackgroundOverlayColor}
         />
         <InputRGB
           red={props.red}
@@ -154,6 +158,10 @@ HomePage.propTypes = {
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
   getHue: PropTypes.func.isRequired,
+  backgroundOverlay: PropTypes.bool.isRequired,
+  setBackgroundOverlay: PropTypes.func.isRequired,
+  setBackgroundColor: PropTypes.func.isRequired,
+  setBackgroundOverlayColor: PropTypes.func.isRequired,
 };
 
 export default HomePage;

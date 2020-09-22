@@ -72,6 +72,22 @@ function InputColorCode(props) {
       props.setGreen(rgbValues[1]);
       props.setBlue(rgbValues[2]);
       props.updateContrastRatio(rgbValues[0], rgbValues[1], rgbValues[2]);
+
+      // Change the background
+      if (!props.backgroundOverlay) {
+        props.setBackgroundOverlayColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        );
+        props.setBackgroundOverlay(true);
+        props.setBackgroundColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        ); // To prevent the overshoot scrolling from revealing the previous background color.
+      } else {
+        props.setBackgroundColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        );
+        props.setBackgroundOverlay(false);
+      }
     }
   };
   return (
