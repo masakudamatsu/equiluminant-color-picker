@@ -76,13 +76,12 @@ export const Input = styled.input.attrs(props => ({
     ${layout.label.paddingPx.mobile.toFixed(4)}px
     ${layout.input.paddingBottomPx.mobile.toFixed(4)}px;
   text-align: left;
-  width: auto; /* To fix the layout when thickening the border upon active state */
+  width: 100%;
 
   &:active,
   &:hover,
   &:focus {
     border-width: ${layout.input.borderWidthPx.active.toFixed()}px;
-    margin: -${(layout.input.borderWidthPx.active - layout.input.borderWidthPx.normal).toFixed()}px;
     outline: none;
   }
 `;
@@ -151,6 +150,7 @@ export const InputExamplesWrapper = styled.div`
 
 export const InputWrapper = styled.div`
   background-color: inherit;
+  height: 70.2969px; /* TODO: replace the hard-coding; specifying the height property is necessary to prevent the layout shift due to thickening the field box border upon click */
   position: relative;
   width: 100%;
 `;
