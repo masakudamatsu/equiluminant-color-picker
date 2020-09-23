@@ -49,15 +49,6 @@ function HomePage(props) {
           setBackgroundColor={props.setBackgroundColor}
           setBackgroundOverlayColor={props.setBackgroundOverlayColor}
         />
-        <InputRGB
-          red={props.red}
-          green={props.green}
-          blue={props.blue}
-          handleChangeRed={props.handleChangeRed}
-          handleChangeGreen={props.handleChangeGreen}
-          handleChangeBlue={props.handleChangeBlue}
-        />
-        <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
         <FlexboxHorizontal>
           <FlexboxVertical>
             <HueSwatch
@@ -142,6 +133,15 @@ function HomePage(props) {
         <button type="submit" onClick={handleClick}>
           Get equiluminant colors!
         </button>
+        <InputRGB
+          red={props.red}
+          green={props.green}
+          blue={props.blue}
+          handleChangeRed={props.handleChangeRed}
+          handleChangeGreen={props.handleChangeGreen}
+          handleChangeBlue={props.handleChangeBlue}
+        />
+        <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       </form>
     </SideMarginSetter>
   );
