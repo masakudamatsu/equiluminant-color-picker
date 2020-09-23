@@ -142,6 +142,10 @@ InputColorCode.propTypes = {
   setBlue: PropTypes.func.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
+  backgroundOverlay: PropTypes.bool.isRequired,
+  setBackgroundOverlay: PropTypes.func.isRequired,
+  setBackgroundColor: PropTypes.func.isRequired,
+  setBackgroundOverlayColor: PropTypes.func.isRequired,
 };
 
 export default InputColorCode;
