@@ -12,16 +12,18 @@ const ButtonHueSwatch = styled.button`
   position: absolute;
   text-align: center;
   top: ${props => props.top}%;
+  transition: transform 100ms linear;
   width: 20%;
   z-index: ${props => props.zIndex};
   &:focus,
   &:hover {
-    opacity: 0.5;
     outline: 0;
+    transform: translate(10px, -10px);
   }
   &:active {
+    box-shadow: ${props => `0 0 8px 8px hsla(${props.hue}, 80%, 50%, 0.6)`};
     outline: 0;
-    width: 95%;
+    transform: scale(0.1);
   }
 `;
 
