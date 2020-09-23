@@ -11,6 +11,9 @@ const mockSetRed = jest.fn();
 const mockSetGreen = jest.fn();
 const mockSetBlue = jest.fn();
 const mockUpdateContrastRatio = jest.fn();
+const mockSetBackgroundOverlay = jest.fn();
+const mockSetBackgroundColor = jest.fn();
+const mockSetBackgroundOverlayColor = jest.fn();
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -34,6 +37,10 @@ test('Blurring without entering any text does not show the error message or call
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        backgroundOverlay={false}
+        setBackgroundOverlay={mockSetBackgroundOverlay}
+        setBackgroundColor={mockSetBackgroundColor}
+        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -64,6 +71,10 @@ test('accepts HEX color codes and calls functions', () => {
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        backgroundOverlay={false}
+        setBackgroundOverlay={mockSetBackgroundOverlay}
+        setBackgroundColor={mockSetBackgroundColor}
+        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -102,6 +113,10 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        backgroundOverlay={false}
+        setBackgroundOverlay={mockSetBackgroundOverlay}
+        setBackgroundColor={mockSetBackgroundColor}
+        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -148,6 +163,10 @@ test('accepts HSL color codes', () => {
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        backgroundOverlay={false}
+        setBackgroundOverlay={mockSetBackgroundOverlay}
+        setBackgroundColor={mockSetBackgroundColor}
+        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -193,6 +212,10 @@ test('shows the error message if the user enters an invalid color code and hides
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        backgroundOverlay={false}
+        setBackgroundOverlay={mockSetBackgroundOverlay}
+        setBackgroundColor={mockSetBackgroundColor}
+        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
       />
       <label htmlFor="dummyInput">
         Dummy input
@@ -230,12 +253,16 @@ test('renders correctly', () => {
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
       darkMode={false}
+      backgroundOverlay={false}
+      setBackgroundOverlay={mockSetBackgroundOverlay}
+      setBackgroundColor={mockSetBackgroundColor}
+      setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
     />,
   );
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
-        class="style__ColorCodeField-o0wbpp-7 hbuqgW"
+        class="style__ColorCodeField-o0wbpp-7 ifsOcm"
       >
         <div
           class="style__InputWrapper-o0wbpp-10 gUBLYr"
@@ -244,7 +271,7 @@ test('renders correctly', () => {
             class="style__Label-o0wbpp-2 higCQm"
             for="inputColorCode"
           >
-            Enter 
+            Enter
             <abbr
               class="style__Abbr-o0wbpp-0 kYbBqH"
             >
@@ -254,7 +281,7 @@ test('renders correctly', () => {
           </label>
           <input
             autocomplete="off"
-            class="style__Input-o0wbpp-1 kmuSFK"
+            class="style__Input-o0wbpp-1 ktRglp"
             id="inputColorCode"
             pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
             type="text"
@@ -299,10 +326,10 @@ test('renders correctly', () => {
             class="style__SpacerVertical-o0wbpp-13 eUnVUw"
           />
           <p
-            class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 jroxaI"
+            class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 cupokD"
             data-testid="colorCodeError"
           >
-            Please enter a valid 
+            Please enter a valid
             <abbr
               class="style__Abbr-o0wbpp-0 kYbBqH"
             >
@@ -327,6 +354,10 @@ test('is accessible', async () => {
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
       darkMode={false}
+      backgroundOverlay={false}
+      setBackgroundOverlay={mockSetBackgroundOverlay}
+      setBackgroundColor={mockSetBackgroundColor}
+      setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
     />,
   );
   const results = await axe(container);
