@@ -31,6 +31,7 @@ function HomePage(props) {
         .
       </noscript>
       <form>
+        <h2>#1 Set Luminance</h2>
         <InputColorCode
           red={props.red}
           green={props.green}
@@ -45,7 +46,7 @@ function HomePage(props) {
           setBackgroundColor={props.setBackgroundColor}
           setBackgroundOverlayColor={props.setBackgroundOverlayColor}
         />
-        <FlexboxHorizontal>
+        <h2>#2 Choose hue</h2>
         <HueSwatchWrapper darkMode={props.darkMode}>
           <HueSwatch
             getHue={props.getHue}
