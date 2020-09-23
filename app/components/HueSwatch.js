@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Svg = styled.svg`
-  fill: ${props => `hsl(${props.hue},100%,50%)`};
+  fill: ${props => `hsl(${props.hue},80%,50%)`};
 `;
 
 const ButtonHueSwatch = styled.button`
