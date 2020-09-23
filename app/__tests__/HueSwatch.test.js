@@ -59,14 +59,14 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <button
-        class="HueSwatch__ButtonHueSwatch-r09t4l-1 fXIrO"
+        class="HueSwatch__ButtonHueSwatch-r09t4l-1 eFUeIJ"
         data-testid="Orange"
         type="submit"
       >
         <svg
           aria-labelledby="colorName"
-          class="HueSwatch__Svg-r09t4l-0 kqEmFs"
-          viewBox="0 0 10 10"
+          class="HueSwatch__Svg-r09t4l-0 ehVVhR"
+          viewBox="0 0 60 120"
         >
           <title
             id="colorName"
@@ -74,8 +74,8 @@ test('renders correctly', () => {
             Orange
           </title>
           <rect
-            height="10"
-            width="10"
+            height="120"
+            width="60"
             x="0"
             y="0"
           />
