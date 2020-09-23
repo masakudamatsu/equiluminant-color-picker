@@ -7,10 +7,13 @@ const Svg = styled.svg`
 
 const ButtonHueSwatch = styled.button`
   border: none;
-  height: ${((32 / 134) * 100).toFixed(4)}%;
-  padding: 0;
+  left: ${props => props.left}%;
+  line-height: 1; /* to remove the extra height at the bottom by 4px (still 3px left)*/
+  position: absolute;
   text-align: center;
-  width: 100%;
+  top: ${props => props.top}%;
+  width: 20%;
+  z-index: ${props => props.zIndex};
   &:focus,
   &:hover {
     opacity: 0.5;
@@ -30,12 +33,15 @@ function HueSwatch(props) {
   return (
     <ButtonHueSwatch
       data-testid={props.title}
+      left={props.left}
       onClick={handleClick}
+      top={props.top}
       type="submit"
+      zIndex={props.zIndex}
     >
-      <Svg hue={props.hue} viewBox="0 0 10 10" aria-labelledby="colorName">
+      <Svg hue={props.hue} viewBox="0 0 60 120" aria-labelledby="colorName">
         <title id="colorName">{props.title}</title>
-        <rect x="0" y="0" width="10" height="10" />
+        <rect x="0" y="0" width="60" height="120" />
       </Svg>
     </ButtonHueSwatch>
   );
@@ -45,7 +51,10 @@ HueSwatch.propTypes = {
   getHue: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   hue: PropTypes.string.isRequired,
+  left: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  top: PropTypes.string.isRequired,
+  zIndex: PropTypes.string.isRequired,
 };
 
 export default HueSwatch;

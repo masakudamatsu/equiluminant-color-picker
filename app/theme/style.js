@@ -168,17 +168,11 @@ export const SpacerVertical = styled.div`
   height: ${layout.label.paddingPx.mobile}px;
 `;
 
-export const FlexboxVertical = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 32%;
-`;
-
-export const FlexboxHorizontal = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+export const HueSwatchWrapper = styled.div`
+  background-color: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+  opacity: 0.8;
+  padding-bottom: 200%;
+  position: relative;
   width: 100%;
 `;
