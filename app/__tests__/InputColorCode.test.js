@@ -27,8 +27,10 @@ const initialRGBcode = {
   blue: '',
 };
 
-test('Blurring without entering any text does not show the error message or call any functions', () => {
-  const {container, getByLabelText, getByTestId} = render(
+let container, getByLabelText, getByTestId, rerender;
+
+beforeEach(() => {
+  return ({container, getByLabelText, getByTestId, rerender} = render(
     <>
       <InputColorCode
         red={initialRGBcode.red}
@@ -53,7 +55,10 @@ test('Blurring without entering any text does not show the error message or call
         <input type="text" id="dummyInput" />
       </label>
     </>,
-  );
+  ));
+});
+
+test('Blurring without entering any text does not show the error message or call any functions', () => {
   const colorCodeField = getByLabelText(/css color code/i);
   colorCodeField.focus();
   getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
@@ -68,7 +73,7 @@ test('Blurring without entering any text does not show the error message or call
 });
 
 test('Blurring without entering any text calls setInputMissing if the inputMissing was false', () => {
-  const {container, getByLabelText, getByTestId} = render(
+  rerender(
     <>
       <InputColorCode
         red={initialRGBcode.red}
@@ -81,7 +86,7 @@ test('Blurring without entering any text calls setInputMissing if the inputMissi
         darkMode={false}
         inputInvalid={false}
         setInputInvalid={mockSetInputInvalid}
-        inputMissing={false} // ATTENTION!!!!!!!!!!!!!!!!!!
+        inputMissing={false} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         setInputMissing={mockSetInputMissing}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
@@ -103,32 +108,6 @@ test('Blurring without entering any text calls setInputMissing if the inputMissi
 });
 
 test('accepts HEX color codes and calls functions', () => {
-  const {container, getByLabelText, getByTestId} = render(
-    <>
-      <InputColorCode
-        red={initialRGBcode.red}
-        green={initialRGBcode.green}
-        blue={initialRGBcode.blue}
-        setRed={mockSetRed}
-        setGreen={mockSetGreen}
-        setBlue={mockSetBlue}
-        updateContrastRatio={mockUpdateContrastRatio}
-        darkMode={false}
-        inputMissing={true}
-        setInputMissing={mockSetInputMissing}
-        inputInvalid={false}
-        setInputInvalid={mockSetInputInvalid}
-        backgroundOverlay={false}
-        setBackgroundOverlay={mockSetBackgroundOverlay}
-        setBackgroundColor={mockSetBackgroundColor}
-        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-      />
-      <label htmlFor="dummyInput">
-        Dummy input
-        <input type="text" id="dummyInput" />
-      </label>
-    </>,
-  );
   const colorCodeField = getByLabelText(/css color code/i);
   ['#3a5', '#A3C', '#4e2ba5'].forEach(colorCode => {
     colorCodeField.focus();
@@ -151,32 +130,6 @@ test('accepts HEX color codes and calls functions', () => {
 });
 
 test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions', () => {
-  const {container, getByLabelText, getByTestId} = render(
-    <>
-      <InputColorCode
-        red={initialRGBcode.red}
-        green={initialRGBcode.green}
-        blue={initialRGBcode.blue}
-        setRed={mockSetRed}
-        setGreen={mockSetGreen}
-        setBlue={mockSetBlue}
-        updateContrastRatio={mockUpdateContrastRatio}
-        darkMode={false}
-        inputMissing={true}
-        setInputMissing={mockSetInputMissing}
-        inputInvalid={false}
-        setInputInvalid={mockSetInputInvalid}
-        backgroundOverlay={false}
-        setBackgroundOverlay={mockSetBackgroundOverlay}
-        setBackgroundColor={mockSetBackgroundColor}
-        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-      />
-      <label htmlFor="dummyInput">
-        Dummy input
-        <input type="text" id="dummyInput" />
-      </label>
-    </>,
-  );
   const colorCodeField = getByLabelText(/css color code/i);
   [
     'rgb(1, 2, 3)',
@@ -207,32 +160,6 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
 });
 
 test('accepts HSL color codes', () => {
-  const {container, getByLabelText, getByTestId} = render(
-    <>
-      <InputColorCode
-        red={initialRGBcode.red}
-        green={initialRGBcode.green}
-        blue={initialRGBcode.blue}
-        setRed={mockSetRed}
-        setGreen={mockSetGreen}
-        setBlue={mockSetBlue}
-        updateContrastRatio={mockUpdateContrastRatio}
-        darkMode={false}
-        inputMissing={true}
-        setInputMissing={mockSetInputMissing}
-        inputInvalid={false}
-        setInputInvalid={mockSetInputInvalid}
-        backgroundOverlay={false}
-        setBackgroundOverlay={mockSetBackgroundOverlay}
-        setBackgroundColor={mockSetBackgroundColor}
-        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-      />
-      <label htmlFor="dummyInput">
-        Dummy input
-        <input type="text" id="dummyInput" />
-      </label>
-    </>,
-  );
   const colorCodeField = getByLabelText(/css color code/i);
   [
     'hsl(360, 100%, 100%)',
@@ -262,32 +189,6 @@ test('accepts HSL color codes', () => {
 });
 
 test('calls setInvalid function with true as its argument if the user enters an invalid color code', () => {
-  const {container, getByLabelText, getByTestId} = render(
-    <>
-      <InputColorCode
-        red={initialRGBcode.red}
-        green={initialRGBcode.green}
-        blue={initialRGBcode.blue}
-        setRed={mockSetRed}
-        setGreen={mockSetGreen}
-        setBlue={mockSetBlue}
-        updateContrastRatio={mockUpdateContrastRatio}
-        darkMode={false}
-        inputMissing={true}
-        setInputMissing={mockSetInputMissing}
-        inputInvalid={false}
-        setInputInvalid={mockSetInputInvalid}
-        backgroundOverlay={false}
-        setBackgroundOverlay={mockSetBackgroundOverlay}
-        setBackgroundColor={mockSetBackgroundColor}
-        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-      />
-      <label htmlFor="dummyInput">
-        Dummy input
-        <input type="text" id="dummyInput" />
-      </label>
-    </>,
-  );
   const colorCodeField = getByLabelText(/css color code/i);
   ['#sss', 'rgb(300, 300, 300)', 'hsl(371, 300, 125%)'].forEach(
     invalidColorCode => {
@@ -308,7 +209,7 @@ test('calls setInvalid function with true as its argument if the user enters an 
 });
 
 test('calls setInputInvalid function with false as its argument if the user corrects an invalid color code', () => {
-  const {container, getByLabelText, getByTestId} = render(
+  rerender(
     <>
       <InputColorCode
         red={initialRGBcode.red}
@@ -354,27 +255,6 @@ test('calls setInputInvalid function with false as its argument if the user corr
 });
 
 test('renders correctly', () => {
-  const {container} = render(
-    <InputColorCode
-      red={initialRGBcode.red}
-      green={initialRGBcode.green}
-      blue={initialRGBcode.blue}
-      setRed={mockSetRed}
-      setGreen={mockSetGreen}
-      setBlue={mockSetBlue}
-      updateContrastRatio={mockUpdateContrastRatio}
-      darkMode={false}
-      inputMissing={true}
-      setInputMissing={mockSetInputMissing}
-      inputInvalid={false}
-      setInputInvalid={mockSetInputInvalid}
-      backgroundOverlay={false}
-      setBackgroundOverlay={mockSetBackgroundOverlay}
-      setBackgroundColor={mockSetBackgroundColor}
-      setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-    />,
-  );
-  // prettier-ignore
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
@@ -385,6 +265,7 @@ test('renders correctly', () => {
           for="inputColorCode"
         >
           Enter
+
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
@@ -451,31 +332,20 @@ test('renders correctly', () => {
            color code
         </p>
       </div>
+      <label
+        for="dummyInput"
+      >
+        Dummy input
+        <input
+          id="dummyInput"
+          type="text"
+        />
+      </label>
     </div>
   `);
 });
 
 test('is accessible', async () => {
-  const {container} = render(
-    <InputColorCode
-      red={initialRGBcode.red}
-      green={initialRGBcode.green}
-      blue={initialRGBcode.blue}
-      setRed={mockSetRed}
-      setGreen={mockSetGreen}
-      setBlue={mockSetBlue}
-      updateContrastRatio={mockUpdateContrastRatio}
-      darkMode={false}
-      inputMissing={true}
-      setInputMissing={mockSetInputMissing}
-      inputInvalid={false}
-      setInputInvalid={mockSetInputInvalid}
-      backgroundOverlay={false}
-      setBackgroundOverlay={mockSetBackgroundOverlay}
-      setBackgroundColor={mockSetBackgroundColor}
-      setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-    />,
-  );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
   cleanup();
