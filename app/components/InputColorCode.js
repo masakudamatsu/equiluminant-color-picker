@@ -107,7 +107,7 @@ function InputColorCode(props) {
         <Input
           type="text"
           darkMode={props.darkMode}
-          error={props.inputInvalid}
+          error={props.inputInvalid || props.alertMissing}
           id="inputColorCode"
           onBlur={handleBlur}
           onChange={handleChange}

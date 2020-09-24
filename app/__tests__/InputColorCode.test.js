@@ -272,7 +272,7 @@ test('renders correctly', () => {
           for="inputColorCode"
         >
           Enter
-
+           
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
@@ -327,10 +327,10 @@ test('renders correctly', () => {
           class="style__SpacerVertical-o0wbpp-13 eUnVUw"
         />
         <p
-          class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 cupokD"
+          class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 eilkyY"
           data-testid="colorCodeError"
         >
-          Please enter a valid
+          Please enter a valid 
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
