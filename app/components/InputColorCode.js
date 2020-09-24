@@ -34,6 +34,9 @@ function InputColorCode(props) {
 
   const handleChange = event => {
     setUserColorCode(event.target.value);
+    if (props.alertMissing) {
+      props.setAlertMissing(false);
+    }
   };
 
   const handleBlur = event => {

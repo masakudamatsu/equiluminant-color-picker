@@ -112,6 +112,42 @@ test('Blurring without entering any text calls setInputMissing if the inputMissi
   expect(mockSetInputMissing).toHaveBeenCalledWith(true);
 });
 
+test('Entering any text calls setAlertMissing with false if the alertMissing was true', () => {
+  rerender(
+    <>
+      <InputColorCode
+        red={initialRGBcode.red}
+        green={initialRGBcode.green}
+        blue={initialRGBcode.blue}
+        setRed={mockSetRed}
+        setGreen={mockSetGreen}
+        setBlue={mockSetBlue}
+        updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
+        alertMissing={true} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!
+        setAlertMissing={mockSetAlertMissing}
+        backgroundOverlay={false}
+        setBackgroundOverlay={mockSetBackgroundOverlay}
+        setBackgroundColor={mockSetBackgroundColor}
+        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
+      />
+      <label htmlFor="dummyInput">
+        Dummy input
+        <input type="text" id="dummyInput" />
+      </label>
+    </>,
+  );
+  const colorCodeField = getByLabelText(/css color code/i);
+  userEvent.type(colorCodeField, 'a');
+  // verify
+  expect(mockSetAlertMissing).toHaveBeenCalledTimes(1);
+  expect(mockSetAlertMissing).toHaveBeenCalledWith(false);
+});
+
 test('accepts HEX color codes and calls functions', () => {
   const colorCodeField = getByLabelText(/css color code/i);
   ['#3a5', '#A3C', '#4e2ba5'].forEach(colorCode => {
