@@ -43,11 +43,11 @@ function InputColorCode(props) {
     }
     // Validation
     const newInputIsInvalid = event.target.validity.patternMismatch;
-    if (!props.invalid && newInputIsInvalid) {
-      props.setInvalid(true);
+    if (!props.inputInvalid && newInputIsInvalid) {
+      props.setInputInvalid(true);
     }
-    if (props.invalid && !newInputIsInvalid) {
-      props.setInvalid(false);
+    if (props.inputInvalid && !newInputIsInvalid) {
+      props.setInputInvalid(false);
     }
     if (!newInputIsInvalid) {
       // Remove all the whitespaces from the user's input value
@@ -95,14 +95,15 @@ function InputColorCode(props) {
   };
   return (
     <>
+      {/* prettier-ignore */}
       <InputWrapper>
         <Label htmlFor="inputColorCode">
-          Enter <Abbr>css</Abbr> color code
+          Enter{' '}<Abbr>css</Abbr> color code
         </Label>
         <Input
           type="text"
           darkMode={props.darkMode}
-          error={props.invalid}
+          error={props.inputInvalid}
           id="inputColorCode"
           onBlur={handleBlur}
           onChange={handleChange}
@@ -128,7 +129,7 @@ function InputColorCode(props) {
         <ParagraphErrorMessage
           data-testid="colorCodeError"
           darkMode={props.darkMode}
-          error={props.invalid}
+          error={props.inputInvalid}
         >
           Please enter a valid <Abbr>css</Abbr> color code
         </ParagraphErrorMessage>
@@ -146,6 +147,8 @@ InputColorCode.propTypes = {
   setBlue: PropTypes.func.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
+  inputInvalid: PropTypes.bool.isRequired,
+  setInputInvalid: PropTypes.func.isRequired,
   backgroundOverlay: PropTypes.bool.isRequired,
   setBackgroundOverlay: PropTypes.func.isRequired,
   setBackgroundColor: PropTypes.func.isRequired,

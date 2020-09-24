@@ -14,7 +14,7 @@ const mockUpdateContrastRatio = jest.fn();
 const mockSetBackgroundOverlay = jest.fn();
 const mockSetBackgroundColor = jest.fn();
 const mockSetBackgroundOverlayColor = jest.fn();
-const mockSetInvalid = jest.fn();
+const mockSetInputInvalid = jest.fn();
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -38,8 +38,8 @@ test('Blurring without entering any text does not show the error message or call
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
-        invalid={false}
-        setInvalid={mockSetInvalid}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -60,7 +60,7 @@ test('Blurring without entering any text does not show the error message or call
   expect(mockSetGreen).not.toHaveBeenCalled();
   expect(mockSetBlue).not.toHaveBeenCalled();
   expect(mockUpdateContrastRatio).not.toHaveBeenCalled();
-  expect(mockSetInvalid).not.toHaveBeenCalled();
+  expect(mockSetInputInvalid).not.toHaveBeenCalled();
 });
 
 test('accepts HEX color codes and calls functions', () => {
@@ -75,8 +75,8 @@ test('accepts HEX color codes and calls functions', () => {
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
-        invalid={false}
-        setInvalid={mockSetInvalid}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -119,8 +119,8 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
-        invalid={false}
-        setInvalid={mockSetInvalid}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -171,8 +171,8 @@ test('accepts HSL color codes', () => {
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
-        invalid={false}
-        setInvalid={mockSetInvalid}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -222,8 +222,8 @@ test('calls setInvalid function with true as its argument if the user enters an 
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
-        invalid={false}
-        setInvalid={mockSetInvalid}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -244,15 +244,15 @@ test('calls setInvalid function with true as its argument if the user enters an 
       userEvent.type(colorCodeField, invalidColorCode);
       getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
       // verify
-      expect(mockSetInvalid).toHaveBeenCalledTimes(1);
-      expect(mockSetInvalid).toHaveBeenCalledWith(true);
+      expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
+      expect(mockSetInputInvalid).toHaveBeenCalledWith(true);
       // isolate
       jest.clearAllMocks();
     },
   );
 });
 
-test('calls setInvalid function with false as its argument if the user corrects an invalid color code', () => {
+test('calls setInputInvalid function with false as its argument if the user corrects an invalid color code', () => {
   const {container, getByLabelText, getByTestId} = render(
     <>
       <InputColorCode
@@ -264,8 +264,8 @@ test('calls setInvalid function with false as its argument if the user corrects 
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
-        invalid={true} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        setInvalid={mockSetInvalid}
+        inputInvalid={true} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -286,8 +286,8 @@ test('calls setInvalid function with false as its argument if the user corrects 
       userEvent.type(colorCodeField, 'rgb(234, 222, 21)');
       getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
       // verify
-      expect(mockSetInvalid).toHaveBeenCalledTimes(1);
-      expect(mockSetInvalid).toHaveBeenCalledWith(false);
+      expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
+      expect(mockSetInputInvalid).toHaveBeenCalledWith(false);
       // isolate
       jest.clearAllMocks();
     },
@@ -305,14 +305,15 @@ test('renders correctly', () => {
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
       darkMode={false}
-      invalid={false}
-      setInvalid={mockSetInvalid}
+      inputInvalid={false}
+      setInputInvalid={mockSetInputInvalid}
       backgroundOverlay={false}
       setBackgroundOverlay={mockSetBackgroundOverlay}
       setBackgroundColor={mockSetBackgroundColor}
       setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
     />,
   );
+  // prettier-ignore
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
@@ -322,7 +323,7 @@ test('renders correctly', () => {
           class="style__Label-o0wbpp-2 higCQm"
           for="inputColorCode"
         >
-          Enter 
+          Enter
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
@@ -380,7 +381,7 @@ test('renders correctly', () => {
           class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 cupokD"
           data-testid="colorCodeError"
         >
-          Please enter a valid 
+          Please enter a valid
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
@@ -404,8 +405,8 @@ test('is accessible', async () => {
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
       darkMode={false}
-      invalid={false}
-      setInvalid={mockSetInvalid}
+      inputInvalid={false}
+      setInputInvalid={mockSetInputInvalid}
       backgroundOverlay={false}
       setBackgroundOverlay={mockSetBackgroundOverlay}
       setBackgroundColor={mockSetBackgroundColor}
