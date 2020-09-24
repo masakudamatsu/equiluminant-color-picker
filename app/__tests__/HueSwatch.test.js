@@ -9,7 +9,10 @@ import HueSwatch from '../components/HueSwatch';
 
 const mockProps = {
   hue: '30',
+  left: '0',
   title: 'Orange',
+  top: '0',
+  zIndex: '1',
 };
 
 const mockGetHue = jest.fn();
@@ -25,7 +28,10 @@ test('Prop values are reflected in the color and the title element', () => {
       getHue={mockGetHue}
       handleSubmit={mockHandleSubmit}
       hue={mockProps.hue}
+      left={mockProps.left}
       title={mockProps.title}
+      top={mockProps.top}
+      zIndex={mockProps.zIndex}
     />,
   );
   const hueSwatch = getByTitle(mockProps.title);
@@ -38,7 +44,10 @@ test('Clicking the button calls the getHue function with its own hue value as an
       getHue={mockGetHue}
       handleSubmit={mockHandleSubmit}
       hue={mockProps.hue}
+      left={mockProps.left}
       title={mockProps.title}
+      top={mockProps.top}
+      zIndex={mockProps.zIndex}
     />,
   );
   userEvent.click(getByTitle(mockProps.title));
@@ -53,13 +62,16 @@ test('renders correctly', () => {
       getHue={mockGetHue}
       handleSubmit={mockHandleSubmit}
       hue={mockProps.hue}
+      left={mockProps.left}
       title={mockProps.title}
+      top={mockProps.top}
+      zIndex={mockProps.zIndex}
     />,
   );
   expect(container).toMatchInlineSnapshot(`
     <div>
       <button
-        class="HueSwatch__ButtonHueSwatch-r09t4l-1 eFUeIJ"
+        class="HueSwatch__ButtonHueSwatch-r09t4l-1 jWidlo"
         data-testid="Orange"
         type="submit"
       >
@@ -91,7 +103,10 @@ test('is accessible', async () => {
       getHue={mockGetHue}
       handleSubmit={mockHandleSubmit}
       hue={mockProps.hue}
+      left={mockProps.left}
       title={mockProps.title}
+      top={mockProps.top}
+      zIndex={mockProps.zIndex}
     />,
   );
   const results = await axe(container);
