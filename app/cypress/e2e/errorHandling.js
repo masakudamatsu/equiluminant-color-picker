@@ -17,11 +17,12 @@ describe('Error handling: missing input', () => {
     cy.findByTestId('colorCodeError').should('be.hidden');
   });
 
-  it('Clicking any hue swatch without any input value DOES show an error message', () => {
+  it('Clicking any hue swatch without any input value DOES show an error message, focus the color code field', () => {
     // execute
     cy.findByTestId('Red').click();
 
     // verify
     cy.findByTestId('colorCodeError').should('be.visible');
+    cy.focused().should('have.attr', 'id', 'inputColorCode');
   });
 });

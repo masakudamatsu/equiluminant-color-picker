@@ -12,6 +12,7 @@ function HomePage(props) {
     e.preventDefault();
     if (props.inputMissing) {
       props.setAlertMissing(true);
+      document.getElementById('inputColorCode').focus();
       return;
     }
     router.push('/results');
