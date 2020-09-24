@@ -2,7 +2,6 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
   Abbr,
-  ColorCodeField,
   SpacerHorizontal,
   Input,
   InputDescriptionWrapper,
@@ -72,10 +71,26 @@ function InputColorCode(props) {
       props.setGreen(rgbValues[1]);
       props.setBlue(rgbValues[2]);
       props.updateContrastRatio(rgbValues[0], rgbValues[1], rgbValues[2]);
+
+      // Change the background
+      if (!props.backgroundOverlay) {
+        props.setBackgroundOverlayColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        );
+        props.setBackgroundOverlay(true);
+        props.setBackgroundColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        ); // To prevent the overshoot scrolling from revealing the previous background color.
+      } else {
+        props.setBackgroundColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        );
+        props.setBackgroundOverlay(false);
+      }
     }
   };
   return (
-    <ColorCodeField backgroundColor={backgroundColor} darkMode={props.darkMode}>
+    <>
       <InputWrapper>
         <Label htmlFor="inputColorCode">
           Enter <Abbr>css</Abbr> color code
@@ -113,7 +128,7 @@ function InputColorCode(props) {
           Please enter a valid <Abbr>css</Abbr> color code
         </ParagraphErrorMessage>
       </InputDescriptionWrapper>
-    </ColorCodeField>
+    </>
   );
 }
 
@@ -126,6 +141,10 @@ InputColorCode.propTypes = {
   setBlue: PropTypes.func.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
+  backgroundOverlay: PropTypes.bool.isRequired,
+  setBackgroundOverlay: PropTypes.func.isRequired,
+  setBackgroundColor: PropTypes.func.isRequired,
+  setBackgroundOverlayColor: PropTypes.func.isRequired,
 };
 
 export default InputColorCode;

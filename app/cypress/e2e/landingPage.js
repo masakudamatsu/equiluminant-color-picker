@@ -192,29 +192,3 @@ describe('Clicking one of the 12 hue swatches', () => {
     });
   });
 });
-
-describe('Clicking the submit button with all inputs selected', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
-
-  it('redirects to the results page and shows the swatches of equiluminant colors with the contrast ratio and the hue shown', () => {
-    // setup
-    const color = colorList[0];
-    cy.findByLabelText('R:').clear().type(color.red.toString());
-    cy.findByLabelText('G:').clear().type(color.green.toString());
-    cy.findByLabelText('B:').clear().type(color.blue.toString());
-
-    cy.findByLabelText(/violet/i).click();
-    const expectedHue = '270';
-
-    cy.findByText(/get/i).click();
-
-    // verify
-    cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
-    cy.findByText(/contrast ratio with pure black/i).contains(
-      getContrastRatio(color.red, color.green, color.blue),
-    );
-    cy.findByText(/hue/i).contains(expectedHue);
-  });
-});

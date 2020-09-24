@@ -1,24 +1,13 @@
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
-import {
-  FlexboxHorizontal,
-  FlexboxVertical,
-  SideMarginSetter,
-} from '../theme/style';
+import {HueSwatchWrapper, SideMarginSetter} from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
 import InputRGB from '../components/InputRGB';
-import InputHue from '../components/InputHue';
 import HueSwatch from '../components/HueSwatch';
 
 function HomePage(props) {
   const router = useRouter();
-  const handleClick = e => {
-    e.preventDefault();
-    const hue = document.querySelector('input[name="hue"]:checked').value;
-    props.getHue(hue);
-    router.push('/results');
-  };
   const handleSubmit = e => {
     e.preventDefault();
     router.push('/results');
@@ -35,6 +24,7 @@ function HomePage(props) {
         .
       </noscript>
       <form>
+        <h2>#1 Set Luminance</h2>
         <InputColorCode
           red={props.red}
           green={props.green}
@@ -44,7 +34,122 @@ function HomePage(props) {
           setBlue={props.setBlue}
           updateContrastRatio={props.updateContrastRatio}
           darkMode={props.darkMode}
+          backgroundOverlay={props.backgroundOverlay}
+          setBackgroundOverlay={props.setBackgroundOverlay}
+          setBackgroundColor={props.setBackgroundColor}
+          setBackgroundOverlayColor={props.setBackgroundOverlayColor}
         />
+        <h2>#2 Choose hue</h2>
+        <HueSwatchWrapper darkMode={props.darkMode}>
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="0"
+            left="4.8"
+            title="Red"
+            top="11.2"
+            zIndex="1"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="30"
+            left="15.5"
+            title="Orange"
+            top="21.7"
+            zIndex="2"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="60"
+            left="52"
+            title="Yellow"
+            top="28.8"
+            zIndex="3"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="90"
+            left="8.2"
+            title="Chartreuse"
+            top="39.1"
+            zIndex="3"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="120"
+            left="41.7"
+            title="Green"
+            top="36.5"
+            zIndex="4"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="150"
+            left="57.6"
+            title="SpringGreen"
+            top="10.3"
+            zIndex="1"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="180"
+            left="13.4"
+            title="Cyan"
+            top="55"
+            zIndex="4"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="210"
+            left="74.8"
+            title="Azure"
+            top="39.3"
+            zIndex="3"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="240"
+            left="67.9"
+            title="Blue"
+            top="23.4"
+            zIndex="2"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="270"
+            left="49.6"
+            title="Violet"
+            top="60.3"
+            zIndex="3"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="300"
+            left="35.8"
+            title="Magenta"
+            top="64"
+            zIndex="4"
+          />
+          <HueSwatch
+            getHue={props.getHue}
+            handleSubmit={handleSubmit}
+            hue="330"
+            left="18.6"
+            title="Rose"
+            top="72"
+            zIndex="5"
+          />
+        </HueSwatchWrapper>
         <InputRGB
           red={props.red}
           green={props.green}
@@ -54,90 +159,6 @@ function HomePage(props) {
           handleChangeBlue={props.handleChangeBlue}
         />
         <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
-        <FlexboxHorizontal>
-          <FlexboxVertical>
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="0"
-              title="Red"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="30"
-              title="Orange"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="60"
-              title="Yellow"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="90"
-              title="Chartreuse"
-            />
-          </FlexboxVertical>
-          <FlexboxVertical>
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="120"
-              title="Green"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="150"
-              title="SpringGreen"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="180"
-              title="Cyan"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="210"
-              title="Azure"
-            />
-          </FlexboxVertical>
-          <FlexboxVertical>
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="240"
-              title="Blue"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="270"
-              title="Violet"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="300"
-              title="Magenta"
-            />
-            <HueSwatch
-              getHue={props.getHue}
-              handleSubmit={handleSubmit}
-              hue="330"
-              title="Rose"
-            />
-          </FlexboxVertical>
-        </FlexboxHorizontal>
-        <InputHue />
-        <button type="submit" onClick={handleClick}>
-          Get equiluminant colors!
-        </button>
       </form>
     </SideMarginSetter>
   );
@@ -154,6 +175,10 @@ HomePage.propTypes = {
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
   getHue: PropTypes.func.isRequired,
+  backgroundOverlay: PropTypes.bool.isRequired,
+  setBackgroundOverlay: PropTypes.func.isRequired,
+  setBackgroundColor: PropTypes.func.isRequired,
+  setBackgroundOverlayColor: PropTypes.func.isRequired,
 };
 
 export default HomePage;

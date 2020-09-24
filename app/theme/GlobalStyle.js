@@ -288,8 +288,25 @@ progress {
 /****************************************************************************
   Custom global style
 *****************************************************************************/
+:root { /* The background-color on the body element won't spread over the entire page for some reason. */
+  background-color: ${props => props.backgroundColor};
+  position: relative;
+
+  &::after {
+    background-color: ${props => props.backgroundOverlayColor};
+    bottom: 0;
+    content:"";
+    opacity: ${props => (props.backgroundOverlay ? 1 : 0)};
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition: opacity 300ms;
+    z-index: -1;
+  }
+}
+
 body {
-  background-color: ${color.body.background.lightMode};
   color: ${props =>
     props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
   font-family: ${font.body.family};
@@ -298,21 +315,6 @@ body {
   line-height: ${(
     layout.body.lineHeight.mobile / layout.body.fontSize.mobile
   ).toFixed(4)};
-  position: relative;
-
-  &::after {
-    background-color: ${color.body.background.darkMode};
-    bottom: 0;
-    content:"";
-    opacity: ${props => (props.darkMode ? 1 : 0)};
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    transition: opacity 300ms;
-    z-index: -1;
-  }
-
 }
 
 input {

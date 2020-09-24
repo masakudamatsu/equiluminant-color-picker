@@ -55,12 +55,12 @@ export const Input = styled.input.attrs(props => ({
   border-color: ${props => {
     if (props.darkMode) {
       return props.error
-        ? color.paragraphErrorMessage.font.forLightColor
-        : color.body.background.darkMode;
-    } else {
-      return props.error
         ? color.paragraphErrorMessage.font.forDarkColor
         : color.body.background.lightMode;
+    } else {
+      return props.error
+        ? color.paragraphErrorMessage.font.forLightColor
+        : color.body.background.darkMode;
     }
   }};
   border-style: solid;
@@ -76,13 +76,12 @@ export const Input = styled.input.attrs(props => ({
     ${layout.label.paddingPx.mobile.toFixed(4)}px
     ${layout.input.paddingBottomPx.mobile.toFixed(4)}px;
   text-align: left;
-  width: auto; /* To fix the layout when thickening the border upon active state */
+  width: 100%;
 
   &:active,
   &:hover,
   &:focus {
     border-width: ${layout.input.borderWidthPx.active.toFixed()}px;
-    margin: -${(layout.input.borderWidthPx.active - layout.input.borderWidthPx.normal).toFixed()}px;
     outline: none;
   }
 `;
@@ -118,8 +117,8 @@ export const Paragraph = styled.p`
 export const ParagraphErrorMessage = styled(Paragraph)`
   color: ${props =>
     props.darkMode
-      ? color.paragraphErrorMessage.font.forLightColor
-      : color.paragraphErrorMessage.font.forDarkColor};
+      ? color.paragraphErrorMessage.font.forDarkColor
+      : color.paragraphErrorMessage.font.forLightColor};
   font-size: ${layout.label.fontSize.mobile}rem;
   visibility: ${props => (props.error ? 'visible' : 'hidden')};
 `;
@@ -132,11 +131,6 @@ export const UnorderedListInputValueExamples = styled.ul`
 
 // Div elements for styling
 export const ColorCodeField = styled.div`
-  background-color: ${props => props.backgroundColor};
-  color: ${props =>
-    props.darkMode
-      ? color.body.background.darkMode
-      : color.body.background.lightMode};
   padding: ${layout.label.paddingPx.mobile.toFixed(4)}px;
   width: 100%;
 `;
@@ -156,6 +150,7 @@ export const InputExamplesWrapper = styled.div`
 
 export const InputWrapper = styled.div`
   background-color: inherit;
+  height: 70.2969px; /* TODO: replace the hard-coding; specifying the height property is necessary to prevent the layout shift due to thickening the field box border upon click */
   position: relative;
   width: 100%;
 `;
@@ -173,17 +168,11 @@ export const SpacerVertical = styled.div`
   height: ${layout.label.paddingPx.mobile}px;
 `;
 
-export const FlexboxVertical = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 32%;
-`;
-
-export const FlexboxHorizontal = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+export const HueSwatchWrapper = styled.div`
+  background-color: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+  opacity: 0.8;
+  padding-bottom: 200%;
+  position: relative;
   width: 100%;
 `;

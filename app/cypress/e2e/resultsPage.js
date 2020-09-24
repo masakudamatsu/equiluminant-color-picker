@@ -13,9 +13,7 @@ describe('Clicking a particular color swatch', () => {
     cy.findByLabelText('G:').clear().type(color.green.toString());
     cy.findByLabelText('B:').clear().type(color.blue.toString());
 
-    cy.findByLabelText(/violet/i).click();
-
-    cy.findByText(/get/i).click();
+    cy.findByTestId('Violet').click();
   });
 
   it('shows the RGB color code for the clicked color', () => {

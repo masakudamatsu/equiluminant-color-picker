@@ -17,6 +17,11 @@ const alertColor = {
 
 // Assign color to each element
 const color = {
+  html: {
+    background: {
+      initial: whiteAA,
+    },
+  },
   body: {
     background: {
       lightMode: whiteAA,
