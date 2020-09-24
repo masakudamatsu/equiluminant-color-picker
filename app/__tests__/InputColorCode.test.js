@@ -15,6 +15,7 @@ const mockSetBackgroundOverlay = jest.fn();
 const mockSetBackgroundColor = jest.fn();
 const mockSetBackgroundOverlayColor = jest.fn();
 const mockSetInputMissing = jest.fn();
+const mockSetAlertMissing = jest.fn();
 const mockSetInputInvalid = jest.fn();
 
 afterEach(() => {
@@ -45,6 +46,8 @@ beforeEach(() => {
         setInputInvalid={mockSetInputInvalid}
         inputMissing={true}
         setInputMissing={mockSetInputMissing}
+        alertMissing={false}
+        setAlertMissing={mockSetAlertMissing}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -88,6 +91,8 @@ test('Blurring without entering any text calls setInputMissing if the inputMissi
         setInputInvalid={mockSetInputInvalid}
         inputMissing={false} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         setInputMissing={mockSetInputMissing}
+        alertMissing={false}
+        setAlertMissing={mockSetAlertMissing}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -222,6 +227,8 @@ test('calls setInputInvalid function with false as its argument if the user corr
         darkMode={false}
         inputMissing={true}
         setInputMissing={mockSetInputMissing}
+        alertMissing={false}
+        setAlertMissing={mockSetAlertMissing}
         inputInvalid={true} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}

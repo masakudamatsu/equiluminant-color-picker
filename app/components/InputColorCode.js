@@ -133,7 +133,7 @@ function InputColorCode(props) {
         <ParagraphErrorMessage
           data-testid="colorCodeError"
           darkMode={props.darkMode}
-          error={props.inputInvalid}
+          error={props.inputInvalid || props.alertMissing}
         >
           Please enter a valid <Abbr>css</Abbr> color code
         </ParagraphErrorMessage>
@@ -153,6 +153,8 @@ InputColorCode.propTypes = {
   darkMode: PropTypes.bool.isRequired,
   inputMissing: PropTypes.bool.isRequired,
   setInputMissing: PropTypes.func.isRequired,
+  alertMissing: PropTypes.bool.isRequired,
+  setAlertMissing: PropTypes.func.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
   setInputInvalid: PropTypes.func.isRequired,
   backgroundOverlay: PropTypes.bool.isRequired,

@@ -13,6 +13,7 @@ function MyApp({Component, pageProps}) {
   const [hue, setHue] = useState('');
   const [darkMode, setDarkMode] = useState(false);
   const [inputMissing, setInputMissing] = useState(true);
+  const [alertMissing, setAlertMissing] = useState(false);
   const [inputInvalid, setInputInvalid] = useState(false);
 
   const [backgroundOverlay, setBackgroundOverlay] = useState(false);
@@ -69,6 +70,8 @@ function MyApp({Component, pageProps}) {
         darkMode={darkMode}
         inputMissing={inputMissing}
         setInputMissing={setInputMissing}
+        alertMissing={alertMissing}
+        setAlertMissing={setAlertMissing}
         inputInvalid={inputInvalid}
         setInputInvalid={setInputInvalid}
         hue={hue}

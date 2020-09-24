@@ -10,6 +10,10 @@ function HomePage(props) {
   const router = useRouter();
   const handleSubmit = e => {
     e.preventDefault();
+    if (props.inputMissing) {
+      props.setAlertMissing(true);
+      return;
+    }
     router.push('/results');
   };
   return (
@@ -36,6 +40,8 @@ function HomePage(props) {
           darkMode={props.darkMode}
           inputMissing={props.inputMissing}
           setInputMissing={props.setInputMissing}
+          alertMissing={props.alertMissing}
+          setAlertMissing={props.setAlertMissing}
           inputInvalid={props.inputInvalid}
           setInputInvalid={props.setInputInvalid}
           backgroundOverlay={props.backgroundOverlay}
@@ -180,6 +186,8 @@ HomePage.propTypes = {
   darkMode: PropTypes.bool.isRequired,
   inputMissing: PropTypes.bool.isRequired,
   setInputMissing: PropTypes.func.isRequired,
+  alertMissing: PropTypes.bool.isRequired,
+  setAlertMissing: PropTypes.func.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
   setInputInvalid: PropTypes.func.isRequired,
   getHue: PropTypes.func.isRequired,
