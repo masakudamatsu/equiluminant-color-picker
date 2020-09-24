@@ -8,12 +8,6 @@ import HueSwatch from '../components/HueSwatch';
 
 function HomePage(props) {
   const router = useRouter();
-  const handleClick = e => {
-    e.preventDefault();
-    const hue = document.querySelector('input[name="hue"]:checked').value;
-    props.getHue(hue);
-    router.push('/results');
-  };
   const handleSubmit = e => {
     e.preventDefault();
     router.push('/results');
@@ -156,9 +150,6 @@ function HomePage(props) {
             zIndex="5"
           />
         </HueSwatchWrapper>
-        <button type="submit" onClick={handleClick}>
-          Get equiluminant colors!
-        </button>
         <InputRGB
           red={props.red}
           green={props.green}
