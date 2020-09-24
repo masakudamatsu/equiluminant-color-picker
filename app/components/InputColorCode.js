@@ -18,6 +18,8 @@ import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import color from '../theme/color';
 
 function InputColorCode(props) {
+  const [userColorCode, setUserColorCode] = useState('');
+
   const regexHexText = '#([A-Fa-f\\d]{3}){1,2}';
   const regexRgbText =
     'rgb\\((1?\\d?\\d|2[0-4]\\d|25[0-5])(,\\s*(1?\\d?\\d|2[0-4]\\d|25[0-5])){2}\\)';
@@ -29,6 +31,10 @@ function InputColorCode(props) {
   if (props.red && props.green && props.blue) {
     backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
   }
+
+  const handleChange = event => {
+    setUserColorCode(event.target.value);
+  };
 
   const handleBlur = event => {
     // When nothing is entered
@@ -99,8 +105,9 @@ function InputColorCode(props) {
           error={props.invalid}
           id="inputColorCode"
           onBlur={handleBlur}
+          onChange={handleChange}
           pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
-          value={props.inputColorCode}
+          value={userColorCode}
         />
       </InputWrapper>
       <InputDescriptionWrapper>
