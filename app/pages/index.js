@@ -4,7 +4,6 @@ import {useRouter} from 'next/router';
 import {HueSwatchWrapper, SideMarginSetter} from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
 import InputRGB from '../components/InputRGB';
-import InputHue from '../components/InputHue';
 import HueSwatch from '../components/HueSwatch';
 
 function HomePage(props) {
@@ -157,7 +156,6 @@ function HomePage(props) {
             zIndex="5"
           />
         </HueSwatchWrapper>
-        <InputHue />
         <button type="submit" onClick={handleClick}>
           Get equiluminant colors!
         </button>
