@@ -18,8 +18,6 @@ import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import color from '../theme/color';
 
 function InputColorCode(props) {
-  const [invalid, setInvalid] = useState(false);
-
   const regexHexText = '#([A-Fa-f\\d]{3}){1,2}';
   const regexRgbText =
     'rgb\\((1?\\d?\\d|2[0-4]\\d|25[0-5])(,\\s*(1?\\d?\\d|2[0-4]\\d|25[0-5])){2}\\)';
@@ -39,11 +37,11 @@ function InputColorCode(props) {
     }
     // Validation
     const newInputIsInvalid = event.target.validity.patternMismatch;
-    if (!invalid && newInputIsInvalid) {
-      setInvalid(true);
+    if (!props.invalid && newInputIsInvalid) {
+      props.setInvalid(true);
     }
-    if (invalid && !newInputIsInvalid) {
-      setInvalid(false);
+    if (props.invalid && !newInputIsInvalid) {
+      props.setInvalid(false);
     }
     if (!newInputIsInvalid) {
       // Remove all the whitespaces from the user's input value
@@ -98,7 +96,7 @@ function InputColorCode(props) {
         <Input
           type="text"
           darkMode={props.darkMode}
-          error={invalid}
+          error={props.invalid}
           id="inputColorCode"
           onBlur={handleBlur}
           pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
@@ -123,7 +121,7 @@ function InputColorCode(props) {
         <ParagraphErrorMessage
           data-testid="colorCodeError"
           darkMode={props.darkMode}
-          error={invalid}
+          error={props.invalid}
         >
           Please enter a valid <Abbr>css</Abbr> color code
         </ParagraphErrorMessage>

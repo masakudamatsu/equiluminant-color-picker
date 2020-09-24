@@ -12,6 +12,7 @@ function MyApp({Component, pageProps}) {
   const [contrastRatio, setContrastRatio] = useState('');
   const [hue, setHue] = useState('');
   const [darkMode, setDarkMode] = useState(false);
+  const [invalid, setInvalid] = useState(false);
 
   const [backgroundOverlay, setBackgroundOverlay] = useState(false);
 
@@ -65,6 +66,8 @@ function MyApp({Component, pageProps}) {
         contrastRatio={contrastRatio}
         updateContrastRatio={updateContrastRatio}
         darkMode={darkMode}
+        invalid={invalid}
+        setInvalid={setInvalid}
         hue={hue}
         getHue={getHue}
         backgroundOverlay={backgroundOverlay}
