@@ -12,6 +12,7 @@ function MyApp({Component, pageProps}) {
   const [contrastRatio, setContrastRatio] = useState('');
   const [hue, setHue] = useState('');
   const [darkMode, setDarkMode] = useState(false);
+  const [inputMissing, setInputMissing] = useState(true);
   const [inputInvalid, setInputInvalid] = useState(false);
 
   const [backgroundOverlay, setBackgroundOverlay] = useState(false);
@@ -66,6 +67,8 @@ function MyApp({Component, pageProps}) {
         contrastRatio={contrastRatio}
         updateContrastRatio={updateContrastRatio}
         darkMode={darkMode}
+        inputMissing={inputMissing}
+        setInputMissing={setInputMissing}
         inputInvalid={inputInvalid}
         setInputInvalid={setInputInvalid}
         hue={hue}

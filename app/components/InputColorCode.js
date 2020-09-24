@@ -39,8 +39,12 @@ function InputColorCode(props) {
   const handleBlur = event => {
     // When nothing is entered
     if (!event.target.value) {
+      if (!props.inputMissing) {
+        props.setInputMissing(true);
+      }
       return;
     }
+    props.setInputMissing(false);
     // Validation
     const newInputIsInvalid = event.target.validity.patternMismatch;
     if (!props.inputInvalid && newInputIsInvalid) {
@@ -147,6 +151,8 @@ InputColorCode.propTypes = {
   setBlue: PropTypes.func.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
+  inputMissing: PropTypes.bool.isRequired,
+  setInputMissing: PropTypes.func.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
   setInputInvalid: PropTypes.func.isRequired,
   backgroundOverlay: PropTypes.bool.isRequired,

@@ -34,6 +34,8 @@ function HomePage(props) {
           setBlue={props.setBlue}
           updateContrastRatio={props.updateContrastRatio}
           darkMode={props.darkMode}
+          inputMissing={props.inputMissing}
+          setInputMissing={props.setInputMissing}
           inputInvalid={props.inputInvalid}
           setInputInvalid={props.setInputInvalid}
           backgroundOverlay={props.backgroundOverlay}
@@ -176,6 +178,8 @@ HomePage.propTypes = {
   contrastRatio: PropTypes.string.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
+  inputMissing: PropTypes.bool.isRequired,
+  setInputMissing: PropTypes.func.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
   setInputInvalid: PropTypes.func.isRequired,
   getHue: PropTypes.func.isRequired,

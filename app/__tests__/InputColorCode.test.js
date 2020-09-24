@@ -14,6 +14,7 @@ const mockUpdateContrastRatio = jest.fn();
 const mockSetBackgroundOverlay = jest.fn();
 const mockSetBackgroundColor = jest.fn();
 const mockSetBackgroundOverlayColor = jest.fn();
+const mockSetInputMissing = jest.fn();
 const mockSetInputInvalid = jest.fn();
 
 afterEach(() => {
@@ -40,6 +41,8 @@ test('Blurring without entering any text does not show the error message or call
         darkMode={false}
         inputInvalid={false}
         setInputInvalid={mockSetInputInvalid}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -56,11 +59,47 @@ test('Blurring without entering any text does not show the error message or call
   getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
   // verify
   expect(getByTestId('colorCodeError')).not.toBeVisible();
+  expect(mockSetInputMissing).not.toHaveBeenCalled();
   expect(mockSetRed).not.toHaveBeenCalled();
   expect(mockSetGreen).not.toHaveBeenCalled();
   expect(mockSetBlue).not.toHaveBeenCalled();
   expect(mockUpdateContrastRatio).not.toHaveBeenCalled();
   expect(mockSetInputInvalid).not.toHaveBeenCalled();
+});
+
+test('Blurring without entering any text calls setInputMissing if the inputMissing was false', () => {
+  const {container, getByLabelText, getByTestId} = render(
+    <>
+      <InputColorCode
+        red={initialRGBcode.red}
+        green={initialRGBcode.green}
+        blue={initialRGBcode.blue}
+        setRed={mockSetRed}
+        setGreen={mockSetGreen}
+        setBlue={mockSetBlue}
+        updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
+        inputMissing={false} // ATTENTION!!!!!!!!!!!!!!!!!!
+        setInputMissing={mockSetInputMissing}
+        backgroundOverlay={false}
+        setBackgroundOverlay={mockSetBackgroundOverlay}
+        setBackgroundColor={mockSetBackgroundColor}
+        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
+      />
+      <label htmlFor="dummyInput">
+        Dummy input
+        <input type="text" id="dummyInput" />
+      </label>
+    </>,
+  );
+  const colorCodeField = getByLabelText(/css color code/i);
+  colorCodeField.focus();
+  getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
+  // verify
+  expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+  expect(mockSetInputMissing).toHaveBeenCalledWith(true);
 });
 
 test('accepts HEX color codes and calls functions', () => {
@@ -75,6 +114,8 @@ test('accepts HEX color codes and calls functions', () => {
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
         inputInvalid={false}
         setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
@@ -98,6 +139,8 @@ test('accepts HEX color codes and calls functions', () => {
     // blur
     getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
     // verify
+    expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+    expect(mockSetInputMissing).toHaveBeenCalledWith(false);
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
@@ -119,6 +162,8 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
         inputInvalid={false}
         setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
@@ -150,6 +195,8 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
     // blur
     getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
     // verify
+    expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+    expect(mockSetInputMissing).toHaveBeenCalledWith(false);
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
@@ -171,6 +218,8 @@ test('accepts HSL color codes', () => {
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
         inputInvalid={false}
         setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
@@ -201,6 +250,8 @@ test('accepts HSL color codes', () => {
     // blur
     getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
     // verify
+    expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+    expect(mockSetInputMissing).toHaveBeenCalledWith(false);
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
@@ -222,6 +273,8 @@ test('calls setInvalid function with true as its argument if the user enters an 
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
         inputInvalid={false}
         setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
@@ -244,6 +297,8 @@ test('calls setInvalid function with true as its argument if the user enters an 
       userEvent.type(colorCodeField, invalidColorCode);
       getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
       // verify
+      expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+      expect(mockSetInputMissing).toHaveBeenCalledWith(false);
       expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
       expect(mockSetInputInvalid).toHaveBeenCalledWith(true);
       // isolate
@@ -264,6 +319,8 @@ test('calls setInputInvalid function with false as its argument if the user corr
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
         inputInvalid={true} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
@@ -286,6 +343,8 @@ test('calls setInputInvalid function with false as its argument if the user corr
       userEvent.type(colorCodeField, 'rgb(234, 222, 21)');
       getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
       // verify
+      expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+      expect(mockSetInputMissing).toHaveBeenCalledWith(false);
       expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
       expect(mockSetInputInvalid).toHaveBeenCalledWith(false);
       // isolate
@@ -305,6 +364,8 @@ test('renders correctly', () => {
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
       darkMode={false}
+      inputMissing={true}
+      setInputMissing={mockSetInputMissing}
       inputInvalid={false}
       setInputInvalid={mockSetInputInvalid}
       backgroundOverlay={false}
@@ -405,6 +466,8 @@ test('is accessible', async () => {
       setBlue={mockSetBlue}
       updateContrastRatio={mockUpdateContrastRatio}
       darkMode={false}
+      inputMissing={true}
+      setInputMissing={mockSetInputMissing}
       inputInvalid={false}
       setInputInvalid={mockSetInputInvalid}
       backgroundOverlay={false}
