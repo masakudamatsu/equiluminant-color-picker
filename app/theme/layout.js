@@ -10,7 +10,7 @@ const baseXheight = {
   desktop: 10 / oneRemPx, // Medium.com and Dev.to
 };
 
-const scaleRatio = 2;
+const scaleRatio = 1.5;
 const modularScale = power => {
   return Math.pow(scaleRatio, power);
 };
