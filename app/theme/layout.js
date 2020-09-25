@@ -109,11 +109,16 @@ const layout = {
       ),
     },
     paddingBottomPx: {
-      mobile: baseXheight.mobile * modularScale(1) * oneRemPx,
+      mobile:
+        capHeightForXheightToBe(baseXheight.mobile, Roboto) *
+        modularScale(1) *
+        oneRemPx,
     },
     paddingTopPx: {
-      // Input field's text box does not include line-height, it seems.
-      mobile: baseXheight.mobile * modularScale(1) * oneRemPx,
+      mobile:
+        capHeightForXheightToBe(baseXheight.mobile, Roboto) *
+        modularScale(1) *
+        oneRemPx,
     },
   },
   label: {
