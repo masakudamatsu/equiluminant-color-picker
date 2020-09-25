@@ -96,10 +96,10 @@ export const Label = styled.label`
   top: ${(
     layout.label.paddingPx.mobile +
     layout.input.borderWidthPx.normal +
-    2
+    3
   ).toFixed(
     4,
-  )}px; /* For some reason, the label element will be placed 2px above the edge of its wrapper div. We fix this by adding 2px. */
+  )}px; /* 3px is added so the vertical space between the border and the top of the label text is 11.5px, the same as the cap height of the label text. */
   left: ${(
     layout.label.paddingPx.mobile + layout.input.borderWidthPx.normal
   ).toFixed(4)}px;

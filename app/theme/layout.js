@@ -125,7 +125,7 @@ const layout = {
     },
     paddingPx: {
       // in pixel, because we do not want it to be enlarged when the user increases the font size.
-      mobile: baseXheight.mobile * oneRemPx,
+      mobile: capHeightForXheightToBe(baseXheight.mobile, Roboto) * oneRemPx,
     },
   },
   sideMarginPx: {
