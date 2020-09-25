@@ -74,7 +74,7 @@ describe('Error handling: invalid input', () => {
     cy.focused().should('not.have.attr', 'id', 'inputColorCode');
   });
 
-  it.only('Clicking the hue swatch with an invalid input shows an error message and focuses the color code field with its border in alert color', () => {
+  it('Clicking the hue swatch with an invalid input shows an error message and focuses the color code field with its border in alert color', () => {
     cy.findByLabelText(/color code/i)
       .click()
       .type('a');
@@ -86,5 +86,37 @@ describe('Error handling: invalid input', () => {
       color.paragraphErrorMessage.font.forLightColor,
     );
     cy.focused().should('have.attr', 'id', 'inputColorCode');
+  });
+
+  it.only('Correcting an invalid input value erases the error message as soon as it satisfies the requirement', () => {
+    const colorCode = 'rgb(123, 123, 223)';
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type(colorCode[0])
+      .blur();
+    cy.findByTestId('colorCodeError').should('be.visible');
+    cy.findByLabelText(/color code/i).should(
+      'have.css',
+      'border-color',
+      color.paragraphErrorMessage.font.forLightColor,
+    );
+    for (let i = 1; i < colorCode.length; i++) {
+      cy.findByLabelText(/color code/i).type(colorCode[i]);
+      if (i < colorCode.length - 1) {
+        cy.findByTestId('colorCodeError').should('be.visible');
+        cy.findByLabelText(/color code/i).should(
+          'have.css',
+          'border-color',
+          color.paragraphErrorMessage.font.forLightColor,
+        );
+      } else {
+        cy.findByTestId('colorCodeError').should('be.hidden');
+        cy.findByLabelText(/color code/i).should(
+          'have.css',
+          'border-color',
+          color.body.font.lightMode,
+        );
+      }
+    }
   });
 });

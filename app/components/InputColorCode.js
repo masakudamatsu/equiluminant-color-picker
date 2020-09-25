@@ -37,6 +37,11 @@ function InputColorCode(props) {
     if (props.alertMissing) {
       props.setAlertMissing(false);
     }
+    if (props.inputInvalid) {
+      if (!event.target.validity.patternMismatch) {
+        props.setInputInvalid(false);
+      }
+    }
   };
 
   const handleBlur = event => {

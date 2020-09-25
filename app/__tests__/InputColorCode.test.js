@@ -248,6 +248,10 @@ test('calls setInvalid function with true as its argument if the user enters an 
 });
 
 test('calls setInputInvalid function with false as its argument if the user corrects an invalid color code', () => {
+  const colorCodeField = getByLabelText(/css color code/i);
+
+  // simulate an error
+  userEvent.type(colorCodeField, 'r');
   rerender(
     <>
       <InputColorCode
@@ -276,23 +280,12 @@ test('calls setInputInvalid function with false as its argument if the user corr
       </label>
     </>,
   );
-  const colorCodeField = getByLabelText(/css color code/i);
-  ['#sss', 'rgb(300, 300, 300)', 'hsl(371, 300, 125%)'].forEach(
-    invalidColorCode => {
-      // Correct the color code
-      colorCodeField.focus();
-      userEvent.clear(colorCodeField);
-      userEvent.type(colorCodeField, 'rgb(234, 222, 21)');
-      getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
-      // verify
-      expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
-      expect(mockSetInputMissing).toHaveBeenCalledWith(false);
-      expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
-      expect(mockSetInputInvalid).toHaveBeenCalledWith(false);
-      // isolate
-      jest.clearAllMocks();
-    },
-  );
+
+  // Correct the color code
+  userEvent.type(colorCodeField, 'gb(234, 222, 21)');
+  // verify
+  expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
+  expect(mockSetInputInvalid).toHaveBeenCalledWith(false);
 });
 
 test('renders correctly', () => {
@@ -306,7 +299,7 @@ test('renders correctly', () => {
           for="inputColorCode"
         >
           Enter
-           
+
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
@@ -364,7 +357,7 @@ test('renders correctly', () => {
           class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 eilkyY"
           data-testid="colorCodeError"
         >
-          Please enter a valid 
+          Please enter a valid
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
