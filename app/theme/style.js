@@ -48,6 +48,10 @@ export const Abbr = styled.abbr`
   }
 `;
 
+export const H2 = styled.h2`
+  ${textCrop.bodyText.capHeight}
+`;
+
 export const Input = styled.input.attrs(props => ({
   autoComplete: 'off', // to remove Webkit browser's default style that cannot be overriden. See https://stackoverflow.com/questions/2338102/override-browser-form-filling-and-input-highlighting-with-html-css
 }))`
