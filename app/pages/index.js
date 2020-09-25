@@ -15,6 +15,10 @@ function HomePage(props) {
       document.getElementById('inputColorCode').focus();
       return;
     }
+    if (props.inputInvalid) {
+      document.getElementById('inputColorCode').focus();
+      return;
+    }
     router.push('/results');
   };
   return (

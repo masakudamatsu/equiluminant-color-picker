@@ -74,4 +74,17 @@ describe('Error handling: invalid input', () => {
     cy.focused().should('not.have.attr', 'id', 'inputColorCode');
   });
 
+  it.only('Clicking the hue swatch with an invalid input shows an error message and focuses the color code field with its border in alert color', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type('a');
+    cy.findByTestId('Red').click();
+    cy.findByTestId('colorCodeError').should('be.visible');
+    cy.findByLabelText(/color code/i).should(
+      'have.css',
+      'border-color',
+      color.paragraphErrorMessage.font.forLightColor,
+    );
+    cy.focused().should('have.attr', 'id', 'inputColorCode');
+  });
 });
