@@ -292,14 +292,14 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
-        class="style__InputWrapper-o0wbpp-10 ddqSqs"
+        class="style__InputWrapper-o0wbpp-11 htJgBy"
       >
         <label
-          class="style__Label-o0wbpp-2 higCQm"
+          class="style__Label-o0wbpp-3 hZPqHY"
           for="inputColorCode"
         >
           Enter
-
+           
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
@@ -309,7 +309,7 @@ test('renders correctly', () => {
         </label>
         <input
           autocomplete="off"
-          class="style__Input-o0wbpp-1 tdJna"
+          class="style__Input-o0wbpp-2 cODAWN"
           id="inputColorCode"
           pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
           type="text"
@@ -317,47 +317,52 @@ test('renders correctly', () => {
         />
       </div>
       <div
-        class="style__InputDescriptionWrapper-o0wbpp-8 bZvtsw"
+        class="style__SpacerVertical-o0wbpp-14 dwTInX"
+        scale="2"
+      />
+      <div
+        class="style__InputDescriptionWrapper-o0wbpp-9 gOzLgQ"
       >
         <div
-          class="style__InputExamplesWrapper-o0wbpp-9 imEDpc"
+          class="style__InputExamplesWrapper-o0wbpp-10 ezytdZ"
         >
           <p
-            class="style__Paragraph-o0wbpp-4 hqkZgQ"
+            class="style__Paragraph-o0wbpp-5 gvhEzQ"
           >
             Examples:
           </p>
           <div
-            class="style__SpacerHorizontal-o0wbpp-12 fUktQs"
+            class="style__SpacerHorizontal-o0wbpp-13 dqtwdM"
           />
           <ul
-            class="style__UnorderedListInputValueExamples-o0wbpp-6 fQAynv"
+            class="style__UnorderedListInputValueExamples-o0wbpp-7 sVxlm"
           >
             <li
-              class="style__ListItemInputValueExample-o0wbpp-3 dnFfkh"
+              class="style__ListItemInputValueExample-o0wbpp-4 hJEoUz"
             >
               rgb(66, 135, 245)
             </li>
             <li
-              class="style__ListItemInputValueExample-o0wbpp-3 dnFfkh"
+              class="style__ListItemInputValueExample-o0wbpp-4 hJEoUz"
             >
               hsl(217, 90%, 61%)
             </li>
             <li
-              class="style__ListItemInputValueExample-o0wbpp-3 dnFfkh"
+              class="style__ListItemInputValueExample-o0wbpp-4 hJEoUz"
             >
               #4287f5
             </li>
           </ul>
         </div>
         <div
-          class="style__SpacerVertical-o0wbpp-13 eUnVUw"
+          class="style__SpacerVertical-o0wbpp-14 dwTInX"
+          scale="2"
         />
         <p
-          class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 eilkyY"
+          class="style__Paragraph-o0wbpp-5 style__ParagraphErrorMessage-o0wbpp-6 gpMJrv"
           data-testid="colorCodeError"
         >
-          Please enter a valid
+          Please enter a valid 
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
