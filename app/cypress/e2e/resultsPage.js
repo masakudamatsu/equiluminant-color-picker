@@ -1,18 +1,28 @@
 import {getContrastRatio} from '../../utils/helpers';
 
 const colorList = [
-  {red: 123, green: 133, blue: 23},
-  {red: 53, green: 2, blue: 223},
+  {
+    red: 123,
+    green: 133,
+    blue: 23,
+    rgbCode: 'rgb(123, 133, 23)', // 5.36:1 contrast ratio to pure black
+  },
+  {
+    red: 53,
+    green: 2,
+    blue: 223,
+    rgbCode: 'rgb(53, 2, 223)', // 2.22:1 contrast ratio to pure black
+  },
 ];
 
 describe('Clicking a particular color swatch', () => {
   beforeEach(() => {
     cy.visit('/');
     const color = colorList[0];
-    cy.findByLabelText('R:').clear().type(color.red.toString());
-    cy.findByLabelText('G:').clear().type(color.green.toString());
-    cy.findByLabelText('B:').clear().type(color.blue.toString());
-
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(color.rgbCode);
     cy.findByTestId('Violet').click();
   });
 
