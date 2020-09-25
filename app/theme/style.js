@@ -71,10 +71,14 @@ export const Input = styled.input.attrs(props => ({
   padding: ${(
       layout.input.paddingTopPx.mobile +
       layout.label.capHeightPx.mobile +
-      layout.label.paddingPx.mobile
+      layout.label.paddingPx.mobile -
+      layout.textCrop.input.topCap * layout.input.fontSize.mobile * 16
     ).toFixed(4)}px
     ${layout.label.paddingPx.mobile.toFixed(4)}px
-    ${layout.input.paddingBottomPx.mobile.toFixed(4)}px;
+    ${(
+      layout.input.paddingBottomPx.mobile -
+      layout.textCrop.input.bottom * layout.input.fontSize.mobile * 16
+    ).toFixed(4)}px;
   text-align: left;
   width: 100%;
 

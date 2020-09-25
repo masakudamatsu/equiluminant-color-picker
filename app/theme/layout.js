@@ -98,25 +98,11 @@ const layout = {
       ),
     },
     paddingBottomPx: {
-      mobile:
-        (baseXheight.mobile * modularScale(1) -
-          getTextCropBottom(Roboto, 1) *
-            fontSizeForCapHeightToBe(
-              baseXheight.mobile * modularScale(1),
-              Roboto,
-            )) *
-        oneRemPx,
+      mobile: baseXheight.mobile * modularScale(1) * oneRemPx,
     },
     paddingTopPx: {
       // Input field's text box does not include line-height, it seems.
-      mobile:
-        (baseXheight.mobile * modularScale(1) -
-          getTextCropTopCap(Roboto, 1) *
-            fontSizeForCapHeightToBe(
-              baseXheight.mobile * modularScale(1),
-              Roboto,
-            )) *
-        oneRemPx,
+      mobile: baseXheight.mobile * modularScale(1) * oneRemPx,
     },
   },
   label: {
@@ -140,6 +126,10 @@ const layout = {
       bottom: getTextCropBottom(Roboto, lineHeightEm.bodyText).toFixed(4),
       topCap: getTextCropTopCap(Roboto, lineHeightEm.bodyText).toFixed(4),
       topX: getTextCropTopX(Roboto, lineHeightEm.bodyText).toFixed(4),
+    },
+    input: {
+      bottom: getTextCropBottom(Roboto, 1).toFixed(4),
+      topCap: getTextCropTopCap(Roboto, 1).toFixed(4),
     },
   },
 };
