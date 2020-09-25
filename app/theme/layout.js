@@ -93,6 +93,10 @@ const layout = {
       mobile: baseXheight.mobile * (1 + scaleRatio),
       desktop: baseXheight.desktop * (1 + scaleRatio),
     }, // in Rem. To be converted in Em in GlobalStyle.js, to make explicit its dependence on font-size
+    xHeight: {
+      mobile: baseXheight.mobile,
+      desktop: baseXheight.desktop,
+    },
   },
   input: {
     borderRadiusPx: 4,
@@ -133,6 +137,7 @@ const layout = {
       mobile: capHeightForXheightToBe(baseXheight.mobile, Roboto) * oneRemPx,
     },
   },
+  modularScale: modularScale,
   sideMarginPx: {
     // in pixel, because we do not want it to be enlarged when the user increases the font size.
     mobile: baseXheight.mobile * modularScale(1) * oneRemPx,

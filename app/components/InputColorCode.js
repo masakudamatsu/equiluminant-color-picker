@@ -126,6 +126,7 @@ function InputColorCode(props) {
           value={userColorCode}
         />
       </InputWrapper>
+      <SpacerVertical scale="2" />
       <InputDescriptionWrapper>
         <InputExamplesWrapper>
           <Paragraph>Examples:</Paragraph>
@@ -140,7 +141,7 @@ function InputColorCode(props) {
             <ListItemInputValueExample>#4287f5</ListItemInputValueExample>
           </UnorderedListInputValueExamples>
         </InputExamplesWrapper>
-        <SpacerVertical />
+        <SpacerVertical scale="2" />
         <ParagraphErrorMessage
           data-testid="colorCodeError"
           darkMode={props.darkMode}

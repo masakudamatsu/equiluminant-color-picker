@@ -48,6 +48,10 @@ export const Abbr = styled.abbr`
   }
 `;
 
+export const H2 = styled.h2`
+  ${textCrop.bodyText.capHeight}
+`;
+
 export const Input = styled.input.attrs(props => ({
   autoComplete: 'off', // to remove Webkit browser's default style that cannot be overriden. See https://stackoverflow.com/questions/2338102/override-browser-form-filling-and-input-highlighting-with-html-css
 }))`
@@ -110,7 +114,7 @@ export const ListItemInputValueExample = styled.li`
   ${textCrop.bodyText.capHeight}
 
   &:not(:first-child) {
-    padding-top: ${layout.label.paddingPx.mobile}px;
+    padding-top: ${layout.body.xHeight.mobile * layout.modularScale(1)}rem;
   }
 `;
 
@@ -149,7 +153,6 @@ export const InputExamplesWrapper = styled.div`
   display: flex;
   font-size: ${layout.label.fontSize.mobile}rem;
   justify-content: flex-start;
-  padding-top: ${layout.label.paddingPx.mobile}px;
 `;
 
 export const InputWrapper = styled.div`
@@ -180,7 +183,8 @@ export const SpacerHorizontal = styled.div`
 `;
 
 export const SpacerVertical = styled.div`
-  height: ${layout.label.paddingPx.mobile}px;
+  height: ${props =>
+    layout.body.xHeight.mobile * layout.modularScale(props.scale)}rem;
 `;
 
 export const HueSwatchWrapper = styled.div`

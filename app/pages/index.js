@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
-import {HueSwatchWrapper, SideMarginSetter} from '../theme/style';
+import {
+  H2,
+  HueSwatchWrapper,
+  SideMarginSetter,
+  SpacerVertical,
+} from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
 import InputRGB from '../components/InputRGB';
 import HueSwatch from '../components/HueSwatch';
@@ -32,8 +37,10 @@ function HomePage(props) {
         </a>
         .
       </noscript>
+      <SpacerVertical scale="3" />
       <form>
-        <h2>#1 Set Luminance</h2>
+        <H2>#1 Set Luminance</H2>
+        <SpacerVertical scale="2" />
         <InputColorCode
           red={props.red}
           green={props.green}
@@ -53,8 +60,10 @@ function HomePage(props) {
           setBackgroundOverlay={props.setBackgroundOverlay}
           setBackgroundColor={props.setBackgroundColor}
           setBackgroundOverlayColor={props.setBackgroundOverlayColor}
-        />
-        <h2>#2 Choose hue</h2>
+        />{' '}
+        <SpacerVertical scale="3" />
+        <H2>#2 Choose hue</H2>
+        <SpacerVertical scale="2" />
         <HueSwatchWrapper darkMode={props.darkMode}>
           <HueSwatch
             getHue={props.getHue}
