@@ -154,7 +154,18 @@ export const InputExamplesWrapper = styled.div`
 
 export const InputWrapper = styled.div`
   background-color: inherit;
-  height: 70.2969px; /* TODO: replace the hard-coding; specifying the height property is necessary to prevent the layout shift due to thickening the field box border upon click */
+  height: ${(
+    layout.input.borderWidthPx.normal +
+    layout.label.paddingPx.mobile +
+    layout.label.capHeightPx.mobile +
+    layout.input.paddingTopPx.mobile +
+    layout.input.capHeightPx.mobile +
+    layout.input.paddingBottomPx.mobile +
+    layout.input.borderWidthPx.normal +
+    4
+  ).toFixed(
+    4,
+  )}px; /* 4px is added so the vertical space between the label text's baseline and the top of the input text is 18px, the same as the cap height of the input text. */
   position: relative;
   width: 100%;
 `;
