@@ -110,7 +110,7 @@ export const ListItemInputValueExample = styled.li`
   ${textCrop.bodyText.capHeight}
 
   &:not(:first-child) {
-    padding-top: ${layout.label.paddingPx.mobile}px;
+    padding-top: ${layout.body.xHeight.mobile * layout.modularScale(1)}rem;
   }
 `;
 
