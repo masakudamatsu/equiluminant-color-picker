@@ -88,7 +88,7 @@ describe('Error handling: invalid input', () => {
     cy.focused().should('have.attr', 'id', 'inputColorCode');
   });
 
-  it.only('Correcting an invalid input value erases the error message as soon as it satisfies the requirement', () => {
+  it('Correcting an invalid input value erases the error message as soon as it satisfies the requirement', () => {
     const colorCode = 'rgb(123, 123, 223)';
     cy.findByLabelText(/color code/i)
       .click()
@@ -118,5 +118,30 @@ describe('Error handling: invalid input', () => {
         );
       }
     }
+  });
+
+  it('Removing an invalid input hides an error message with the field box border back to normal', () => {
+    // simulate error
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type('a')
+      .blur();
+    cy.findByTestId('colorCodeError').should('be.visible');
+    cy.findByLabelText(/color code/i).should(
+      'have.css',
+      'border-color',
+      color.paragraphErrorMessage.font.forLightColor,
+    );
+    // clear the input value
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type('{backspace}');
+    // verify
+    cy.findByTestId('colorCodeError').should('be.hidden');
+    cy.findByLabelText(/color code/i).should(
+      'have.css',
+      'border-color',
+      color.body.font.lightMode,
+    );
   });
 });
