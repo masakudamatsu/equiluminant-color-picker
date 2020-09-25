@@ -11,7 +11,7 @@ const whiteAAA = 'rgb(253, 253, 253)';
 
 // Alert text
 const alertColor = {
-  forLightColor: 'red',
+  forLightColor: 'rgb(255, 0, 0)',
   forDarkColor: 'yellow',
 };
 

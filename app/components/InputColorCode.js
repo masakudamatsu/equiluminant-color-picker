@@ -18,7 +18,7 @@ import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import color from '../theme/color';
 
 function InputColorCode(props) {
-  const [invalid, setInvalid] = useState(false);
+  const [userColorCode, setUserColorCode] = useState('');
 
   const regexHexText = '#([A-Fa-f\\d]{3}){1,2}';
   const regexRgbText =
@@ -32,20 +32,39 @@ function InputColorCode(props) {
     backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
   }
 
+  const handleChange = event => {
+    setUserColorCode(event.target.value);
+    if (props.alertMissing) {
+      props.setAlertMissing(false);
+    }
+    if (props.inputInvalid) {
+      if (!event.target.validity.patternMismatch) {
+        props.setInputInvalid(false);
+      }
+    }
+  };
+
   const handleBlur = event => {
     // When nothing is entered
     if (!event.target.value) {
+      if (!props.inputMissing) {
+        props.setInputMissing(true);
+      }
       return;
     }
+    // When something is entered
+    props.setInputMissing(false);
     // Validation
     const newInputIsInvalid = event.target.validity.patternMismatch;
-    if (!invalid && newInputIsInvalid) {
-      setInvalid(true);
-    }
-    if (invalid && !newInputIsInvalid) {
-      setInvalid(false);
+    if (newInputIsInvalid) {
+      if (!props.inputInvalid) {
+        props.setInputInvalid(true);
+      }
     }
     if (!newInputIsInvalid) {
+      if (props.inputInvalid) {
+        props.setInputInvalid(false);
+      }
       // Remove all the whitespaces from the user's input value
       const newInputValue = event.target.value.trim().replace(/\s/g, '');
       // Convert into RGB code
@@ -91,18 +110,20 @@ function InputColorCode(props) {
   };
   return (
     <>
+      {/* prettier-ignore */}
       <InputWrapper>
         <Label htmlFor="inputColorCode">
-          Enter <Abbr>css</Abbr> color code
+          Enter{' '}<Abbr>css</Abbr> color code
         </Label>
         <Input
           type="text"
           darkMode={props.darkMode}
-          error={invalid}
+          error={props.inputInvalid || props.alertMissing}
           id="inputColorCode"
           onBlur={handleBlur}
+          onChange={handleChange}
           pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
-          value={props.inputColorCode}
+          value={userColorCode}
         />
       </InputWrapper>
       <InputDescriptionWrapper>
@@ -123,7 +144,7 @@ function InputColorCode(props) {
         <ParagraphErrorMessage
           data-testid="colorCodeError"
           darkMode={props.darkMode}
-          error={invalid}
+          error={props.inputInvalid || props.alertMissing}
         >
           Please enter a valid <Abbr>css</Abbr> color code
         </ParagraphErrorMessage>
@@ -141,6 +162,12 @@ InputColorCode.propTypes = {
   setBlue: PropTypes.func.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
+  inputMissing: PropTypes.bool.isRequired,
+  setInputMissing: PropTypes.func.isRequired,
+  alertMissing: PropTypes.bool.isRequired,
+  setAlertMissing: PropTypes.func.isRequired,
+  inputInvalid: PropTypes.bool.isRequired,
+  setInputInvalid: PropTypes.func.isRequired,
   backgroundOverlay: PropTypes.bool.isRequired,
   setBackgroundOverlay: PropTypes.func.isRequired,
   setBackgroundColor: PropTypes.func.isRequired,

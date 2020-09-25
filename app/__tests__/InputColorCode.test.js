@@ -14,6 +14,9 @@ const mockUpdateContrastRatio = jest.fn();
 const mockSetBackgroundOverlay = jest.fn();
 const mockSetBackgroundColor = jest.fn();
 const mockSetBackgroundOverlayColor = jest.fn();
+const mockSetInputMissing = jest.fn();
+const mockSetAlertMissing = jest.fn();
+const mockSetInputInvalid = jest.fn();
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -25,8 +28,10 @@ const initialRGBcode = {
   blue: '',
 };
 
-test('Blurring without entering any text does not show the error message or call any functions', () => {
-  const {container, getByLabelText, getByTestId} = render(
+let container, getByLabelText, getByTestId, rerender;
+
+beforeEach(() => {
+  return ({container, getByLabelText, getByTestId, rerender} = render(
     <>
       <InputColorCode
         red={initialRGBcode.red}
@@ -37,6 +42,57 @@ test('Blurring without entering any text does not show the error message or call
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
+        alertMissing={false}
+        setAlertMissing={mockSetAlertMissing}
+        backgroundOverlay={false}
+        setBackgroundOverlay={mockSetBackgroundOverlay}
+        setBackgroundColor={mockSetBackgroundColor}
+        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
+      />
+      <label htmlFor="dummyInput">
+        Dummy input
+        <input type="text" id="dummyInput" />
+      </label>
+    </>,
+  ));
+});
+
+test('Blurring without entering any text does not show the error message or call any functions', () => {
+  const colorCodeField = getByLabelText(/css color code/i);
+  colorCodeField.focus();
+  getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
+  // verify
+  expect(getByTestId('colorCodeError')).not.toBeVisible();
+  expect(mockSetInputMissing).not.toHaveBeenCalled();
+  expect(mockSetRed).not.toHaveBeenCalled();
+  expect(mockSetGreen).not.toHaveBeenCalled();
+  expect(mockSetBlue).not.toHaveBeenCalled();
+  expect(mockUpdateContrastRatio).not.toHaveBeenCalled();
+  expect(mockSetInputInvalid).not.toHaveBeenCalled();
+});
+
+test('Blurring without entering any text calls setInputMissing if the inputMissing was false', () => {
+  rerender(
+    <>
+      <InputColorCode
+        red={initialRGBcode.red}
+        green={initialRGBcode.green}
+        blue={initialRGBcode.blue}
+        setRed={mockSetRed}
+        setGreen={mockSetGreen}
+        setBlue={mockSetBlue}
+        updateContrastRatio={mockUpdateContrastRatio}
+        darkMode={false}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
+        inputMissing={false} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        setInputMissing={mockSetInputMissing}
+        alertMissing={false}
+        setAlertMissing={mockSetAlertMissing}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -52,15 +108,12 @@ test('Blurring without entering any text does not show the error message or call
   colorCodeField.focus();
   getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
   // verify
-  expect(getByTestId('colorCodeError')).not.toBeVisible();
-  expect(mockSetRed).not.toHaveBeenCalled();
-  expect(mockSetGreen).not.toHaveBeenCalled();
-  expect(mockSetBlue).not.toHaveBeenCalled();
-  expect(mockUpdateContrastRatio).not.toHaveBeenCalled();
+  expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+  expect(mockSetInputMissing).toHaveBeenCalledWith(true);
 });
 
-test('accepts HEX color codes and calls functions', () => {
-  const {container, getByLabelText, getByTestId} = render(
+test('Entering any text calls setAlertMissing with false if the alertMissing was true', () => {
+  rerender(
     <>
       <InputColorCode
         red={initialRGBcode.red}
@@ -71,6 +124,12 @@ test('accepts HEX color codes and calls functions', () => {
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        inputInvalid={false}
+        setInputInvalid={mockSetInputInvalid}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
+        alertMissing={true} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!
+        setAlertMissing={mockSetAlertMissing}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -83,6 +142,14 @@ test('accepts HEX color codes and calls functions', () => {
     </>,
   );
   const colorCodeField = getByLabelText(/css color code/i);
+  userEvent.type(colorCodeField, 'a');
+  // verify
+  expect(mockSetAlertMissing).toHaveBeenCalledTimes(1);
+  expect(mockSetAlertMissing).toHaveBeenCalledWith(false);
+});
+
+test('accepts HEX color codes and calls functions', () => {
+  const colorCodeField = getByLabelText(/css color code/i);
   ['#3a5', '#A3C', '#4e2ba5'].forEach(colorCode => {
     colorCodeField.focus();
     userEvent.clear(colorCodeField);
@@ -92,6 +159,8 @@ test('accepts HEX color codes and calls functions', () => {
     // blur
     getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
     // verify
+    expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+    expect(mockSetInputMissing).toHaveBeenCalledWith(false);
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
@@ -102,28 +171,6 @@ test('accepts HEX color codes and calls functions', () => {
 });
 
 test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions', () => {
-  const {container, getByLabelText, getByTestId} = render(
-    <>
-      <InputColorCode
-        red={initialRGBcode.red}
-        green={initialRGBcode.green}
-        blue={initialRGBcode.blue}
-        setRed={mockSetRed}
-        setGreen={mockSetGreen}
-        setBlue={mockSetBlue}
-        updateContrastRatio={mockUpdateContrastRatio}
-        darkMode={false}
-        backgroundOverlay={false}
-        setBackgroundOverlay={mockSetBackgroundOverlay}
-        setBackgroundColor={mockSetBackgroundColor}
-        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-      />
-      <label htmlFor="dummyInput">
-        Dummy input
-        <input type="text" id="dummyInput" />
-      </label>
-    </>,
-  );
   const colorCodeField = getByLabelText(/css color code/i);
   [
     'rgb(1, 2, 3)',
@@ -142,6 +189,8 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
     // blur
     getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
     // verify
+    expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+    expect(mockSetInputMissing).toHaveBeenCalledWith(false);
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
@@ -152,28 +201,6 @@ test('accepts RGB color codes and calls setRed, setGreen, and setBlue functions'
 });
 
 test('accepts HSL color codes', () => {
-  const {container, getByLabelText, getByTestId} = render(
-    <>
-      <InputColorCode
-        red={initialRGBcode.red}
-        green={initialRGBcode.green}
-        blue={initialRGBcode.blue}
-        setRed={mockSetRed}
-        setGreen={mockSetGreen}
-        setBlue={mockSetBlue}
-        updateContrastRatio={mockUpdateContrastRatio}
-        darkMode={false}
-        backgroundOverlay={false}
-        setBackgroundOverlay={mockSetBackgroundOverlay}
-        setBackgroundColor={mockSetBackgroundColor}
-        setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-      />
-      <label htmlFor="dummyInput">
-        Dummy input
-        <input type="text" id="dummyInput" />
-      </label>
-    </>,
-  );
   const colorCodeField = getByLabelText(/css color code/i);
   [
     'hsl(360, 100%, 100%)',
@@ -191,6 +218,8 @@ test('accepts HSL color codes', () => {
     // blur
     getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
     // verify
+    expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
+    expect(mockSetInputMissing).toHaveBeenCalledWith(false);
     expect(mockSetRed).toHaveBeenCalledTimes(1);
     expect(mockSetGreen).toHaveBeenCalledTimes(1);
     expect(mockSetBlue).toHaveBeenCalledTimes(1);
@@ -200,8 +229,30 @@ test('accepts HSL color codes', () => {
   });
 });
 
-test('shows the error message if the user enters an invalid color code and hides it when the user corrects it', () => {
-  const {container, getByLabelText, getByTestId} = render(
+test('calls setInvalid function with true as its argument if the user enters an invalid color code', () => {
+  const colorCodeField = getByLabelText(/css color code/i);
+  ['#sss', 'rgb(300, 300, 300)', 'hsl(371, 300, 125%)'].forEach(
+    invalidColorCode => {
+      // Enter an invalid color code
+      colorCodeField.focus();
+      userEvent.clear(colorCodeField);
+      userEvent.type(colorCodeField, invalidColorCode);
+      getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
+      // verify
+      expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
+      expect(mockSetInputInvalid).toHaveBeenCalledWith(true);
+      // isolate
+      jest.clearAllMocks();
+    },
+  );
+});
+
+test('calls setInputInvalid function with false as its argument if the user corrects an invalid color code', () => {
+  const colorCodeField = getByLabelText(/css color code/i);
+
+  // simulate an error
+  userEvent.type(colorCodeField, 'r');
+  rerender(
     <>
       <InputColorCode
         red={initialRGBcode.red}
@@ -212,6 +263,12 @@ test('shows the error message if the user enters an invalid color code and hides
         setBlue={mockSetBlue}
         updateContrastRatio={mockUpdateContrastRatio}
         darkMode={false}
+        inputMissing={true}
+        setInputMissing={mockSetInputMissing}
+        alertMissing={false}
+        setAlertMissing={mockSetAlertMissing}
+        inputInvalid={true} // ATTENTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        setInputInvalid={mockSetInputInvalid}
         backgroundOverlay={false}
         setBackgroundOverlay={mockSetBackgroundOverlay}
         setBackgroundColor={mockSetBackgroundColor}
@@ -223,42 +280,15 @@ test('shows the error message if the user enters an invalid color code and hides
       </label>
     </>,
   );
-  const colorCodeField = getByLabelText(/css color code/i);
-  ['#sss', 'rgb(300, 300, 300)', 'hsl(371, 300, 125%)'].forEach(
-    invalidColorCode => {
-      // Enter an invalid color code
-      colorCodeField.focus();
-      userEvent.clear(colorCodeField);
-      userEvent.type(colorCodeField, invalidColorCode);
-      getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
-      expect(getByTestId('colorCodeError')).toBeVisible();
-      // Correct the color code
-      colorCodeField.focus();
-      userEvent.clear(colorCodeField);
-      userEvent.type(colorCodeField, 'rgb(234, 222, 21)');
-      getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
-      expect(getByTestId('colorCodeError')).not.toBeVisible();
-    },
-  );
+
+  // Correct the color code
+  userEvent.type(colorCodeField, 'gb(234, 222, 21)');
+  // verify
+  expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
+  expect(mockSetInputInvalid).toHaveBeenCalledWith(false);
 });
 
 test('renders correctly', () => {
-  const {container} = render(
-    <InputColorCode
-      red={initialRGBcode.red}
-      green={initialRGBcode.green}
-      blue={initialRGBcode.blue}
-      setRed={mockSetRed}
-      setGreen={mockSetGreen}
-      setBlue={mockSetBlue}
-      updateContrastRatio={mockUpdateContrastRatio}
-      darkMode={false}
-      backgroundOverlay={false}
-      setBackgroundOverlay={mockSetBackgroundOverlay}
-      setBackgroundColor={mockSetBackgroundColor}
-      setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-    />,
-  );
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
@@ -268,7 +298,8 @@ test('renders correctly', () => {
           class="style__Label-o0wbpp-2 higCQm"
           for="inputColorCode"
         >
-          Enter 
+          Enter
+
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
@@ -323,10 +354,10 @@ test('renders correctly', () => {
           class="style__SpacerVertical-o0wbpp-13 eUnVUw"
         />
         <p
-          class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 cupokD"
+          class="style__Paragraph-o0wbpp-4 style__ParagraphErrorMessage-o0wbpp-5 eilkyY"
           data-testid="colorCodeError"
         >
-          Please enter a valid 
+          Please enter a valid
           <abbr
             class="style__Abbr-o0wbpp-0 kYbBqH"
           >
@@ -335,27 +366,20 @@ test('renders correctly', () => {
            color code
         </p>
       </div>
+      <label
+        for="dummyInput"
+      >
+        Dummy input
+        <input
+          id="dummyInput"
+          type="text"
+        />
+      </label>
     </div>
   `);
 });
 
 test('is accessible', async () => {
-  const {container} = render(
-    <InputColorCode
-      red={initialRGBcode.red}
-      green={initialRGBcode.green}
-      blue={initialRGBcode.blue}
-      setRed={mockSetRed}
-      setGreen={mockSetGreen}
-      setBlue={mockSetBlue}
-      updateContrastRatio={mockUpdateContrastRatio}
-      darkMode={false}
-      backgroundOverlay={false}
-      setBackgroundOverlay={mockSetBackgroundOverlay}
-      setBackgroundColor={mockSetBackgroundColor}
-      setBackgroundOverlayColor={mockSetBackgroundOverlayColor}
-    />,
-  );
   const results = await axe(container);
   expect(results).toHaveNoViolations();
   cleanup();

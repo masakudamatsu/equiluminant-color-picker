@@ -10,6 +10,15 @@ function HomePage(props) {
   const router = useRouter();
   const handleSubmit = e => {
     e.preventDefault();
+    if (props.inputMissing) {
+      props.setAlertMissing(true);
+      document.getElementById('inputColorCode').focus();
+      return;
+    }
+    if (props.inputInvalid) {
+      document.getElementById('inputColorCode').focus();
+      return;
+    }
     router.push('/results');
   };
   return (
@@ -34,6 +43,12 @@ function HomePage(props) {
           setBlue={props.setBlue}
           updateContrastRatio={props.updateContrastRatio}
           darkMode={props.darkMode}
+          inputMissing={props.inputMissing}
+          setInputMissing={props.setInputMissing}
+          alertMissing={props.alertMissing}
+          setAlertMissing={props.setAlertMissing}
+          inputInvalid={props.inputInvalid}
+          setInputInvalid={props.setInputInvalid}
           backgroundOverlay={props.backgroundOverlay}
           setBackgroundOverlay={props.setBackgroundOverlay}
           setBackgroundColor={props.setBackgroundColor}
@@ -174,6 +189,12 @@ HomePage.propTypes = {
   contrastRatio: PropTypes.string.isRequired,
   updateContrastRatio: PropTypes.func.isRequired,
   darkMode: PropTypes.bool.isRequired,
+  inputMissing: PropTypes.bool.isRequired,
+  setInputMissing: PropTypes.func.isRequired,
+  alertMissing: PropTypes.bool.isRequired,
+  setAlertMissing: PropTypes.func.isRequired,
+  inputInvalid: PropTypes.bool.isRequired,
+  setInputInvalid: PropTypes.func.isRequired,
   getHue: PropTypes.func.isRequired,
   backgroundOverlay: PropTypes.bool.isRequired,
   setBackgroundOverlay: PropTypes.func.isRequired,
