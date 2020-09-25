@@ -149,7 +149,6 @@ export const InputExamplesWrapper = styled.div`
   display: flex;
   font-size: ${layout.label.fontSize.mobile}rem;
   justify-content: flex-start;
-  padding-top: ${layout.label.paddingPx.mobile}px;
 `;
 
 export const InputWrapper = styled.div`
@@ -180,7 +179,8 @@ export const SpacerHorizontal = styled.div`
 `;
 
 export const SpacerVertical = styled.div`
-  height: ${layout.label.paddingPx.mobile}px;
+  height: ${props =>
+    layout.body.xHeight.mobile * layout.modularScale(props.scale)}rem;
 `;
 
 export const HueSwatchWrapper = styled.div`
