@@ -74,7 +74,7 @@ export const Input = styled.input.attrs(props => ({
       layout.label.paddingPx.mobile -
       layout.textCrop.input.topCap * layout.input.fontSize.mobile * 16
     ).toFixed(4)}px
-    ${layout.label.paddingPx.mobile.toFixed(4)}px
+    ${(layout.label.paddingPx.mobile - 1).toFixed(4)}px /* Visual alignment */
     ${(
       layout.input.paddingBottomPx.mobile -
       layout.textCrop.input.bottom * layout.input.fontSize.mobile * 16
