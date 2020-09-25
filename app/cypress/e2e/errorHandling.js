@@ -42,3 +42,36 @@ describe('Error handling: missing input', () => {
     );
   });
 });
+
+describe('Error handling: invalid input', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
+  it('No error message is shown (with no change in border color) while entering text', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type('a');
+    cy.findByTestId('colorCodeError').should('be.hidden');
+    cy.findByLabelText(/color code/i).should(
+      'have.css',
+      'border-color',
+      color.body.font.lightMode,
+    );
+  });
+
+  it('Blurring with an invalid input shows an error message with the field box color in alert, but does not focus the input field', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type('a')
+      .blur();
+    cy.findByTestId('colorCodeError').should('be.visible');
+    cy.findByLabelText(/color code/i).should(
+      'have.css',
+      'border-color',
+      color.paragraphErrorMessage.font.forLightColor,
+    );
+    cy.focused().should('not.have.attr', 'id', 'inputColorCode');
+  });
+
+});
