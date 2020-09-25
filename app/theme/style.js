@@ -71,10 +71,14 @@ export const Input = styled.input.attrs(props => ({
   padding: ${(
       layout.input.paddingTopPx.mobile +
       layout.label.capHeightPx.mobile +
-      layout.label.paddingPx.mobile
+      layout.label.paddingPx.mobile -
+      layout.textCrop.input.topCap * layout.input.fontSize.mobile * 16
     ).toFixed(4)}px
-    ${layout.label.paddingPx.mobile.toFixed(4)}px
-    ${layout.input.paddingBottomPx.mobile.toFixed(4)}px;
+    ${(layout.label.paddingPx.mobile - 1).toFixed(4)}px /* Visual alignment */
+    ${(
+      layout.input.paddingBottomPx.mobile -
+      layout.textCrop.input.bottom * layout.input.fontSize.mobile * 16
+    ).toFixed(4)}px;
   text-align: left;
   width: 100%;
 
@@ -92,10 +96,10 @@ export const Label = styled.label`
   top: ${(
     layout.label.paddingPx.mobile +
     layout.input.borderWidthPx.normal +
-    2
+    3
   ).toFixed(
     4,
-  )}px; /* For some reason, the label element will be placed 2px above the edge of its wrapper div. We fix this by adding 2px. */
+  )}px; /* 3px is added so the vertical space between the border and the top of the label text is 11.5px, the same as the cap height of the label text. */
   left: ${(
     layout.label.paddingPx.mobile + layout.input.borderWidthPx.normal
   ).toFixed(4)}px;
@@ -150,7 +154,18 @@ export const InputExamplesWrapper = styled.div`
 
 export const InputWrapper = styled.div`
   background-color: inherit;
-  height: 70.2969px; /* TODO: replace the hard-coding; specifying the height property is necessary to prevent the layout shift due to thickening the field box border upon click */
+  height: ${(
+    layout.input.borderWidthPx.normal +
+    layout.label.paddingPx.mobile +
+    layout.label.capHeightPx.mobile +
+    layout.input.paddingTopPx.mobile +
+    layout.input.capHeightPx.mobile +
+    layout.input.paddingBottomPx.mobile +
+    layout.input.borderWidthPx.normal +
+    4
+  ).toFixed(
+    4,
+  )}px; /* 4px is added so the vertical space between the label text's baseline and the top of the input text is 18px, the same as the cap height of the input text. */
   position: relative;
   width: 100%;
 `;

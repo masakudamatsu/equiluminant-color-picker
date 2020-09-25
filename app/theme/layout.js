@@ -10,7 +10,7 @@ const baseXheight = {
   desktop: 10 / oneRemPx, // Medium.com and Dev.to
 };
 
-const scaleRatio = 2;
+const scaleRatio = 1.5;
 const modularScale = power => {
   return Math.pow(scaleRatio, power);
 };
@@ -42,6 +42,12 @@ const fontSizeForCapHeightToBe = (capHeight, fontMetrics) => {
   const capHeightToFontSizeRatio =
     fontMetrics.capHeight / fontMetrics.unitsPerEm;
   return capHeight / capHeightToFontSizeRatio;
+};
+
+// Convert x-height into cap-height
+const capHeightForXheightToBe = (xHeight, fontMetrics) => {
+  const xHeightToCapHeightRatio = fontMetrics.xHeight / fontMetrics.capHeight;
+  return xHeight / xHeightToCapHeightRatio;
 };
 
 const lineHeight = {
@@ -91,44 +97,40 @@ const layout = {
   input: {
     borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},
+    capHeightPx: {
+      mobile:
+        capHeightForXheightToBe(baseXheight.mobile * modularScale(1), Roboto) *
+        oneRemPx,
+    },
     fontSize: {
-      mobile: fontSizeForCapHeightToBe(
+      mobile: fontSizeForXheightToBe(
         baseXheight.mobile * modularScale(1),
         Roboto,
       ),
     },
     paddingBottomPx: {
       mobile:
-        (baseXheight.mobile * modularScale(1) -
-          getTextCropBottom(Roboto, 1) *
-            fontSizeForCapHeightToBe(
-              baseXheight.mobile * modularScale(1),
-              Roboto,
-            )) *
+        capHeightForXheightToBe(baseXheight.mobile, Roboto) *
+        modularScale(1) *
         oneRemPx,
     },
     paddingTopPx: {
-      // Input field's text box does not include line-height, it seems.
       mobile:
-        (baseXheight.mobile * modularScale(1) -
-          getTextCropTopCap(Roboto, 1) *
-            fontSizeForCapHeightToBe(
-              baseXheight.mobile * modularScale(1),
-              Roboto,
-            )) *
+        capHeightForXheightToBe(baseXheight.mobile, Roboto) *
+        modularScale(1) *
         oneRemPx,
     },
   },
   label: {
     capHeightPx: {
-      mobile: baseXheight.mobile * oneRemPx,
+      mobile: capHeightForXheightToBe(baseXheight.mobile, Roboto) * oneRemPx,
     },
     fontSize: {
-      mobile: fontSizeForCapHeightToBe(baseXheight.mobile, Roboto),
+      mobile: fontSizeForXheightToBe(baseXheight.mobile, Roboto),
     },
     paddingPx: {
       // in pixel, because we do not want it to be enlarged when the user increases the font size.
-      mobile: baseXheight.mobile * oneRemPx,
+      mobile: capHeightForXheightToBe(baseXheight.mobile, Roboto) * oneRemPx,
     },
   },
   sideMarginPx: {
@@ -140,6 +142,10 @@ const layout = {
       bottom: getTextCropBottom(Roboto, lineHeightEm.bodyText).toFixed(4),
       topCap: getTextCropTopCap(Roboto, lineHeightEm.bodyText).toFixed(4),
       topX: getTextCropTopX(Roboto, lineHeightEm.bodyText).toFixed(4),
+    },
+    input: {
+      bottom: getTextCropBottom(Roboto, 1).toFixed(4),
+      topCap: getTextCropTopCap(Roboto, 1).toFixed(4),
     },
   },
 };
