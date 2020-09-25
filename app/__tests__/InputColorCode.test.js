@@ -362,13 +362,9 @@ test('renders correctly', () => {
           class="style__Paragraph-o0wbpp-5 style__ParagraphErrorMessage-o0wbpp-6 gpMJrv"
           data-testid="colorCodeError"
         >
-          Please enter a valid 
-          <abbr
-            class="style__Abbr-o0wbpp-0 kYbBqH"
-          >
-            css
-          </abbr>
-           color code
+          <span>
+            This text prevents the layout shift due to the error message appearance.
+          </span>
         </p>
       </div>
       <label
