@@ -47,16 +47,19 @@ function InputColorCode(props) {
       }
       return;
     }
+    // When something is entered
     props.setInputMissing(false);
     // Validation
     const newInputIsInvalid = event.target.validity.patternMismatch;
-    if (!props.inputInvalid && newInputIsInvalid) {
-      props.setInputInvalid(true);
-    }
-    if (props.inputInvalid && !newInputIsInvalid) {
-      props.setInputInvalid(false);
+    if (newInputIsInvalid) {
+      if (!props.inputInvalid) {
+        props.setInputInvalid(true);
+      }
     }
     if (!newInputIsInvalid) {
+      if (props.inputInvalid) {
+        props.setInputInvalid(false);
+      }
       // Remove all the whitespaces from the user's input value
       const newInputValue = event.target.value.trim().replace(/\s/g, '');
       // Convert into RGB code
