@@ -239,8 +239,6 @@ test('calls setInvalid function with true as its argument if the user enters an 
       userEvent.type(colorCodeField, invalidColorCode);
       getByLabelText(/dummy input/i).focus(); // To blur the colorCodeField element
       // verify
-      expect(mockSetInputMissing).toHaveBeenCalledTimes(1);
-      expect(mockSetInputMissing).toHaveBeenCalledWith(false);
       expect(mockSetInputInvalid).toHaveBeenCalledTimes(1);
       expect(mockSetInputInvalid).toHaveBeenCalledWith(true);
       // isolate
