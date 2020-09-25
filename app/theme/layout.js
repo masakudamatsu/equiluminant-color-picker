@@ -44,6 +44,12 @@ const fontSizeForCapHeightToBe = (capHeight, fontMetrics) => {
   return capHeight / capHeightToFontSizeRatio;
 };
 
+// Convert x-height into cap-height
+const capHeightForXheightToBe = (xHeight, fontMetrics) => {
+  const xHeightToCapHeightRatio = fontMetrics.xHeight / fontMetrics.capHeight;
+  return xHeight / xHeightToCapHeightRatio;
+};
+
 const lineHeight = {
   // in rem
   bodyText: {
@@ -91,8 +97,13 @@ const layout = {
   input: {
     borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},
+    capHeightPx: {
+      mobile:
+        capHeightForXheightToBe(baseXheight.mobile * modularScale(1), Roboto) *
+        oneRemPx,
+    },
     fontSize: {
-      mobile: fontSizeForCapHeightToBe(
+      mobile: fontSizeForXheightToBe(
         baseXheight.mobile * modularScale(1),
         Roboto,
       ),
@@ -107,10 +118,10 @@ const layout = {
   },
   label: {
     capHeightPx: {
-      mobile: baseXheight.mobile * oneRemPx,
+      mobile: capHeightForXheightToBe(baseXheight.mobile, Roboto) * oneRemPx,
     },
     fontSize: {
-      mobile: fontSizeForCapHeightToBe(baseXheight.mobile, Roboto),
+      mobile: fontSizeForXheightToBe(baseXheight.mobile, Roboto),
     },
     paddingPx: {
       // in pixel, because we do not want it to be enlarged when the user increases the font size.
