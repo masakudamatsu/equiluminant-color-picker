@@ -315,6 +315,7 @@ body {
   line-height: ${(
     layout.body.lineHeight.mobile / layout.body.fontSize.mobile
   ).toFixed(4)};
+  margin: ${layout.sideMarginPx.mobile}px;
 }
 
 input {

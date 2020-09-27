@@ -2,12 +2,7 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
-import {
-  H2,
-  HueSwatchWrapper,
-  SideMarginSetter,
-  SpacerVertical,
-} from '../theme/style';
+import {H2, HueSwatchWrapper, SpacerVertical} from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
@@ -125,7 +120,7 @@ function HomePage(props) {
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
   return (
-    <SideMarginSetter>
+    <>
       <h1>Luminance Picker</h1>
       <noscript>
         For full functionality of this site, it is necessary to enable
@@ -283,7 +278,7 @@ function HomePage(props) {
         />
         <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       </form>
-    </SideMarginSetter>
+    </>
   );
 }
 
