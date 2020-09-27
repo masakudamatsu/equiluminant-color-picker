@@ -1,18 +1,108 @@
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
-import {
-  H2,
-  HueSwatchWrapper,
-  SideMarginSetter,
-  SpacerVertical,
-} from '../theme/style';
+import {H2, HueSwatchWrapper, SpacerVertical} from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
+import ErrorText from '../components/ErrorText';
+import HelperText from '../components/HelperText';
+import TextField from '../components/TextField';
+
 import InputRGB from '../components/InputRGB';
 import HueSwatch from '../components/HueSwatch';
 
+import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
+import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
+import color from '../theme/color';
+
 function HomePage(props) {
+  const [userColorCode, setUserColorCode] = useState('');
+
+  const handleChange = event => {
+    setUserColorCode(event.target.value);
+    if (props.alertMissing) {
+      props.setAlertMissing(false);
+    }
+    if (props.inputInvalid) {
+      if (!event.target.validity.patternMismatch) {
+        props.setInputInvalid(false);
+      }
+    }
+  };
+
+  // Generate the RGB color code
+  let backgroundColor = color.body.font.lightMode;
+  if (props.red && props.green && props.blue) {
+    backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
+  }
+
+  const handleBlur = event => {
+    // When nothing is entered
+    if (!event.target.value) {
+      if (!props.inputMissing) {
+        props.setInputMissing(true);
+      }
+      return;
+    }
+    // When something is entered
+    props.setInputMissing(false);
+    // Validation
+    const newInputIsInvalid = event.target.validity.patternMismatch;
+    if (newInputIsInvalid) {
+      if (!props.inputInvalid) {
+        props.setInputInvalid(true);
+      }
+    }
+    if (!newInputIsInvalid) {
+      if (props.inputInvalid) {
+        props.setInputInvalid(false);
+      }
+      // Remove all the whitespaces from the user's input value
+      const newInputValue = event.target.value.trim().replace(/\s/g, '');
+      // Convert into RGB code
+      let newInputValueRGB;
+      // HEX
+      const regexHex = new RegExp(regexHexText);
+      if (regexHex.test(newInputValue)) {
+        newInputValueRGB = getRgbFromHex(newInputValue);
+      }
+      // RGB
+      const regexRgb = new RegExp(regexRgbText);
+      if (regexRgb.test(newInputValue)) {
+        newInputValueRGB = newInputValue;
+      }
+      // HSL
+      const regexHsl = new RegExp(regexHslText);
+      if (regexHsl.test(newInputValue)) {
+        newInputValueRGB = getRgbFromHsl(newInputValue);
+      }
+      // Extract RGB values
+      const rgbValues = newInputValueRGB.slice(4, -1).split(',');
+      props.setRed(rgbValues[0]);
+      props.setGreen(rgbValues[1]);
+      props.setBlue(rgbValues[2]);
+      props.updateContrastRatio(rgbValues[0], rgbValues[1], rgbValues[2]);
+
+      // Change the background
+      if (!props.backgroundOverlay) {
+        props.setBackgroundOverlayColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        );
+        props.setBackgroundOverlay(true);
+        props.setBackgroundColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        ); // To prevent the overshoot scrolling from revealing the previous background color.
+      } else {
+        props.setBackgroundColor(
+          `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`,
+        );
+        props.setBackgroundOverlay(false);
+      }
+    }
+  };
+
   const router = useRouter();
+
   const handleSubmit = e => {
     e.preventDefault();
     if (props.inputMissing) {
@@ -26,8 +116,11 @@ function HomePage(props) {
     }
     router.push('/results');
   };
+
+  const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
+
   return (
-    <SideMarginSetter>
+    <>
       <h1>Luminance Picker</h1>
       <noscript>
         For full functionality of this site, it is necessary to enable
@@ -42,24 +135,25 @@ function HomePage(props) {
         <H2>#1 Set Luminance</H2>
         <SpacerVertical scale="2" />
         <InputColorCode
-          red={props.red}
-          green={props.green}
-          blue={props.blue}
-          setRed={props.setRed}
-          setGreen={props.setGreen}
-          setBlue={props.setBlue}
-          updateContrastRatio={props.updateContrastRatio}
-          darkMode={props.darkMode}
-          inputMissing={props.inputMissing}
-          setInputMissing={props.setInputMissing}
-          alertMissing={props.alertMissing}
-          setAlertMissing={props.setAlertMissing}
-          inputInvalid={props.inputInvalid}
-          setInputInvalid={props.setInputInvalid}
-          backgroundOverlay={props.backgroundOverlay}
-          setBackgroundOverlay={props.setBackgroundOverlay}
-          setBackgroundColor={props.setBackgroundColor}
-          setBackgroundOverlayColor={props.setBackgroundOverlayColor}
+          textField={
+            <TextField
+              darkMode={props.darkMode}
+              inputInvalid={props.inputInvalid}
+              alertMissing={props.alertMissing}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              pattern={pattern}
+              value={userColorCode}
+            />
+          }
+          helperText={<HelperText />}
+          errorText={
+            <ErrorText
+              darkMode={props.darkMode}
+              inputInvalid={props.inputInvalid}
+              alertMissing={props.alertMissing}
+            />
+          }
         />{' '}
         <SpacerVertical scale="3" />
         <H2>#2 Choose hue</H2>
@@ -184,7 +278,7 @@ function HomePage(props) {
         />
         <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       </form>
-    </SideMarginSetter>
+    </>
   );
 }
 
