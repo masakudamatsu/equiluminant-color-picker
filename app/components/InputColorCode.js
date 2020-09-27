@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import PropTypes from 'prop-types';
 import ErrorText from './ErrorText';
 import HelperText from './HelperText';
@@ -14,8 +13,6 @@ import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import color from '../theme/color';
 
 function InputColorCode(props) {
-  const [userColorCode, setUserColorCode] = useState('');
-
   const regexHexText = '#([A-Fa-f\\d]{3}){1,2}';
   const regexRgbText =
     'rgb\\((1?\\d?\\d|2[0-4]\\d|25[0-5])(,\\s*(1?\\d?\\d|2[0-4]\\d|25[0-5])){2}\\)';
@@ -27,18 +24,6 @@ function InputColorCode(props) {
   if (props.red && props.green && props.blue) {
     backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
   }
-
-  const handleChange = event => {
-    setUserColorCode(event.target.value);
-    if (props.alertMissing) {
-      props.setAlertMissing(false);
-    }
-    if (props.inputInvalid) {
-      if (!event.target.validity.patternMismatch) {
-        props.setInputInvalid(false);
-      }
-    }
-  };
 
   const handleBlur = event => {
     // When nothing is entered
@@ -118,9 +103,9 @@ function InputColorCode(props) {
           error={props.inputInvalid || props.alertMissing}
           id="inputColorCode"
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={props.handleChange}
           pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
-          value={userColorCode}
+          value={props.userColorCode}
         />
       </InputWrapper>
       <SpacerVertical scale="2" />

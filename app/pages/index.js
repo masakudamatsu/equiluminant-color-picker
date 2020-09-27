@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
@@ -13,6 +14,21 @@ import HueSwatch from '../components/HueSwatch';
 
 function HomePage(props) {
   const router = useRouter();
+
+  const [userColorCode, setUserColorCode] = useState('');
+
+  const handleChange = event => {
+    setUserColorCode(event.target.value);
+    if (props.alertMissing) {
+      props.setAlertMissing(false);
+    }
+    if (props.inputInvalid) {
+      if (!event.target.validity.patternMismatch) {
+        props.setInputInvalid(false);
+      }
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     if (props.inputMissing) {
@@ -42,6 +58,8 @@ function HomePage(props) {
         <H2>#1 Set Luminance</H2>
         <SpacerVertical scale="2" />
         <InputColorCode
+          handleChange={handleChange}
+          userColorCode={userColorCode}
           red={props.red}
           green={props.green}
           blue={props.blue}
