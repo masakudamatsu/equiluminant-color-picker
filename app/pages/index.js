@@ -21,8 +21,6 @@ import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 import color from '../theme/color';
 
 function HomePage(props) {
-  const router = useRouter();
-
   const [userColorCode, setUserColorCode] = useState('');
 
   const handleChange = event => {
@@ -36,8 +34,6 @@ function HomePage(props) {
       }
     }
   };
-
-  const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
   // Generate the RGB color code
   let backgroundColor = color.body.font.lightMode;
@@ -110,6 +106,8 @@ function HomePage(props) {
     }
   };
 
+  const router = useRouter();
+
   const handleSubmit = e => {
     e.preventDefault();
     if (props.inputMissing) {
@@ -123,6 +121,9 @@ function HomePage(props) {
     }
     router.push('/results');
   };
+
+  const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
+
   return (
     <SideMarginSetter>
       <h1>Luminance Picker</h1>
