@@ -9,6 +9,10 @@ import {
   SpacerVertical,
 } from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
+import ErrorText from '../components/ErrorText';
+import HelperText from '../components/HelperText';
+import TextField from '../components/TextField';
+
 import InputRGB from '../components/InputRGB';
 import HueSwatch from '../components/HueSwatch';
 
@@ -135,28 +139,25 @@ function HomePage(props) {
         <H2>#1 Set Luminance</H2>
         <SpacerVertical scale="2" />
         <InputColorCode
-          handleChange={handleChange}
-          userColorCode={userColorCode}
-          handleBlur={handleBlur}
-          pattern={pattern}
-          red={props.red}
-          green={props.green}
-          blue={props.blue}
-          setRed={props.setRed}
-          setGreen={props.setGreen}
-          setBlue={props.setBlue}
-          updateContrastRatio={props.updateContrastRatio}
-          darkMode={props.darkMode}
-          inputMissing={props.inputMissing}
-          setInputMissing={props.setInputMissing}
-          alertMissing={props.alertMissing}
-          setAlertMissing={props.setAlertMissing}
-          inputInvalid={props.inputInvalid}
-          setInputInvalid={props.setInputInvalid}
-          backgroundOverlay={props.backgroundOverlay}
-          setBackgroundOverlay={props.setBackgroundOverlay}
-          setBackgroundColor={props.setBackgroundColor}
-          setBackgroundOverlayColor={props.setBackgroundOverlayColor}
+          textField={
+            <TextField
+              darkMode={props.darkMode}
+              inputInvalid={props.inputInvalid}
+              alertMissing={props.alertMissing}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              pattern={pattern}
+              value={userColorCode}
+            />
+          }
+          helperText={<HelperText />}
+          errorText={
+            <ErrorText
+              darkMode={props.darkMode}
+              inputInvalid={props.inputInvalid}
+              alertMissing={props.alertMissing}
+            />
+          }
         />{' '}
         <SpacerVertical scale="3" />
         <H2>#2 Choose hue</H2>
