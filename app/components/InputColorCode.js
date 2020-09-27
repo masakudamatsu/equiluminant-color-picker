@@ -1,17 +1,13 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import ErrorText from './ErrorText';
+import HelperText from './HelperText';
 import {
   Abbr,
-  SpacerHorizontal,
   Input,
   InputDescriptionWrapper,
-  InputExamplesWrapper,
   InputWrapper,
   Label,
-  ListItemInputValueExample,
-  Paragraph,
-  UnorderedListInputValueExamples,
   SpacerVertical,
 } from '../theme/style';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
@@ -129,19 +125,7 @@ function InputColorCode(props) {
       </InputWrapper>
       <SpacerVertical scale="2" />
       <InputDescriptionWrapper>
-        <InputExamplesWrapper>
-          <Paragraph>Examples:</Paragraph>
-          <SpacerHorizontal />
-          <UnorderedListInputValueExamples>
-            <ListItemInputValueExample>
-              rgb(66, 135, 245)
-            </ListItemInputValueExample>
-            <ListItemInputValueExample>
-              hsl(217, 90%, 61%)
-            </ListItemInputValueExample>
-            <ListItemInputValueExample>#4287f5</ListItemInputValueExample>
-          </UnorderedListInputValueExamples>
-        </InputExamplesWrapper>
+        <HelperText />
         <SpacerVertical scale="2" />
         <ErrorText
           darkMode={props.darkMode}
