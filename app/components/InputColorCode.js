@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import ErrorText from './ErrorText';
 import HelperText from './HelperText';
+import TextField from './TextField';
+
 import {
   Abbr,
   Input,
@@ -14,21 +16,15 @@ function InputColorCode(props) {
   return (
     <>
       {/* prettier-ignore */}
-      <InputWrapper>
-        <Label htmlFor="inputColorCode">
-          Enter{' '}<Abbr>css</Abbr> color code
-        </Label>
-        <Input
-          type="text"
+      <TextField
           darkMode={props.darkMode}
-          error={props.inputInvalid || props.alertMissing}
-          id="inputColorCode"
-          onBlur={props.handleBlur}
-          onChange={props.handleChange}
+          inputInvalid={props.inputInvalid}
+          alertMissing={props.alertMissing}
+          handleBlur={props.handleBlur}
+          handleChange={props.handleChange}
           pattern={props.pattern}
           value={props.userColorCode}
         />
-      </InputWrapper>
       <SpacerVertical scale="2" />
       <InputDescriptionWrapper>
         <HelperText />

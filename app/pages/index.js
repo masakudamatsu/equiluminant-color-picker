@@ -13,6 +13,7 @@ import InputRGB from '../components/InputRGB';
 import HueSwatch from '../components/HueSwatch';
 
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
+import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 import color from '../theme/color';
 
 function HomePage(props) {
@@ -32,11 +33,6 @@ function HomePage(props) {
     }
   };
 
-  const regexHexText = '#([A-Fa-f\\d]{3}){1,2}';
-  const regexRgbText =
-    'rgb\\((1?\\d?\\d|2[0-4]\\d|25[0-5])(,\\s*(1?\\d?\\d|2[0-4]\\d|25[0-5])){2}\\)';
-  const regexHslText =
-    'hsl\\((360|3[0-5]\\d|[1-2]?\\d?\\d)(,\\s*(100|[1-9]?\\d)%){2}\\)';
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
   // Generate the RGB color code
