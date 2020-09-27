@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
+import ErrorText from './ErrorText';
 import {
   Abbr,
   SpacerHorizontal,
@@ -9,7 +10,6 @@ import {
   InputWrapper,
   Label,
   ListItemInputValueExample,
-  ParagraphErrorMessage,
   Paragraph,
   UnorderedListInputValueExamples,
   SpacerVertical,
@@ -109,28 +109,6 @@ function InputColorCode(props) {
     }
   };
 
-  // Error message text
-  let errorMessage;
-  if (props.inputInvalid) {
-    errorMessage = (
-      <span>
-        Please enter a valid <Abbr>css</Abbr> color code as shown in the above
-        examples
-      </span>
-    );
-  } else if (props.alertMissing) {
-    errorMessage = (
-      <span>
-        Please enter a <Abbr>css</Abbr> color code before choosing a hue
-      </span>
-    );
-  } else {
-    errorMessage = (
-      <span>
-        This text prevents the layout shift due to the error message appearance.
-      </span>
-    );
-  }
   return (
     <>
       {/* prettier-ignore */}
@@ -165,13 +143,11 @@ function InputColorCode(props) {
           </UnorderedListInputValueExamples>
         </InputExamplesWrapper>
         <SpacerVertical scale="2" />
-        <ParagraphErrorMessage
-          data-testid="colorCodeError"
+        <ErrorText
           darkMode={props.darkMode}
-          error={props.inputInvalid || props.alertMissing}
-        >
-          {errorMessage}
-        </ParagraphErrorMessage>
+          inputInvalid={props.inputInvalid}
+          alertMissing={props.alertMissing}
+        />
       </InputDescriptionWrapper>
     </>
   );
