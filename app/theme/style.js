@@ -207,8 +207,20 @@ export const ResultsWrapper = styled.ul`
   width: 100%;
 `;
 
-export const ResultSwatch = styled.div`
+export const ResultSwatch = styled.button`
   background-color: ${props => props.backgroundColor};
-  padding-top: 100%;
+  border: none;
+  line-height: 1; /* to remove the extra height at the bottom by 4px (still 3px left)*/
+  padding-top: 100%; /* To keep aspect ratio */
+  transition: transform 100ms;
   width: 100%;
+  &:focus,
+  &:hover {
+    outline: 0;
+    transform: rotate(30deg);
+  }
+  &:active {
+    outline: 0;
+    transform: rotate(60deg);
+  }
 `;
