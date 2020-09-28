@@ -3,7 +3,7 @@ type Query {
   feed(
     hue: Int
     contrastRatio: Float
-    orderBy: ColorCodeOrderByInput
+    orderBy: [ColorCodeOrderByInput]
   ): [ColorCode!]!
 }
 
@@ -19,6 +19,7 @@ type ColorCode {
 
 input ColorCodeOrderByInput {
   chroma: Sort
+  hue: Sort
 }
 
 enum Sort {

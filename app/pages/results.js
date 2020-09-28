@@ -14,7 +14,7 @@ function Results(props) {
 
   const FEED_QUERY = gql`
     {
-      feed(hue: ${props.hue}, contrastRatio: ${props.contrastRatio}, orderBy: { chroma: desc }) {
+      feed(hue: ${props.hue}, contrastRatio: ${props.contrastRatio}, orderBy: [{ chroma: asc }, { hue: asc }]) {
         red
         green
         blue
