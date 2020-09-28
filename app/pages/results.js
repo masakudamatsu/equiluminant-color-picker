@@ -35,7 +35,7 @@ function Results(props) {
 
   const colorsToRender = data.feed;
 
-  const hueRange = Array.from(Array(15), (_, i) => i - 7); // [-7, -6, ..., -1, 0, 1, ... 6, 7]. See https://stackoverflow.com/a/33352604/11847654
+  const hueRange = Array.from(Array(30), (_, i) => i - 14); // [-14, -13, ..., -1, 0, 1, ... 14, 15]. See https://stackoverflow.com/a/33352604/11847654
 
   const colorSwatchColumns = hueRange.map(hue => (
     <ul
