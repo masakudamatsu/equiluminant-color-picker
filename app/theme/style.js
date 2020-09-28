@@ -207,7 +207,14 @@ export const ResultsWrapper = styled.ul`
   width: 100%;
 `;
 
-export const ResultSwatch = styled.button`
+export const LiSwatchWrapper = styled.li`
+  flex-grow: 1;
+  margin-left: ${layout.resultSwatch.marginPx}px;
+  margin-top: ${layout.resultSwatch.marginPx}px;
+  width: ${layout.resultSwatch.minWidthPx}px;
+`;
+
+export const ButtonSwatch = styled.button`
   background-color: ${props => props.backgroundColor};
   border: none;
   line-height: 1; /* to remove the extra height at the bottom by 4px (still 3px left)*/

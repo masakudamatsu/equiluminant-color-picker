@@ -8,7 +8,7 @@ import Swatch from '../components/Swatch';
 import ColorCodeDisplay from '../components/ColorCodeDisplay';
 import CopyButton from '../components/CopyButton';
 
-import {ResultsWrapper} from '../theme/style';
+import {ResultsWrapper, LiSwatchWrapper} from '../theme/style';
 
 function Results(props) {
   const [clickedColorCode, setClickedColorCode] = useState('');
@@ -79,13 +79,14 @@ function Results(props) {
       <CopyButton copyColorCode={copyColorCode} />
       <ResultsWrapper darkMode={props.darkMode}>
         {colorsToRender.map((color, i) => (
-          <Swatch
-            r={color.red}
-            g={color.green}
-            b={color.blue}
-            key={`color${i}`}
-            setClickedColorCode={setClickedColorCode}
-          />
+          <LiSwatchWrapper key={`color${i}`}>
+            <Swatch
+              r={color.red}
+              g={color.green}
+              b={color.blue}
+              setClickedColorCode={setClickedColorCode}
+            />
+          </LiSwatchWrapper>
         ))}
       </ResultsWrapper>
     </>
