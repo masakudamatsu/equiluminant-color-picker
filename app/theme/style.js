@@ -195,3 +195,11 @@ export const HueSwatchWrapper = styled.div`
   position: relative;
   width: 100%;
 `;
+
+export const ResultsWrapper = styled.div`
+  background-color: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+`;

@@ -8,6 +8,8 @@ import Swatch from '../components/Swatch';
 import ColorCodeDisplay from '../components/ColorCodeDisplay';
 import CopyButton from '../components/CopyButton';
 
+import {ResultsWrapper} from '../theme/style';
+
 function Results(props) {
   const [clickedColorCode, setClickedColorCode] = useState('');
   const [clipboardError, setClipboardError] = useState(false);
@@ -95,7 +97,9 @@ function Results(props) {
       <p>{`Selected hue: ${props.hue}`}</p>
       <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
       <CopyButton copyColorCode={copyColorCode} />
-      <div style={{display: `flex`, width: `100%`}}>{colorSwatchColumns}</div>
+      <ResultsWrapper darkMode={props.darkMode}>
+        {colorSwatchColumns}
+      </ResultsWrapper>
     </>
   );
 }
