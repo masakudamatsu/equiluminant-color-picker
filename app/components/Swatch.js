@@ -1,23 +1,26 @@
 import PropTypes from 'prop-types';
 
+import {ResultSwatch} from '../theme/style';
+import layout from '../theme/layout';
+
 function Swatch(props) {
   const colorCode = `rgb(${props.r}, ${props.g}, ${props.b})`;
   const swatchStyle = {
-    backgroundColor: colorCode,
-    marginTop: `1px`,
-    paddingTop: '100%',
-    width: '100%',
+    flexGrow: 1,
+    marginLeft: `${layout.resultSwatch.marginPx}px`,
+    marginTop: `${layout.resultSwatch.marginPx}px`,
+    width: `${layout.resultSwatch.minWidthPx}px`,
   };
   const handleClick = event => {
     props.setClickedColorCode(colorCode);
   };
   return (
-    <li>
-      <div
-        style={swatchStyle}
+    <li style={swatchStyle}>
+      <ResultSwatch
+        backgroundColor={colorCode}
         data-testid={`rgb-${props.r}-${props.g}-${props.b}`}
         onClick={handleClick}
-      ></div>
+      ></ResultSwatch>
     </li>
   );
 }

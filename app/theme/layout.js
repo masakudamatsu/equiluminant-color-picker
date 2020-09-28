@@ -138,6 +138,11 @@ const layout = {
     },
   },
   modularScale: modularScale,
+  resultSwatch: {
+    // "Targets that are smaller than 48 px by 48 px or closer than 8 px apart fail the (Lighthouse) audit." (https://web.dev/tap-targets/)
+    marginPx: '1',
+    minWidthPx: '48',
+  },
   sideMarginPx: {
     // in pixel, because we do not want it to be enlarged when the user increases the font size.
     mobile: baseXheight.mobile * modularScale(1) * oneRemPx,

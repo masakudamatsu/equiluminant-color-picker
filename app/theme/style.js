@@ -196,10 +196,19 @@ export const HueSwatchWrapper = styled.div`
   width: 100%;
 `;
 
-export const ResultsWrapper = styled.div`
+export const ResultsWrapper = styled.ul`
   background-color: ${props =>
     props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
+  padding-bottom: ${layout.resultSwatch.marginPx}px;
+  padding-right: ${layout.resultSwatch.marginPx}px;
+  width: 100%;
+`;
+
+export const ResultSwatch = styled.div`
+  background-color: ${props => props.backgroundColor};
+  padding-top: 100%;
   width: 100%;
 `;

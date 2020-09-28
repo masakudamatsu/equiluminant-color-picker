@@ -37,26 +37,6 @@ function Results(props) {
 
   const colorsToRender = data.feed;
 
-  const hueRange = Array.from(Array(30), (_, i) => i - 14); // [-14, -13, ..., -1, 0, 1, ... 14, 15]. See https://stackoverflow.com/a/33352604/11847654
-
-  const colorSwatchColumns = hueRange.map(hue => (
-    <ul
-      style={{listStyle: 'none', marginLeft: '1px', padding: '0', width: '6%'}}
-    >
-      {colorsToRender
-        .filter(color => color.hue === Number(props.hue) + hue)
-        .map((color, i) => (
-          <Swatch
-            r={color.red}
-            g={color.green}
-            b={color.blue}
-            key={`color${hue}-${i}`}
-            setClickedColorCode={setClickedColorCode}
-          />
-        ))}
-    </ul>
-  ));
-
   const copyColorCode = () => {
     if (navigator.clipboard) {
       // For browsers supporting Clipboard API
@@ -98,7 +78,15 @@ function Results(props) {
       <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
       <CopyButton copyColorCode={copyColorCode} />
       <ResultsWrapper darkMode={props.darkMode}>
-        {colorSwatchColumns}
+        {colorsToRender.map((color, i) => (
+          <Swatch
+            r={color.red}
+            g={color.green}
+            b={color.blue}
+            key={`color${i}`}
+            setClickedColorCode={setClickedColorCode}
+          />
+        ))}
       </ResultsWrapper>
     </>
   );
