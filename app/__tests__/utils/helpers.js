@@ -1,6 +1,6 @@
 import cases from 'jest-in-case';
 
-import {getContrastRatio} from '../../utils/helpers';
+import {getContrastRatio, getRgbFromHex} from '../../utils/helpers';
 
 cases(
   'getContrastRatio returns the correct contrast ratio for:',
@@ -33,6 +33,39 @@ cases(
       g: 130,
       b: 2,
       contrastRatio: '7.69',
+    },
+  },
+);
+
+cases(
+  'getRgbFromHex returns the correct RGB code for:',
+  options => {
+    expect(getRgbFromHex(options.hexCode)).toBe(options.rgbCode);
+  },
+  {
+    '6-digit numeric Hex code': {
+      hexCode: '#234398',
+      rgbCode: 'rgb(35,67,152)',
+    },
+    '6-digit lowercase alphanumeric Hex code': {
+      hexCode: '#bc23d2',
+      rgbCode: 'rgb(188,35,210)',
+    },
+    '6-digit uppercase alphanumeric Hex code': {
+      hexCode: '#FB23A2',
+      rgbCode: 'rgb(251,35,162)',
+    },
+    '3-digit numeric Hex code': {
+      hexCode: '#964',
+      rgbCode: 'rgb(153,102,68)',
+    },
+    '3-digit lowercase alphanumeric Hex code': {
+      hexCode: '#efa',
+      rgbCode: 'rgb(238,255,170)',
+    },
+    '3-digit uppercase alphanumeric Hex code': {
+      hexCode: '#ADC',
+      rgbCode: 'rgb(170,221,204)',
     },
   },
 );
