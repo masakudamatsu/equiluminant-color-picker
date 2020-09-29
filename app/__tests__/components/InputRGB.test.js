@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
-import InputRGB from '../components/InputRGB';
+import InputRGB from '../../components/InputRGB';
 
 const exampleColor = {
   red: '123',

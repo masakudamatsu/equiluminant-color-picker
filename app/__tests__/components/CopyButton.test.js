@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
-import CopyButton from '../components/CopyButton';
+import CopyButton from '../../components/CopyButton';
 
 const mockCopyColorCode = jest.fn();
 
