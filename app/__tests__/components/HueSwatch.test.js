@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
-import HueSwatch from '../components/HueSwatch';
+import HueSwatch from '../../components/HueSwatch';
 
 const mockProps = {
   hue: '30',

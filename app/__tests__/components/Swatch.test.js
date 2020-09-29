@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
-import Swatch from '../components/Swatch';
+import Swatch from '../../components/Swatch';
 
 const colorList = [
   {red: 123, green: 133, blue: 23},

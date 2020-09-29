@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
-import ErrorText from '../components/ErrorText';
+import ErrorText from '../../components/ErrorText';
 
 // afterEach(() => {
 //   jest.clearAllMocks();

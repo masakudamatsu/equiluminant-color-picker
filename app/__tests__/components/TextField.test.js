@@ -5,8 +5,8 @@ import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
-import TextField from '../components/TextField';
-import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
+import TextField from '../../components/TextField';
+import {regexHexText, regexRgbText, regexHslText} from '../../utils/regex';
 
 const mockHandleBlur = jest.fn();
 const mockHandleChange = jest.fn();
