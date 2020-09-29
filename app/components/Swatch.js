@@ -1,24 +1,19 @@
 import PropTypes from 'prop-types';
 
+import {ButtonSwatch} from '../theme/style';
+
 function Swatch(props) {
   const colorCode = `rgb(${props.r}, ${props.g}, ${props.b})`;
-  const swatchStyle = {
-    backgroundColor: colorCode,
-    marginTop: `1px`,
-    paddingTop: '100%',
-    width: '100%',
-  };
   const handleClick = event => {
     props.setClickedColorCode(colorCode);
   };
   return (
-    <li>
-      <div
-        style={swatchStyle}
-        data-testid={`rgb-${props.r}-${props.g}-${props.b}`}
-        onClick={handleClick}
-      ></div>
-    </li>
+    <ButtonSwatch
+      aria-label={colorCode}
+      backgroundColor={colorCode}
+      data-testid={`rgb-${props.r}-${props.g}-${props.b}`}
+      onClick={handleClick}
+    />
   );
 }
 

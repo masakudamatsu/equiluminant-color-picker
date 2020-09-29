@@ -3,12 +3,12 @@ async function feed(parent, args, context, info) {
     AND: [
       {
         hue: {
-          gte: args.hue - 7,
+          gte: args.hue - 14,
         },
       },
       {
         hue: {
-          lte: args.hue + 7,
+          lte: args.hue + 15,
         },
       },
       {

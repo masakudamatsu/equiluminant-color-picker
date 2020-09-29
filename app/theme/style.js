@@ -195,3 +195,39 @@ export const HueSwatchWrapper = styled.div`
   position: relative;
   width: 100%;
 `;
+
+export const ResultsWrapper = styled.ul`
+  background-color: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding-bottom: ${layout.resultSwatch.marginPx}px;
+  padding-right: ${layout.resultSwatch.marginPx}px;
+  width: 100%;
+`;
+
+export const LiSwatchWrapper = styled.li`
+  flex-grow: 1;
+  margin-left: ${layout.resultSwatch.marginPx}px;
+  margin-top: ${layout.resultSwatch.marginPx}px;
+  width: ${layout.resultSwatch.minWidthPx}px;
+`;
+
+export const ButtonSwatch = styled.button`
+  background-color: ${props => props.backgroundColor};
+  border: none;
+  line-height: 1; /* to remove the extra height at the bottom by 4px (still 3px left)*/
+  padding-top: 100%; /* To keep aspect ratio */
+  transition: transform 100ms;
+  width: 100%;
+  &:focus,
+  &:hover {
+    outline: 0;
+    transform: rotate(30deg);
+  }
+  &:active {
+    outline: 0;
+    transform: rotate(60deg);
+  }
+`;

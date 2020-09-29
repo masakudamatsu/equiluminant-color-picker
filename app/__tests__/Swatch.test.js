@@ -21,14 +21,12 @@ afterEach(() => {
 test('shows the color as specified in props', () => {
   colorList.forEach(color => {
     const {container, getByTestId} = render(
-      <ul>
-        <Swatch
-          r={color.red}
-          g={color.green}
-          b={color.blue}
-          setClickedColorCode={mockSetClickedColorCode}
-        />
-      </ul>,
+      <Swatch
+        r={color.red}
+        g={color.green}
+        b={color.blue}
+        setClickedColorCode={mockSetClickedColorCode}
+      />,
     );
     expect(
       getByTestId(`rgb-${color.red}-${color.green}-${color.blue}`),
@@ -40,14 +38,12 @@ test('shows the color as specified in props', () => {
 
 test('calls the setClickedColorCode function when the user clicks', () => {
   const {container, getByTestId} = render(
-    <ul>
-      <Swatch
-        r={colorList[0].red}
-        g={colorList[0].green}
-        b={colorList[0].blue}
-        setClickedColorCode={mockSetClickedColorCode}
-      />
-    </ul>,
+    <Swatch
+      r={colorList[0].red}
+      g={colorList[0].green}
+      b={colorList[0].blue}
+      setClickedColorCode={mockSetClickedColorCode}
+    />,
   );
   userEvent.click(
     getByTestId(
@@ -59,39 +55,32 @@ test('calls the setClickedColorCode function when the user clicks', () => {
 
 test('renders correctly', () => {
   const {container} = render(
-    <ul>
-      <Swatch
-        r={colorList[0].red}
-        g={colorList[0].green}
-        b={colorList[0].blue}
-        setClickedColorCode={mockSetClickedColorCode}
-      />
-    </ul>,
+    <Swatch
+      r={colorList[0].red}
+      g={colorList[0].green}
+      b={colorList[0].blue}
+      setClickedColorCode={mockSetClickedColorCode}
+    />,
   );
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <ul>
-        <li>
-          <div
-            data-testid="rgb-123-133-23"
-            style="background-color: rgb(123, 133, 23); margin-top: 1px; padding-top: 100%; width: 100%;"
-          />
-        </li>
-      </ul>
+      <button
+        aria-label="rgb(123, 133, 23)"
+        class="style__ButtonSwatch-o0wbpp-18 dxTkpx"
+        data-testid="rgb-123-133-23"
+      />
     </div>
   `);
 });
 
 test('is accessible', async () => {
   const {container} = render(
-    <ul>
-      <Swatch
-        r={colorList[0].red}
-        g={colorList[0].green}
-        b={colorList[0].blue}
-        setClickedColorCode={mockSetClickedColorCode}
-      />
-    </ul>,
+    <Swatch
+      r={colorList[0].red}
+      g={colorList[0].green}
+      b={colorList[0].blue}
+      setClickedColorCode={mockSetClickedColorCode}
+    />,
   );
   const results = await axe(container);
   expect(results).toHaveNoViolations();

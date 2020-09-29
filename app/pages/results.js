@@ -8,13 +8,15 @@ import Swatch from '../components/Swatch';
 import ColorCodeDisplay from '../components/ColorCodeDisplay';
 import CopyButton from '../components/CopyButton';
 
+import {ResultsWrapper, LiSwatchWrapper} from '../theme/style';
+
 function Results(props) {
   const [clickedColorCode, setClickedColorCode] = useState('');
   const [clipboardError, setClipboardError] = useState(false);
 
   const FEED_QUERY = gql`
     {
-      feed(hue: ${props.hue}, contrastRatio: ${props.contrastRatio}, orderBy: { chroma: desc }) {
+      feed(hue: ${props.hue}, contrastRatio: ${props.contrastRatio}, orderBy: [{ chroma: asc }, { hue: asc }]) {
         red
         green
         blue
@@ -34,26 +36,6 @@ function Results(props) {
   if (error) return <div>Error</div>;
 
   const colorsToRender = data.feed;
-
-  const hueRange = Array.from(Array(15), (_, i) => i - 7); // [-7, -6, ..., -1, 0, 1, ... 6, 7]. See https://stackoverflow.com/a/33352604/11847654
-
-  const colorSwatchColumns = hueRange.map(hue => (
-    <ul
-      style={{listStyle: 'none', marginLeft: '1px', padding: '0', width: '6%'}}
-    >
-      {colorsToRender
-        .filter(color => color.hue === Number(props.hue) + hue)
-        .map((color, i) => (
-          <Swatch
-            r={color.red}
-            g={color.green}
-            b={color.blue}
-            key={`color${hue}-${i}`}
-            setClickedColorCode={setClickedColorCode}
-          />
-        ))}
-    </ul>
-  ));
 
   const copyColorCode = () => {
     if (navigator.clipboard) {
@@ -95,7 +77,18 @@ function Results(props) {
       <p>{`Selected hue: ${props.hue}`}</p>
       <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
       <CopyButton copyColorCode={copyColorCode} />
-      <div style={{display: `flex`, width: `100%`}}>{colorSwatchColumns}</div>
+      <ResultsWrapper darkMode={props.darkMode}>
+        {colorsToRender.map((color, i) => (
+          <LiSwatchWrapper key={`color${i}`}>
+            <Swatch
+              r={color.red}
+              g={color.green}
+              b={color.blue}
+              setClickedColorCode={setClickedColorCode}
+            />
+          </LiSwatchWrapper>
+        ))}
+      </ResultsWrapper>
     </>
   );
 }
