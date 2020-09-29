@@ -1,6 +1,10 @@
 import cases from 'jest-in-case';
 
-import {getContrastRatio, getRgbFromHex} from '../../utils/helpers';
+import {
+  getContrastRatio,
+  getRgbFromHex,
+  getRgbFromHsl,
+} from '../../utils/helpers';
 
 cases(
   'getContrastRatio returns the correct contrast ratio for:',
@@ -66,6 +70,47 @@ cases(
     '3-digit uppercase alphanumeric Hex code': {
       hexCode: '#ADC',
       rgbCode: 'rgb(170,221,204)',
+    },
+  },
+);
+
+cases(
+  'getRgbFromHsl returns the correct RGB code for:',
+  options => {
+    expect(getRgbFromHsl(options.hslCode)).toBe(options.rgbCode);
+  },
+  {
+    orange: {
+      hslCode: 'hsl(30, 90%, 35%)',
+      rgbCode: 'rgb(170,89,9)',
+    },
+    'yellow-green': {
+      hslCode: 'hsl(109, 56%, 67%)',
+      rgbCode: 'rgb(141,218,124)',
+    },
+    'green-cyan': {
+      hslCode: 'hsl(156, 87%, 49%)',
+      rgbCode: 'rgb(16,234,147)',
+    },
+    'blue-cyan (saturated)': {
+      hslCode: 'hsl(212, 100%, 46%)',
+      rgbCode: 'rgb(0,109,235)',
+    },
+    purple: {
+      hslCode: 'hsl(276, 34%, 88%)',
+      rgbCode: 'rgb(226,214,235)',
+    },
+    rose: {
+      hslCode: 'hsl(333, 89%, 43%)',
+      rgbCode: 'rgb(207,12,100)',
+    },
+    'pure white': {
+      hslCode: 'hsl(0, 0%, 100%)',
+      rgbCode: 'rgb(255,255,255)',
+    },
+    'pure black': {
+      hslCode: 'hsl(0, 0%, 0%)',
+      rgbCode: 'rgb(0,0,0)',
     },
   },
 );
