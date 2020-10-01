@@ -1,2 +1,3 @@
-# luminance-picker
-A web app to pick a color for a specified luminance level
+# luminance-picker server
+
+A database server that returns a shade of saturated blue that matches the user's selected luminance contrast ratio against pure black
