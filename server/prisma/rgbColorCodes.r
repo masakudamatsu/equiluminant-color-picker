@@ -20,7 +20,7 @@ table_rgb_full <- mutate(table_id_only,
                        ((blue_srgb + 0.055)/1.055)^2.4,
                        blue_srgb / 12.92),
        luminance = 0.2126*r + 0.7152*g + 0.0722*b,
-       contrast_ratio = round((luminance + 0.05)/0.05, digits = 3),
+       contrast_ratio = round((luminance + 0.05)/0.05, digits = 2),
        # https://en.wikipedia.org/wiki/Hue#Defining_hue_in_terms_of_RGB
        max = ifelse( red >= green & red >= blue, red,
                ifelse( green > red & green >= blue, green, blue)
