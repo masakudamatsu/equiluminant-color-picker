@@ -1,5 +1,5 @@
 type Query {
-  feed(contrastRatio: Float, orderBy: [ColorCodeOrderByInput]): [ColorCode!]!
+  feed(contrastRatio: Float): [ColorCode!]!
 }
 
 type ColorCode {
@@ -10,14 +10,4 @@ type ColorCode {
   contrast_ratio: Float!
   hue: Int
   chroma: Int!
-}
-
-input ColorCodeOrderByInput {
-  chroma: Sort
-  hue: Sort
-}
-
-enum Sort {
-  asc
-  desc
 }
