@@ -1,10 +1,5 @@
 type Query {
-  info: String!
-  feed(
-    hue: Int
-    contrastRatio: Float
-    orderBy: [ColorCodeOrderByInput]
-  ): [ColorCode!]!
+  feed(contrastRatio: Float, orderBy: [ColorCodeOrderByInput]): [ColorCode!]!
 }
 
 type ColorCode {
