@@ -24,7 +24,7 @@ async function feed(parent, args, context, info) {
     ],
   };
 
-  const colors = await context.prisma.rgbColorCodes.findMany({
+  const colors = await context.prisma.rgbColorCodesSmall.findMany({
     where,
     orderBy: args.orderBy,
   });

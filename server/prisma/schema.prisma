@@ -4,10 +4,10 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./rgbColorCodes.db"
+  url      = "file:./rgbColorCodesSmall.db"
 }
 
-model rgbColorCodes {
+model rgbColorCodesSmall {
   id             Int   @default(autoincrement()) @id
   red            Int
   green          Int
