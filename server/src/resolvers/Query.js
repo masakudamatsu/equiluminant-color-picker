@@ -12,14 +12,7 @@ async function feed(parent, args, context, info) {
         },
       },
       {
-        contrast_ratio: {
-          gt: args.contrastRatio - 0.001,
-        },
-      },
-      {
-        contrast_ratio: {
-          lt: args.contrastRatio + 0.001,
-        },
+        contrast_ratio: args.contrastRatio,
       },
     ],
   };
