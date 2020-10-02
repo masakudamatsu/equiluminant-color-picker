@@ -34,21 +34,24 @@ const hueList = [
   'Rose',
 ];
 
-describe('Landing Page', () => {
+describe('Landing Page shows non-interactive UI components', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-
-  it('shows the non-interactive UI components correctly', () => {
+  it('h1 element for accessibility', () => {
     cy.get('h1').should('have.text', 'Luminance Picker');
   });
-
-  it('shows the list of 12 hues to select from', () => {
-    hueList.forEach(hue => {
-      cy.findByTitle(hue);
-    });
+  it('h2 elements', () => {
+    cy.findByText(/set luminance/i);
+    cy.findByText(/choose hue/i);
   });
-});
+  it('color code examples', () => {
+    cy.findByText(/examples/i);
+    cy.findByText(/rgb/i);
+    cy.findByText(/hsl/i);
+    cy.findByText('#4287f5');
+  });
+    });
 
 describe('Color code input field', () => {
   beforeEach(() => {
