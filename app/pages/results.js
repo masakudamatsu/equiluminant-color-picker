@@ -100,7 +100,7 @@ Results.propTypes = {
 
 export default withUrqlClient(
   (_ssrExchange, ctx) => ({
-    url: 'http://localhost:4000',
+    url: 'http://localhost:4000/graphql',
   }),
   {ssr: true},
 )(Results);

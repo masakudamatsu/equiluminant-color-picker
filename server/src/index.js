@@ -17,4 +17,11 @@ const server = new GraphQLServer({
   },
 });
 
-server.start(() => console.log(`Server is running on http://localhost:4000`));
+// See https://github.com/prisma-labs/graphql-yoga#startoptions-options-callback-options-options--void----null-promisevoid
+const options = {
+  port: 4000,
+  endpoint: "/graphql",
+};
+server.start(options, ({ port }) =>
+  console.log(`Server is running on http://localhost:${port}`)
+);
