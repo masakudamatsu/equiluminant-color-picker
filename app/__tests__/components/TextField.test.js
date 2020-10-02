@@ -8,6 +8,8 @@ import 'jest-axe/extend-expect';
 import TextField from '../../components/TextField';
 import {regexHexText, regexRgbText, regexHslText} from '../../utils/regex';
 
+const mockLabel = <span>mock label</span>;
+
 const mockHandleBlur = jest.fn();
 const mockHandleChange = jest.fn();
 
@@ -26,7 +28,10 @@ beforeEach(() => {
         handleBlur={mockHandleBlur}
         handleChange={mockHandleChange}
         inputInvalid={false}
+        id="mockId"
+        label={mockLabel}
         pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
+        value={''}
       />
       <label htmlFor="dummyInput">
         Dummy input to simulate the onBlur event
@@ -38,7 +43,7 @@ beforeEach(() => {
 
 test('calls handleBlur() when the user blurs the input element', () => {
   // Simulate the onBlur event
-  getByLabelText(/color code/i).focus();
+  getByLabelText(/mock label/i).focus();
   getByLabelText(/dummy/i).focus();
   // Verify
   expect(mockHandleBlur).toHaveBeenCalledTimes(1);
@@ -47,7 +52,7 @@ test('calls handleBlur() when the user blurs the input element', () => {
 test('calls handleChange() each time the user enters a character in the input element', () => {
   // Simulate the onChange event
   const text = 'abc';
-  userEvent.type(getByLabelText(/color code/i), text);
+  userEvent.type(getByLabelText(/mock label/i), text);
   // Verify
   expect(mockHandleChange).toHaveBeenCalledTimes(text.length);
 });
@@ -60,20 +65,16 @@ test('renders correctly', () => {
       >
         <label
           class="style__Label-o0wbpp-3 hZPqHY"
-          for="inputColorCode"
+          for="mockId"
         >
-          Enter 
-          <abbr
-            class="style__Abbr-o0wbpp-0 kYbBqH"
-          >
-            css
-          </abbr>
-           color code
+          <span>
+            mock label
+          </span>
         </label>
         <input
           autocomplete="off"
           class="style__Input-o0wbpp-2 cODAWN"
-          id="inputColorCode"
+          id="mockId"
           pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
           type="text"
           value=""

@@ -4,18 +4,17 @@ import {Abbr, Input, InputWrapper, Label} from '../theme/style';
 function TextField(props) {
   return (
     <InputWrapper>
-      <Label htmlFor="inputColorCode">
-        Enter <Abbr>css</Abbr> color code
-      </Label>
+      <Label htmlFor={props.id}>{props.label}</Label>
       <Input
+        data-testid={props.testId}
         type="text"
         darkMode={props.darkMode}
         error={props.inputInvalid || props.alertMissing}
-        id="inputColorCode"
+        id={props.id}
         onBlur={props.handleBlur}
         onChange={props.handleChange}
         pattern={props.pattern}
-        value={props.userColorCode}
+        value={props.value}
       />
     </InputWrapper>
   );
@@ -26,9 +25,12 @@ TextField.propTypes = {
   darkMode: PropTypes.bool.isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
+  label: PropTypes.element.isRequired,
   pattern: PropTypes.string.isRequired,
-  userColorCode: PropTypes.string,
+  testId: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default TextField;
