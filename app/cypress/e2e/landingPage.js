@@ -52,21 +52,21 @@ describe('Landing Page shows non-interactive UI components', () => {
     cy.findByText(/hsl/i);
     cy.findByText('#4287f5');
   });
-    });
+});
 
 describe('Blurring after typing a valid color code changes the color scheme appropriately', () => {
   beforeEach(() => {
     cy.visit('/');
   });
   it('light color in RGB', () => {
-      cy.findByLabelText(/color code/i)
-        .click()
-        .clear()
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
       .type(colorList[0].rgbCode)
-        .blur();
+      .blur();
     cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
     cy.get('body').should('have.css', 'color', color.body.font.lightMode);
-    });
+  });
   it('dark color in RGB', () => {
     cy.findByLabelText(/color code/i)
       .click()
@@ -78,13 +78,13 @@ describe('Blurring after typing a valid color code changes the color scheme appr
   });
   it('light color in HEX', () => {
     cy.findByLabelText(/color code/i)
-        .click()
-        .clear()
+      .click()
+      .clear()
       .type(colorList[0].hexCode)
-        .blur();
+      .blur();
     cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
     cy.get('body').should('have.css', 'color', color.body.font.lightMode);
-    });
+  });
   it('dark color in HEX', () => {
     cy.findByLabelText(/color code/i)
       .click()
@@ -96,13 +96,13 @@ describe('Blurring after typing a valid color code changes the color scheme appr
   });
   it('light color in HSL', () => {
     cy.findByLabelText(/color code/i)
-        .click()
-        .clear()
+      .click()
+      .clear()
       .type(colorList[0].hslCode)
-        .blur();
+      .blur();
     cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
     cy.get('body').should('have.css', 'color', color.body.font.lightMode);
-    });
+  });
   it('dark color in HSL', () => {
     cy.findByLabelText(/color code/i)
       .click()
@@ -114,46 +114,7 @@ describe('Blurring after typing a valid color code changes the color scheme appr
   });
 });
 
-describe('RGB value input fields', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
-  it('show the contrast ratio to pure black of the user-selected RGB color code', () => {
-    // execute
-    colorList.forEach(color => {
-      cy.findByLabelText('R:').clear().type(color.red.toString());
-      cy.findByLabelText('G:').clear().type(color.green.toString());
-      cy.findByLabelText('B:').clear().type(color.blue.toString());
-      // verify
-      cy.findByText(/contrast ratio with pure black/i).contains(
-        getContrastRatio(color.red, color.green, color.blue),
-      );
-    });
-  });
-
-  it('changes the color scheme depending on the luminance level of the user-selected RGB color code', () => {
-    // execute
-    colorList.forEach((color, index) => {
-      cy.findByLabelText('R:').clear().type(color.red.toString());
-      cy.findByLabelText('G:').clear().type(color.green.toString());
-      cy.findByLabelText('B:').clear().type(color.blue.toString());
-      const contrastRatio = getContrastRatio(
-        color.red,
-        color.green,
-        color.blue,
-      );
-      // verify
-      // if (index === 0) {
-      //   cy.checkDarkModeColorScheme();
-      // }
-      // if (index === 1) {
-      //   cy.checkNormalColorScheme();
-      // }
-    });
-  });
-});
-
-describe('Clicking one of the 12 hue swatches', () => {
+describe('Clicking a hue swatche with a valid color code redirects to the results page', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.findByLabelText(/color code/i)
@@ -164,20 +125,11 @@ describe('Clicking one of the 12 hue swatches', () => {
   });
 
   hueList.forEach((hue, index) => {
-    it(`redirects to the results page and shows the swatches of equiluminant colors with the contrast ratio and the hue shown: ${hue}`, () => {
+    it.only(`${hue}`, () => {
       // setup
       cy.findByTestId(hue).click();
-      const expectedHue = (index * 30).toFixed();
       // verify
       cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
-      cy.findByText(/contrast ratio with pure black/i).contains(
-        getContrastRatio(
-          colorList[0].red,
-          colorList[0].green,
-          colorList[0].blue,
-        ),
-      );
-      cy.findByText(/hue/i).contains(expectedHue);
     });
   });
 });
