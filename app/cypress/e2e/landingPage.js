@@ -1,4 +1,5 @@
 import {getContrastRatio} from '../../utils/helpers';
+import color from '../../theme/color';
 
 const colorList = [
   {
@@ -34,137 +35,86 @@ const hueList = [
   'Rose',
 ];
 
-describe('Landing Page', () => {
+describe('Landing Page shows non-interactive UI components', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-
-  it('shows the non-interactive UI components correctly', () => {
+  it('h1 element for accessibility', () => {
     cy.get('h1').should('have.text', 'Luminance Picker');
   });
-
-  it('shows the list of 12 hues to select from', () => {
-    hueList.forEach(hue => {
-      cy.findByTitle(hue);
-    });
+  it('h2 elements', () => {
+    cy.findByText(/set luminance/i);
+    cy.findByText(/choose hue/i);
+  });
+  it('color code examples', () => {
+    cy.findByText(/examples/i);
+    cy.findByText(/rgb/i);
+    cy.findByText(/hsl/i);
+    cy.findByText('#4287f5');
   });
 });
 
-describe('Color code input field', () => {
+describe('Blurring after typing a valid color code changes the color scheme appropriately', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-
-  it('Entering a RGB code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the color scheme for legibility if necessary', () => {
-    colorList.forEach((color, index) => {
-      cy.findByLabelText(/color code/i)
-        .click()
-        .clear()
-        .type(color.rgbCode)
-        .blur();
-      cy.findByLabelText('R:').should('have.value', color.red.toString());
-      cy.findByLabelText('G:').should('have.value', color.green.toString());
-      cy.findByLabelText('B:').should('have.value', color.blue.toString());
-      // verify
-      cy.findByText(/contrast ratio with pure black/i).contains(
-        getContrastRatio(color.red, color.green, color.blue),
-      );
-      // if (index === 0) {
-      //   cy.checkDarkModeColorScheme();
-      // }
-      // if (index === 1) {
-      //   cy.checkNormalColorScheme();
-      // }
-    });
+  it('light color in RGB', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].rgbCode)
+      .blur();
+    cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
+    cy.get('body').should('have.css', 'color', color.body.font.lightMode);
   });
-
-  it('Entering a HEX code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the color scheme for legibility if necessary', () => {
-    colorList.forEach((color, index) => {
-      cy.findByLabelText(/css color code/i)
-        .click()
-        .clear()
-        .type(color.hexCode)
-        .blur();
-      cy.findByLabelText('R:').should('have.value', color.red.toString());
-      cy.findByLabelText('G:').should('have.value', color.green.toString());
-      cy.findByLabelText('B:').should('have.value', color.blue.toString());
-      // verify
-      cy.findByText(/contrast ratio with pure black/i).contains(
-        getContrastRatio(color.red, color.green, color.blue),
-      );
-      // if (index === 0) {
-      //   cy.checkDarkModeColorScheme();
-      // }
-      // if (index === 1) {
-      //   cy.checkNormalColorScheme();
-      // }
-    });
+  it('dark color in RGB', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[1].rgbCode)
+      .blur();
+    cy.get('html').should('have.css', 'background-color', colorList[1].rgbCode);
+    cy.get('body').should('have.css', 'color', color.body.font.darkMode);
   });
-
-  it('Entering a HSL code changes the RGB color code input fields, shows its contrast ratio to pure black, and switches the color scheme for legibility if necessary', () => {
-    colorList.forEach((color, index) => {
-      cy.findByLabelText(/css color code/i)
-        .click()
-        .clear()
-        .type(color.hslCode)
-        .blur();
-      cy.findByLabelText('R:').should('have.value', color.red.toString());
-      cy.findByLabelText('G:').should('have.value', color.green.toString());
-      cy.findByLabelText('B:').should('have.value', color.blue.toString());
-      // verify
-      cy.findByText(/contrast ratio with pure black/i).contains(
-        getContrastRatio(color.red, color.green, color.blue),
-      );
-      // if (index === 0) {
-      //   cy.checkDarkModeColorScheme();
-      // }
-      // if (index === 1) {
-      //   cy.checkNormalColorScheme();
-      // }
-    });
+  it('light color in HEX', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].hexCode)
+      .blur();
+    cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
+    cy.get('body').should('have.css', 'color', color.body.font.lightMode);
+  });
+  it('dark color in HEX', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[1].hexCode)
+      .blur();
+    cy.get('html').should('have.css', 'background-color', colorList[1].rgbCode);
+    cy.get('body').should('have.css', 'color', color.body.font.darkMode);
+  });
+  it('light color in HSL', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].hslCode)
+      .blur();
+    cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
+    cy.get('body').should('have.css', 'color', color.body.font.lightMode);
+  });
+  it('dark color in HSL', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[1].hslCode)
+      .blur();
+    cy.get('html').should('have.css', 'background-color', colorList[1].rgbCode);
+    cy.get('body').should('have.css', 'color', color.body.font.darkMode);
   });
 });
 
-describe('RGB value input fields', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
-  it('show the contrast ratio to pure black of the user-selected RGB color code', () => {
-    // execute
-    colorList.forEach(color => {
-      cy.findByLabelText('R:').clear().type(color.red.toString());
-      cy.findByLabelText('G:').clear().type(color.green.toString());
-      cy.findByLabelText('B:').clear().type(color.blue.toString());
-      // verify
-      cy.findByText(/contrast ratio with pure black/i).contains(
-        getContrastRatio(color.red, color.green, color.blue),
-      );
-    });
-  });
-
-  it('changes the color scheme depending on the luminance level of the user-selected RGB color code', () => {
-    // execute
-    colorList.forEach((color, index) => {
-      cy.findByLabelText('R:').clear().type(color.red.toString());
-      cy.findByLabelText('G:').clear().type(color.green.toString());
-      cy.findByLabelText('B:').clear().type(color.blue.toString());
-      const contrastRatio = getContrastRatio(
-        color.red,
-        color.green,
-        color.blue,
-      );
-      // verify
-      // if (index === 0) {
-      //   cy.checkDarkModeColorScheme();
-      // }
-      // if (index === 1) {
-      //   cy.checkNormalColorScheme();
-      // }
-    });
-  });
-});
-
-describe('Clicking one of the 12 hue swatches', () => {
+describe('Clicking a hue swatche with a valid color code redirects to the results page', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.findByLabelText(/color code/i)
@@ -175,20 +125,11 @@ describe('Clicking one of the 12 hue swatches', () => {
   });
 
   hueList.forEach((hue, index) => {
-    it(`redirects to the results page and shows the swatches of equiluminant colors with the contrast ratio and the hue shown: ${hue}`, () => {
+    it(`${hue}`, () => {
       // setup
       cy.findByTestId(hue).click();
-      const expectedHue = (index * 30).toFixed();
       // verify
       cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
-      cy.findByText(/contrast ratio with pure black/i).contains(
-        getContrastRatio(
-          colorList[0].red,
-          colorList[0].green,
-          colorList[0].blue,
-        ),
-      );
-      cy.findByText(/hue/i).contains(expectedHue);
     });
   });
 });

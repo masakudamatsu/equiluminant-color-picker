@@ -74,7 +74,7 @@ function Results(props) {
     <>
       <h1>Luminance Picker: Results</h1>
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
-      <p>{`Selected hue: ${props.hue}`}</p>
+      <p data-testid="hue-in-degrees">{`Selected hue: ${props.hue}`}</p>
       <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
       <CopyButton copyColorCode={copyColorCode} />
       <ResultsWrapper darkMode={props.darkMode}>
@@ -100,7 +100,7 @@ Results.propTypes = {
 
 export default withUrqlClient(
   (_ssrExchange, ctx) => ({
-    url: 'http://localhost:4000',
+    url: 'http://localhost:4000/graphql',
   }),
   {ssr: true},
 )(Results);
