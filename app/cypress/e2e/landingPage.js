@@ -125,7 +125,7 @@ describe('Clicking a hue swatche with a valid color code redirects to the result
   });
 
   hueList.forEach((hue, index) => {
-    it.only(`${hue}`, () => {
+    it(`${hue}`, () => {
       // setup
       cy.findByTestId(hue).click();
       // verify
