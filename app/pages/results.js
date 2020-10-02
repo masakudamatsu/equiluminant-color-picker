@@ -7,6 +7,7 @@ import {useQuery} from 'urql';
 import Swatch from '../components/Swatch';
 import ColorCodeDisplay from '../components/ColorCodeDisplay';
 import CopyButton from '../components/CopyButton';
+import TextField from '../components/TextField';
 
 import {ResultsWrapper, LiSwatchWrapper} from '../theme/style';
 
@@ -70,11 +71,27 @@ function Results(props) {
     }
   };
 
+  const contrastRatioFieldLabel = <span>Contrast Ratio to Black</span>;
+
   return (
     <>
       <h1>Luminance Picker: Results</h1>
-      <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
       <p data-testid="hue-in-degrees">{`Selected hue: ${props.hue}`}</p>
+      <TextField
+        darkMode={props.darkMode}
+        id="contrastRatio"
+        inputInvalid={false}
+        label={contrastRatioFieldLabel}
+        alertMissing={false}
+        handleBlur={() => {
+          return null;
+        }}
+        handleChange={() => {
+          return null;
+        }}
+        pattern="d+"
+        value={props.contrastRatio}
+      />
       <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
       <CopyButton copyColorCode={copyColorCode} />
       <ResultsWrapper darkMode={props.darkMode}>
