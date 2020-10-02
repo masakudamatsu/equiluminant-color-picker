@@ -138,6 +138,7 @@ function HomePage(props) {
           textField={
             <TextField
               darkMode={props.darkMode}
+              id="inputColorCode"
               inputInvalid={props.inputInvalid}
               alertMissing={props.alertMissing}
               handleBlur={handleBlur}

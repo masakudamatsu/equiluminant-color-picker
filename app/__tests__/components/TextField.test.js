@@ -26,6 +26,7 @@ beforeEach(() => {
         handleBlur={mockHandleBlur}
         handleChange={mockHandleChange}
         inputInvalid={false}
+        id="mockId"
         pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
       />
       <label htmlFor="dummyInput">
@@ -60,7 +61,7 @@ test('renders correctly', () => {
       >
         <label
           class="style__Label-o0wbpp-3 hZPqHY"
-          for="inputColorCode"
+          for="mockId"
         >
           Enter 
           <abbr
@@ -73,7 +74,7 @@ test('renders correctly', () => {
         <input
           autocomplete="off"
           class="style__Input-o0wbpp-2 cODAWN"
-          id="inputColorCode"
+          id="mockId"
           pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
           type="text"
           value=""
