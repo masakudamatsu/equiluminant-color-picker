@@ -29,3 +29,5 @@ cypress/screenshots
 app/public/EuclidFlex-Regular-WebTrial.woff
 
 app/public/EuclidTriangle-Regular-WebTrial.woff
+
+app/cypress/fixtures/example.json
