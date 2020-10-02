@@ -74,7 +74,7 @@ function Results(props) {
     <>
       <h1>Luminance Picker: Results</h1>
       <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
-      <p>{`Selected hue: ${props.hue}`}</p>
+      <p data-testid="hue-in-degrees">{`Selected hue: ${props.hue}`}</p>
       <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
       <CopyButton copyColorCode={copyColorCode} />
       <ResultsWrapper darkMode={props.darkMode}>
