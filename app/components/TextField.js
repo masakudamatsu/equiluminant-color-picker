@@ -6,6 +6,7 @@ function TextField(props) {
     <InputWrapper>
       <Label htmlFor={props.id}>{props.label}</Label>
       <Input
+        data-testid={props.testId}
         type="text"
         darkMode={props.darkMode}
         error={props.inputInvalid || props.alertMissing}
@@ -28,6 +29,7 @@ TextField.propTypes = {
   inputInvalid: PropTypes.bool.isRequired,
   label: PropTypes.element.isRequired,
   pattern: PropTypes.string.isRequired,
+  testId: PropTypes.string,
   value: PropTypes.string,
 };
 

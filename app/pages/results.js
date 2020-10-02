@@ -73,10 +73,11 @@ function Results(props) {
 
   const contrastRatioFieldLabel = <span>Contrast Ratio to Black</span>;
 
+  const hueFieldLabel = <span>Selected hue</span>;
+
   return (
     <>
       <h1>Luminance Picker: Results</h1>
-      <p data-testid="hue-in-degrees">{`Selected hue: ${props.hue}`}</p>
       <TextField
         darkMode={props.darkMode}
         id="contrastRatio"
@@ -91,6 +92,22 @@ function Results(props) {
         }}
         pattern="d+"
         value={props.contrastRatio}
+      />
+      <TextField
+        darkMode={props.darkMode}
+        id="hue-field"
+        inputInvalid={false}
+        label={hueFieldLabel}
+        alertMissing={false}
+        handleBlur={() => {
+          return null;
+        }}
+        handleChange={() => {
+          return null;
+        }}
+        pattern="d+"
+        testId="hue-in-degrees"
+        value={props.hue}
       />
       <ColorCodeDisplay>{clickedColorCode}</ColorCodeDisplay>
       <CopyButton copyColorCode={copyColorCode} />

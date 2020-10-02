@@ -70,9 +70,9 @@ describe('Results page shows the user-selected hue in degrees', () => {
 
   hueList.forEach((hue, index) => {
     it(`${hue}`, () => {
-      const expectedHue = (index * 30).toFixed();
+      const expectedHue = index * 30;
       cy.findByTestId(hue).click();
-      cy.findByTestId('hue-in-degrees').contains(expectedHue);
+      cy.findByTestId('hue-in-degrees').should('have.value', expectedHue);
     });
   });
 });
