@@ -8,6 +8,8 @@ import 'jest-axe/extend-expect';
 import TextField from '../../components/TextField';
 import {regexHexText, regexRgbText, regexHslText} from '../../utils/regex';
 
+const mockLabel = <span>mock label</span>;
+
 const mockHandleBlur = jest.fn();
 const mockHandleChange = jest.fn();
 
@@ -27,6 +29,7 @@ beforeEach(() => {
         handleChange={mockHandleChange}
         inputInvalid={false}
         id="mockId"
+        label={mockLabel}
         pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
       />
       <label htmlFor="dummyInput">
@@ -39,7 +42,7 @@ beforeEach(() => {
 
 test('calls handleBlur() when the user blurs the input element', () => {
   // Simulate the onBlur event
-  getByLabelText(/color code/i).focus();
+  getByLabelText(/mock label/i).focus();
   getByLabelText(/dummy/i).focus();
   // Verify
   expect(mockHandleBlur).toHaveBeenCalledTimes(1);
@@ -48,7 +51,7 @@ test('calls handleBlur() when the user blurs the input element', () => {
 test('calls handleChange() each time the user enters a character in the input element', () => {
   // Simulate the onChange event
   const text = 'abc';
-  userEvent.type(getByLabelText(/color code/i), text);
+  userEvent.type(getByLabelText(/mock label/i), text);
   // Verify
   expect(mockHandleChange).toHaveBeenCalledTimes(text.length);
 });
@@ -63,13 +66,9 @@ test('renders correctly', () => {
           class="style__Label-o0wbpp-3 hZPqHY"
           for="mockId"
         >
-          Enter 
-          <abbr
-            class="style__Abbr-o0wbpp-0 kYbBqH"
-          >
-            css
-          </abbr>
-           color code
+          <span>
+            mock label
+          </span>
         </label>
         <input
           autocomplete="off"

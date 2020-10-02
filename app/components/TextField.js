@@ -4,9 +4,7 @@ import {Abbr, Input, InputWrapper, Label} from '../theme/style';
 function TextField(props) {
   return (
     <InputWrapper>
-      <Label htmlFor={props.id}>
-        Enter <Abbr>css</Abbr> color code
-      </Label>
+      <Label htmlFor={props.id}>{props.label}</Label>
       <Input
         type="text"
         darkMode={props.darkMode}
@@ -28,6 +26,7 @@ TextField.propTypes = {
   handleChange: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
+  label: PropTypes.element.isRequired,
   pattern: PropTypes.string.isRequired,
   userColorCode: PropTypes.string,
 };

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
-import {H2, HueSwatchWrapper, SpacerVertical} from '../theme/style';
+import {Abbr, H2, HueSwatchWrapper, SpacerVertical} from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
@@ -117,6 +117,12 @@ function HomePage(props) {
     router.push('/results');
   };
 
+  const colorCodeFieldLabel = (
+    <span>
+      Enter <Abbr>css</Abbr> color code
+    </span>
+  );
+
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
   return (
@@ -140,6 +146,7 @@ function HomePage(props) {
               darkMode={props.darkMode}
               id="inputColorCode"
               inputInvalid={props.inputInvalid}
+              label={colorCodeFieldLabel}
               alertMissing={props.alertMissing}
               handleBlur={handleBlur}
               handleChange={handleChange}
