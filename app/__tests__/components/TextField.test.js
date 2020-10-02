@@ -31,6 +31,7 @@ beforeEach(() => {
         id="mockId"
         label={mockLabel}
         pattern={`${regexHexText}|${regexRgbText}|${regexHslText}`}
+        value={''}
       />
       <label htmlFor="dummyInput">
         Dummy input to simulate the onBlur event

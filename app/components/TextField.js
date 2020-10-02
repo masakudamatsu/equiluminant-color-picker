@@ -13,7 +13,7 @@ function TextField(props) {
         onBlur={props.handleBlur}
         onChange={props.handleChange}
         pattern={props.pattern}
-        value={props.userColorCode}
+        value={props.value}
       />
     </InputWrapper>
   );
@@ -28,7 +28,7 @@ TextField.propTypes = {
   inputInvalid: PropTypes.bool.isRequired,
   label: PropTypes.element.isRequired,
   pattern: PropTypes.string.isRequired,
-  userColorCode: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default TextField;
