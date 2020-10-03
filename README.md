@@ -1,7 +1,7 @@
 # Equiluminant Color Picker
 A web app to pick a color for a specified luminance level
 
-# Install
+## Install
 You need to install [Node.js](https://nodejs.org/en/) first. Then:
 ```
 cd server
@@ -11,7 +11,7 @@ cd ../app
 npm install
 ```
 
-# Run development servers
+## Run development servers
 ```
 cd server
 npm start
