@@ -131,3 +131,27 @@ describe('Result page shows UI components not tested so far', () => {
     cy.findByText(/copy/i).click();
   });
 });
+
+describe('Clicking contrast ratio field allows the user to change it', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    const color = colorList[0];
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(color.rgbCode);
+    cy.findByTestId('Violet').click();
+  });
+  it('by typing', () => {
+    const newContrastRatio = '13.52';
+    cy.findByLabelText(/contrast ratio/i)
+      .click()
+      .clear()
+      .type(newContrastRatio)
+      .blur();
+    cy.findByLabelText(/contrast ratio/i).should(
+      'have.value',
+      newContrastRatio,
+    );
+  });
+});

@@ -73,6 +73,10 @@ function Results(props) {
 
   const contrastRatioFieldLabel = <span>Contrast Ratio to Black</span>;
 
+  const handleChangeContrastRatio = event => {
+    props.setContrastRatio(event.target.value);
+  };
+
   const hueFieldLabel = <span>Selected hue</span>;
 
   return (
@@ -87,9 +91,7 @@ function Results(props) {
         handleBlur={() => {
           return null;
         }}
-        handleChange={() => {
-          return null;
-        }}
+        handleChange={handleChangeContrastRatio}
         pattern="d+"
         value={props.contrastRatio}
       />

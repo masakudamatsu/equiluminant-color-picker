@@ -66,6 +66,7 @@ function MyApp({Component, pageProps}) {
         handleChangeGreen={handleChangeGreen}
         handleChangeBlue={handleChangeBlue}
         contrastRatio={contrastRatio}
+        setContrastRatio={setContrastRatio}
         updateContrastRatio={updateContrastRatio}
         darkMode={darkMode}
         inputMissing={inputMissing}
