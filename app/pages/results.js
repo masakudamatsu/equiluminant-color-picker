@@ -77,6 +77,24 @@ function Results(props) {
     props.setContrastRatio(event.target.value);
   };
 
+  const handleKeyDownContrastRatio = event => {
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+      return;
+    }
+    const stepValue = 0.01;
+    let newContrastRatio;
+    // Increase the value by 0.1
+    if (event.key === 'ArrowUp') {
+      event.preventDefault(); // Prevent the cursor from moving to the top
+        newContrastRatio = (Number(event.target.value) + stepValue).toFixed(2);
+    }
+    // Decrease the value by 0.1
+    if (event.key === 'ArrowDown') {
+        newContrastRatio = (Number(event.target.value) - stepValue).toFixed(2);
+    }
+    props.setContrastRatio(newContrastRatio); // toFixed(2) prevents floating values to be displayed (e.g. 1.3800000000000001 after 1.37)
+  };
+
   const hueFieldLabel = <span>Selected hue</span>;
 
   return (
@@ -92,7 +110,7 @@ function Results(props) {
           return null;
         }}
         handleChange={handleChangeContrastRatio}
-        pattern="d+"
+        handleKeyDown={handleKeyDownContrastRatio}
         value={props.contrastRatio}
       />
       <TextField
