@@ -12,7 +12,7 @@ const colorList = [
   {red: 53, green: 2, blue: 223},
 ];
 
-const mockSetClickedColorCode = jest.fn();
+const mockSetClickedColorCode = jest.fn().mockName('setClickedColorCode');
 
 afterEach(() => {
   jest.clearAllMocks();

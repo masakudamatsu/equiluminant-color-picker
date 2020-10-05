@@ -10,8 +10,8 @@ import {regexHexText, regexRgbText, regexHslText} from '../../utils/regex';
 
 const mockLabel = <span>mock label</span>;
 
-const mockHandleBlur = jest.fn();
-const mockHandleChange = jest.fn();
+const mockHandleBlur = jest.fn().mockName('handleBlur');
+const mockHandleChange = jest.fn().mockName('handleChange');
 
 afterEach(() => {
   jest.clearAllMocks();
