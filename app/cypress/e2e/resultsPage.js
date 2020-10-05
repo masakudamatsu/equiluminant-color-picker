@@ -187,3 +187,38 @@ describe('Clicking contrast ratio field allows the user to change it', () => {
       newContrastRatio.toFixed(2),
     );
   });
+  it.only('by shift + up arrow, to increase by 0.1', () => {
+    const newContrastRatio =
+      Number(
+        getContrastRatio(
+          colorList[0].red,
+          colorList[0].green,
+          colorList[0].blue,
+        ),
+      ) + 0.1;
+    cy.findByLabelText(/contrast ratio/i)
+      .click()
+      .type('{shift}{uparrow}');
+    cy.findByLabelText(/contrast ratio/i).should(
+      'have.value',
+      newContrastRatio.toFixed(2),
+    );
+  });
+  it.only('by shift + down arrow, to decrease by 0.1', () => {
+    const newContrastRatio =
+      Number(
+        getContrastRatio(
+          colorList[0].red,
+          colorList[0].green,
+          colorList[0].blue,
+        ),
+      ) - 0.1;
+    cy.findByLabelText(/contrast ratio/i)
+      .click()
+      .type('{shift}{downarrow}');
+    cy.findByLabelText(/contrast ratio/i).should(
+      'have.value',
+      newContrastRatio.toFixed(2),
+    );
+  });
+});

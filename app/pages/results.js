@@ -81,8 +81,9 @@ function Results(props) {
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
       return;
     }
-    const stepValue = 0.01;
     let newContrastRatio;
+    if (event.shiftKey) {
+      const stepValue = 0.1;
     // Increase the value by 0.1
     if (event.key === 'ArrowUp') {
       event.preventDefault(); // Prevent the cursor from moving to the top
@@ -91,6 +92,18 @@ function Results(props) {
     // Decrease the value by 0.1
     if (event.key === 'ArrowDown') {
         newContrastRatio = (Number(event.target.value) - stepValue).toFixed(2);
+    }
+    } else {
+      const stepValue = 0.01;
+      // Increase the value by 0.01
+      if (event.key === 'ArrowUp') {
+        event.preventDefault(); // Prevent the cursor from moving to the top
+        newContrastRatio = (Number(event.target.value) + stepValue).toFixed(2);
+      }
+      // Decrease the value by 0.01
+      if (event.key === 'ArrowDown') {
+        newContrastRatio = (Number(event.target.value) - stepValue).toFixed(2);
+      }
     }
     props.setContrastRatio(newContrastRatio); // toFixed(2) prevents floating values to be displayed (e.g. 1.3800000000000001 after 1.37)
   };
