@@ -13,6 +13,7 @@ function TextField(props) {
         id={props.id}
         onBlur={props.handleBlur}
         onChange={props.handleChange}
+        onKeyDown={props.handleKeyDown}
         pattern={props.pattern}
         value={props.value}
       />
@@ -25,6 +26,7 @@ TextField.propTypes = {
   darkMode: PropTypes.bool.isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  handleKeyDown: PropTypes.func,
   id: PropTypes.string.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
   label: PropTypes.element.isRequired,

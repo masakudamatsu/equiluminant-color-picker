@@ -131,3 +131,94 @@ describe('Result page shows UI components not tested so far', () => {
     cy.findByText(/copy/i).click();
   });
 });
+
+describe('Clicking contrast ratio field allows the user to change it', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    const color = colorList[0];
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(color.rgbCode);
+    cy.findByTestId('Violet').click();
+  });
+  it('by typing', () => {
+    const newContrastRatio = '13.52';
+    cy.findByLabelText(/contrast ratio/i)
+      .click()
+      .clear()
+      .type(newContrastRatio);
+    cy.findByLabelText(/contrast ratio/i).should(
+      'have.value',
+      newContrastRatio,
+    );
+  });
+  it.only('by down arrow keys', () => {
+    const newContrastRatio =
+      Number(
+        getContrastRatio(
+          colorList[0].red,
+          colorList[0].green,
+          colorList[0].blue,
+        ),
+      ) - 0.01;
+    cy.findByLabelText(/contrast ratio/i)
+      .click()
+      .type('{downarrow}');
+    cy.findByLabelText(/contrast ratio/i).should(
+      'have.value',
+      newContrastRatio.toFixed(2),
+    );
+});
+  it.only('by up arrow keys', () => {
+    const newContrastRatio =
+      Number(
+        getContrastRatio(
+          colorList[0].red,
+          colorList[0].green,
+          colorList[0].blue,
+        ),
+      ) + 0.01;
+    cy.findByLabelText(/contrast ratio/i)
+      .click()
+      .type('{uparrow}');
+    cy.findByLabelText(/contrast ratio/i).should(
+      'have.value',
+      newContrastRatio.toFixed(2),
+    );
+  });
+  it.only('by shift + up arrow, to increase by 0.1', () => {
+    const newContrastRatio =
+      Number(
+        getContrastRatio(
+          colorList[0].red,
+          colorList[0].green,
+          colorList[0].blue,
+        ),
+      ) + 0.1;
+    cy.findByLabelText(/contrast ratio/i)
+      .click()
+      .type('{shift}{uparrow}');
+    cy.findByLabelText(/contrast ratio/i).should(
+      'have.value',
+      newContrastRatio.toFixed(2),
+    );
+  });
+  it.only('by shift + down arrow, to decrease by 0.1', () => {
+    const newContrastRatio =
+      Number(
+        getContrastRatio(
+          colorList[0].red,
+          colorList[0].green,
+          colorList[0].blue,
+        ),
+      ) - 0.1;
+    cy.findByLabelText(/contrast ratio/i)
+      .click()
+      .type('{shift}{downarrow}');
+    cy.findByLabelText(/contrast ratio/i).should(
+      'have.value',
+      newContrastRatio.toFixed(2),
+    );
+  });
+});
