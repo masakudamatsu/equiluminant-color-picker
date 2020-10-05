@@ -15,8 +15,8 @@ const mockProps = {
   zIndex: '1',
 };
 
-const mockGetHue = jest.fn();
-const mockHandleSubmit = jest.fn();
+const mockGetHue = jest.fn().mockName('getHue');
+const mockHandleSubmit = jest.fn().mockName('handleSubmit');
 
 afterEach(() => {
   jest.clearAllMocks();

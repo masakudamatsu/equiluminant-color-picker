@@ -13,9 +13,9 @@ const exampleColor = {
   blue: '20',
 };
 
-const mockHandleChangeRed = jest.fn();
-const mockHandleChangeGreen = jest.fn();
-const mockHandleChangeBlue = jest.fn();
+const mockHandleChangeRed = jest.fn().mockName('handleChangeRed');
+const mockHandleChangeGreen = jest.fn().mockName('handleChangeGreen');
+const mockHandleChangeBlue = jest.fn().mockName('handleChangeBlue');
 
 afterEach(() => {
   jest.clearAllMocks();

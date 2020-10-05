@@ -7,7 +7,7 @@ import 'jest-axe/extend-expect';
 
 import CopyButton from '../../components/CopyButton';
 
-const mockCopyColorCode = jest.fn();
+const mockCopyColorCode = jest.fn().mockName('copyColorCode');
 
 afterEach(() => {
   jest.clearAllMocks();
