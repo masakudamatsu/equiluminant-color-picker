@@ -1,5 +1,5 @@
 import React from 'react';
-import {cleanup, render} from '@testing-library/react';
+import {cleanup, fireEvent, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
@@ -12,6 +12,7 @@ const mockLabel = <span>mock label</span>;
 
 const mockHandleBlur = jest.fn().mockName('handleBlur');
 const mockHandleChange = jest.fn().mockName('handleChange');
+const mockHandleKeyDown = jest.fn().mockName('handleKeyDown');
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -27,6 +28,7 @@ beforeEach(() => {
         darkMode={false}
         handleBlur={mockHandleBlur}
         handleChange={mockHandleChange}
+        handleKeyDown={mockHandleKeyDown}
         inputInvalid={false}
         id="mockId"
         label={mockLabel}
@@ -55,6 +57,22 @@ test('calls handleChange() each time the user enters a character in the input el
   userEvent.type(getByLabelText(/mock label/i), text);
   // Verify
   expect(mockHandleChange).toHaveBeenCalledTimes(text.length);
+});
+
+test('calls handleKeyDown() each time the user hits arrow keys', () => {
+  const textField = getByLabelText(/mock label/i);
+  textField.focus();
+  fireEvent.keyDown(textField, {
+    key: 'ArrowUp',
+    code: 'ArrowUp',
+  });
+  expect(mockHandleKeyDown).toHaveBeenCalledTimes(1);
+  mockHandleKeyDown.mockClear();
+  fireEvent.keyDown(textField, {
+    key: 'ArrowDown',
+    code: 'ArrowDown',
+  });
+  expect(mockHandleKeyDown).toHaveBeenCalledTimes(1);
 });
 
 test('renders correctly', () => {
