@@ -101,6 +101,17 @@ function HomePage(props) {
     }
   };
 
+  const handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the submission
+      // When nothing is entered
+      if (!event.target.value) {
+        props.setAlertMissing(true);
+        return;
+      }
+    }
+  };
+
   const router = useRouter();
 
   const handleSubmit = e => {
@@ -150,6 +161,7 @@ function HomePage(props) {
               alertMissing={props.alertMissing}
               handleBlur={handleBlur}
               handleChange={handleChange}
+              handleKeyDown={handleKeyDown}
               pattern={pattern}
               value={userColorCode}
             />

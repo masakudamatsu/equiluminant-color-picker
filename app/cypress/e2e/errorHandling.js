@@ -145,3 +145,19 @@ describe('Error handling: invalid input', () => {
     );
   });
 });
+
+describe('Error-handling: Pressing the return key alerts the user to', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
+  it.only('enter a color code if the user has not entered any text', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type('{enter}');
+    cy.findByTestId('colorCodeError').should(
+      'have.text',
+      'Please enter a css color code before choosing a hue',
+    );
+  });
+});
