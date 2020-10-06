@@ -160,4 +160,13 @@ describe('Error-handling: Pressing the return key alerts the user to', () => {
       'Please enter a css color code before choosing a hue',
     );
   });
+  it.only('enter a valid color code if an invalid input is provided', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type('rgb{enter}');
+    cy.findByTestId('colorCodeError').should(
+      'have.text',
+      'Please enter a valid css color code as shown in the above examples',
+    );
+});
 });

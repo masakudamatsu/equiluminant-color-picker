@@ -109,6 +109,15 @@ function HomePage(props) {
         props.setAlertMissing(true);
         return;
       }
+      // When something is entered
+      props.setInputMissing(false);
+      // Validation
+      const newInputIsInvalid = event.target.validity.patternMismatch;
+      if (newInputIsInvalid) {
+        if (!props.inputInvalid) {
+          props.setInputInvalid(true);
+    }
+      }
     }
   };
 
