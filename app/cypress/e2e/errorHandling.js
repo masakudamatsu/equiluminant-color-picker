@@ -168,5 +168,15 @@ describe('Error-handling: Pressing the return key alerts the user to', () => {
       'have.text',
       'Please enter a valid css color code as shown in the above examples',
     );
-});
+  });
+  it.only('click the hue swatch if the input is valid (and the input element is blurred)', () => {
+    cy.findByLabelText(/color code/i)
+      .click()
+      .type('rgb(100,100,100){enter}');
+    cy.findByTestId('colorCodeError').should(
+      'have.text',
+      'Please click one of the hue swatches below',
+    );
+    cy.focused().should('not.have.attr', 'id', 'inputColorCode');
+  });
 });

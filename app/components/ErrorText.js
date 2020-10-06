@@ -16,6 +16,8 @@ function ErrorText(props) {
         Please enter a <Abbr>css</Abbr> color code before choosing a hue
       </span>
     );
+  } else if (props.alertEnterKey) {
+    errorMessage = <span>Please click one of the hue swatches below</span>;
   } else {
     errorMessage = (
       <span>
@@ -27,7 +29,7 @@ function ErrorText(props) {
     <ParagraphErrorMessage
       data-testid="colorCodeError"
       darkMode={props.darkMode}
-      error={props.inputInvalid || props.alertMissing}
+      error={props.inputInvalid || props.alertMissing || props.alertEnterKey}
     >
       {errorMessage}
     </ParagraphErrorMessage>
@@ -36,6 +38,7 @@ function ErrorText(props) {
 
 ErrorText.propTypes = {
   darkMode: PropTypes.bool.isRequired,
+  alertEnterKey: PropTypes.bool.isRequired,
   alertMissing: PropTypes.bool.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
 };

@@ -116,7 +116,10 @@ function HomePage(props) {
       if (newInputIsInvalid) {
         if (!props.inputInvalid) {
           props.setInputInvalid(true);
-    }
+        }
+      } else {
+        props.setAlertEnterKey(true);
+        document.getElementById('inputColorCode').blur();
       }
     }
   };
@@ -181,6 +184,7 @@ function HomePage(props) {
               darkMode={props.darkMode}
               inputInvalid={props.inputInvalid}
               alertMissing={props.alertMissing}
+              alertEnterKey={props.alertEnterKey}
             />
           }
         />{' '}
@@ -327,6 +331,8 @@ HomePage.propTypes = {
   setAlertMissing: PropTypes.func.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
   setInputInvalid: PropTypes.func.isRequired,
+  alertEnterKey: PropTypes.bool.isRequired,
+  setAlertEnterKey: PropTypes.func.isRequired,
   getHue: PropTypes.func.isRequired,
   backgroundOverlay: PropTypes.bool.isRequired,
   setBackgroundOverlay: PropTypes.func.isRequired,
