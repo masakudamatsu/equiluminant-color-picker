@@ -101,6 +101,29 @@ function HomePage(props) {
     }
   };
 
+  const handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the submission
+      // When nothing is entered
+      if (!event.target.value) {
+        props.setAlertMissing(true);
+        return;
+      }
+      // When something is entered
+      props.setInputMissing(false);
+      // Validation
+      const newInputIsInvalid = event.target.validity.patternMismatch;
+      if (newInputIsInvalid) {
+        if (!props.inputInvalid) {
+          props.setInputInvalid(true);
+        }
+      } else {
+        props.setAlertEnterKey(true);
+        document.getElementById('inputColorCode').blur();
+      }
+    }
+  };
+
   const router = useRouter();
 
   const handleSubmit = e => {
@@ -150,6 +173,7 @@ function HomePage(props) {
               alertMissing={props.alertMissing}
               handleBlur={handleBlur}
               handleChange={handleChange}
+              handleKeyDown={handleKeyDown}
               pattern={pattern}
               value={userColorCode}
             />
@@ -160,6 +184,7 @@ function HomePage(props) {
               darkMode={props.darkMode}
               inputInvalid={props.inputInvalid}
               alertMissing={props.alertMissing}
+              alertEnterKey={props.alertEnterKey}
             />
           }
         />{' '}
@@ -306,6 +331,8 @@ HomePage.propTypes = {
   setAlertMissing: PropTypes.func.isRequired,
   inputInvalid: PropTypes.bool.isRequired,
   setInputInvalid: PropTypes.func.isRequired,
+  alertEnterKey: PropTypes.bool.isRequired,
+  setAlertEnterKey: PropTypes.func.isRequired,
   getHue: PropTypes.func.isRequired,
   backgroundOverlay: PropTypes.bool.isRequired,
   setBackgroundOverlay: PropTypes.func.isRequired,

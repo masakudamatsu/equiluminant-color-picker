@@ -15,7 +15,12 @@ let container, getByText, rerender;
 
 beforeEach(() => {
   return ({container, getByText, rerender} = render(
-    <ErrorText darkMode={false} alertMissing={false} inputInvalid={false} />,
+    <ErrorText
+      alertEnterKey={false}
+      alertMissing={false}
+      darkMode={false}
+      inputInvalid={false}
+    />,
   ));
 });
 
@@ -29,16 +34,38 @@ test('shows invisible dummy text if there is no error', () => {
 
 test('shows the relevant alert if the alertMissing prop is true', () => {
   rerender(
-    <ErrorText darkMode={false} alertMissing={true} inputInvalid={false} />,
+    <ErrorText
+      alertEnterKey={false}
+      alertMissing={true}
+      darkMode={false}
+      inputInvalid={false}
+    />,
   );
   expect(getByText(/before choosing a hue/i)).toBeVisible();
 });
 
 test('shows the relevant alert if the inputInvalid prop is true', () => {
   rerender(
-    <ErrorText darkMode={false} alertMissing={false} inputInvalid={true} />,
+    <ErrorText
+      alertEnterKey={false}
+      alertMissing={false}
+      darkMode={false}
+      inputInvalid={true}
+    />,
   );
   expect(getByText(/as shown in the above/i)).toBeVisible();
+});
+
+test('shows the relevant alert if the alertEnterKey is true', () => {
+  rerender(
+    <ErrorText
+      alertEnterKey={true}
+      alertMissing={false}
+      darkMode={false}
+      inputInvalid={false}
+    />,
+  );
+  expect(getByText(/one of the hue swatches below/i)).toBeVisible();
 });
 
 test('renders correctly', () => {

@@ -15,6 +15,7 @@ function MyApp({Component, pageProps}) {
   const [inputMissing, setInputMissing] = useState(true);
   const [alertMissing, setAlertMissing] = useState(false);
   const [inputInvalid, setInputInvalid] = useState(false);
+  const [alertEnterKey, setAlertEnterKey] = useState(false);
 
   const [backgroundOverlay, setBackgroundOverlay] = useState(false);
 
@@ -75,6 +76,8 @@ function MyApp({Component, pageProps}) {
         setAlertMissing={setAlertMissing}
         inputInvalid={inputInvalid}
         setInputInvalid={setInputInvalid}
+        alertEnterKey={alertEnterKey}
+        setAlertEnterKey={setAlertEnterKey}
         hue={hue}
         getHue={getHue}
         backgroundOverlay={backgroundOverlay}
