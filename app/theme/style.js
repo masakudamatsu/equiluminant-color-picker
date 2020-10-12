@@ -94,6 +94,30 @@ export const Input = styled.input.attrs(props => ({
   }
 `;
 
+const inputRangeThumbStyle = css`
+  background: ${color.inputRange.thumb};
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+`;
+
+export const InputRange = styled.input.attrs(props => ({
+  type: 'range',
+}))`
+  &::-webkit-slider-thumb {
+    ${inputRangeThumbStyle}
+    margin-top: -14px;
+  }
+  &::-moz-range-thumb {
+    ${inputRangeThumbStyle}
+  }
+  &::-ms-thumb {
+    ${inputRangeThumbStyle}
+  }
+`;
+
 export const Label = styled.label`
   font-size: ${layout.label.fontSize.mobile.toFixed(4)}rem;
   position: absolute;

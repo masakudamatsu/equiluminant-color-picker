@@ -32,6 +32,9 @@ const color = {
       darkMode: whiteAA,
     },
   },
+  inputRange: {
+    thumb: whiteAA,
+  },
   paragraphErrorMessage: {
     font: {
       forDarkColor: alertColor.forDarkColor,

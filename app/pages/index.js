@@ -2,7 +2,13 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
-import {Abbr, H2, HueSwatchWrapper, SpacerVertical} from '../theme/style';
+import {
+  Abbr,
+  H2,
+  HueSwatchWrapper,
+  InputRange,
+  SpacerVertical,
+} from '../theme/style';
 import InputColorCode from '../components/InputColorCode';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
@@ -196,8 +202,7 @@ function HomePage(props) {
         <H2>#2 Choose chroma</H2>
         <SpacerVertical scale="2" />
         <label htmlFor="chroma-setter">Set how vivid color should be</label>
-        <input
-          type="range"
+        <InputRange
           id="chroma-setter"
           max="255"
           min="0"
