@@ -20,20 +20,14 @@ const colorList = [
   },
 ];
 
-const hueList = [
-  'Red',
-  'Orange',
-  'Yellow',
-  'Chartreuse',
-  'Green',
-  'SpringGreen',
-  'Cyan',
-  'Azure',
-  'Blue',
-  'Violet',
-  'Magenta',
-  'Rose',
-];
+const initialChroma = '255';
+const newChroma = '25';
+
+// Simulate the user's interaction with the range input slider
+const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+  window.HTMLInputElement.prototype,
+  'value',
+).set; // A workaround for React overriding the Dom node's setter. See https://github.com/cypress-io/cypress/issues/1570#issuecomment-450966053
 
 describe('Landing Page shows non-interactive UI components', () => {
   beforeEach(() => {
@@ -44,12 +38,12 @@ describe('Landing Page shows non-interactive UI components', () => {
   });
   it('h2 elements', () => {
     cy.findByText(/set luminance/i);
-    cy.findByText(/choose hue/i);
+    cy.findByText(/choose chroma/i);
   });
   it('color code examples', () => {
     cy.findByText(/examples/i);
-    cy.findByText(/rgb/i);
-    cy.findByText(/hsl/i);
+    cy.findByText(/rgb\(/i);
+    cy.findByText(/hsl\(/i);
     cy.findByText('#4287f5');
   });
 });
@@ -114,7 +108,7 @@ describe('Blurring after typing a valid color code changes the color scheme appr
   });
 });
 
-describe('Clicking a hue swatche with a valid color code redirects to the results page', () => {
+describe('Moving the slider', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.findByLabelText(/color code/i)
@@ -124,12 +118,46 @@ describe('Clicking a hue swatche with a valid color code redirects to the result
       .blur();
   });
 
-  hueList.forEach((hue, index) => {
-    it(`${hue}`, () => {
-      // setup
-      cy.findByTestId(hue).click();
-      // verify
-      cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+  it('changes the chroma value displayed', () => {
+    // Check the initial value
+    cy.findByLabelText(/vivid/i)
+      .siblings('span')
+      .should('have.text', initialChroma);
+    // Move the slider
+    cy.findByLabelText(/vivid/i).then($range => {
+      const range = $range[0];
+      nativeInputValueSetter.call(range, Number(newChroma));
+      range.dispatchEvent(
+        new Event('change', {value: Number(newChroma), bubbles: true}),
+      );
     });
+
+    // Verify the new value
+    cy.findByLabelText(/vivid/i)
+      .siblings('span')
+      .should('have.text', newChroma);
+  });
+});
+
+describe('Clicking the submit button', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].rgbCode)
+      .blur();
+    cy.findByLabelText(/vivid/i).then($range => {
+      const range = $range[0];
+      nativeInputValueSetter.call(range, Number(newChroma));
+      range.dispatchEvent(
+        new Event('change', {value: Number(newChroma), bubbles: true}),
+      );
+    });
+  });
+
+  it('redirects the user to the results page', () => {
+    cy.findByText(/get/i).click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
   });
 });

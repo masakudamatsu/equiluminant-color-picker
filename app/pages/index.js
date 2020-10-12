@@ -148,6 +148,10 @@ function HomePage(props) {
 
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
+  const handleChangeChroma = event => {
+    props.setChroma(event.target.value);
+  };
+
   return (
     <>
       <h1>Luminance Picker</h1>
@@ -189,127 +193,26 @@ function HomePage(props) {
           }
         />{' '}
         <SpacerVertical scale="3" />
-        <H2>#2 Choose hue</H2>
+        <H2>#2 Choose chroma</H2>
         <SpacerVertical scale="2" />
-        <HueSwatchWrapper darkMode={props.darkMode}>
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="0"
-            left="4.8"
-            title="Red"
-            top="11.2"
-            zIndex="1"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="30"
-            left="15.5"
-            title="Orange"
-            top="21.7"
-            zIndex="2"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="60"
-            left="52"
-            title="Yellow"
-            top="28.8"
-            zIndex="3"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="90"
-            left="8.2"
-            title="Chartreuse"
-            top="39.1"
-            zIndex="3"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="120"
-            left="41.7"
-            title="Green"
-            top="36.5"
-            zIndex="4"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="150"
-            left="57.6"
-            title="SpringGreen"
-            top="10.3"
-            zIndex="1"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="180"
-            left="13.4"
-            title="Cyan"
-            top="55"
-            zIndex="4"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="210"
-            left="74.8"
-            title="Azure"
-            top="39.3"
-            zIndex="3"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="240"
-            left="67.9"
-            title="Blue"
-            top="23.4"
-            zIndex="2"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="270"
-            left="49.6"
-            title="Violet"
-            top="60.3"
-            zIndex="3"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="300"
-            left="35.8"
-            title="Magenta"
-            top="64"
-            zIndex="4"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="330"
-            left="18.6"
-            title="Rose"
-            top="72"
-            zIndex="5"
-          />
-        </HueSwatchWrapper>
-        <InputRGB
-          red={props.red}
-          green={props.green}
-          blue={props.blue}
-          handleChangeRed={props.handleChangeRed}
-          handleChangeGreen={props.handleChangeGreen}
-          handleChangeBlue={props.handleChangeBlue}
+        <label htmlFor="chroma-setter">Set how vivid color should be</label>
+        <input
+          type="range"
+          id="chroma-setter"
+          max="255"
+          min="0"
+          onChange={handleChangeChroma}
+          step="1"
+          value={props.chroma}
         />
-        <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
+        <span>{props.chroma}</span>
+        <p>
+          The value refers to the difference between maximum and minimum of the
+          RGB values: 0 for grayscale; 255 for fully-saturated color
+        </p>
+        <button type="submit" onClick={handleSubmit}>
+          Get equiluminant color!
+        </button>
       </form>
     </>
   );

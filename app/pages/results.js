@@ -17,7 +17,7 @@ function Results(props) {
 
   const FEED_QUERY = gql`
     {
-      feed(hue: ${props.hue}, contrastRatio: ${props.contrastRatio}, orderBy: [{ chroma: asc }, { hue: asc }]) {
+      feed(contrastRatio: ${props.contrastRatio}, chroma: ${props.chroma}, orderBy: [{ hue: asc }]) {
         red
         green
         blue
@@ -84,15 +84,15 @@ function Results(props) {
     let newContrastRatio;
     if (event.shiftKey) {
       const stepValue = 0.1;
-    // Increase the value by 0.1
-    if (event.key === 'ArrowUp') {
-      event.preventDefault(); // Prevent the cursor from moving to the top
+      // Increase the value by 0.1
+      if (event.key === 'ArrowUp') {
+        event.preventDefault(); // Prevent the cursor from moving to the top
         newContrastRatio = (Number(event.target.value) + stepValue).toFixed(2);
-    }
-    // Decrease the value by 0.1
-    if (event.key === 'ArrowDown') {
+      }
+      // Decrease the value by 0.1
+      if (event.key === 'ArrowDown') {
         newContrastRatio = (Number(event.target.value) - stepValue).toFixed(2);
-    }
+      }
     } else {
       const stepValue = 0.01;
       // Increase the value by 0.01
