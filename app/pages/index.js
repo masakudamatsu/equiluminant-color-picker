@@ -9,6 +9,8 @@ import {
   InputRange,
   SpacerVertical,
 } from '../theme/style';
+
+import ChromaScale from '../components/ChromaScale';
 import InputColorCode from '../components/InputColorCode';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
@@ -201,6 +203,7 @@ function HomePage(props) {
         <SpacerVertical scale="3" />
         <H2>#2 Choose chroma</H2>
         <SpacerVertical scale="2" />
+        <ChromaScale />
         <label htmlFor="chroma-setter">Set how vivid color should be</label>
         <InputRange
           id="chroma-setter"

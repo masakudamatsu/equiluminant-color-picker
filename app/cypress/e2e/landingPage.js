@@ -46,6 +46,9 @@ describe('Landing Page shows non-interactive UI components', () => {
     cy.findByText(/hsl\(/i);
     cy.findByText('#4287f5');
   });
+  it('chroma scale', () => {
+    cy.findByTitle(/chroma scale/i);
+  });
 });
 
 describe('Blurring after typing a valid color code changes the color scheme appropriately', () => {
