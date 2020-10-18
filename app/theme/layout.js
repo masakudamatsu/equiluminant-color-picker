@@ -149,11 +149,17 @@ const layout = {
   },
   slider: {
     thumb: {
-      diameterPx: 48,
+      diameterPx: 48 /* to be easy to tap or click. See https://web.dev/tap-targets/ */,
     },
-    track: {
-      heightPx: 255,
-      widthPx: 16,
+    get track() {
+      // see https://stackoverflow.com/a/4616262/11847654 for the get syntax
+      return {
+        heightPx:
+          255 +
+          this.thumb
+            .diameterPx /* 255 so sliding by 1px means increasing the value by 1 */,
+        widthPx: this.thumb.diameterPx / 3,
+      };
     },
   },
   textCrop: {

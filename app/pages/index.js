@@ -8,6 +8,8 @@ import {
   HueSwatchWrapper,
   InputRange,
   SpacerVertical,
+  SliderSpaceReserver,
+  SliderWrapper,
 } from '../theme/style';
 
 import ChromaScale from '../components/ChromaScale';
@@ -203,8 +205,7 @@ function HomePage(props) {
         <SpacerVertical scale="3" />
         <H2>#2 Choose chroma</H2>
         <SpacerVertical scale="2" />
-        <ChromaScale />
-        <label htmlFor="chroma-setter">Set how vivid color should be</label>
+        <SliderWrapper>
         <InputRange
             darkMode={props.darkMode}
           id="chroma-setter"
@@ -214,6 +215,9 @@ function HomePage(props) {
           step="1"
           value={props.chroma}
         />
+          <SliderSpaceReserver />
+        </SliderWrapper>
+        <label htmlFor="chroma-setter">Set how vivid color should be</label>
         <span>{props.chroma}</span>
         <p>
           The value refers to the difference between maximum and minimum of the

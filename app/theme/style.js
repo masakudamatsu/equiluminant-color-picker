@@ -142,9 +142,24 @@ const inputRangeTrackStyle = css`
 export const InputRange = styled.input.attrs(props => ({
   type: 'range',
 }))`
-  width: ${(
-    layout.slider.track.heightPx + layout.slider.thumb.diameterPx
-  ).toFixed()}px;
+  position: absolute;
+  top: ${(
+    (layout.slider.thumb.diameterPx - layout.slider.track.widthPx) /
+    2
+  ).toFixed()}px; /* To top-align the thumb, not the track */
+  transform:
+    translate( /* newCenterLocation(x,y) - oldCenterLocation(x,y) */
+      ${(
+        (layout.slider.thumb.diameterPx - layout.slider.track.heightPx) /
+        2
+      ).toFixed()}px,
+      ${(
+        (layout.slider.track.heightPx - layout.slider.thumb.diameterPx) /
+        2
+      ).toFixed()}px
+    )
+    rotate(270deg) /* So the value increases from bottom to top */;
+  width: ${layout.slider.track.heightPx.toFixed()}px;
   /* Thumb */
   &::-webkit-slider-thumb {
     ${inputRangeThumbStyle}
@@ -306,4 +321,14 @@ export const ButtonSwatch = styled.button`
     outline: 0;
     transform: rotate(60deg);
   }
+`;
+
+export const SliderWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+export const SliderSpaceReserver = styled.div`
+  height: ${layout.slider.track.heightPx}px;
+  width: ${layout.slider.thumb.diameterPx}px;
 `;
