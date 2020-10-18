@@ -327,10 +327,9 @@ input {
 input[type=range] {
   /* Hides the slider so that custom slider can be made */
   -webkit-appearance: none;
-  /* Specific width is required for Firefox. */
-  width: 100%;
   /* Remove white background in Chrome */
   background: transparent;
+  /* "width: 100%;" (for Firefox which requires a specific width) is removed as it will override the custom-style (for unknown reason) */
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -343,7 +342,6 @@ input[type=range]:focus {
 }
 
 input[type=range]::-ms-track {
-  width: 100%;
   cursor: pointer;
   /* Hides the slider so custom styles can be added */
   background: transparent; 

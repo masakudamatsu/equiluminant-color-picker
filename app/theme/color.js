@@ -32,13 +32,32 @@ const color = {
       darkMode: whiteAA,
     },
   },
-  inputRange: {
-    thumb: whiteAA,
-  },
   paragraphErrorMessage: {
     font: {
       forDarkColor: alertColor.forDarkColor,
       forLightColor: alertColor.forLightColor,
+    },
+  },
+  slider: {
+    thumb: {
+      lightMode: {
+        default: blackAA,
+        focus: blackAAA,
+      },
+      darkMode: {
+        default: whiteAA,
+        focus: whiteAAA,
+      },
+    },
+    track: {
+      lightMode: {
+        default: blackAA,
+        focus: blackAAA,
+      },
+      darkMode: {
+        default: whiteAA,
+        focus: whiteAAA,
+      },
     },
   },
 };

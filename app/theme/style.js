@@ -95,26 +95,78 @@ export const Input = styled.input.attrs(props => ({
 `;
 
 const inputRangeThumbStyle = css`
-  background: ${color.inputRange.thumb};
-  border: 1px solid black;
+  background: ${props =>
+    props.darkMode
+      ? color.slider.thumb.darkMode.default
+      : color.slider.thumb.lightMode.default};
   border-radius: 50%;
+  cursor: pointer; /* fallback for IE and legacy browsers */
+  cursor: grab;
+  height: ${layout.slider.thumb.diameterPx.toFixed()}px;
+  width: ${layout.slider.thumb.diameterPx.toFixed()}px;
+  &:hover,
+  &:focus /* does not work*/ {
+    background: ${props =>
+      props.darkMode
+        ? color.slider.thumb.darkMode.focus
+        : color.slider.thumb.lightMode.focus};
+  }
+  &:active {
+    cursor: grabbing;
+  }
+`;
+
+const inputRangeTrackStyle = css`
+  background: ${props =>
+    props.darkMode
+      ? color.slider.track.darkMode.default
+      : color.slider.track.lightMode.default};
+  background-color: linear-gradient(
+    90deg,
+    #808080 0%,
+    #ff8000 100%
+  ); /* does not work*/
+  border-radius: ${(layout.slider.track.widthPx / 2).toFixed()}px;
   cursor: pointer;
-  height: 50px;
-  width: 50px;
+  height: ${layout.slider.track.widthPx.toFixed()}px;
+  width: 100%;
+  &:hover,
+  &:focus /* does not work*/ {
+    background: ${props =>
+      props.darkMode
+        ? color.slider.thumb.darkMode.focus
+        : color.slider.thumb.lightMode.focus};
+  }
 `;
 
 export const InputRange = styled.input.attrs(props => ({
   type: 'range',
 }))`
+  width: ${(
+    layout.slider.track.heightPx + layout.slider.thumb.diameterPx
+  ).toFixed()}px;
+  /* Thumb */
   &::-webkit-slider-thumb {
     ${inputRangeThumbStyle}
-    margin-top: -14px;
+    margin-top: ${
+      -(layout.slider.thumb.diameterPx - layout.slider.track.widthPx) / 2
+    }px; /* Webkit browsers top-align thumb and track by default.  */
   }
   &::-moz-range-thumb {
     ${inputRangeThumbStyle}
   }
   &::-ms-thumb {
     ${inputRangeThumbStyle}
+  }
+  /* Track */
+  &::-webkit-slider-runnable-track {
+    ${inputRangeTrackStyle}
+  }
+  &::-moz-range-track {
+    ${inputRangeTrackStyle}
+  }
+  &::-ms-track {
+    ${inputRangeTrackStyle}
   }
 `;
 

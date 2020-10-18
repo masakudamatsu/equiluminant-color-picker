@@ -147,6 +147,15 @@ const layout = {
     // in pixel, because we do not want it to be enlarged when the user increases the font size.
     mobile: baseXheight.mobile * modularScale(1) * oneRemPx,
   },
+  slider: {
+    thumb: {
+      diameterPx: 48,
+    },
+    track: {
+      heightPx: 255,
+      widthPx: 16,
+    },
+  },
   textCrop: {
     bodyText: {
       bottom: getTextCropBottom(Roboto, lineHeightEm.bodyText).toFixed(4),

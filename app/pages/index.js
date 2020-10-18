@@ -206,6 +206,7 @@ function HomePage(props) {
         <ChromaScale />
         <label htmlFor="chroma-setter">Set how vivid color should be</label>
         <InputRange
+            darkMode={props.darkMode}
           id="chroma-setter"
           max="255"
           min="0"
