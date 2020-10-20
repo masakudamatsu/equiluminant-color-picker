@@ -335,3 +335,9 @@ export const SliderSpaceReserver = styled.div`
   height: ${layout.slider.track.heightPx}px;
   width: ${layout.slider.thumb.diameterPx}px;
 `;
+
+export const ChromaSetterInnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
