@@ -7,6 +7,7 @@ import {
   H2,
   HueSwatchWrapper,
   InputRange,
+  SpacerHorizontal,
   SpacerVertical,
   SliderSpaceReserver,
   SliderWrapper,
@@ -156,6 +157,8 @@ function HomePage(props) {
     </span>
   );
 
+  const chromaFieldLabel = <span>Enter chroma (0 to 255)</span>;
+
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
   const handleChangeChroma = event => {
@@ -216,9 +219,23 @@ function HomePage(props) {
           value={props.chroma}
         />
           <SliderSpaceReserver />
+          <SpacerHorizontal />
+          <TextField
+            darkMode={props.darkMode}
+            id="chroma-field"
+            inputInvalid={false}
+            label={chromaFieldLabel}
+            alertMissing={false}
+            handleBlur={() => {
+              return null;
+            }}
+            handleChange={handleChangeChroma}
+            pattern="1?\d?\d|2[0-4]\d|25[0-5]"
+            testId="chroma-field"
+            value={props.chroma}
+          />
         </SliderWrapper>
         <label htmlFor="chroma-setter">Set how vivid color should be</label>
-        <span>{props.chroma}</span>
         <p>
           The value refers to the difference between maximum and minimum of the
           RGB values: 0 for grayscale; 255 for fully-saturated color

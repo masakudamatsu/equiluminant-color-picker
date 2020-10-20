@@ -270,6 +270,7 @@ export const SideMarginSetter = styled.div`
 
 // div elements for spacing
 export const SpacerHorizontal = styled.div`
+  flex-shrink: 0;
   width: ${layout.label.paddingPx.mobile}px;
 `;
 
@@ -324,11 +325,13 @@ export const ButtonSwatch = styled.button`
 `;
 
 export const SliderWrapper = styled.div`
+  display: flex;
   position: relative;
   width: 100%;
 `;
 
 export const SliderSpaceReserver = styled.div`
+  flex-shrink: 0;
   height: ${layout.slider.track.heightPx}px;
   width: ${layout.slider.thumb.diameterPx}px;
 `;
