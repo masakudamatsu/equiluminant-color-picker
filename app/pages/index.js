@@ -4,14 +4,12 @@ import {useRouter} from 'next/router';
 
 import {
   Abbr,
-  ChromaSetterInnerWrapper,
+  ChromaTextFieldWrapper,
+  ChromaTextField,
   H2,
   HueSwatchWrapper,
   InputRange,
-  SpacerHorizontal,
   SpacerVertical,
-  SliderSpaceReserver,
-  SliderWrapper,
 } from '../theme/style';
 
 import ChromaPreview from '../components/ChromaPreview';
@@ -158,8 +156,6 @@ function HomePage(props) {
     </span>
   );
 
-  const chromaFieldLabel = <span>Enter chroma (0 to 255)</span>;
-
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
   const handleChangeChroma = event => {
@@ -209,37 +205,29 @@ function HomePage(props) {
         <SpacerVertical scale="3" />
         <H2>#2 Choose chroma</H2>
         <SpacerVertical scale="2" />
-        <SliderWrapper>
-          <InputRange
+        <ChromaTextFieldWrapper>
+          <ChromaPreview chroma={props.chroma} />
+          <ChromaTextField
             darkMode={props.darkMode}
-            id="chroma-setter"
-            max="255"
-            min="0"
+            id="chroma-field"
             onChange={handleChangeChroma}
-            step="1"
+            pattern="1?\d?\d|2[0-4]\d|25[0-5]"
+            testId="chroma-field"
             value={props.chroma}
           />
-          <SliderSpaceReserver />
-          <SpacerHorizontal />
-          <ChromaSetterInnerWrapper>
-            <TextField
-              darkMode={props.darkMode}
-              id="chroma-field"
-              inputInvalid={false}
-              label={chromaFieldLabel}
-              alertMissing={false}
-              handleBlur={() => {
-                return null;
-              }}
-              handleChange={handleChangeChroma}
-              pattern="1?\d?\d|2[0-4]\d|25[0-5]"
-              testId="chroma-field"
-              value={props.chroma}
-            />
-            <p>0 for grayscale; 255 for fully-saturated color</p>
-            <ChromaPreview chroma={props.chroma} />
-          </ChromaSetterInnerWrapper>
-        </SliderWrapper>
+        </ChromaTextFieldWrapper>
+        <SpacerVertical scale="2" />
+        <InputRange
+          darkMode={props.darkMode}
+          id="chroma-setter"
+          max="255"
+          min="0"
+          onChange={handleChangeChroma}
+          step="1"
+          value={props.chroma}
+        />
+        <SpacerVertical scale="1" />
+        <p>0 for grayscale; 255 for fully-saturated color</p>
         <button type="submit" onClick={handleSubmit}>
           Get equiluminant color!
         </button>

@@ -154,11 +154,7 @@ const layout = {
     get track() {
       // see https://stackoverflow.com/a/4616262/11847654 for the get syntax
       return {
-        heightPx:
-          255 +
-          this.thumb
-            .diameterPx /* 255 so sliding by 1px means increasing the value by 1 */,
-        widthPx: this.thumb.diameterPx / 3,
+        heightPx: this.thumb.diameterPx / 3,
       };
     },
   },

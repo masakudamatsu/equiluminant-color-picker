@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Svg = styled.svg``;
+const Svg = styled.svg`
+  position: absolute;
+  width: 100%; /* Without this, being wrapped with a div makes the svg image disappear */
+`;
 
 function ChromaPreview(props) {
   // (max, min) = (255, 0) if props.chroma = 255

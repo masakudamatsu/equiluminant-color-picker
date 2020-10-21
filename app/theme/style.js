@@ -126,9 +126,9 @@ const inputRangeTrackStyle = css`
     #808080 0%,
     #ff8000 100%
   ); /* does not work*/
-  border-radius: ${(layout.slider.track.widthPx / 2).toFixed()}px;
+  border-radius: ${(layout.slider.track.heightPx / 2).toFixed()}px;
   cursor: pointer;
-  height: ${layout.slider.track.widthPx.toFixed()}px;
+  height: ${layout.slider.track.heightPx.toFixed()}px;
   width: 100%;
   &:hover,
   &:focus /* does not work*/ {
@@ -142,29 +142,15 @@ const inputRangeTrackStyle = css`
 export const InputRange = styled.input.attrs(props => ({
   type: 'range',
 }))`
-  position: absolute;
-  top: ${(
-    (layout.slider.thumb.diameterPx - layout.slider.track.widthPx) /
-    2
-  ).toFixed()}px; /* To top-align the thumb, not the track */
-  transform:
-    translate( /* newCenterLocation(x,y) - oldCenterLocation(x,y) */
-      ${(
-        (layout.slider.thumb.diameterPx - layout.slider.track.heightPx) /
-        2
-      ).toFixed()}px,
-      ${(
-        (layout.slider.track.heightPx - layout.slider.thumb.diameterPx) /
-        2
-      ).toFixed()}px
-    )
-    rotate(270deg) /* So the value increases from bottom to top */;
-  width: ${layout.slider.track.heightPx.toFixed()}px;
+  margin: ${
+    (layout.slider.thumb.diameterPx - layout.slider.track.heightPx) / 2
+  }px 0; /* Otherwise the thumb overlaps the previous/subsequent elements */
+  width: 100%;
   /* Thumb */
   &::-webkit-slider-thumb {
     ${inputRangeThumbStyle}
     margin-top: ${
-      -(layout.slider.thumb.diameterPx - layout.slider.track.widthPx) / 2
+      -(layout.slider.thumb.diameterPx - layout.slider.track.heightPx) / 2
     }px; /* Webkit browsers top-align thumb and track by default.  */
   }
   &::-moz-range-thumb {
@@ -324,20 +310,31 @@ export const ButtonSwatch = styled.button`
   }
 `;
 
-export const SliderWrapper = styled.div`
+export const ChromaTextFieldWrapper = styled.div`
+  align-items: center;
   display: flex;
+  height: 200px;
+  justify-content: center;
   position: relative;
   width: 100%;
 `;
 
-export const SliderSpaceReserver = styled.div`
-  flex-shrink: 0;
-  height: ${layout.slider.track.heightPx}px;
-  width: ${layout.slider.thumb.diameterPx}px;
-`;
-
-export const ChromaSetterInnerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+export const ChromaTextField = styled.input.attrs(props => ({
+  type: 'text',
+}))`
+  border: 2px solid
+    ${props =>
+      props.darkMode
+        ? color.body.background.darkMode
+        : color.body.background.lightMode};
+  border-radius: ${layout.input.borderRadiusPx}px;
+  color: ${props =>
+    props.darkMode
+      ? color.body.background.darkMode
+      : color.body.background.lightMode};
+  font-size: 80px;
+  height: 50%;
+  position: absolute;
+  text-align: center;
+  width: 66%;
 `;
