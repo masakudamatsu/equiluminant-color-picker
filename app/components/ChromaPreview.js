@@ -55,7 +55,7 @@ function ChromaPreview(props) {
         <rect
           data-testid="Green"
           fill={green}
-          x="188"
+          x="0"
           y="0"
           width="93"
           height="93"
@@ -71,7 +71,7 @@ function ChromaPreview(props) {
         <rect
           data-testid="Blue"
           fill={blue}
-          x="0"
+          x="188"
           y="0"
           width="93"
           height="93"

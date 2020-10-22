@@ -49,7 +49,7 @@ test('renders correctly', () => {
     <div>
       <svg
         aria-labelledby="ChromaPreview"
-        class="ChromaPreview__Svg-sc-1ccy2fs-0 hTbqZP"
+        class="ChromaPreview__Svg-sc-1ccy2fs-0 bKNLsH"
         viewBox="0 0 281 187"
       >
         <title
@@ -94,7 +94,7 @@ test('renders correctly', () => {
             fill="rgb(63, 191, 63)"
             height="93"
             width="93"
-            x="188"
+            x="0"
             y="0"
           />
           <rect
@@ -110,7 +110,7 @@ test('renders correctly', () => {
             fill="rgb(63, 63, 191)"
             height="93"
             width="93"
-            x="0"
+            x="188"
             y="0"
           />
         </g>
