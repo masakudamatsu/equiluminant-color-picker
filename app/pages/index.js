@@ -21,6 +21,7 @@ import TextField from '../components/TextField';
 import InputRGB from '../components/InputRGB';
 import HueSwatch from '../components/HueSwatch';
 
+import {handleArrowKeys} from '../utils/eventHandlers';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 import color from '../theme/color';
@@ -166,6 +167,18 @@ function HomePage(props) {
     if (event.key === 'Enter') {
       event.preventDefault(); // Prevent the submission
     }
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+      return;
+    }
+    let newChromaValue;
+    if (event.shiftKey) {
+      // Increase the value by 10
+      newChromaValue = handleArrowKeys(event, 10);
+    } else {
+      // Increase the value by 1
+      newChromaValue = handleArrowKeys(event, 1);
+    }
+    props.setChroma(newChromaValue);
   };
 
   return (
