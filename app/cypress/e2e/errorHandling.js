@@ -157,7 +157,7 @@ describe('Error-handling: Pressing the return key alerts the user to', () => {
       .type('{enter}');
     cy.findByTestId('colorCodeError').should(
       'have.text',
-      'Please enter a css color code before choosing a hue',
+      'Please enter a css color code before pressing the search button',
     );
   });
   it('enter a valid color code if an invalid input is provided', () => {
