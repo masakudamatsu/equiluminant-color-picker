@@ -120,11 +120,10 @@ describe('Moving the slider', () => {
 
   it('changes the chroma value displayed', () => {
     // Check the initial value
-    cy.findByLabelText(/vivid/i)
-      .siblings('span')
-      .should('have.text', initialChroma);
+    cy.findByTestId('chroma-field').should('have.value', initialChroma);
+
     // Move the slider
-    cy.findByLabelText(/vivid/i).then($range => {
+    cy.findByTestId('chroma-setter').then($range => {
       const range = $range[0];
       nativeInputValueSetter.call(range, Number(newChroma));
       range.dispatchEvent(
@@ -133,9 +132,7 @@ describe('Moving the slider', () => {
     });
 
     // Verify the new value
-    cy.findByLabelText(/vivid/i)
-      .siblings('span')
-      .should('have.text', newChroma);
+    cy.findByTestId('chroma-field').should('have.value', newChroma);
   });
 });
 
@@ -147,7 +144,7 @@ describe('Clicking the submit button', () => {
       .clear()
       .type(colorList[0].rgbCode)
       .blur();
-    cy.findByLabelText(/vivid/i).then($range => {
+    cy.findByTestId('chroma-setter').then($range => {
       const range = $range[0];
       nativeInputValueSetter.call(range, Number(newChroma));
       range.dispatchEvent(

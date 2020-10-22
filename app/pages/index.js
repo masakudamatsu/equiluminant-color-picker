@@ -228,17 +228,18 @@ function HomePage(props) {
           <ChromaPreview chroma={props.chroma} />
           <ChromaTextField
             darkMode={props.darkMode}
+            data-testid="chroma-field"
             id="chroma-field"
             onChange={handleChangeChroma}
             onKeyDown={handleKeyDownChroma}
             pattern="1?\d?\d|2[0-4]\d|25[0-5]"
-            testId="chroma-field"
             value={props.chroma}
           />
         </ChromaTextFieldWrapper>
         <SpacerVertical scale="2" />
         <InputRange
           darkMode={props.darkMode}
+          data-testid="chroma-setter"
           id="chroma-setter"
           max="255"
           min="0"
