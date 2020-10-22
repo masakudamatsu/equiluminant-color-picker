@@ -95,10 +95,11 @@ export const Input = styled.input.attrs(props => ({
 `;
 
 const inputRangeThumbStyle = css`
-  background: ${props =>
-    props.darkMode
-      ? color.slider.thumb.darkMode.default
-      : color.slider.thumb.lightMode.default};
+  background: rgb(
+    ${props => 255 - (255 - props.value) / 2},
+    128,
+    ${props => (255 - props.value) / 2}
+  );
   border-radius: 50%;
   cursor: pointer; /* fallback for IE and legacy browsers */
   cursor: grab;
@@ -106,10 +107,6 @@ const inputRangeThumbStyle = css`
   width: ${layout.slider.thumb.diameterPx.toFixed()}px;
   &:hover,
   &:focus /* does not work*/ {
-    background: ${props =>
-      props.darkMode
-        ? color.slider.thumb.darkMode.focus
-        : color.slider.thumb.lightMode.focus};
   }
   &:active {
     cursor: grabbing;
@@ -121,21 +118,17 @@ const inputRangeTrackStyle = css`
     props.darkMode
       ? color.slider.track.darkMode.default
       : color.slider.track.lightMode.default};
-  background-color: linear-gradient(
-    90deg,
-    #808080 0%,
-    #ff8000 100%
-  ); /* does not work*/
+  background-image: linear-gradient(
+    to right,
+    #808080 ${layout.slider.thumb.diameterPx / 2}px,
+    #ff8000 calc(100% - ${layout.slider.thumb.diameterPx / 2}px)
+  );
   border-radius: ${(layout.slider.track.heightPx / 2).toFixed()}px;
   cursor: pointer;
   height: ${layout.slider.track.heightPx.toFixed()}px;
   width: 100%;
   &:hover,
   &:focus /* does not work*/ {
-    background: ${props =>
-      props.darkMode
-        ? color.slider.thumb.darkMode.focus
-        : color.slider.thumb.lightMode.focus};
   }
 `;
 
