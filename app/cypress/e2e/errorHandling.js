@@ -19,9 +19,9 @@ describe('Error handling: missing input', () => {
     cy.findByTestId('colorCodeError').should('be.hidden');
   });
 
-  it('Clicking any hue swatch without any input value DOES show an error message, focus the color code field with its border in the alert color. But once entering text, the alert disappears.', () => {
+  it('Clicking the submit button without any input value DOES show an error message, focus the color code field with its border in the alert color. But once entering text, the alert disappears.', () => {
     // execute
-    cy.findByTestId('Red').click();
+    cy.findByText(/get/i).click();
     // verify
     cy.findByTestId('colorCodeError').should('be.visible');
     cy.focused().should('have.attr', 'id', 'inputColorCode');
@@ -74,11 +74,11 @@ describe('Error handling: invalid input', () => {
     cy.focused().should('not.have.attr', 'id', 'inputColorCode');
   });
 
-  it('Clicking the hue swatch with an invalid input shows an error message and focuses the color code field with its border in alert color', () => {
+  it('Clicking the submit button with an invalid input shows an error message and focuses the color code field with its border in alert color', () => {
     cy.findByLabelText(/color code/i)
       .click()
       .type('a');
-    cy.findByTestId('Red').click();
+    cy.findByText(/get/i).click();
     cy.findByTestId('colorCodeError').should('be.visible');
     cy.findByLabelText(/color code/i).should(
       'have.css',
@@ -151,7 +151,7 @@ describe('Error-handling: Pressing the return key alerts the user to', () => {
     cy.visit('/');
   });
 
-  it.only('enter a color code if the user has not entered any text', () => {
+  it('enter a color code if the user has not entered any text', () => {
     cy.findByLabelText(/color code/i)
       .click()
       .type('{enter}');
@@ -160,7 +160,7 @@ describe('Error-handling: Pressing the return key alerts the user to', () => {
       'Please enter a css color code before choosing a hue',
     );
   });
-  it.only('enter a valid color code if an invalid input is provided', () => {
+  it('enter a valid color code if an invalid input is provided', () => {
     cy.findByLabelText(/color code/i)
       .click()
       .type('rgb{enter}');
@@ -169,7 +169,7 @@ describe('Error-handling: Pressing the return key alerts the user to', () => {
       'Please enter a valid css color code as shown in the above examples',
     );
   });
-  it.only('click the hue swatch if the input is valid (and the input element is blurred)', () => {
+  it('click the hue swatch if the input is valid (and the input element is blurred)', () => {
     cy.findByLabelText(/color code/i)
       .click()
       .type('rgb(100,100,100){enter}');

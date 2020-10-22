@@ -13,7 +13,8 @@ function ErrorText(props) {
   } else if (props.alertMissing) {
     errorMessage = (
       <span>
-        Please enter a <Abbr>css</Abbr> color code before choosing a hue
+        Please enter a <Abbr>css</Abbr> color code before pressing the search
+        button
       </span>
     );
   } else if (props.alertEnterKey) {
