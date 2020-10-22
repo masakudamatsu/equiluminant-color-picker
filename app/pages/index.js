@@ -162,6 +162,12 @@ function HomePage(props) {
     props.setChroma(event.target.value);
   };
 
+  const handleKeyDownChroma = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the submission
+    }
+  };
+
   return (
     <>
       <h1>Luminance Picker</h1>
@@ -211,6 +217,7 @@ function HomePage(props) {
             darkMode={props.darkMode}
             id="chroma-field"
             onChange={handleChangeChroma}
+            onKeyDown={handleKeyDownChroma}
             pattern="1?\d?\d|2[0-4]\d|25[0-5]"
             testId="chroma-field"
             value={props.chroma}
