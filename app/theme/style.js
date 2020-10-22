@@ -52,10 +52,11 @@ export const H2 = styled.h2`
   ${textCrop.bodyText.capHeight}
 `;
 
-export const Input = styled.input.attrs(props => ({
-  autoComplete: 'off', // to remove Webkit browser's default style that cannot be overriden. See https://stackoverflow.com/questions/2338102/override-browser-form-filling-and-input-highlighting-with-html-css
+export const InputText = styled.input.attrs(props => ({
+  autoComplete: 'off', // to remove Webkit browser's default style that cannot be overriden. See https://stackoverflow.com/questions/2338102/overrideq-browser-form-filling-and-input-highlighting-with-html-css
+  type: 'text',
 }))`
-  background-color: inherit;
+  background-color: transparent;
   border-color: ${props => {
     if (props.darkMode) {
       return props.error
@@ -68,20 +69,20 @@ export const Input = styled.input.attrs(props => ({
     }
   }};
   border-style: solid;
-  border-width: ${layout.input.borderWidthPx.normal.toFixed()}px;
-  border-radius: ${layout.input.borderRadiusPx.toFixed()}px;
-  font-size: ${layout.input.fontSize.mobile.toFixed(4)}rem;
+  border-width: ${layout.inputText.borderWidthPx.normal.toFixed()}px;
+  border-radius: ${layout.inputText.borderRadiusPx.toFixed()}px;
+  font-size: ${layout.inputText.fontSize.mobile.toFixed(4)}rem;
   height: 100%; /* Without this, 10px will be added up for some reason */
   padding: ${(
-      layout.input.paddingTopPx.mobile +
+      layout.inputText.paddingTopPx.mobile +
       layout.label.capHeightPx.mobile +
       layout.label.paddingPx.mobile -
-      layout.textCrop.input.topCap * layout.input.fontSize.mobile * 16
+      layout.textCrop.input.topCap * layout.inputText.fontSize.mobile * 16
     ).toFixed(4)}px
     ${(layout.label.paddingPx.mobile - 1).toFixed(4)}px /* Visual alignment */
     ${(
-      layout.input.paddingBottomPx.mobile -
-      layout.textCrop.input.bottom * layout.input.fontSize.mobile * 16
+      layout.inputText.paddingBottomPx.mobile -
+      layout.textCrop.input.bottom * layout.inputText.fontSize.mobile * 16
     ).toFixed(4)}px;
   text-align: left;
   width: 100%;
@@ -89,7 +90,7 @@ export const Input = styled.input.attrs(props => ({
   &:active,
   &:hover,
   &:focus {
-    border-width: ${layout.input.borderWidthPx.active.toFixed()}px;
+    border-width: ${layout.inputText.borderWidthPx.active.toFixed()}px;
     outline: none;
   }
 `;
@@ -169,13 +170,13 @@ export const Label = styled.label`
   position: absolute;
   top: ${(
     layout.label.paddingPx.mobile +
-    layout.input.borderWidthPx.normal +
+    layout.inputText.borderWidthPx.normal +
     3
   ).toFixed(
     4,
   )}px; /* 3px is added so the vertical space between the border and the top of the label text is 11.5px, the same as the cap height of the label text. */
   left: ${(
-    layout.label.paddingPx.mobile + layout.input.borderWidthPx.normal
+    layout.label.paddingPx.mobile + layout.inputText.borderWidthPx.normal
   ).toFixed(4)}px;
   ${textCrop.bodyText.capHeight}
 `;
@@ -215,7 +216,7 @@ export const ColorCodeField = styled.div`
 
 export const InputDescriptionWrapper = styled.div`
   padding-left: ${(
-    layout.label.paddingPx.mobile + layout.input.borderWidthPx.normal
+    layout.label.paddingPx.mobile + layout.inputText.borderWidthPx.normal
   ).toFixed(4)}px;
 `;
 
@@ -228,13 +229,13 @@ export const InputExamplesWrapper = styled.div`
 export const InputWrapper = styled.div`
   background-color: inherit;
   height: ${(
-    layout.input.borderWidthPx.normal +
+    layout.inputText.borderWidthPx.normal +
     layout.label.paddingPx.mobile +
     layout.label.capHeightPx.mobile +
-    layout.input.paddingTopPx.mobile +
-    layout.input.capHeightPx.mobile +
-    layout.input.paddingBottomPx.mobile +
-    layout.input.borderWidthPx.normal +
+    layout.inputText.paddingTopPx.mobile +
+    layout.inputText.capHeightPx.mobile +
+    layout.inputText.paddingBottomPx.mobile +
+    layout.inputText.borderWidthPx.normal +
     4
   ).toFixed(
     4,
@@ -312,22 +313,41 @@ export const ChromaTextFieldWrapper = styled.div`
   width: 100%;
 `;
 
-export const ChromaTextField = styled.input.attrs(props => ({
-  type: 'text',
-}))`
-  border: 2px solid
-    ${props =>
-      props.darkMode
-        ? color.body.background.darkMode
-        : color.body.background.lightMode};
-  border-radius: ${layout.input.borderRadiusPx}px;
-  color: ${props =>
+export const ChromaTextField = styled(InputText)`
+  background-color: ${props =>
     props.darkMode
-      ? color.body.background.darkMode
-      : color.body.background.lightMode};
-  font-size: 80px;
+      ? color.chromaTextField.background.darkMode
+      : color.chromaTextField.background.lightMode};
+  border-color: ${props =>
+    props.darkMode
+      ? color.chromaTextField.background.darkMode
+      : color.chromaTextField.background.lightMode};
+  color: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+  font-size: ${layout.chromaTextField.fontSize.mobile}rem;
   height: 50%;
+  padding-bottom: ${(
+    layout.chromaTextField.paddingBottomPx.mobile -
+    layout.textCrop.input.bottom * layout.chromaTextField.fontSize.mobile * 16
+  ).toFixed(4)}px;
+  padding-top: ${(
+    layout.chromaTextField.paddingTopPx.mobile -
+    layout.textCrop.input.topCap * layout.chromaTextField.fontSize.mobile * 16
+  ).toFixed(4)}px;
   position: absolute;
   text-align: center;
   width: 66%;
+
+  &:active,
+  &:hover,
+  &:focus {
+    background-color: ${props =>
+      props.darkMode
+        ? color.body.background.darkMode
+        : color.body.background.lightMode};
+    border-color: ${props =>
+      props.darkMode
+        ? color.body.background.darkMode
+        : color.body.background.lightMode};
+  }
 `;

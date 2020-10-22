@@ -98,7 +98,21 @@ const layout = {
       desktop: baseXheight.desktop,
     },
   },
-  input: {
+  chromaTextField: {
+    fontSize: {
+      mobile: fontSizeForCapHeightToBe(
+        baseXheight.mobile * modularScale(4),
+        Roboto,
+      ),
+    },
+    paddingBottomPx: {
+      mobile: ((baseXheight.mobile * modularScale(4)) / 2) * oneRemPx,
+    },
+    paddingTopPx: {
+      mobile: ((baseXheight.mobile * modularScale(4)) / 2) * oneRemPx,
+    },
+  },
+  inputText: {
     borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},
     capHeightPx: {
