@@ -21,31 +21,31 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
-        class="style__InputExamplesWrapper-o0wbpp-10 ezytdZ"
+        class="style__InputExamplesWrapper-o0wbpp-11 bomJcg"
       >
         <p
-          class="style__Paragraph-o0wbpp-5 gvhEzQ"
+          class="style__Paragraph-o0wbpp-6 dhmbeD"
         >
           Examples:
         </p>
         <div
-          class="style__SpacerHorizontal-o0wbpp-13 dqtwdM"
+          class="style__SpacerHorizontal-o0wbpp-14 gkEYjx"
         />
         <ul
-          class="style__UnorderedListInputValueExamples-o0wbpp-7 sVxlm"
+          class="style__UnorderedListInputValueExamples-o0wbpp-8 joOchR"
         >
           <li
-            class="style__ListItemInputValueExample-o0wbpp-4 hJEoUz"
+            class="style__ListItemInputValueExample-o0wbpp-5 jOQzzS"
           >
             rgb(66, 135, 245)
           </li>
           <li
-            class="style__ListItemInputValueExample-o0wbpp-4 hJEoUz"
+            class="style__ListItemInputValueExample-o0wbpp-5 jOQzzS"
           >
             hsl(217, 90%, 61%)
           </li>
           <li
-            class="style__ListItemInputValueExample-o0wbpp-4 hJEoUz"
+            class="style__ListItemInputValueExample-o0wbpp-5 jOQzzS"
           >
             #4287f5
           </li>

@@ -79,10 +79,10 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <div
-        class="style__InputWrapper-o0wbpp-11 htJgBy"
+        class="style__InputWrapper-o0wbpp-12 hGwvwV"
       >
         <label
-          class="style__Label-o0wbpp-3 hZPqHY"
+          class="style__Label-o0wbpp-4 ioSAPn"
           for="mockId"
         >
           <span>
@@ -91,7 +91,7 @@ test('renders correctly', () => {
         </label>
         <input
           autocomplete="off"
-          class="style__Input-o0wbpp-2 cODAWN"
+          class="style__InputText-o0wbpp-2 iUgOwH"
           id="mockId"
           pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
           type="text"

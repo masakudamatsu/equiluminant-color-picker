@@ -20,20 +20,14 @@ const colorList = [
   },
 ];
 
-const hueList = [
-  'Red',
-  'Orange',
-  'Yellow',
-  'Chartreuse',
-  'Green',
-  'SpringGreen',
-  'Cyan',
-  'Azure',
-  'Blue',
-  'Violet',
-  'Magenta',
-  'Rose',
-];
+const initialChroma = '255';
+const newChroma = '25';
+
+// Simulate the user's interaction with the range input slider
+const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+  window.HTMLInputElement.prototype,
+  'value',
+).set; // A workaround for React overriding the Dom node's setter. See https://github.com/cypress-io/cypress/issues/1570#issuecomment-450966053
 
 describe('Landing Page shows non-interactive UI components', () => {
   beforeEach(() => {
@@ -44,12 +38,12 @@ describe('Landing Page shows non-interactive UI components', () => {
   });
   it('h2 elements', () => {
     cy.findByText(/set luminance/i);
-    cy.findByText(/choose hue/i);
+    cy.findByText(/choose chroma/i);
   });
   it('color code examples', () => {
     cy.findByText(/examples/i);
-    cy.findByText(/rgb/i);
-    cy.findByText(/hsl/i);
+    cy.findByText(/rgb\(/i);
+    cy.findByText(/hsl\(/i);
     cy.findByText('#4287f5');
   });
 });
@@ -114,7 +108,7 @@ describe('Blurring after typing a valid color code changes the color scheme appr
   });
 });
 
-describe('Clicking a hue swatche with a valid color code redirects to the results page', () => {
+describe('Moving the slider', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.findByLabelText(/color code/i)
@@ -124,12 +118,105 @@ describe('Clicking a hue swatche with a valid color code redirects to the result
       .blur();
   });
 
-  hueList.forEach((hue, index) => {
-    it(`${hue}`, () => {
-      // setup
-      cy.findByTestId(hue).click();
-      // verify
-      cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+  it('changes the chroma value displayed', () => {
+    // Check the initial value
+    cy.findByTestId('chroma-field').should('have.value', initialChroma);
+
+    // Move the slider
+    cy.findByTestId('chroma-setter').then($range => {
+      const range = $range[0];
+      nativeInputValueSetter.call(range, Number(newChroma));
+      range.dispatchEvent(
+        new Event('change', {value: Number(newChroma), bubbles: true}),
+      );
     });
+
+    // Verify the new value
+    cy.findByTestId('chroma-field').should('have.value', newChroma);
+  });
+});
+
+describe('Typing a value in the chroma value field box', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].rgbCode)
+      .blur();
+  });
+  it('changes chroma immediately', () => {
+    const newChroma = '120';
+
+    cy.findByTestId('chroma-field').click().clear().type(newChroma[0]);
+
+    cy.findByTestId('chroma-field').should('have.value', newChroma[0]);
+
+    cy.findByTestId('chroma-field').type(newChroma[1]);
+
+    cy.findByTestId('chroma-field').should(
+      'have.value',
+      newChroma[0] + newChroma[1],
+    );
+
+    cy.findByTestId('chroma-field').type(newChroma[2]);
+
+    cy.findByTestId('chroma-field').should('have.value', newChroma);
+  });
+});
+
+describe('Pressing arrow keys in the chroma value field box', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].rgbCode)
+      .blur();
+  });
+  it('changes chroma by 1', () => {
+    const expectedChroma = (Number(initialChroma) - 1).toString();
+
+    cy.findByTestId('chroma-field').click().type('{downarrow}');
+
+    cy.findByTestId('chroma-field').should('have.value', expectedChroma);
+
+    cy.findByTestId('chroma-field').click().type('{uparrow}');
+
+    cy.findByTestId('chroma-field').should('have.value', initialChroma);
+  });
+  it('changes chroma by 10 if pressed with Shift key', () => {
+    const expectedChroma = (Number(initialChroma) - 10).toString();
+
+    cy.findByTestId('chroma-field').click().type('{shift}{downarrow}');
+
+    cy.findByTestId('chroma-field').should('have.value', expectedChroma);
+
+    cy.findByTestId('chroma-field').click().type('{shift}{uparrow}');
+
+    cy.findByTestId('chroma-field').should('have.value', initialChroma);
+  });
+});
+
+describe('Clicking the submit button', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].rgbCode)
+      .blur();
+    cy.findByTestId('chroma-setter').then($range => {
+      const range = $range[0];
+      nativeInputValueSetter.call(range, Number(newChroma));
+      range.dispatchEvent(
+        new Event('change', {value: Number(newChroma), bubbles: true}),
+      );
+    });
+  });
+
+  it('redirects the user to the results page', () => {
+    cy.findByText(/get/i).click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
   });
 });

@@ -98,7 +98,21 @@ const layout = {
       desktop: baseXheight.desktop,
     },
   },
-  input: {
+  chromaTextField: {
+    fontSize: {
+      mobile: fontSizeForCapHeightToBe(
+        baseXheight.mobile * modularScale(4),
+        Roboto,
+      ),
+    },
+    paddingBottomPx: {
+      mobile: ((baseXheight.mobile * modularScale(4)) / 2) * oneRemPx,
+    },
+    paddingTopPx: {
+      mobile: ((baseXheight.mobile * modularScale(4)) / 2) * oneRemPx,
+    },
+  },
+  inputText: {
     borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},
     capHeightPx: {
@@ -146,6 +160,17 @@ const layout = {
   sideMarginPx: {
     // in pixel, because we do not want it to be enlarged when the user increases the font size.
     mobile: baseXheight.mobile * modularScale(1) * oneRemPx,
+  },
+  slider: {
+    thumb: {
+      diameterPx: 48 /* to be easy to tap or click. See https://web.dev/tap-targets/ */,
+    },
+    get track() {
+      // see https://stackoverflow.com/a/4616262/11847654 for the get syntax
+      return {
+        heightPx: this.thumb.diameterPx / 3,
+      };
+    },
   },
   textCrop: {
     bodyText: {

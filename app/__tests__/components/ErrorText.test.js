@@ -72,7 +72,7 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <p
-        class="style__Paragraph-o0wbpp-5 style__ParagraphErrorMessage-o0wbpp-6 gpMJrv"
+        class="style__Paragraph-o0wbpp-6 style__ParagraphErrorMessage-o0wbpp-7 gMjrsG"
         data-testid="colorCodeError"
       >
         <span>

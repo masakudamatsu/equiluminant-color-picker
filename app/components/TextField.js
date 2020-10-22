@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
-import {Abbr, Input, InputWrapper, Label} from '../theme/style';
+import {Abbr, InputText, InputWrapper, Label} from '../theme/style';
 
 function TextField(props) {
   return (
     <InputWrapper>
       <Label htmlFor={props.id}>{props.label}</Label>
-      <Input
+      <InputText
         data-testid={props.testId}
-        type="text"
         darkMode={props.darkMode}
         error={props.inputInvalid || props.alertMissing}
         id={props.id}

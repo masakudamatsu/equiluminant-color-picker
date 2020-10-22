@@ -3,6 +3,7 @@ type Query {
   feed(
     hue: Int
     contrastRatio: Float
+    chroma: Int
     orderBy: [ColorCodeOrderByInput]
   ): [ColorCode!]!
 }

@@ -2,7 +2,17 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
 
-import {Abbr, H2, HueSwatchWrapper, SpacerVertical} from '../theme/style';
+import {
+  Abbr,
+  ChromaTextFieldWrapper,
+  ChromaTextField,
+  H2,
+  HueSwatchWrapper,
+  InputRange,
+  SpacerVertical,
+} from '../theme/style';
+
+import ChromaPreview from '../components/ChromaPreview';
 import InputColorCode from '../components/InputColorCode';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
@@ -11,6 +21,7 @@ import TextField from '../components/TextField';
 import InputRGB from '../components/InputRGB';
 import HueSwatch from '../components/HueSwatch';
 
+import {handleArrowKeys} from '../utils/eventHandlers';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
 import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 import color from '../theme/color';
@@ -148,6 +159,28 @@ function HomePage(props) {
 
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
+  const handleChangeChroma = event => {
+    props.setChroma(event.target.value);
+  };
+
+  const handleKeyDownChroma = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the submission
+    }
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+      return;
+    }
+    let newChromaValue;
+    if (event.shiftKey) {
+      // Increase the value by 10
+      newChromaValue = handleArrowKeys(event, 10);
+    } else {
+      // Increase the value by 1
+      newChromaValue = handleArrowKeys(event, 1);
+    }
+    props.setChroma(newChromaValue);
+  };
+
   return (
     <>
       <h1>Luminance Picker</h1>
@@ -189,127 +222,36 @@ function HomePage(props) {
           }
         />{' '}
         <SpacerVertical scale="3" />
-        <H2>#2 Choose hue</H2>
+        <H2>#2 Choose chroma</H2>
         <SpacerVertical scale="2" />
-        <HueSwatchWrapper darkMode={props.darkMode}>
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="0"
-            left="4.8"
-            title="Red"
-            top="11.2"
-            zIndex="1"
+        <ChromaTextFieldWrapper>
+          <ChromaPreview chroma={props.chroma} />
+          <ChromaTextField
+            darkMode={props.darkMode}
+            data-testid="chroma-field"
+            id="chroma-field"
+            onChange={handleChangeChroma}
+            onKeyDown={handleKeyDownChroma}
+            pattern="1?\d?\d|2[0-4]\d|25[0-5]"
+            value={props.chroma}
           />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="30"
-            left="15.5"
-            title="Orange"
-            top="21.7"
-            zIndex="2"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="60"
-            left="52"
-            title="Yellow"
-            top="28.8"
-            zIndex="3"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="90"
-            left="8.2"
-            title="Chartreuse"
-            top="39.1"
-            zIndex="3"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="120"
-            left="41.7"
-            title="Green"
-            top="36.5"
-            zIndex="4"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="150"
-            left="57.6"
-            title="SpringGreen"
-            top="10.3"
-            zIndex="1"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="180"
-            left="13.4"
-            title="Cyan"
-            top="55"
-            zIndex="4"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="210"
-            left="74.8"
-            title="Azure"
-            top="39.3"
-            zIndex="3"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="240"
-            left="67.9"
-            title="Blue"
-            top="23.4"
-            zIndex="2"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="270"
-            left="49.6"
-            title="Violet"
-            top="60.3"
-            zIndex="3"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="300"
-            left="35.8"
-            title="Magenta"
-            top="64"
-            zIndex="4"
-          />
-          <HueSwatch
-            getHue={props.getHue}
-            handleSubmit={handleSubmit}
-            hue="330"
-            left="18.6"
-            title="Rose"
-            top="72"
-            zIndex="5"
-          />
-        </HueSwatchWrapper>
-        <InputRGB
-          red={props.red}
-          green={props.green}
-          blue={props.blue}
-          handleChangeRed={props.handleChangeRed}
-          handleChangeGreen={props.handleChangeGreen}
-          handleChangeBlue={props.handleChangeBlue}
+        </ChromaTextFieldWrapper>
+        <SpacerVertical scale="2" />
+        <InputRange
+          darkMode={props.darkMode}
+          data-testid="chroma-setter"
+          id="chroma-setter"
+          max="255"
+          min="0"
+          onChange={handleChangeChroma}
+          step="1"
+          value={props.chroma}
         />
-        <p>{`Contrast ratio with pure black: ${props.contrastRatio}`}</p>
+        <SpacerVertical scale="1" />
+        <p>0 for grayscale; 255 for fully-saturated color</p>
+        <button type="submit" onClick={handleSubmit}>
+          Get equiluminant color!
+        </button>
       </form>
     </>
   );
@@ -338,6 +280,7 @@ HomePage.propTypes = {
   setBackgroundOverlay: PropTypes.func.isRequired,
   setBackgroundColor: PropTypes.func.isRequired,
   setBackgroundOverlayColor: PropTypes.func.isRequired,
+  chroma: PropTypes.string.isRequired,
 };
 
 export default HomePage;

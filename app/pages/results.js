@@ -11,13 +11,15 @@ import TextField from '../components/TextField';
 
 import {ResultsWrapper, LiSwatchWrapper} from '../theme/style';
 
+import {handleArrowKeys} from '../utils/eventHandlers';
+
 function Results(props) {
   const [clickedColorCode, setClickedColorCode] = useState('');
   const [clipboardError, setClipboardError] = useState(false);
 
   const FEED_QUERY = gql`
     {
-      feed(hue: ${props.hue}, contrastRatio: ${props.contrastRatio}, orderBy: [{ chroma: asc }, { hue: asc }]) {
+      feed(contrastRatio: ${props.contrastRatio}, chroma: ${props.chroma}, orderBy: [{ hue: asc }]) {
         red
         green
         blue
@@ -83,27 +85,11 @@ function Results(props) {
     }
     let newContrastRatio;
     if (event.shiftKey) {
-      const stepValue = 0.1;
-    // Increase the value by 0.1
-    if (event.key === 'ArrowUp') {
-      event.preventDefault(); // Prevent the cursor from moving to the top
-        newContrastRatio = (Number(event.target.value) + stepValue).toFixed(2);
-    }
-    // Decrease the value by 0.1
-    if (event.key === 'ArrowDown') {
-        newContrastRatio = (Number(event.target.value) - stepValue).toFixed(2);
-    }
+      // Increase the value by 0.1
+      newContrastRatio = handleArrowKeys(event, 0.1).toFixed(2);
     } else {
-      const stepValue = 0.01;
       // Increase the value by 0.01
-      if (event.key === 'ArrowUp') {
-        event.preventDefault(); // Prevent the cursor from moving to the top
-        newContrastRatio = (Number(event.target.value) + stepValue).toFixed(2);
-      }
-      // Decrease the value by 0.01
-      if (event.key === 'ArrowDown') {
-        newContrastRatio = (Number(event.target.value) - stepValue).toFixed(2);
-      }
+      newContrastRatio = handleArrowKeys(event, 0.01).toFixed(2);
     }
     props.setContrastRatio(newContrastRatio); // toFixed(2) prevents floating values to be displayed (e.g. 1.3800000000000001 after 1.37)
   };

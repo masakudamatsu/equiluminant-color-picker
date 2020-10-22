@@ -66,7 +66,7 @@ test('renders correctly', () => {
     <div>
       <button
         aria-label="rgb(123, 133, 23)"
-        class="style__ButtonSwatch-o0wbpp-18 dxTkpx"
+        class="style__ButtonSwatch-o0wbpp-19 PzvEA"
         data-testid="rgb-123-133-23"
       />
     </div>
