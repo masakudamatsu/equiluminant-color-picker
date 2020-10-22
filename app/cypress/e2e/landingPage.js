@@ -136,6 +136,35 @@ describe('Moving the slider', () => {
   });
 });
 
+describe('Typing a value in the chroma value field box', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.findByLabelText(/color code/i)
+      .click()
+      .clear()
+      .type(colorList[0].rgbCode)
+      .blur();
+  });
+  it('changes chroma immediately', () => {
+    const newChroma = '120';
+
+    cy.findByTestId('chroma-field').click().clear().type(newChroma[0]);
+
+    cy.findByTestId('chroma-field').should('have.value', newChroma[0]);
+
+    cy.findByTestId('chroma-field').type(newChroma[1]);
+
+    cy.findByTestId('chroma-field').should(
+      'have.value',
+      newChroma[0] + newChroma[1],
+    );
+
+    cy.findByTestId('chroma-field').type(newChroma[2]);
+
+    cy.findByTestId('chroma-field').should('have.value', newChroma);
+  });
+});
+
 describe('Pressing arrow keys in the chroma value field box', () => {
   beforeEach(() => {
     cy.visit('/');
