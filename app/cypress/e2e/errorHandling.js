@@ -1,5 +1,6 @@
 import color from '../../theme/color';
 
+describe('Color code text field', () => {
 describe('Error handling: missing input', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -92,7 +93,7 @@ describe('Error handling: invalid input', () => {
     const colorCode = 'rgb(123, 123, 223)';
     cy.findByLabelText(/color code/i)
       .click()
-      .type(colorCode[0])
+        .type(colorCode[0]) // Enter one letter at a time
       .blur();
     cy.findByTestId('colorCodeError').should('be.visible');
     cy.findByLabelText(/color code/i).should(
@@ -179,4 +180,5 @@ describe('Error-handling: Pressing the return key alerts the user to', () => {
     );
     cy.focused().should('not.have.attr', 'id', 'inputColorCode');
   });
+});
 });
