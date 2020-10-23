@@ -37,12 +37,6 @@ function HomePage(props) {
     }
   };
 
-  // Generate the RGB color code
-  let backgroundColor = color.body.font.lightMode;
-  if (props.red && props.green && props.blue) {
-    backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
-  }
-
   const handleBlur = event => {
     // When nothing is entered
     if (!event.target.value) {
