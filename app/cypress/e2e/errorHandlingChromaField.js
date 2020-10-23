@@ -31,8 +31,8 @@ describe('Chroma field', () => {
       it('clicks the chroma text field', () => {
         cy.findByTestId('chroma-field').click();
         cy.findByTestId('chromaError').should('be.hidden');
+      });
     });
-  });
   });
 
   describe('Error handling: arrow keys', () => {
@@ -152,13 +152,23 @@ describe('Chroma field', () => {
     });
   });
 
-  describe('Error-handling: Pressing the return key alerts the user to', () => {
+  describe.only('Error-handling: Pressing the return key alerts the user to', () => {
     beforeEach(() => {
       cy.visit('/');
-});
+      cy.findByLabelText(/color code/i)
+        .click()
+        .clear()
+        .type('rgb(126, 135, 23)')
+        .blur(); // So no error for the color code field
+    });
 
     it('enter a chroma value if the user has not entered any text', () => {
       cy.findByTestId('chroma-field').click().clear().type('{enter}');
       cy.findByTestId('chromaError').contains(/empty/i);
     });
+    it('enter a valid chroma value if an invalid input is provided', () => {
+      cy.findByTestId('chroma-field').click().clear().type('a{enter}');
+      cy.findByTestId('chromaError').contains(/integer/i);
+    });
+  });
 });

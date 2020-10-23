@@ -179,10 +179,16 @@ function HomePage(props) {
     // Deal with enter keys
     if (event.key === 'Enter') {
       if (!event.target.value) {
-      event.preventDefault(); // Prevent the submission
+        event.preventDefault(); // Prevent the submission
         props.setChromaMissing(true);
         return;
-    }
+      }
+      if (event.target.validity.patternMismatch) {
+        event.preventDefault(); // Prevent the submission
+        if (!props.chromaInvalid) {
+          props.setChromaInvalid(true);
+        }
+      }
     }
     // Deal with non-arrow keys
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
