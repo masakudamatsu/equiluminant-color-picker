@@ -41,7 +41,7 @@ test('shows the relevant alert if the alertMissing prop is true', () => {
       inputInvalid={false}
     />,
   );
-  expect(getByText(/before choosing a hue/i)).toBeVisible();
+  expect(getByText(/before/i)).toBeVisible();
 });
 
 test('shows the relevant alert if the inputInvalid prop is true', () => {
