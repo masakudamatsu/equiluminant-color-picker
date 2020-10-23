@@ -152,7 +152,7 @@ describe('Chroma field', () => {
     });
   });
 
-  describe.only('Error-handling: Pressing the return key alerts the user to', () => {
+  describe('Error-handling: Pressing the return key alerts the user to', () => {
     beforeEach(() => {
       cy.visit('/');
       cy.findByLabelText(/color code/i)
