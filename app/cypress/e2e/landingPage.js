@@ -214,4 +214,9 @@ describe('Once all inputs are provided correctly', () => {
     cy.findByText(/get/i).click();
     cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
   });
+
+  it('Pressing the enter key redirects the user to the results page', () => {
+    cy.findByTestId('chroma-field').click().type('{enter}');
+    cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+  });
 });
