@@ -170,14 +170,11 @@ describe('Color code field', () => {
         'Please enter a valid css color code as shown in the above examples',
       );
     });
-    it('click the hue swatch if the input is valid (and the input element is blurred)', () => {
+    it('choose chroma if the input is valid', () => {
       cy.findByLabelText(/color code/i)
         .click()
         .type('rgb(100,100,100){enter}');
-      cy.findByTestId('colorCodeError').should(
-        'have.text',
-        'Please click one of the hue swatches below',
-      );
+      cy.findByTestId('colorCodeError').contains(/choose chroma/i);
       cy.focused().should('not.have.attr', 'id', 'inputColorCode');
     });
   });
