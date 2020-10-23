@@ -65,7 +65,7 @@ test('shows the relevant alert if the alertEnterKey is true', () => {
       inputInvalid={false}
     />,
   );
-  expect(getByText(/one of the hue swatches below/i)).toBeVisible();
+  expect(getByText(/choose chroma/i)).toBeVisible();
 });
 
 test('renders correctly', () => {

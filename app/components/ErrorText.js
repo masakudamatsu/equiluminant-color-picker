@@ -18,7 +18,9 @@ function ErrorText(props) {
       </span>
     );
   } else if (props.alertEnterKey) {
-    errorMessage = <span>Please click one of the hue swatches below</span>;
+    errorMessage = (
+      <span>Please choose chroma and then press the search button</span>
+    );
   } else if (props.chromaInvalid) {
     errorMessage = (
       <span>Chroma value needs to be an integer between 0 and 255</span>
