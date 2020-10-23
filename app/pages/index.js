@@ -176,10 +176,15 @@ function HomePage(props) {
   };
 
   const handleKeyDownChroma = event => {
-    // Deal with non-arrow keys
+    // Deal with enter keys
     if (event.key === 'Enter') {
+      if (!event.target.value) {
       event.preventDefault(); // Prevent the submission
+        props.setChromaMissing(true);
+        return;
     }
+    }
+    // Deal with non-arrow keys
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
       return;
     }

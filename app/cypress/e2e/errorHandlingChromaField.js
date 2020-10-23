@@ -151,4 +151,14 @@ describe('Chroma field', () => {
       );
     });
   });
+
+  describe('Error-handling: Pressing the return key alerts the user to', () => {
+    beforeEach(() => {
+      cy.visit('/');
+});
+
+    it('enter a chroma value if the user has not entered any text', () => {
+      cy.findByTestId('chroma-field').click().clear().type('{enter}');
+      cy.findByTestId('chromaError').contains(/empty/i);
+    });
 });
