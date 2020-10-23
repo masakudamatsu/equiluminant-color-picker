@@ -25,6 +25,7 @@ function MyApp({Component, pageProps}) {
   const [backgroundOverlayColor, setBackgroundOverlayColor] = useState('');
 
   const [chroma, setChroma] = useState('255');
+  const [chromaInvalid, setChromaInvalid] = useState(false);
 
   const updateContrastRatio = (red, green, blue) => {
     const newContrastRatio = getContrastRatio(red, green, blue);
@@ -88,6 +89,8 @@ function MyApp({Component, pageProps}) {
         setBackgroundOverlayColor={setBackgroundOverlayColor}
         chroma={chroma}
         setChroma={setChroma}
+        chromaInvalid={chromaInvalid}
+        setChromaInvalid={setChromaInvalid}
       />
       <GlobalStyle
         darkMode={darkMode}

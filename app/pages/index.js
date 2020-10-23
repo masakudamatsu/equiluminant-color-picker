@@ -148,6 +148,10 @@ function HomePage(props) {
       document.getElementById('inputColorCode').focus();
       return;
     }
+    if (props.chromaInvalid) {
+      document.getElementById('chroma-field').focus();
+      return;
+    }
     router.push('/results');
   };
 
@@ -161,6 +165,11 @@ function HomePage(props) {
 
   const handleChangeChroma = event => {
     props.setChroma(event.target.value);
+    if (props.chromaInvalid) {
+      if (!event.target.validity.patternMismatch) {
+        props.setChromaInvalid(false);
+      }
+    }
   };
 
   const handleKeyDownChroma = event => {
@@ -179,6 +188,16 @@ function HomePage(props) {
       newChromaValue = handleArrowKeys(event, 1);
     }
     props.setChroma(newChromaValue);
+  };
+
+  const handleBlurChroma = event => {
+    // Validation
+    const newInputIsInvalid = event.target.validity.patternMismatch;
+    if (newInputIsInvalid) {
+      if (!props.chromaInvalid) {
+        props.setChromaInvalid(true);
+      }
+    }
   };
 
   return (
@@ -218,6 +237,7 @@ function HomePage(props) {
               inputInvalid={props.inputInvalid}
               alertMissing={props.alertMissing}
               alertEnterKey={props.alertEnterKey}
+              testId="colorCodeError"
             />
           }
         />{' '}
@@ -229,14 +249,16 @@ function HomePage(props) {
           <ChromaTextField
             darkMode={props.darkMode}
             data-testid="chroma-field"
+            error={props.chromaInvalid}
             id="chroma-field"
+            onBlur={handleBlurChroma}
             onChange={handleChangeChroma}
             onKeyDown={handleKeyDownChroma}
             pattern="1?\d?\d|2[0-4]\d|25[0-5]"
             value={props.chroma}
           />
         </ChromaTextFieldWrapper>
-        <SpacerVertical scale="2" />
+        <SpacerVertical scale="1" />
         <InputRange
           darkMode={props.darkMode}
           data-testid="chroma-setter"
@@ -249,6 +271,12 @@ function HomePage(props) {
         />
         <SpacerVertical scale="1" />
         <p>0 for grayscale; 255 for fully-saturated color</p>
+        <ErrorText
+          chromaInvalid={props.chromaInvalid}
+          darkMode={props.darkMode}
+          testId="chromaError"
+        />
+        <SpacerVertical scale="1" />
         <button type="submit" onClick={handleSubmit}>
           Get equiluminant color!
         </button>

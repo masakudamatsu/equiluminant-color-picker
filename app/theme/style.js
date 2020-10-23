@@ -318,10 +318,17 @@ export const ChromaTextField = styled(InputText)`
     props.darkMode
       ? color.chromaTextField.background.darkMode
       : color.chromaTextField.background.lightMode};
-  border-color: ${props =>
-    props.darkMode
-      ? color.chromaTextField.background.darkMode
-      : color.chromaTextField.background.lightMode};
+  border-color: ${props => {
+    if (props.darkMode) {
+      return props.error
+        ? color.paragraphErrorMessage.font.forDarkColor
+        : color.chromaTextField.background.darkMode;
+    } else {
+      return props.error
+        ? color.paragraphErrorMessage.font.forLightColor
+        : color.chromaTextField.background.lightMode;
+    }
+  }};
   color: ${props =>
     props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
   font-size: ${layout.chromaTextField.fontSize.mobile}rem;
@@ -342,10 +349,6 @@ export const ChromaTextField = styled(InputText)`
   &:hover,
   &:focus {
     background-color: ${props =>
-      props.darkMode
-        ? color.body.background.darkMode
-        : color.body.background.lightMode};
-    border-color: ${props =>
       props.darkMode
         ? color.body.background.darkMode
         : color.body.background.lightMode};

@@ -19,6 +19,8 @@ function ErrorText(props) {
     );
   } else if (props.alertEnterKey) {
     errorMessage = <span>Please click one of the hue swatches below</span>;
+  } else if (props.chromaInvalid) {
+    errorMessage = <span>Please enter a value between 0 and 255</span>;
   } else {
     errorMessage = (
       <span>
@@ -28,9 +30,14 @@ function ErrorText(props) {
   }
   return (
     <ParagraphErrorMessage
-      data-testid="colorCodeError"
+      data-testid={props.testId}
       darkMode={props.darkMode}
-      error={props.inputInvalid || props.alertMissing || props.alertEnterKey}
+      error={
+        props.inputInvalid ||
+        props.alertMissing ||
+        props.alertEnterKey ||
+        props.chromaInvalid
+      }
     >
       {errorMessage}
     </ParagraphErrorMessage>
@@ -39,9 +46,10 @@ function ErrorText(props) {
 
 ErrorText.propTypes = {
   darkMode: PropTypes.bool.isRequired,
-  alertEnterKey: PropTypes.bool.isRequired,
-  alertMissing: PropTypes.bool.isRequired,
-  inputInvalid: PropTypes.bool.isRequired,
+  alertEnterKey: PropTypes.bool,
+  alertMissing: PropTypes.bool,
+  inputInvalid: PropTypes.bool,
+  chromaInvalid: PropTypes.bool,
 };
 
 export default ErrorText;
