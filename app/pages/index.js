@@ -18,7 +18,6 @@ import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
 import TextField from '../components/TextField';
 
-import InputRGB from '../components/InputRGB';
 import HueSwatch from '../components/HueSwatch';
 
 import {handleArrowKeys} from '../utils/eventHandlers';
