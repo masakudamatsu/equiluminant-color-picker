@@ -28,7 +28,11 @@ describe('Chroma field', () => {
         });
         cy.findByTestId('chromaError').should('be.hidden');
       });
+      it('clicks the chroma text field', () => {
+        cy.findByTestId('chroma-field').click();
+        cy.findByTestId('chromaError').should('be.hidden');
     });
+  });
   });
 
   describe('Error handling: arrow keys', () => {

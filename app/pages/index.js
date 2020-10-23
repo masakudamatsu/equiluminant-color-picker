@@ -226,6 +226,12 @@ function HomePage(props) {
     }
   };
 
+  const handleFocusChroma = event => {
+    if (props.chromaMissing) {
+      props.setChromaMissing(false);
+    }
+  };
+
   return (
     <>
       <h1>Luminance Picker</h1>
@@ -279,6 +285,7 @@ function HomePage(props) {
             id="chroma-field"
             onBlur={handleBlurChroma}
             onChange={handleChangeChroma}
+            onFocus={handleFocusChroma}
             onKeyDown={handleKeyDownChroma}
             pattern="1?\d?\d|2[0-4]\d|25[0-5]"
             value={props.chroma}
