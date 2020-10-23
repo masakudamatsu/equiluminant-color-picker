@@ -193,7 +193,7 @@ describe('Pressing arrow keys in the chroma value field box', () => {
   });
 });
 
-describe('Clicking the submit button', () => {
+describe('Once all inputs are provided correctly', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.findByLabelText(/color code/i)
@@ -210,7 +210,7 @@ describe('Clicking the submit button', () => {
     });
   });
 
-  it('redirects the user to the results page', () => {
+  it('Clicking the submit button redirects the user to the results page', () => {
     cy.findByText(/get/i).click();
     cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
   });
