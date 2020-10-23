@@ -12,7 +12,6 @@ function ChromaPreview(props) {
   const chroma = Number(props.chroma);
   const max = Math.floor((chroma + 255) / 2);
   const min = max - chroma;
-  console.log(`max is ${max}; min is ${min}`);
   const purple = `rgb(${max}, ${min}, ${max})`;
   const red = `rgb(${max}, ${min}, ${min})`;
   const yellow = `rgb(${max}, ${max}, ${min})`;
