@@ -184,6 +184,44 @@ describe('Color code text field', () => {
 });
 
 describe('Chroma text field', () => {
+  describe('Error handling: arrow keys', () => {
+    beforeEach(() => {
+      cy.visit('/');
+      cy.findByLabelText(/color code/i)
+        .click()
+        .clear()
+        .type('rgb(126, 135, 23)')
+        .blur(); // So no error for the color code field
+    });
+    it('Pressing arrow UP key does not change chroma if it is 255, and the alert will be shown with an appropriate text. When pressing arrow DOWN key, then the alert disappears.', () => {
+      // Make sure the chroma value is 255
+      cy.findByTestId('chroma-field').should('have.value', '255');
+      // Execute
+      cy.findByTestId('chroma-field').click().type('{uparrow}');
+      // verify
+      cy.findByTestId('chroma-field').should('have.value', '255');
+      cy.findByTestId('chromaError').should('be.visible').contains('255');
+      // Execute
+      cy.findByTestId('chroma-field').click().type('{downarrow}');
+      // Verify
+      cy.findByTestId('chroma-field').should('have.value', '254');
+      cy.findByTestId('chromaError').should('be.hidden');
+    });
+    it('Pressing arrow DOWN key does not change chroma if it is 0, and the alert will be shown with an appropriate text. When pressing arrow UP key, then the alert disappears.', () => {
+      // Make sure the chroma value is 0
+      cy.findByTestId('chroma-field').click().clear().type('0');
+      // Execute
+      cy.findByTestId('chroma-field').click().type('{downarrow}');
+      // verify
+      cy.findByTestId('chroma-field').should('have.value', '0');
+      cy.findByTestId('chromaError').should('be.visible').contains('0');
+      // Execute
+      cy.findByTestId('chroma-field').click().type('{uparrow}');
+      // Verify
+      cy.findByTestId('chroma-field').should('have.value', '1');
+      cy.findByTestId('chromaError').should('be.hidden');
+    });
+  });
   describe('Error handling: invalid input', () => {
     beforeEach(() => {
       cy.visit('/');

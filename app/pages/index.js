@@ -173,11 +173,26 @@ function HomePage(props) {
   };
 
   const handleKeyDownChroma = event => {
+    // Deal with non-arrow keys
     if (event.key === 'Enter') {
       event.preventDefault(); // Prevent the submission
     }
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
       return;
+    }
+    // Invalid arrow key events
+    if (event.key === 'ArrowUp' && event.target.value === '255') {
+      event.preventDefault();
+      props.setChromaInvalid(true);
+      return;
+    }
+    if (event.key === 'ArrowDown' && event.target.value === '0') {
+      props.setChromaInvalid(true);
+      return;
+    }
+    // When everything is valid
+    if (props.chromaInvalid) {
+      props.setChromaInvalid(false);
     }
     let newChromaValue;
     if (event.shiftKey) {
