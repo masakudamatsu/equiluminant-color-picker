@@ -1,41 +1,29 @@
 import {useState} from 'react';
-import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
+import PropTypes from 'prop-types';
 
 import {
   Abbr,
-  ChromaTextFieldWrapper,
   ChromaTextField,
+  ChromaTextFieldWrapper,
   H2,
   InputRange,
   SpacerVertical,
 } from '../theme/style';
 
 import ChromaPreview from '../components/ChromaPreview';
-import InputColorCode from '../components/InputColorCode';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
+import InputColorCode from '../components/InputColorCode';
 import TextField from '../components/TextField';
 
-import {handleArrowKeys} from '../utils/eventHandlers';
-import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
-import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 import color from '../theme/color';
+import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
+import {handleArrowKeys} from '../utils/eventHandlers';
+import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 
 function HomePage(props) {
   const [userColorCode, setUserColorCode] = useState('');
-
-  const handleChange = event => {
-    setUserColorCode(event.target.value);
-    if (props.alertMissing) {
-      props.setAlertMissing(false);
-    }
-    if (props.inputInvalid) {
-      if (!event.target.validity.patternMismatch) {
-        props.setInputInvalid(false);
-      }
-    }
-  };
 
   const handleBlur = event => {
     // When nothing is entered
@@ -102,6 +90,18 @@ function HomePage(props) {
     }
   };
 
+  const handleChange = event => {
+    setUserColorCode(event.target.value);
+    if (props.alertMissing) {
+      props.setAlertMissing(false);
+    }
+    if (props.inputInvalid) {
+      if (!event.target.validity.patternMismatch) {
+        props.setInputInvalid(false);
+      }
+    }
+  };
+
   const handleKeyDown = event => {
     if (event.key === 'Enter') {
       event.preventDefault(); // Prevent the submission
@@ -125,33 +125,23 @@ function HomePage(props) {
     }
   };
 
-  const router = useRouter();
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (props.inputMissing) {
-      props.setAlertMissing(true);
-      document.getElementById('inputColorCode').focus();
+  const handleBlurChroma = event => {
+    // When nothing is entered
+    if (!event.target.value) {
+      if (!props.chromaMissing) {
+        props.setChromaMissing(true);
+      }
+      props.setChroma('255');
       return;
     }
-    if (props.inputInvalid) {
-      document.getElementById('inputColorCode').focus();
-      return;
+    // Validation
+    const newInputIsInvalid = event.target.validity.patternMismatch;
+    if (newInputIsInvalid) {
+      if (!props.chromaInvalid) {
+        props.setChromaInvalid(true);
+      }
     }
-    if (props.chromaInvalid) {
-      document.getElementById('chroma-field').focus();
-      return;
-    }
-    router.push('/results');
   };
-
-  const colorCodeFieldLabel = (
-    <span>
-      Enter <Abbr>css</Abbr> color code
-    </span>
-  );
-
-  const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
   const handleChangeChroma = event => {
     if (props.chromaMissing) {
@@ -162,6 +152,12 @@ function HomePage(props) {
       if (!event.target.validity.patternMismatch) {
         props.setChromaInvalid(false);
       }
+    }
+  };
+
+  const handleFocusChroma = event => {
+    if (props.chromaMissing) {
+      props.setChromaMissing(false);
     }
   };
 
@@ -209,30 +205,31 @@ function HomePage(props) {
     props.setChroma(newChromaValue);
   };
 
-  const handleBlurChroma = event => {
-    // When nothing is entered
-    if (!event.target.value) {
-      if (!props.chromaMissing) {
-        props.setChromaMissing(true);
-      }
-      props.setChroma('255');
+  const router = useRouter();
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (props.inputMissing) {
+      props.setAlertMissing(true);
+      document.getElementById('inputColorCode').focus();
       return;
     }
-    // Validation
-    const newInputIsInvalid = event.target.validity.patternMismatch;
-    if (newInputIsInvalid) {
-      if (!props.chromaInvalid) {
-        props.setChromaInvalid(true);
-      }
+    if (props.inputInvalid) {
+      document.getElementById('inputColorCode').focus();
+      return;
     }
+    if (props.chromaInvalid) {
+      document.getElementById('chroma-field').focus();
+      return;
+    }
+    router.push('/results');
   };
 
-  const handleFocusChroma = event => {
-    if (props.chromaMissing) {
-      props.setChromaMissing(false);
-    }
-  };
-
+  const colorCodeFieldLabel = (
+    <span>
+      Enter <Abbr>css</Abbr> color code
+    </span>
+  );
+  const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
   return (
     <>
       <h1>Luminance Picker</h1>
