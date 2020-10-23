@@ -7,7 +7,6 @@ import {
   ChromaTextFieldWrapper,
   ChromaTextField,
   H2,
-  HueSwatchWrapper,
   InputRange,
   SpacerVertical,
 } from '../theme/style';
@@ -17,8 +16,6 @@ import InputColorCode from '../components/InputColorCode';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
 import TextField from '../components/TextField';
-
-import HueSwatch from '../components/HueSwatch';
 
 import {handleArrowKeys} from '../utils/eventHandlers';
 import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
