@@ -150,18 +150,18 @@ describe('Typing a value in the chroma value field box', () => {
 
     cy.findByTestId('chroma-field').click().clear().type(newChroma[0]);
 
-    cy.findByTestId('chroma-field').should('have.value', newChroma[0]);
+    cy.findByTestId('chroma-setter').should('have.value', newChroma[0]);
 
     cy.findByTestId('chroma-field').type(newChroma[1]);
 
-    cy.findByTestId('chroma-field').should(
+    cy.findByTestId('chroma-setter').should(
       'have.value',
       newChroma[0] + newChroma[1],
     );
 
     cy.findByTestId('chroma-field').type(newChroma[2]);
 
-    cy.findByTestId('chroma-field').should('have.value', newChroma);
+    cy.findByTestId('chroma-setter').should('have.value', newChroma);
   });
 });
 
