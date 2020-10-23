@@ -1,4 +1,5 @@
 import color from '../../theme/color';
+import nativeInputValueSetter from '../utils/nativeInputValueSetter';
 
 describe('Color code text field', () => {
   describe('Error handling: missing input', () => {
@@ -184,6 +185,35 @@ describe('Color code text field', () => {
 });
 
 describe('Chroma text field', () => {
+  describe('Error handling: missing input', () => {
+    beforeEach(() => {
+      cy.visit('/');
+      cy.findByLabelText(/color code/i)
+        .click()
+        .clear()
+        .type('rgb(126, 135, 23)')
+        .blur(); // So no error for the color code field
+    });
+    it('Blurring with a missing input alerts the user and resets chroma to be 255', () => {
+      cy.findByTestId('chroma-field').click().clear().blur();
+      cy.findByTestId('chromaError').should('be.visible');
+      cy.findByTestId('chroma-setter').should('have.value', '255');
+    });
+    describe('Alert on the missing input will disappear as soon as the user:', () => {
+      beforeEach(() => {
+        cy.findByTestId('chroma-field').click().clear().blur();
+      });
+      it('drags the slider', () => {
+        cy.findByTestId('chroma-setter').then($range => {
+          const range = $range[0];
+          nativeInputValueSetter.call(range, 15);
+          range.dispatchEvent(new Event('change', {value: 15, bubbles: true}));
+        });
+        cy.findByTestId('chromaError').should('be.hidden');
+      });
+      it('clicks the chroma text field', () => {});
+    });
+  });
   describe('Error handling: arrow keys', () => {
     beforeEach(() => {
       cy.visit('/');

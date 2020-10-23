@@ -164,6 +164,9 @@ function HomePage(props) {
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
 
   const handleChangeChroma = event => {
+    if (props.chromaMissing) {
+      props.setChromaMissing(false);
+    }
     props.setChroma(event.target.value);
     if (props.chromaInvalid) {
       if (!event.target.validity.patternMismatch) {
@@ -206,6 +209,14 @@ function HomePage(props) {
   };
 
   const handleBlurChroma = event => {
+    // When nothing is entered
+    if (!event.target.value) {
+      if (!props.chromaMissing) {
+        props.setChromaMissing(true);
+      }
+      props.setChroma('255');
+      return;
+    }
     // Validation
     const newInputIsInvalid = event.target.validity.patternMismatch;
     if (newInputIsInvalid) {
@@ -288,6 +299,7 @@ function HomePage(props) {
         <p>0 for grayscale; 255 for fully-saturated color</p>
         <ErrorText
           chromaInvalid={props.chromaInvalid}
+          chromaMissing={props.chromaMissing}
           darkMode={props.darkMode}
           testId="chromaError"
         />
