@@ -18,7 +18,20 @@ function ErrorText(props) {
       </span>
     );
   } else if (props.alertEnterKey) {
-    errorMessage = <span>Please click one of the hue swatches below</span>;
+    errorMessage = (
+      <span>Please choose chroma and then press the search button</span>
+    );
+  } else if (props.chromaInvalid) {
+    errorMessage = (
+      <span>Chroma value needs to be an integer between 0 and 255</span>
+    );
+  } else if (props.chromaMissing) {
+    errorMessage = (
+      <span>
+        You cannot leave the chroma value field box empty; we reset chroma to
+        255
+      </span>
+    );
   } else {
     errorMessage = (
       <span>
@@ -28,9 +41,15 @@ function ErrorText(props) {
   }
   return (
     <ParagraphErrorMessage
-      data-testid="colorCodeError"
+      data-testid={props.testId}
       darkMode={props.darkMode}
-      error={props.inputInvalid || props.alertMissing || props.alertEnterKey}
+      error={
+        props.inputInvalid ||
+        props.alertMissing ||
+        props.alertEnterKey ||
+        props.chromaInvalid ||
+        props.chromaMissing
+      }
     >
       {errorMessage}
     </ParagraphErrorMessage>
@@ -39,9 +58,11 @@ function ErrorText(props) {
 
 ErrorText.propTypes = {
   darkMode: PropTypes.bool.isRequired,
-  alertEnterKey: PropTypes.bool.isRequired,
-  alertMissing: PropTypes.bool.isRequired,
-  inputInvalid: PropTypes.bool.isRequired,
+  alertEnterKey: PropTypes.bool,
+  alertMissing: PropTypes.bool,
+  inputInvalid: PropTypes.bool,
+  chromaInvalid: PropTypes.bool,
+  chromaMising: PropTypes.bool,
 };
 
 export default ErrorText;

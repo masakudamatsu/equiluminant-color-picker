@@ -41,7 +41,7 @@ test('shows the relevant alert if the alertMissing prop is true', () => {
       inputInvalid={false}
     />,
   );
-  expect(getByText(/before choosing a hue/i)).toBeVisible();
+  expect(getByText(/before/i)).toBeVisible();
 });
 
 test('shows the relevant alert if the inputInvalid prop is true', () => {
@@ -65,7 +65,7 @@ test('shows the relevant alert if the alertEnterKey is true', () => {
       inputInvalid={false}
     />,
   );
-  expect(getByText(/one of the hue swatches below/i)).toBeVisible();
+  expect(getByText(/choose chroma/i)).toBeVisible();
 });
 
 test('renders correctly', () => {
@@ -73,7 +73,6 @@ test('renders correctly', () => {
     <div>
       <p
         class="style__Paragraph-o0wbpp-6 style__ParagraphErrorMessage-o0wbpp-7 gMjrsG"
-        data-testid="colorCodeError"
       >
         <span>
           This text prevents the layout shift due to the error message appearance.

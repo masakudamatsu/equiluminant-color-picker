@@ -1,5 +1,6 @@
 import {getContrastRatio} from '../../utils/helpers';
 import color from '../../theme/color';
+import nativeInputValueSetter from '../utils/nativeInputValueSetter';
 
 const colorList = [
   {
@@ -22,12 +23,6 @@ const colorList = [
 
 const initialChroma = '255';
 const newChroma = '25';
-
-// Simulate the user's interaction with the range input slider
-const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-  window.HTMLInputElement.prototype,
-  'value',
-).set; // A workaround for React overriding the Dom node's setter. See https://github.com/cypress-io/cypress/issues/1570#issuecomment-450966053
 
 describe('Landing Page shows non-interactive UI components', () => {
   beforeEach(() => {
@@ -150,18 +145,18 @@ describe('Typing a value in the chroma value field box', () => {
 
     cy.findByTestId('chroma-field').click().clear().type(newChroma[0]);
 
-    cy.findByTestId('chroma-field').should('have.value', newChroma[0]);
+    cy.findByTestId('chroma-setter').should('have.value', newChroma[0]);
 
     cy.findByTestId('chroma-field').type(newChroma[1]);
 
-    cy.findByTestId('chroma-field').should(
+    cy.findByTestId('chroma-setter').should(
       'have.value',
       newChroma[0] + newChroma[1],
     );
 
     cy.findByTestId('chroma-field').type(newChroma[2]);
 
-    cy.findByTestId('chroma-field').should('have.value', newChroma);
+    cy.findByTestId('chroma-setter').should('have.value', newChroma);
   });
 });
 
@@ -198,7 +193,7 @@ describe('Pressing arrow keys in the chroma value field box', () => {
   });
 });
 
-describe('Clicking the submit button', () => {
+describe('Once all inputs are provided correctly', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.findByLabelText(/color code/i)
@@ -215,8 +210,13 @@ describe('Clicking the submit button', () => {
     });
   });
 
-  it('redirects the user to the results page', () => {
+  it('Clicking the submit button redirects the user to the results page', () => {
     cy.findByText(/get/i).click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+  });
+
+  it('Pressing the enter key redirects the user to the results page', () => {
+    cy.findByTestId('chroma-field').click().type('{enter}');
     cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
   });
 });

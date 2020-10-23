@@ -1,51 +1,29 @@
 import {useState} from 'react';
-import PropTypes from 'prop-types';
 import {useRouter} from 'next/router';
+import PropTypes from 'prop-types';
 
 import {
   Abbr,
-  ChromaTextFieldWrapper,
   ChromaTextField,
+  ChromaTextFieldWrapper,
   H2,
-  HueSwatchWrapper,
   InputRange,
   SpacerVertical,
 } from '../theme/style';
 
 import ChromaPreview from '../components/ChromaPreview';
-import InputColorCode from '../components/InputColorCode';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
+import InputColorCode from '../components/InputColorCode';
 import TextField from '../components/TextField';
 
-import InputRGB from '../components/InputRGB';
-import HueSwatch from '../components/HueSwatch';
-
-import {handleArrowKeys} from '../utils/eventHandlers';
-import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
-import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 import color from '../theme/color';
+import {getRgbFromHex, getRgbFromHsl} from '../utils/helpers';
+import {handleArrowKeys} from '../utils/eventHandlers';
+import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 
 function HomePage(props) {
   const [userColorCode, setUserColorCode] = useState('');
-
-  const handleChange = event => {
-    setUserColorCode(event.target.value);
-    if (props.alertMissing) {
-      props.setAlertMissing(false);
-    }
-    if (props.inputInvalid) {
-      if (!event.target.validity.patternMismatch) {
-        props.setInputInvalid(false);
-      }
-    }
-  };
-
-  // Generate the RGB color code
-  let backgroundColor = color.body.font.lightMode;
-  if (props.red && props.green && props.blue) {
-    backgroundColor = `rgb(${props.red}, ${props.green}, ${props.blue})`;
-  }
 
   const handleBlur = event => {
     // When nothing is entered
@@ -112,6 +90,18 @@ function HomePage(props) {
     }
   };
 
+  const handleChange = event => {
+    setUserColorCode(event.target.value);
+    if (props.alertMissing) {
+      props.setAlertMissing(false);
+    }
+    if (props.inputInvalid) {
+      if (!event.target.validity.patternMismatch) {
+        props.setInputInvalid(false);
+      }
+    }
+  };
+
   const handleKeyDown = event => {
     if (event.key === 'Enter') {
       event.preventDefault(); // Prevent the submission
@@ -135,40 +125,74 @@ function HomePage(props) {
     }
   };
 
-  const router = useRouter();
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (props.inputMissing) {
-      props.setAlertMissing(true);
-      document.getElementById('inputColorCode').focus();
+  const handleBlurChroma = event => {
+    // When nothing is entered
+    if (!event.target.value) {
+      if (!props.chromaMissing) {
+        props.setChromaMissing(true);
+      }
+      props.setChroma('255');
       return;
     }
-    if (props.inputInvalid) {
-      document.getElementById('inputColorCode').focus();
-      return;
+    // Validation
+    const newInputIsInvalid = event.target.validity.patternMismatch;
+    if (newInputIsInvalid) {
+      if (!props.chromaInvalid) {
+        props.setChromaInvalid(true);
+      }
     }
-    router.push('/results');
   };
 
-  const colorCodeFieldLabel = (
-    <span>
-      Enter <Abbr>css</Abbr> color code
-    </span>
-  );
-
-  const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
-
   const handleChangeChroma = event => {
+    if (props.chromaMissing) {
+      props.setChromaMissing(false);
+    }
     props.setChroma(event.target.value);
+    if (props.chromaInvalid) {
+      if (!event.target.validity.patternMismatch) {
+        props.setChromaInvalid(false);
+      }
+    }
+  };
+
+  const handleFocusChroma = event => {
+    if (props.chromaMissing) {
+      props.setChromaMissing(false);
+    }
   };
 
   const handleKeyDownChroma = event => {
+    // Deal with enter keys
     if (event.key === 'Enter') {
-      event.preventDefault(); // Prevent the submission
+      if (!event.target.value) {
+        event.preventDefault(); // Prevent the submission
+        props.setChromaMissing(true);
+        return;
+      }
+      if (event.target.validity.patternMismatch) {
+        event.preventDefault(); // Prevent the submission
+        if (!props.chromaInvalid) {
+          props.setChromaInvalid(true);
+        }
+      }
     }
+    // Deal with non-arrow keys
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
       return;
+    }
+    // Invalid arrow key events
+    if (event.key === 'ArrowUp' && event.target.value === '255') {
+      event.preventDefault();
+      props.setChromaInvalid(true);
+      return;
+    }
+    if (event.key === 'ArrowDown' && event.target.value === '0') {
+      props.setChromaInvalid(true);
+      return;
+    }
+    // When everything is valid
+    if (props.chromaInvalid) {
+      props.setChromaInvalid(false);
     }
     let newChromaValue;
     if (event.shiftKey) {
@@ -181,6 +205,31 @@ function HomePage(props) {
     props.setChroma(newChromaValue);
   };
 
+  const router = useRouter();
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (props.inputMissing) {
+      props.setAlertMissing(true);
+      document.getElementById('inputColorCode').focus();
+      return;
+    }
+    if (props.inputInvalid) {
+      document.getElementById('inputColorCode').focus();
+      return;
+    }
+    if (props.chromaInvalid) {
+      document.getElementById('chroma-field').focus();
+      return;
+    }
+    router.push('/results');
+  };
+
+  const colorCodeFieldLabel = (
+    <span>
+      Enter <Abbr>css</Abbr> color code
+    </span>
+  );
+  const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
   return (
     <>
       <h1>Luminance Picker</h1>
@@ -218,6 +267,7 @@ function HomePage(props) {
               inputInvalid={props.inputInvalid}
               alertMissing={props.alertMissing}
               alertEnterKey={props.alertEnterKey}
+              testId="colorCodeError"
             />
           }
         />{' '}
@@ -229,14 +279,17 @@ function HomePage(props) {
           <ChromaTextField
             darkMode={props.darkMode}
             data-testid="chroma-field"
+            error={props.chromaInvalid}
             id="chroma-field"
+            onBlur={handleBlurChroma}
             onChange={handleChangeChroma}
+            onFocus={handleFocusChroma}
             onKeyDown={handleKeyDownChroma}
             pattern="1?\d?\d|2[0-4]\d|25[0-5]"
             value={props.chroma}
           />
         </ChromaTextFieldWrapper>
-        <SpacerVertical scale="2" />
+        <SpacerVertical scale="1" />
         <InputRange
           darkMode={props.darkMode}
           data-testid="chroma-setter"
@@ -249,6 +302,13 @@ function HomePage(props) {
         />
         <SpacerVertical scale="1" />
         <p>0 for grayscale; 255 for fully-saturated color</p>
+        <ErrorText
+          chromaInvalid={props.chromaInvalid}
+          chromaMissing={props.chromaMissing}
+          darkMode={props.darkMode}
+          testId="chromaError"
+        />
+        <SpacerVertical scale="1" />
         <button type="submit" onClick={handleSubmit}>
           Get equiluminant color!
         </button>
