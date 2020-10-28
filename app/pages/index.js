@@ -308,7 +308,9 @@ function HomePage(props) {
           darkMode={props.darkMode}
           testId="chromaError"
         />
-        <SpacerVertical scale="1" />
+        <SpacerVertical scale="3" />
+        <H2>#3 Search the color database</H2>
+        <SpacerVertical scale="2" />
         <button type="submit" onClick={handleSubmit}>
           Get equiluminant color!
         </button>
