@@ -14,6 +14,7 @@ import ChromaPreview from '../components/ChromaPreview';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
 import InputColorCode from '../components/InputColorCode';
+import SearchResults from '../components/SearchResults';
 import TextField from '../components/TextField';
 
 import color from '../theme/color';
@@ -313,6 +314,16 @@ function HomePage(props) {
           Get equiluminant color!
         </button>
       </form>
+      <SpacerVertical scale="3" />
+      <H2>#4 Choose equiluminant color</H2>
+      <SpacerVertical scale="2" />
+      <SearchResults
+        chroma={props.chroma}
+        contrastRatio={props.contrastRatio}
+        darkMode={props.darkMode}
+        submitted={props.submitted}
+      />
+      <SpacerVertical scale="3" />
     </>
   );
 }
