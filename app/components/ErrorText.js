@@ -50,6 +50,7 @@ function ErrorText(props) {
         props.chromaInvalid ||
         props.chromaMissing
       }
+      role="alert"
     >
       {errorMessage}
     </ParagraphErrorMessage>

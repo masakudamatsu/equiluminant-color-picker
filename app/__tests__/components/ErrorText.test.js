@@ -73,6 +73,7 @@ test('renders correctly', () => {
     <div>
       <p
         class="style__Paragraph-o0wbpp-6 style__ParagraphErrorMessage-o0wbpp-7 gMjrsG"
+        role="alert"
       >
         <span>
           This text prevents the layout shift due to the error message appearance.
