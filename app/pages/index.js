@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import {useRouter} from 'next/router';
 import PropTypes from 'prop-types';
 
 import {
@@ -205,7 +204,6 @@ function HomePage(props) {
     props.setChroma(newChromaValue);
   };
 
-  const router = useRouter();
   const handleSubmit = e => {
     e.preventDefault();
     if (props.inputMissing) {
@@ -221,7 +219,7 @@ function HomePage(props) {
       document.getElementById('chroma-field').focus();
       return;
     }
-    router.push('/results');
+    props.setSubmitted(true);
   };
 
   const colorCodeFieldLabel = (
@@ -343,6 +341,8 @@ HomePage.propTypes = {
   setBackgroundColor: PropTypes.func.isRequired,
   setBackgroundOverlayColor: PropTypes.func.isRequired,
   chroma: PropTypes.string.isRequired,
+  submitted: PropTypes.bool.isRequired,
+  setSubmitted: PropTypes.func.isRequired,
 };
 
 export default HomePage;
