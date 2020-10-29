@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import {useRouter} from 'next/router';
 import PropTypes from 'prop-types';
 
 import {
@@ -15,6 +14,7 @@ import ChromaPreview from '../components/ChromaPreview';
 import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
 import InputColorCode from '../components/InputColorCode';
+import SearchResults from '../components/SearchResults';
 import TextField from '../components/TextField';
 
 import color from '../theme/color';
@@ -205,7 +205,6 @@ function HomePage(props) {
     props.setChroma(newChromaValue);
   };
 
-  const router = useRouter();
   const handleSubmit = e => {
     e.preventDefault();
     if (props.inputMissing) {
@@ -221,7 +220,7 @@ function HomePage(props) {
       document.getElementById('chroma-field').focus();
       return;
     }
-    router.push('/results');
+    props.setSubmitted(true);
   };
 
   const colorCodeFieldLabel = (
@@ -308,11 +307,23 @@ function HomePage(props) {
           darkMode={props.darkMode}
           testId="chromaError"
         />
-        <SpacerVertical scale="1" />
+        <SpacerVertical scale="3" />
+        <H2>#3 Search the color database</H2>
+        <SpacerVertical scale="2" />
         <button type="submit" onClick={handleSubmit}>
           Get equiluminant color!
         </button>
       </form>
+      <SpacerVertical scale="3" />
+      <H2>#4 Choose equiluminant color</H2>
+      <SpacerVertical scale="2" />
+      <SearchResults
+        chroma={props.chroma}
+        contrastRatio={props.contrastRatio}
+        darkMode={props.darkMode}
+        submitted={props.submitted}
+      />
+      <SpacerVertical scale="3" />
     </>
   );
 }
@@ -341,6 +352,8 @@ HomePage.propTypes = {
   setBackgroundColor: PropTypes.func.isRequired,
   setBackgroundOverlayColor: PropTypes.func.isRequired,
   chroma: PropTypes.string.isRequired,
+  submitted: PropTypes.bool.isRequired,
+  setSubmitted: PropTypes.func.isRequired,
 };
 
 export default HomePage;

@@ -28,6 +28,8 @@ function MyApp({Component, pageProps}) {
   const [chromaInvalid, setChromaInvalid] = useState(false);
   const [chromaMissing, setChromaMissing] = useState(false);
 
+  const [submitted, setSubmitted] = useState(false);
+
   const updateContrastRatio = (red, green, blue) => {
     const newContrastRatio = getContrastRatio(red, green, blue);
     setContrastRatio(newContrastRatio);
@@ -94,6 +96,8 @@ function MyApp({Component, pageProps}) {
         setChromaInvalid={setChromaInvalid}
         chromaMissing={chromaMissing}
         setChromaMissing={setChromaMissing}
+        submitted={submitted}
+        setSubmitted={setSubmitted}
       />
       <GlobalStyle
         darkMode={darkMode}
