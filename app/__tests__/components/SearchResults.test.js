@@ -13,13 +13,17 @@ afterEach(() => {
 
 let container, getByLabelText;
 beforeEach(() => {
-  return ({container, getByLabelText} = render(<SearchResults />));
+  return ({container, getByLabelText} = render(
+    <SearchResults chroma="5.67" contrastRatio="11" submitted={true} />,
+  ));
 });
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <div />
+      <div>
+        Fetching
+      </div>
     </div>
   `);
 });
