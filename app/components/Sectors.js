@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import Sector from './Sector';
 
-function Sectors({colors, hueName, startAngle}) {
+function Sectors({colors, handleClick, handleKeyDown, hueName, startAngle}) {
   const angle = 30 / colors.length;
 
   const centerX = 250;
@@ -12,7 +12,14 @@ function Sectors({colors, hueName, startAngle}) {
   const endPointX = centerX + radius * Math.cos(angleInRadians);
   const endPointY = centerY + radius * Math.sin(angleInRadians);
   return (
-    <g transform={`rotate(-${startAngle}, 250, 250)`}>
+    <g
+      aria-label={`equiluminant colors in ${hueName} hue`}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex="0"
+      transform={`rotate(-${startAngle}, 250, 250)`}
+    >
       {colors.map((color, i) => (
         <Sector
           angle={angle}
@@ -29,6 +36,8 @@ function Sectors({colors, hueName, startAngle}) {
 
 Sectors.propTypes = {
   colors: PropTypes.array,
+  handleClick: PropTypes.func,
+  handleKeyDown: PropTypes.func,
   hueName: PropTypes.string,
   startAngle: PropTypes.number,
 };

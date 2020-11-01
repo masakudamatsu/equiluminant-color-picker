@@ -7,22 +7,48 @@ import 'jest-axe/extend-expect';
 
 import Sectors from '../../components/Sectors';
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 const mockColors = [
   {red: '124', green: '234', blue: '12'},
   {red: '24', green: '134', blue: '112'},
 ];
 
+const mockHandleClick = jest.fn();
+const mockHandleKeyDown = jest.fn();
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 let container, getByRole;
 beforeEach(() => {
   return ({container, getByRole} = render(
     <svg>
-      <Sectors colors={mockColors} hueName={'red'} startAngle={30} />
+      <Sectors
+        colors={mockColors}
+        handleClick={mockHandleClick}
+        handleKeyDown={mockHandleKeyDown}
+        hueName={'red'}
+        startAngle={30}
+      />
     </svg>,
   ));
+});
+
+test('calls handleClick() when clicked', () => {
+  userEvent.click(getByRole('button'));
+  expect(mockHandleClick).toHaveBeenCalledTimes(1);
+});
+
+test('calls handleKeyDown() when Enter key is pressed', () => {
+  getByRole('button').focus();
+  userEvent.type(getByRole('button'), '{enter}', {skipClick: true});
+  expect(mockHandleKeyDown).toHaveBeenCalledTimes(1);
+});
+
+test('calls handleKeyDown() when Space key is pressed', () => {
+  getByRole('button').focus();
+  userEvent.type(getByRole('button'), ' ', {skipClick: true});
+  expect(mockHandleKeyDown).toHaveBeenCalledTimes(1);
 });
 
 test('renders correctly', () => {
@@ -30,6 +56,9 @@ test('renders correctly', () => {
     <div>
       <svg>
         <g
+          aria-label="equiluminant colors in red hue"
+          role="button"
+          tabindex="0"
           transform="rotate(-30, 250, 250)"
         >
           <path

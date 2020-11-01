@@ -70,48 +70,124 @@ function SearchResults({chroma, contrastRatio, submitted}) {
   const pinkHues = colorsToRender.filter(
     color => color.hue >= 330 && color.hue < 360,
   );
+  const handleClick = event => {
+    console.log('clicked');
+  };
+  const handleKeyDown = event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      console.log('key down');
+    }
+  };
   return (
     <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
       <title id="SearchResults">Wheel of equiluminant colors</title>
       {redHues.length ? (
-        <Sectors colors={redHues} hueName={'red'} startAngle={0} />
+        <Sectors
+          colors={redHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'red'}
+          startAngle={0}
+        />
       ) : null}
       {orangeHues.length ? (
-        <Sectors colors={orangeHues} hueName={'orange'} startAngle={30} />
+        <Sectors
+          colors={orangeHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'orange'}
+          startAngle={30}
+        />
       ) : null}
       {yellowHues.length ? (
-        <Sectors colors={yellowHues} hueName={'yellow'} startAngle={60} />
+        <Sectors
+          colors={yellowHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'yellow'}
+          startAngle={60}
+        />
       ) : null}
       {limeHues.length ? (
-        <Sectors colors={limeHues} hueName={'lime'} startAngle={90} />
+        <Sectors
+          colors={limeHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'lime'}
+          startAngle={90}
+        />
       ) : null}
       {greenHues.length ? (
-        <Sectors colors={greenHues} hueName={'green'} startAngle={120} />
+        <Sectors
+          colors={greenHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'green'}
+          startAngle={120}
+        />
       ) : null}
       {greenCyanHues.length ? (
         <Sectors
           colors={greenCyanHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
           hueName={'greenCyan'}
           startAngle={150}
         />
       ) : null}
       {cyanHues.length ? (
-        <Sectors colors={cyanHues} hueName={'cyan'} startAngle={180} />
+        <Sectors
+          colors={cyanHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'cyan'}
+          startAngle={180}
+        />
       ) : null}
       {blueCyanHues.length ? (
-        <Sectors colors={blueCyanHues} hueName={'blueCyan'} startAngle={210} />
+        <Sectors
+          colors={blueCyanHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'blueCyan'}
+          startAngle={210}
+        />
       ) : null}
       {blueHues.length ? (
-        <Sectors colors={blueHues} hueName={'blue'} startAngle={240} />
+        <Sectors
+          colors={blueHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'blue'}
+          startAngle={240}
+        />
       ) : null}
       {purpleHues.length ? (
-        <Sectors colors={purpleHues} hueName={'purple'} startAngle={270} />
+        <Sectors
+          colors={purpleHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'purple'}
+          startAngle={270}
+        />
       ) : null}
       {magentaHues.length ? (
-        <Sectors colors={magentaHues} hueName={'magenta'} startAngle={300} />
+        <Sectors
+          colors={magentaHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'magenta'}
+          startAngle={300}
+        />
       ) : null}
       {pinkHues.length ? (
-        <Sectors colors={pinkHues} hueName={'pink'} startAngle={330} />
+        <Sectors
+          colors={pinkHues}
+          handleClick={handleClick}
+          handleKeyDown={handleKeyDown}
+          hueName={'pink'}
+          startAngle={330}
+        />
       ) : null}
     </svg>
   );
