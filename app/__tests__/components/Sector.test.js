@@ -7,57 +7,37 @@ import 'jest-axe/extend-expect';
 
 import Sector from '../../components/Sector';
 
-const mockSetClickedColorCode = jest.fn();
-const rgbValues = {red: '35', green: '241', blue: '134'};
-const rgbCode = `rgb(${rgbValues.red}, ${rgbValues.green}, ${rgbValues.blue})`;
-
 afterEach(() => {
   jest.clearAllMocks();
 });
 
-let container, getByRole;
-beforeEach(() => {
-  return ({container, getByRole} = render(
-    <Sector
-      angle={30}
-      r={rgbValues.red}
-      g={rgbValues.green}
-      b={rgbValues.blue}
-      setClickedColorCode={mockSetClickedColorCode}
-    />,
-  ));
-});
+const mockColor = {red: '124', green: '234', blue: '12'};
 
-test('calls setClickedColorCode() after being clicked', () => {
-  userEvent.click(getByRole('button'));
-  expect(mockSetClickedColorCode).toHaveBeenCalledTimes(1);
-  expect(mockSetClickedColorCode).toHaveBeenCalledWith(rgbCode);
+let container, getByLabelText;
+beforeEach(() => {
+  return ({container, getByLabelText} = render(
+    <svg>
+      <Sector
+        color={mockColor}
+        index={9}
+        angle={10}
+        endPointX={10}
+        endPointY={10}
+      />
+    </svg>,
+  ));
 });
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
-      <button
-        aria-label="rgb(35, 241, 134)"
-        data-testid="rgb-35-241-134"
-        type="button"
-      >
-        <svg
-          aria-labelledby="Sector"
-          class="Sector__Svg-sc-1otofyi-0 gBgXqf"
-          viewBox="0 0 500 500"
-        >
-          <title
-            id="Sector"
-          >
-            rgb(35, 241, 134)
-          </title>
-          <path
-            d="M250,250 l250,0 A250,250 0,0,0 466.5063509461097,375 z"
-            fill="rgb(35, 241, 134)"
-          />
-        </svg>
-      </button>
+      <svg>
+        <path
+          d="M250,250 l250,0 A250,250 0,0,0 10,10 z"
+          fill="rgb(124, 234, 12)"
+          transform="rotate(-90, 250, 250)"
+        />
+      </svg>
     </div>
   `);
 });
