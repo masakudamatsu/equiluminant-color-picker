@@ -30,6 +30,8 @@ function MyApp({Component, pageProps}) {
 
   const [submitted, setSubmitted] = useState(false);
 
+  const [clickedColorCode, setClickedColorCode] = useState('');
+
   const updateContrastRatio = (red, green, blue) => {
     const newContrastRatio = getContrastRatio(red, green, blue);
     setContrastRatio(newContrastRatio);
@@ -98,6 +100,8 @@ function MyApp({Component, pageProps}) {
         setChromaMissing={setChromaMissing}
         submitted={submitted}
         setSubmitted={setSubmitted}
+        clickedColorCode={clickedColorCode}
+        setClickedColorCode={setClickedColorCode}
       />
       <GlobalStyle
         darkMode={darkMode}

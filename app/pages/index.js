@@ -321,6 +321,7 @@ function HomePage(props) {
         chroma={props.chroma}
         contrastRatio={props.contrastRatio}
         darkMode={props.darkMode}
+        setClickedColorCode={props.setClickedColorCode}
         submitted={props.submitted}
       />
       <SpacerVertical scale="3" />
@@ -354,6 +355,8 @@ HomePage.propTypes = {
   chroma: PropTypes.string.isRequired,
   submitted: PropTypes.bool.isRequired,
   setSubmitted: PropTypes.func.isRequired,
+  clickedColorCode: PropTypes.string,
+  setClickedColorCode: PropTypes.func.isRequired,
 };
 
 export default HomePage;
