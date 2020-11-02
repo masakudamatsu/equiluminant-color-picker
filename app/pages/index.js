@@ -15,6 +15,7 @@ import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
 import InputColorCode from '../components/InputColorCode';
 import SearchResults from '../components/SearchResults';
+import Swatches from '../components/Swatches';
 import TextField from '../components/TextField';
 
 import color from '../theme/color';
@@ -315,7 +316,7 @@ function HomePage(props) {
         </button>
       </form>
       <SpacerVertical scale="3" />
-      <H2>#4 Choose equiluminant color</H2>
+      <H2>#4 Choose a hue</H2>
       <SpacerVertical scale="2" />
       <SearchResults
         chroma={props.chroma}
@@ -325,6 +326,9 @@ function HomePage(props) {
         submitted={props.submitted}
       />
       <SpacerVertical scale="3" />
+      <H2>#5 Copy the color code</H2>
+      <SpacerVertical scale="2" />
+      <Swatches colors={[]} />
     </>
   );
 }
