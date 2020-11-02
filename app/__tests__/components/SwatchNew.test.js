@@ -1,5 +1,5 @@
 import React from 'react';
-import {cleanup, fireEvent, render} from '@testing-library/react';
+import {act, cleanup, fireEvent, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
@@ -30,7 +30,9 @@ test('temporarily (1.5 sec) changes the button label when clicked', async () => 
   const button = getByRole('button', {name: mockColor.rgbCode});
   userEvent.click(button);
   expect(button).toHaveTextContent('Copied!');
-  jest.advanceTimersByTime(1500); // see https://jestjs.io/docs/en/timer-mocks
+  act(() => jest.advanceTimersByTime(1500));
+  // For jest.advanceTimersByTime(), see https://jestjs.io/docs/en/timer-mocks
+  // For act(), see https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning?ck_subscriber_id=661694401#1-when-using-jestusefaketimers
   expect(button).toHaveTextContent(mockColor.rgbCode);
 });
 
@@ -48,16 +50,10 @@ test('renders correctly', () => {
   `);
 });
 
-// test('is accessible', async () => {
-//   const results = await axe(container);
-//   expect(results).toHaveNoViolations();
-//   cleanup();
-// });
-//
-// TODO: Using fake timer breaks the accessibility test with the following error message
-//
-// : Timeout - Async callback was not invoked within the 5000 ms timeout specified by jest.setTimeout.Timout - Async callback was not invoked within the 5000 ms timeout specified by jest.setTimeout.Error:
-//
-// I have no idea how to resolve this.
-// For the time being, we comment out this test
-//
+test('is accessible', async () => {
+  jest.useRealTimers();
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+  cleanup();
+});
