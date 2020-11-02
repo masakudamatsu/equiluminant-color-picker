@@ -17,13 +17,13 @@ import 'jest-axe/extend-expect';
 import Template from '../../components/Template';
 
 describe.skip('Delete this line', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   let container, getByLabelText;
   beforeEach(() => {
     return ({container, getByLabelText} = render(<Template />));
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   test('renders correctly', () => {
