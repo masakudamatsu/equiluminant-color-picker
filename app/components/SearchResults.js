@@ -34,42 +34,55 @@ function SearchResults({chroma, contrastRatio, submitted}) {
   }
 
   const colorsToRender = data.feed;
+  const hues = [];
   const redHues = colorsToRender.filter(
     color => color.hue >= 0 && color.hue < 30,
   );
+  hues.push({hueName: 'red', data: redHues});
   const orangeHues = colorsToRender.filter(
     color => color.hue >= 30 && color.hue < 60,
   );
+  hues.push({hueName: 'orange', data: orangeHues});
   const yellowHues = colorsToRender.filter(
     color => color.hue >= 60 && color.hue < 90,
   );
+  hues.push({hueName: 'yellow', data: yellowHues});
   const limeHues = colorsToRender.filter(
     color => color.hue >= 90 && color.hue < 120,
   );
+  hues.push({hueName: 'lime', data: limeHues});
   const greenHues = colorsToRender.filter(
     color => color.hue >= 120 && color.hue < 150,
   );
+  hues.push({hueName: 'green', data: greenHues});
   const greenCyanHues = colorsToRender.filter(
     color => color.hue >= 150 && color.hue < 180,
   );
+  hues.push({hueName: 'greenCyan', data: greenCyanHues});
   const cyanHues = colorsToRender.filter(
     color => color.hue >= 180 && color.hue < 210,
   );
+  hues.push({hueName: 'cyan', data: cyanHues});
   const blueCyanHues = colorsToRender.filter(
     color => color.hue >= 210 && color.hue < 240,
   );
+  hues.push({hueName: 'blueCyan', data: blueCyanHues});
   const blueHues = colorsToRender.filter(
     color => color.hue >= 240 && color.hue < 270,
   );
+  hues.push({hueName: 'blue', data: blueHues});
   const purpleHues = colorsToRender.filter(
     color => color.hue >= 270 && color.hue < 300,
   );
+  hues.push({hueName: 'purple', data: purpleHues});
   const magentaHues = colorsToRender.filter(
     color => color.hue >= 300 && color.hue < 330,
   );
+  hues.push({hueName: 'magenta', data: magentaHues});
   const pinkHues = colorsToRender.filter(
     color => color.hue >= 330 && color.hue < 360,
   );
+  hues.push({hueName: 'pink', data: pinkHues});
   const handleClick = event => {
     console.log('clicked');
   };
@@ -81,114 +94,18 @@ function SearchResults({chroma, contrastRatio, submitted}) {
   return (
     <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
       <title id="SearchResults">Wheel of equiluminant colors</title>
-      {redHues.length ? (
-        <Sectors
-          colors={redHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'red'}
-          startAngle={0}
-        />
-      ) : null}
-      {orangeHues.length ? (
-        <Sectors
-          colors={orangeHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'orange'}
-          startAngle={30}
-        />
-      ) : null}
-      {yellowHues.length ? (
-        <Sectors
-          colors={yellowHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'yellow'}
-          startAngle={60}
-        />
-      ) : null}
-      {limeHues.length ? (
-        <Sectors
-          colors={limeHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'lime'}
-          startAngle={90}
-        />
-      ) : null}
-      {greenHues.length ? (
-        <Sectors
-          colors={greenHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'green'}
-          startAngle={120}
-        />
-      ) : null}
-      {greenCyanHues.length ? (
-        <Sectors
-          colors={greenCyanHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'greenCyan'}
-          startAngle={150}
-        />
-      ) : null}
-      {cyanHues.length ? (
-        <Sectors
-          colors={cyanHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'cyan'}
-          startAngle={180}
-        />
-      ) : null}
-      {blueCyanHues.length ? (
-        <Sectors
-          colors={blueCyanHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'blueCyan'}
-          startAngle={210}
-        />
-      ) : null}
-      {blueHues.length ? (
-        <Sectors
-          colors={blueHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'blue'}
-          startAngle={240}
-        />
-      ) : null}
-      {purpleHues.length ? (
-        <Sectors
-          colors={purpleHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'purple'}
-          startAngle={270}
-        />
-      ) : null}
-      {magentaHues.length ? (
-        <Sectors
-          colors={magentaHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'magenta'}
-          startAngle={300}
-        />
-      ) : null}
-      {pinkHues.length ? (
-        <Sectors
-          colors={pinkHues}
-          handleClick={handleClick}
-          handleKeyDown={handleKeyDown}
-          hueName={'pink'}
-          startAngle={330}
-        />
-      ) : null}
+      {hues.map((hue, i) => {
+        return hue.data.length ? (
+          <Sectors
+            colors={hue.data}
+            handleClick={handleClick}
+            handleKeyDown={handleKeyDown}
+            hueName={hue.hueName}
+            key={hue.hueName}
+            startAngle={i * 30}
+          />
+        ) : null;
+      })}
     </svg>
   );
 }
