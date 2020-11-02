@@ -14,16 +14,23 @@ const mockColor = {
   rgbCode: 'rgb(123, 133, 23)',
 };
 
-afterEach(() => {
-  jest.clearAllMocks();
+beforeAll(() => {
+  jest.useFakeTimers(); // see https://jestjs.io/docs/en/timer-mocks
 });
 
 let container, getByRole;
 beforeEach(() => {
-  jest.useFakeTimers(); // see https://jestjs.io/docs/en/timer-mocks
   return ({container, getByRole} = render(
     <SwatchNew r={mockColor.red} g={mockColor.green} b={mockColor.blue} />,
   ));
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+afterAll(() => {
+  jest.useRealTimers();
 });
 
 test('temporarily (1.5 sec) changes the button label when clicked', async () => {
