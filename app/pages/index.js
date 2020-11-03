@@ -15,6 +15,7 @@ import ErrorText from '../components/ErrorText';
 import HelperText from '../components/HelperText';
 import InputColorCode from '../components/InputColorCode';
 import SearchResults from '../components/SearchResults';
+import Swatches from '../components/Swatches';
 import TextField from '../components/TextField';
 
 import color from '../theme/color';
@@ -24,6 +25,7 @@ import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 
 function HomePage(props) {
   const [userColorCode, setUserColorCode] = useState('');
+  const [hueToDisplay, setHueToDisplay] = useState([]);
 
   const handleBlur = event => {
     // When nothing is entered
@@ -315,15 +317,19 @@ function HomePage(props) {
         </button>
       </form>
       <SpacerVertical scale="3" />
-      <H2>#4 Choose equiluminant color</H2>
+      <H2>#4 Choose a hue</H2>
       <SpacerVertical scale="2" />
       <SearchResults
         chroma={props.chroma}
         contrastRatio={props.contrastRatio}
         darkMode={props.darkMode}
+        setHueToDisplay={setHueToDisplay}
         submitted={props.submitted}
       />
       <SpacerVertical scale="3" />
+      <H2>#5 Copy the color code</H2>
+      <SpacerVertical scale="2" />
+      <Swatches colors={hueToDisplay} />
     </>
   );
 }
@@ -354,6 +360,8 @@ HomePage.propTypes = {
   chroma: PropTypes.string.isRequired,
   submitted: PropTypes.bool.isRequired,
   setSubmitted: PropTypes.func.isRequired,
+  clickedColorCode: PropTypes.string,
+  setClickedColorCode: PropTypes.func.isRequired,
 };
 
 export default HomePage;

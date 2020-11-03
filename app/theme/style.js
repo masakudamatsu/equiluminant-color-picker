@@ -268,24 +268,6 @@ export const HueSwatchWrapper = styled.div`
   width: 100%;
 `;
 
-export const ResultsWrapper = styled.ul`
-  background-color: ${props =>
-    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding-bottom: ${layout.resultSwatch.marginPx}px;
-  padding-right: ${layout.resultSwatch.marginPx}px;
-  width: 100%;
-`;
-
-export const LiSwatchWrapper = styled.li`
-  flex-grow: 1;
-  margin-left: ${layout.resultSwatch.marginPx}px;
-  margin-top: ${layout.resultSwatch.marginPx}px;
-  width: ${layout.resultSwatch.minWidthPx}px;
-`;
-
 export const ButtonSwatch = styled.button`
   background-color: ${props => props.backgroundColor};
   border: none;
