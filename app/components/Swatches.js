@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import SwatchNew from './SwatchNew';
+import Swatch from './Swatch';
 
 const Ul = styled.ul`
   align-items: center;
@@ -20,7 +20,7 @@ function Swatches({colors}) {
       {colors.map(color => {
         return (
           <Li key={`${color.red}-${color.green}-${color.blue}`}>
-            <SwatchNew r={color.red} g={color.green} b={color.blue} />
+            <Swatch r={color.red} g={color.green} b={color.blue} />
           </Li>
         );
       })}

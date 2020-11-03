@@ -12,7 +12,7 @@ const Button = styled.button`
   width: 100%;
 `;
 
-function SwatchNew(props) {
+function Swatch(props) {
   const rgbCode = `rgb(${props.r}, ${props.g}, ${props.b})`;
 
   const [clicked, setClicked] = useState(false);
@@ -36,10 +36,10 @@ function SwatchNew(props) {
   );
 }
 
-SwatchNew.propTypes = {
+Swatch.propTypes = {
   r: PropTypes.number.isRequired,
   g: PropTypes.number.isRequired,
   b: PropTypes.number.isRequired,
 };
 
-export default SwatchNew;
+export default Swatch;

@@ -33,8 +33,9 @@ test('renders correctly', () => {
           class="Swatches__Li-sc-2rnu0-1 ckfZtC"
         >
           <button
-            class="SwatchNew__Button-sc-1rl9ngw-0 hyuUlt"
+            class="Swatch__Button-sc-1m9mdn9-0 hNTCgO"
             data-testid="rgb-123-133-23"
+            id="rgb(123, 133, 23)"
             type="button"
           >
             rgb(123, 133, 23)
@@ -44,8 +45,9 @@ test('renders correctly', () => {
           class="Swatches__Li-sc-2rnu0-1 ckfZtC"
         >
           <button
-            class="SwatchNew__Button-sc-1rl9ngw-0 fmukBm"
+            class="Swatch__Button-sc-1m9mdn9-0 brMaRR"
             data-testid="rgb-53-2-223"
+            id="rgb(53, 2, 223)"
             type="button"
           >
             rgb(53, 2, 223)

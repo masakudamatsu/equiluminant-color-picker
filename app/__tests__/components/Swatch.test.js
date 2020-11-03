@@ -5,7 +5,8 @@ import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
-import SwatchNew from '../../components/SwatchNew';
+import Swatch from '../../components/Swatch';
+// import * as mockCopyToClipboard from '../../utils/copyToClipboard';
 
 const mockColor = {
   red: 123,
@@ -14,19 +15,22 @@ const mockColor = {
   rgbCode: 'rgb(123, 133, 23)',
 };
 
+// jest.mock('../../utils/copyToClipboard');
+
 beforeAll(() => {
   jest.useFakeTimers(); // see https://jestjs.io/docs/en/timer-mocks
 });
 
 let container, getByRole;
 beforeEach(() => {
+  // mockCopyToClipboard.mockResolvedValueOnce();
   return ({container, getByRole} = render(
-    <SwatchNew r={mockColor.red} g={mockColor.green} b={mockColor.blue} />,
+    <Swatch r={mockColor.red} g={mockColor.green} b={mockColor.blue} />,
   ));
 });
 
 afterEach(() => {
-  jest.clearAllMocks();
+  jest.resetAllMocks();
 });
 
 afterAll(() => {
@@ -47,8 +51,9 @@ test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
     <div>
       <button
-        class="SwatchNew__Button-sc-1rl9ngw-0 hyuUlt"
+        class="Swatch__Button-sc-1m9mdn9-0 hNTCgO"
         data-testid="rgb-123-133-23"
+        id="rgb(123, 133, 23)"
         type="button"
       >
         rgb(123, 133, 23)
