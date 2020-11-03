@@ -25,6 +25,7 @@ import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 
 function HomePage(props) {
   const [userColorCode, setUserColorCode] = useState('');
+  const [hueToDisplay, setHueToDisplay] = useState([]);
 
   const handleBlur = event => {
     // When nothing is entered
@@ -322,13 +323,13 @@ function HomePage(props) {
         chroma={props.chroma}
         contrastRatio={props.contrastRatio}
         darkMode={props.darkMode}
-        setClickedColorCode={props.setClickedColorCode}
+        setHueToDisplay={setHueToDisplay}
         submitted={props.submitted}
       />
       <SpacerVertical scale="3" />
       <H2>#5 Copy the color code</H2>
       <SpacerVertical scale="2" />
-      <Swatches colors={[]} />
+      <Swatches colors={hueToDisplay} />
     </>
   );
 }
