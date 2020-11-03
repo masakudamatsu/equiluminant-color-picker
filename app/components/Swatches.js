@@ -15,7 +15,6 @@ const Li = styled.li`
 `;
 
 function Swatches({colors}) {
-  console.log(colors);
   return (
     <Ul>
       {colors.map(color => {
