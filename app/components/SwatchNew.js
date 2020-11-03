@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {useState} from 'react';
 
+import copyToClipboard from '../utils/copyToClipboard';
+
 const Button = styled.button`
   background-color: ${props => props.backgroundColor};
   color: white; /* TODO: Change according to the overall color palette */
@@ -11,18 +13,21 @@ const Button = styled.button`
 `;
 
 function SwatchNew(props) {
+  const rgbCode = `rgb(${props.r}, ${props.g}, ${props.b})`;
+
   const [clicked, setClicked] = useState(false);
   const handleClick = event => {
+    copyToClipboard(rgbCode);
     setClicked(true);
     setTimeout(() => {
       setClicked(false);
     }, 1500);
   };
-  const rgbCode = `rgb(${props.r}, ${props.g}, ${props.b})`;
   return (
     <Button
       backgroundColor={rgbCode}
       data-testid={`rgb-${props.r}-${props.g}-${props.b}`}
+      id={rgbCode}
       onClick={handleClick}
       type="button"
     >
