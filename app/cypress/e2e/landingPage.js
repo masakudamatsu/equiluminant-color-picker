@@ -29,7 +29,7 @@ describe('Landing Page shows non-interactive UI components', () => {
     cy.visit('/');
   });
   it('h1 element for accessibility', () => {
-    cy.get('h1').should('have.text', 'Luminance Picker');
+    cy.get('h1').should('have.text', 'Equiluminant Color Picker');
   });
   it('h2 elements', () => {
     cy.findByText(/set luminance/i);

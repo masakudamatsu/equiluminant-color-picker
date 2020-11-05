@@ -233,7 +233,7 @@ function HomePage(props) {
   const pattern = `${regexHexText}|${regexRgbText}|${regexHslText}`;
   return (
     <>
-      <h1>Luminance Picker</h1>
+      <h1>Equiluminant Color Picker</h1>
       <noscript>
         For full functionality of this site, it is necessary to enable
         JavaScript. Here are the{' '}
