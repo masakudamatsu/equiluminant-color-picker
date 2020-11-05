@@ -15,10 +15,6 @@ const mockColors = [
 const mockHandleClick = jest.fn();
 const mockHandleKeyDown = jest.fn();
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 let container, getByRole;
 beforeEach(() => {
   return ({container, getByRole} = render(
@@ -32,6 +28,10 @@ beforeEach(() => {
       />
     </svg>,
   ));
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
 });
 
 test('calls handleClick() when clicked', () => {

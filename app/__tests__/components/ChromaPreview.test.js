@@ -5,26 +5,17 @@ import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
-// How to use this ChromaPreview
-//
-// Step 1
-// Replace ChromaPreview with the name of a component
-//
-// Step 2
-// Delete lines 19 and 38 (the describe() function), which makes Jest skip to run this test file
-//
-
 import ChromaPreview from '../../components/ChromaPreview';
-
-afterEach(() => {
-  jest.clearAllMocks();
-});
 
 let container, getByTestId, rerender;
 beforeEach(() => {
   return ({container, getByTestId, rerender} = render(
     <ChromaPreview chroma={'128'} />,
   ));
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
 });
 
 test('sets the color by props.hue', () => {

@@ -7,15 +7,15 @@ import 'jest-axe/extend-expect';
 
 import HelperText from '../../components/HelperText';
 
-// afterEach(() => {
-//   jest.clearAllMocks();
-// });
-
 let container;
 
 beforeEach(() => {
   return ({container} = render(<HelperText />));
 });
+
+// afterEach(() => {
+//   jest.clearAllMocks();
+// });
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`

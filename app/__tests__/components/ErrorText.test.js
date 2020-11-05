@@ -7,10 +7,6 @@ import 'jest-axe/extend-expect';
 
 import ErrorText from '../../components/ErrorText';
 
-// afterEach(() => {
-//   jest.clearAllMocks();
-// });
-
 let container, getByText, rerender;
 
 beforeEach(() => {
@@ -23,6 +19,10 @@ beforeEach(() => {
     />,
   ));
 });
+
+// afterEach(() => {
+//   jest.clearAllMocks();
+// });
 
 test('shows invisible dummy text if there is no error', () => {
   expect(

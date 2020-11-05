@@ -14,10 +14,6 @@ const mockHandleBlur = jest.fn().mockName('handleBlur');
 const mockHandleChange = jest.fn().mockName('handleChange');
 const mockHandleKeyDown = jest.fn().mockName('handleKeyDown');
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 let container, getByLabelText;
 
 beforeEach(() => {
@@ -41,6 +37,10 @@ beforeEach(() => {
       </label>
     </>,
   ));
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
 });
 
 test('calls handleBlur() when the user blurs the input element', () => {

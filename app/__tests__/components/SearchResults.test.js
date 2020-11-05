@@ -7,15 +7,15 @@ import 'jest-axe/extend-expect';
 
 import SearchResults from '../../components/SearchResults';
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 let container, getByLabelText;
 beforeEach(() => {
   return ({container, getByLabelText} = render(
     <SearchResults chroma="5.67" contrastRatio="11" submitted={true} />,
   ));
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
 });
 
 test('renders correctly', () => {

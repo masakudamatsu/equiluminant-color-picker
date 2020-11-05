@@ -7,10 +7,6 @@ import 'jest-axe/extend-expect';
 
 import Sector from '../../components/Sector';
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 const mockColor = {red: '124', green: '234', blue: '12'};
 
 let container, getByLabelText;
@@ -26,6 +22,10 @@ beforeEach(() => {
       />
     </svg>,
   ));
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
 });
 
 test('renders correctly', () => {
