@@ -24,7 +24,7 @@ function MyApp({Component, pageProps}) {
   );
   const [backgroundOverlayColor, setBackgroundOverlayColor] = useState('');
 
-  const [chroma, setChroma] = useState('255');
+  const [chroma, setChroma] = useState('0');
   const [chromaInvalid, setChromaInvalid] = useState(false);
   const [chromaMissing, setChromaMissing] = useState(false);
 

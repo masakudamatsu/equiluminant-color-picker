@@ -21,7 +21,7 @@ const colorList = [
   },
 ];
 
-const initialChroma = '255';
+const initialChroma = '0';
 const newChroma = '25';
 
 describe('Landing Page shows non-interactive UI components', () => {
@@ -52,6 +52,9 @@ describe.only('Interactive components show the expected initial value', () => {
   it('Color code text field shows no default value', () => {
     cy.findByLabelText(/color code/i).should('have.text', '');
   });
+  it(`Chroma text field shows ${initialChroma}`, () => {
+    cy.findByTestId('chroma-field').should('have.value', initialChroma);
+});
 });
 
 describe('Type a valid color code, and the color scheme changes accordingly after blurring the text field', () => {
