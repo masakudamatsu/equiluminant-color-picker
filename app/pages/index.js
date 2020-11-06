@@ -244,7 +244,7 @@ function HomePage(props) {
       </noscript>
       <SpacerVertical scale="3" />
       <form>
-        <H2>#1 Set Luminance</H2>
+        <H2>#1 Get Luminance</H2>
         <SpacerVertical scale="2" />
         <InputColorCode
           textField={
@@ -273,7 +273,7 @@ function HomePage(props) {
           }
         />{' '}
         <SpacerVertical scale="3" />
-        <H2>#2 Choose chroma</H2>
+        <H2>#2 Set Saturation</H2>
         <SpacerVertical scale="2" />
         <ChromaTextFieldWrapper>
           <ChromaPreview chroma={props.chroma} />
@@ -310,14 +310,12 @@ function HomePage(props) {
           testId="chromaError"
         />
         <SpacerVertical scale="3" />
-        <H2>#3 Search the color database</H2>
-        <SpacerVertical scale="2" />
         <button type="submit" onClick={handleSubmit}>
-          Get equiluminant color!
+          Search the color database
         </button>
       </form>
       <SpacerVertical scale="3" />
-      <H2>#4 Choose a hue</H2>
+      <H2>#3 Pick Hue</H2>
       <SpacerVertical scale="2" />
       <SearchResults
         chroma={props.chroma}
@@ -327,7 +325,7 @@ function HomePage(props) {
         submitted={props.submitted}
       />
       <SpacerVertical scale="3" />
-      <H2>#5 Copy the color code</H2>
+      <H2>#4 Copy Color Code</H2>
       <SpacerVertical scale="2" />
       <Swatches colors={hueToDisplay} />
     </>

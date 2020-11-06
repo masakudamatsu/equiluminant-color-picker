@@ -32,8 +32,10 @@ describe('Landing Page shows non-interactive UI components', () => {
     cy.get('h1').should('have.text', 'Equiluminant Color Picker');
   });
   it('h2 elements', () => {
-    cy.findByText(/set luminance/i);
-    cy.findByText(/choose chroma/i);
+    cy.findByRole('heading', {name: /luminance/i});
+    cy.findByRole('heading', {name: /saturation/i});
+    cy.findByRole('heading', {name: /hue/i});
+    cy.findByRole('heading', {name: /color code/i});
   });
   it('color code examples', () => {
     cy.findByText(/examples/i);
