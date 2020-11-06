@@ -1,23 +1,34 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import rgbCode from '../utils/rgbCode';
+
 const Svg = styled.svg`
   position: absolute;
   width: 100%; /* Without this, being wrapped with a div makes the svg image disappear */
 `;
 
 function ChromaPreview(props) {
-  // (max, min) = (255, 0) if props.chroma = 255
-  //              (127, 127)   if          = 0
   const chroma = Number(props.chroma);
-  const max = Math.floor((chroma + 255) / 2);
-  const min = max - chroma;
-  const purple = `rgb(${max}, ${min}, ${max})`;
-  const red = `rgb(${max}, ${min}, ${min})`;
-  const yellow = `rgb(${max}, ${max}, ${min})`;
-  const green = `rgb(${min}, ${max}, ${min})`;
-  const cyan = `rgb(${min}, ${max}, ${max})`;
-  const blue = `rgb(${min}, ${min}, ${max})`;
+
+  const purple = `rgb(${rgbCode(chroma).purple.r},  ${
+    rgbCode(chroma).purple.g
+  },  ${rgbCode(chroma).purple.b})`;
+  const red = `rgb(${rgbCode(chroma).red.r},  ${rgbCode(chroma).red.g},  ${
+    rgbCode(chroma).red.b
+  })`;
+  const yellow = `rgb(${rgbCode(chroma).yellow.r}, ${
+    rgbCode(chroma).yellow.g
+  }, ${rgbCode(chroma).yellow.b})`;
+  const green = `rgb(${rgbCode(chroma).green.r}, ${rgbCode(chroma).green.g}, ${
+    rgbCode(chroma).green.b
+  })`;
+  const cyan = `rgb(${rgbCode(chroma).cyan.r}, ${rgbCode(chroma).cyan.g}, ${
+    rgbCode(chroma).cyan.b
+  })`;
+  const blue = `rgb(${rgbCode(chroma).blue.r}, ${rgbCode(chroma).blue.g}, ${
+    rgbCode(chroma).blue.b
+  })`;
   return (
     <Svg viewBox="0 0 281 187" aria-labelledby="ChromaPreview">
       <title id="ChromaPreview">
