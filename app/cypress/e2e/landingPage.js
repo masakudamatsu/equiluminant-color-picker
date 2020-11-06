@@ -45,10 +45,19 @@ describe('Landing Page shows non-interactive UI components', () => {
   });
 });
 
-describe('Blurring after typing a valid color code changes the color scheme appropriately', () => {
+describe.only('Interactive components show the expected initial value', () => {
   beforeEach(() => {
     cy.visit('/');
   });
+  it('Color code text field shows no default value', () => {
+    cy.findByLabelText(/color code/i).should('have.text', '');
+  });
+});
+
+describe('Type a valid color code, and the color scheme changes accordingly after blurring the text field', () => {
+  beforeEach(() => {
+    cy.visit('/');
+});
   it('light color in RGB', () => {
     cy.findByLabelText(/color code/i)
       .click()
