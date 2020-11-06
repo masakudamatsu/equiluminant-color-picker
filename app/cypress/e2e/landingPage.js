@@ -1,6 +1,7 @@
 import {getContrastRatio} from '../../utils/helpers';
 import color from '../../theme/color';
 import nativeInputValueSetter from '../utils/nativeInputValueSetter';
+import rgbCode from '../../utils/rgbCode';
 
 const colorList = [
   {
@@ -21,8 +22,64 @@ const colorList = [
   },
 ];
 
-const initialChroma = '0';
-const newChroma = '25';
+const initialChroma = 0;
+const newChroma = 125;
+const chromaSwatches = [
+  {
+    testId: 'Purple',
+    rgbCodeInitial: `rgb(${rgbCode(initialChroma).purple.r}, ${
+      rgbCode(initialChroma).purple.g
+    }, ${rgbCode(initialChroma).purple.b})`,
+    rgbCodeNew: `rgb(${rgbCode(newChroma).purple.r}, ${
+      rgbCode(newChroma).purple.g
+    }, ${rgbCode(newChroma).purple.b})`,
+  },
+  {
+    testId: 'Red',
+    rgbCodeInitial: `rgb(${rgbCode(initialChroma).red.r}, ${
+      rgbCode(initialChroma).red.g
+    }, ${rgbCode(initialChroma).red.b})`,
+    rgbCodeNew: `rgb(${rgbCode(newChroma).red.r}, ${
+      rgbCode(newChroma).red.g
+    }, ${rgbCode(newChroma).red.b})`,
+  },
+  {
+    testId: 'Yellow',
+    rgbCodeInitial: `rgb(${rgbCode(initialChroma).yellow.r}, ${
+      rgbCode(initialChroma).yellow.g
+    }, ${rgbCode(initialChroma).yellow.b})`,
+    rgbCodeNew: `rgb(${rgbCode(newChroma).yellow.r}, ${
+      rgbCode(newChroma).yellow.g
+    }, ${rgbCode(newChroma).yellow.b})`,
+  },
+  {
+    testId: 'Green',
+    rgbCodeInitial: `rgb(${rgbCode(initialChroma).green.r}, ${
+      rgbCode(initialChroma).green.g
+    }, ${rgbCode(initialChroma).green.b})`,
+    rgbCodeNew: `rgb(${rgbCode(newChroma).green.r}, ${
+      rgbCode(newChroma).green.g
+    }, ${rgbCode(newChroma).green.b})`,
+  },
+  {
+    testId: 'Cyan',
+    rgbCodeInitial: `rgb(${rgbCode(initialChroma).cyan.r}, ${
+      rgbCode(initialChroma).cyan.g
+    }, ${rgbCode(initialChroma).cyan.b})`,
+    rgbCodeNew: `rgb(${rgbCode(newChroma).cyan.r}, ${
+      rgbCode(newChroma).cyan.g
+    }, ${rgbCode(newChroma).cyan.b})`,
+  },
+  {
+    testId: 'Blue',
+    rgbCodeInitial: `rgb(${rgbCode(initialChroma).blue.r}, ${
+      rgbCode(initialChroma).blue.g
+    }, ${rgbCode(initialChroma).blue.b})`,
+    rgbCodeNew: `rgb(${rgbCode(newChroma).blue.r}, ${
+      rgbCode(newChroma).blue.g
+    }, ${rgbCode(newChroma).blue.b})`,
+  },
+];
 
 describe('Landing Page shows non-interactive UI components', () => {
   beforeEach(() => {
@@ -45,7 +102,7 @@ describe('Landing Page shows non-interactive UI components', () => {
   });
 });
 
-describe.only('Interactive components show the expected initial value', () => {
+describe('Interactive components show the expected initial value', () => {
   beforeEach(() => {
     cy.visit('/');
   });
@@ -54,13 +111,22 @@ describe.only('Interactive components show the expected initial value', () => {
   });
   it(`Chroma text field shows ${initialChroma}`, () => {
     cy.findByTestId('chroma-field').should('have.value', initialChroma);
-});
+  });
+  it(`Chroma preview swatches get rendered in accordance with ${initialChroma}`, () => {
+    chromaSwatches.forEach(swatch => {
+      cy.findByTestId(swatch.testId).should(
+        'have.css',
+        'fill',
+        swatch.rgbCodeInitial,
+      );
+    });
+  });
 });
 
 describe('Type a valid color code, and the color scheme changes accordingly after blurring the text field', () => {
   beforeEach(() => {
     cy.visit('/');
-});
+  });
   it('light color in RGB', () => {
     cy.findByLabelText(/color code/i)
       .click()
@@ -117,20 +183,9 @@ describe('Type a valid color code, and the color scheme changes accordingly afte
   });
 });
 
-describe('Moving the slider', () => {
+describe.only('Moving the slider', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.findByLabelText(/color code/i)
-      .click()
-      .clear()
-      .type(colorList[0].rgbCode)
-      .blur();
-  });
-
-  it('changes the chroma value displayed', () => {
-    // Check the initial value
-    cy.findByTestId('chroma-field').should('have.value', initialChroma);
-
     // Move the slider
     cy.findByTestId('chroma-setter').then($range => {
       const range = $range[0];
@@ -139,9 +194,20 @@ describe('Moving the slider', () => {
         new Event('change', {value: Number(newChroma), bubbles: true}),
       );
     });
+  });
 
-    // Verify the new value
+  it('changes the chroma value displayed', () => {
     cy.findByTestId('chroma-field').should('have.value', newChroma);
+  });
+
+  it.only('changes the chroma swatch colors', () => {
+    chromaSwatches.forEach(swatch => {
+      cy.findByTestId(swatch.testId).should(
+        'have.css',
+        'fill',
+        swatch.rgbCodeNew,
+      );
+    });
   });
 });
 
