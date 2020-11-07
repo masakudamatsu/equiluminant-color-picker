@@ -6,11 +6,15 @@ import {axe} from 'jest-axe';
 import 'jest-axe/extend-expect';
 
 import ChromaPreview from '../../components/ChromaPreview';
+import rgbCode from '../../utils/rgbCode';
+
+const initialChroma = 128;
+const newChroma = 64;
 
 let container, getByTestId, rerender;
 beforeEach(() => {
   return ({container, getByTestId, rerender} = render(
-    <ChromaPreview chroma={'128'} />,
+    <ChromaPreview chroma={initialChroma.toString()} />,
   ));
 });
 
@@ -18,21 +22,48 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-test('sets the color by props.hue', () => {
-  expect(getByTestId('Purple')).toHaveAttribute('fill', 'rgb(191, 63, 191)');
-  expect(getByTestId('Red')).toHaveAttribute('fill', 'rgb(191, 63, 63)');
-  expect(getByTestId('Yellow')).toHaveAttribute('fill', 'rgb(191, 191, 63)');
-  expect(getByTestId('Green')).toHaveAttribute('fill', 'rgb(63, 191, 63)');
-  expect(getByTestId('Cyan')).toHaveAttribute('fill', 'rgb(63, 191, 191)');
-  expect(getByTestId('Blue')).toHaveAttribute('fill', 'rgb(63, 63, 191)');
+test('sets the color by props.chroma', () => {
+  expect(getByTestId('Purple')).toHaveAttribute(
+    'fill',
+    rgbCode(initialChroma).purple,
+  );
+  expect(getByTestId('Red')).toHaveAttribute(
+    'fill',
+    rgbCode(initialChroma).red,
+  );
+  expect(getByTestId('Yellow')).toHaveAttribute(
+    'fill',
+    rgbCode(initialChroma).yellow,
+  );
+  expect(getByTestId('Green')).toHaveAttribute(
+    'fill',
+    rgbCode(initialChroma).green,
+  );
+  expect(getByTestId('Cyan')).toHaveAttribute(
+    'fill',
+    rgbCode(initialChroma).cyan,
+  );
+  expect(getByTestId('Blue')).toHaveAttribute(
+    'fill',
+    rgbCode(initialChroma).blue,
+  );
 
-  rerender(<ChromaPreview chroma={'64'} />);
-  expect(getByTestId('Purple')).toHaveAttribute('fill', 'rgb(159, 95, 159)');
-  expect(getByTestId('Red')).toHaveAttribute('fill', 'rgb(159, 95, 95)');
-  expect(getByTestId('Yellow')).toHaveAttribute('fill', 'rgb(159, 159, 95)');
-  expect(getByTestId('Green')).toHaveAttribute('fill', 'rgb(95, 159, 95)');
-  expect(getByTestId('Cyan')).toHaveAttribute('fill', 'rgb(95, 159, 159)');
-  expect(getByTestId('Blue')).toHaveAttribute('fill', 'rgb(95, 95, 159)');
+  rerender(<ChromaPreview chroma={newChroma.toString()} />);
+  expect(getByTestId('Purple')).toHaveAttribute(
+    'fill',
+    rgbCode(newChroma).purple,
+  );
+  expect(getByTestId('Red')).toHaveAttribute('fill', rgbCode(newChroma).red);
+  expect(getByTestId('Yellow')).toHaveAttribute(
+    'fill',
+    rgbCode(newChroma).yellow,
+  );
+  expect(getByTestId('Green')).toHaveAttribute(
+    'fill',
+    rgbCode(newChroma).green,
+  );
+  expect(getByTestId('Cyan')).toHaveAttribute('fill', rgbCode(newChroma).cyan);
+  expect(getByTestId('Blue')).toHaveAttribute('fill', rgbCode(newChroma).blue);
 });
 
 test('renders correctly', () => {
@@ -53,7 +84,7 @@ test('renders correctly', () => {
         >
           <rect
             data-testid="Purple"
-            fill="rgb(191, 63, 191)"
+            fill="rgb(200, 72, 200)"
             height="93"
             width="93"
             x="0"
@@ -69,7 +100,7 @@ test('renders correctly', () => {
           />
           <rect
             data-testid="Yellow"
-            fill="rgb(191, 191, 63)"
+            fill="rgb(251, 251, 123)"
             height="93"
             width="93"
             x="188"
@@ -82,7 +113,7 @@ test('renders correctly', () => {
         >
           <rect
             data-testid="Green"
-            fill="rgb(63, 191, 63)"
+            fill="rgb(109, 237, 109)"
             height="93"
             width="93"
             x="0"
@@ -90,7 +121,7 @@ test('renders correctly', () => {
           />
           <rect
             data-testid="Cyan"
-            fill="rgb(63, 191, 191)"
+            fill="rgb(114, 242, 242)"
             height="93"
             width="93"
             x="94"
@@ -98,7 +129,7 @@ test('renders correctly', () => {
           />
           <rect
             data-testid="Blue"
-            fill="rgb(63, 63, 191)"
+            fill="rgb(37, 37, 165)"
             height="93"
             width="93"
             x="188"
