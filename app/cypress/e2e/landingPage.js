@@ -88,7 +88,7 @@ describe('Interactive components show the expected initial value', () => {
   it(`Chroma text field shows ${initialChroma}`, () => {
     cy.findByTestId('chroma-field').should('have.value', initialChroma);
   });
-  it.only(`Chroma preview swatches get rendered in accordance with ${initialChroma}`, () => {
+  it(`Chroma preview swatches get rendered in accordance with ${initialChroma}`, () => {
     chromaSwatches.forEach(swatch => {
       cy.findByTestId(swatch.testId).should(
         'have.css',
@@ -176,7 +176,7 @@ describe('Moving the slider', () => {
     cy.findByTestId('chroma-field').should('have.value', newChroma);
   });
 
-  it.only('changes the chroma swatch colors', () => {
+  it('changes the chroma swatch colors', () => {
     chromaSwatches.forEach(swatch => {
       cy.findByTestId(swatch.testId).should(
         'have.css',
