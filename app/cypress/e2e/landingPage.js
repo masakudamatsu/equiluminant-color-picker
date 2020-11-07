@@ -190,11 +190,6 @@ describe('Moving the slider', () => {
 describe('Typing a value in the chroma value field box', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.findByLabelText(/color code/i)
-      .click()
-      .clear()
-      .type(colorList[0].rgbCode)
-      .blur();
   });
   it('changes chroma immediately', () => {
     const newChroma = '120';
@@ -219,33 +214,31 @@ describe('Typing a value in the chroma value field box', () => {
 describe('Pressing arrow keys in the chroma value field box', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.findByLabelText(/color code/i)
-      .click()
-      .clear()
-      .type(colorList[0].rgbCode)
-      .blur();
+    cy.findByTestId('chroma-field').click().clear().type(newChroma);
   });
   it('changes chroma by 1', () => {
-    const expectedChroma = (Number(initialChroma) - 1).toString();
-
-    cy.findByTestId('chroma-field').click().type('{downarrow}');
-
-    cy.findByTestId('chroma-field').should('have.value', expectedChroma);
+    const originalChroma = newChroma;
+    const expectedChroma = (Number(originalChroma) + 1).toString();
 
     cy.findByTestId('chroma-field').click().type('{uparrow}');
 
-    cy.findByTestId('chroma-field').should('have.value', initialChroma);
+    cy.findByTestId('chroma-field').should('have.value', expectedChroma);
+
+    cy.findByTestId('chroma-field').click().type('{downarrow}');
+
+    cy.findByTestId('chroma-field').should('have.value', originalChroma);
   });
   it('changes chroma by 10 if pressed with Shift key', () => {
-    const expectedChroma = (Number(initialChroma) - 10).toString();
-
-    cy.findByTestId('chroma-field').click().type('{shift}{downarrow}');
-
-    cy.findByTestId('chroma-field').should('have.value', expectedChroma);
+    const originalChroma = newChroma;
+    const expectedChroma = (Number(originalChroma) + 10).toString();
 
     cy.findByTestId('chroma-field').click().type('{shift}{uparrow}');
 
-    cy.findByTestId('chroma-field').should('have.value', initialChroma);
+    cy.findByTestId('chroma-field').should('have.value', expectedChroma);
+
+    cy.findByTestId('chroma-field').click().type('{shift}{downarrow}');
+
+    cy.findByTestId('chroma-field').should('have.value', originalChroma);
   });
 });
 
