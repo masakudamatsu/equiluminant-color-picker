@@ -11,24 +11,13 @@ const Svg = styled.svg`
 function ChromaPreview(props) {
   const chroma = Number(props.chroma);
 
-  const purple = `rgb(${rgbCode(chroma).purple.r},  ${
-    rgbCode(chroma).purple.g
-  },  ${rgbCode(chroma).purple.b})`;
-  const red = `rgb(${rgbCode(chroma).red.r},  ${rgbCode(chroma).red.g},  ${
-    rgbCode(chroma).red.b
-  })`;
-  const yellow = `rgb(${rgbCode(chroma).yellow.r}, ${
-    rgbCode(chroma).yellow.g
-  }, ${rgbCode(chroma).yellow.b})`;
-  const green = `rgb(${rgbCode(chroma).green.r}, ${rgbCode(chroma).green.g}, ${
-    rgbCode(chroma).green.b
-  })`;
-  const cyan = `rgb(${rgbCode(chroma).cyan.r}, ${rgbCode(chroma).cyan.g}, ${
-    rgbCode(chroma).cyan.b
-  })`;
-  const blue = `rgb(${rgbCode(chroma).blue.r}, ${rgbCode(chroma).blue.g}, ${
-    rgbCode(chroma).blue.b
-  })`;
+  const purple = rgbCode(chroma).purple;
+  const red = rgbCode(chroma).red;
+  const yellow = rgbCode(chroma).yellow;
+  const green = rgbCode(chroma).green;
+  const cyan = rgbCode(chroma).cyan;
+  const blue = rgbCode(chroma).blue;
+
   return (
     <Svg viewBox="0 0 281 187" aria-labelledby="ChromaPreview">
       <title id="ChromaPreview">

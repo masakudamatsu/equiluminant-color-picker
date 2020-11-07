@@ -27,57 +27,33 @@ const newChroma = 125;
 const chromaSwatches = [
   {
     testId: 'Purple',
-    rgbCodeInitial: `rgb(${rgbCode(initialChroma).purple.r}, ${
-      rgbCode(initialChroma).purple.g
-    }, ${rgbCode(initialChroma).purple.b})`,
-    rgbCodeNew: `rgb(${rgbCode(newChroma).purple.r}, ${
-      rgbCode(newChroma).purple.g
-    }, ${rgbCode(newChroma).purple.b})`,
+    rgbCodeInitial: rgbCode(initialChroma).purple,
+    rgbCodeNew: rgbCode(newChroma).purple,
   },
   {
     testId: 'Red',
-    rgbCodeInitial: `rgb(${rgbCode(initialChroma).red.r}, ${
-      rgbCode(initialChroma).red.g
-    }, ${rgbCode(initialChroma).red.b})`,
-    rgbCodeNew: `rgb(${rgbCode(newChroma).red.r}, ${
-      rgbCode(newChroma).red.g
-    }, ${rgbCode(newChroma).red.b})`,
+    rgbCodeInitial: rgbCode(initialChroma).red,
+    rgbCodeNew: rgbCode(newChroma).red,
   },
   {
     testId: 'Yellow',
-    rgbCodeInitial: `rgb(${rgbCode(initialChroma).yellow.r}, ${
-      rgbCode(initialChroma).yellow.g
-    }, ${rgbCode(initialChroma).yellow.b})`,
-    rgbCodeNew: `rgb(${rgbCode(newChroma).yellow.r}, ${
-      rgbCode(newChroma).yellow.g
-    }, ${rgbCode(newChroma).yellow.b})`,
+    rgbCodeInitial: rgbCode(initialChroma).yellow,
+    rgbCodeNew: rgbCode(newChroma).yellow,
   },
   {
     testId: 'Green',
-    rgbCodeInitial: `rgb(${rgbCode(initialChroma).green.r}, ${
-      rgbCode(initialChroma).green.g
-    }, ${rgbCode(initialChroma).green.b})`,
-    rgbCodeNew: `rgb(${rgbCode(newChroma).green.r}, ${
-      rgbCode(newChroma).green.g
-    }, ${rgbCode(newChroma).green.b})`,
+    rgbCodeInitial: rgbCode(initialChroma).green,
+    rgbCodeNew: rgbCode(newChroma).green,
   },
   {
     testId: 'Cyan',
-    rgbCodeInitial: `rgb(${rgbCode(initialChroma).cyan.r}, ${
-      rgbCode(initialChroma).cyan.g
-    }, ${rgbCode(initialChroma).cyan.b})`,
-    rgbCodeNew: `rgb(${rgbCode(newChroma).cyan.r}, ${
-      rgbCode(newChroma).cyan.g
-    }, ${rgbCode(newChroma).cyan.b})`,
+    rgbCodeInitial: rgbCode(initialChroma).cyan,
+    rgbCodeNew: rgbCode(newChroma).cyan,
   },
   {
     testId: 'Blue',
-    rgbCodeInitial: `rgb(${rgbCode(initialChroma).blue.r}, ${
-      rgbCode(initialChroma).blue.g
-    }, ${rgbCode(initialChroma).blue.b})`,
-    rgbCodeNew: `rgb(${rgbCode(newChroma).blue.r}, ${
-      rgbCode(newChroma).blue.g
-    }, ${rgbCode(newChroma).blue.b})`,
+    rgbCodeInitial: rgbCode(initialChroma).blue,
+    rgbCodeNew: rgbCode(newChroma).blue,
   },
 ];
 
@@ -112,7 +88,7 @@ describe('Interactive components show the expected initial value', () => {
   it(`Chroma text field shows ${initialChroma}`, () => {
     cy.findByTestId('chroma-field').should('have.value', initialChroma);
   });
-  it(`Chroma preview swatches get rendered in accordance with ${initialChroma}`, () => {
+  it.only(`Chroma preview swatches get rendered in accordance with ${initialChroma}`, () => {
     chromaSwatches.forEach(swatch => {
       cy.findByTestId(swatch.testId).should(
         'have.css',
@@ -183,7 +159,7 @@ describe('Type a valid color code, and the color scheme changes accordingly afte
   });
 });
 
-describe.only('Moving the slider', () => {
+describe('Moving the slider', () => {
   beforeEach(() => {
     cy.visit('/');
     // Move the slider
