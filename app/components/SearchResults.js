@@ -4,6 +4,21 @@ import styled from 'styled-components';
 import useData from '../utils/useData';
 import Sectors from './Sectors';
 
+const Wrapper = styled.div`
+  position: relative;
+`;
+const SvgWrapper = styled.figure`
+  width: 100%;
+`;
+const MessageBox = styled.p`
+  height: 20px;
+  margin-top: -10px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+`;
+
 function SearchResults({chroma, contrastRatio, setHueToDisplay, submitted}) {
   const initialData = [
     {
@@ -38,7 +53,17 @@ function SearchResults({chroma, contrastRatio, setHueToDisplay, submitted}) {
   const {data, isLoading, isError} = useData(chroma, contrastRatio);
 
   if (isLoading) {
-    return <div>Fetching</div>;
+    return (
+      <Wrapper>
+        <SvgWrapper>
+          <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
+            <title id="SearchResults">SearchResults</title>
+            {greyColorWheel}
+          </svg>
+        </SvgWrapper>
+        <MessageBox>Fetching...</MessageBox>
+      </Wrapper>
+    );
   }
   if (isError) {
     return <div>Error</div>;
@@ -265,21 +290,25 @@ function SearchResults({chroma, contrastRatio, setHueToDisplay, submitted}) {
   });
 
   return (
-    <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
-      <title id="SearchResults">Wheel of equiluminant colors</title>
-      {hues.map((hue, i) => {
-        return hue.data.length ? (
-          <Sectors
-            colors={hue.data}
-            handleClick={hue.handleClick}
-            handleKeyDown={hue.handleKeyDown}
-            hueName={hue.hueName}
-            key={hue.hueName}
-            startAngle={i * 30}
-          />
-        ) : null;
-      })}
-    </svg>
+    <Wrapper>
+      <SvgWrapper>
+        <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
+          <title id="SearchResults">Wheel of equiluminant colors</title>
+          {hues.map((hue, i) => {
+            return hue.data.length ? (
+              <Sectors
+                colors={hue.data}
+                handleClick={hue.handleClick}
+                handleKeyDown={hue.handleKeyDown}
+                hueName={hue.hueName}
+                key={hue.hueName}
+                startAngle={i * 30}
+              />
+            ) : null;
+          })}
+        </svg>
+      </SvgWrapper>
+    </Wrapper>
   );
 }
 

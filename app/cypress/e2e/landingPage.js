@@ -255,30 +255,30 @@ describe('Pressing arrow keys in the chroma value field box', () => {
   });
 });
 
-describe('Once all inputs are provided correctly', () => {
-  beforeEach(() => {
-    cy.visit('/');
-    cy.findByLabelText(/color code/i)
-      .click()
-      .clear()
-      .type(colorList[0].rgbCode)
-      .blur();
-    cy.findByTestId('chroma-setter').then($range => {
-      const range = $range[0];
-      nativeInputValueSetter.call(range, Number(newChroma));
-      range.dispatchEvent(
-        new Event('change', {value: Number(newChroma), bubbles: true}),
-      );
-    });
-  });
-
-  it('Clicking the submit button redirects the user to the results page', () => {
-    cy.findByText(/get/i).click();
-    cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
-  });
-
-  it('Pressing the enter key redirects the user to the results page', () => {
-    cy.findByTestId('chroma-field').click().type('{enter}');
-    cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
-  });
-});
+// describe('Once all inputs are provided correctly', () => {
+//   beforeEach(() => {
+//     cy.visit('/');
+//     cy.findByLabelText(/color code/i)
+//       .click()
+//       .clear()
+//       .type(colorList[0].rgbCode)
+//       .blur();
+//     cy.findByTestId('chroma-setter').then($range => {
+//       const range = $range[0];
+//       nativeInputValueSetter.call(range, Number(newChroma));
+//       range.dispatchEvent(
+//         new Event('change', {value: Number(newChroma), bubbles: true}),
+//       );
+//     });
+//   });
+//
+//   it('Clicking the submit button redirects the user to the results page', () => {
+//     cy.findByText(/get/i).click();
+//     cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+//   });
+//
+//   it('Pressing the enter key redirects the user to the results page', () => {
+//     cy.findByTestId('chroma-field').click().type('{enter}');
+//     cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
+//   });
+// });
