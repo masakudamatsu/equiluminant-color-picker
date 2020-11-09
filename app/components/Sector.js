@@ -6,6 +6,7 @@ function Sector({color, index, angle, endPointX, endPointY}) {
   return (
     <path
       d={`M250,250 l250,0 A250,250 0,0,0 ${endPointX},${endPointY} z`}
+      data-testid={'sector'}
       fill={rgbCode}
       transform={`rotate(-${rotation}, 250, 250)`}
     />

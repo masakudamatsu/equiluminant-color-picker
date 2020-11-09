@@ -99,6 +99,19 @@ describe('Interactive components show the expected initial value', () => {
   });
 });
 
+describe('Initial style for search results', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+  it('The greyed-out color wheel is shown', () => {
+    cy.findAllByTestId('sector').should(
+      'have.css',
+      'fill',
+      'rgb(127, 127, 127)',
+    );
+  });
+});
+
 describe('Type a valid color code, and the color scheme changes accordingly after blurring the text field', () => {
   beforeEach(() => {
     cy.visit('/');

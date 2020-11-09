@@ -5,8 +5,34 @@ import useData from '../utils/useData';
 import Sectors from './Sectors';
 
 function SearchResults({chroma, contrastRatio, setHueToDisplay, submitted}) {
+  const initialData = [
+    {
+      red: 127,
+      green: 127,
+      blue: 127,
+    },
+  ];
+  let greyColorWheel = [];
+  for (let i = 0; i < 12; i++) {
+    greyColorWheel.push(
+      <Sectors
+        colors={initialData}
+        handleClick={null}
+        handleKeyDown={null}
+        hueName={'grey'}
+        key={`grey${i}`}
+        startAngle={i * 30}
+      />,
+    );
+  }
+
   if (!submitted) {
-    return <div></div>;
+    return (
+      <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
+        <title id="SearchResults">SearchResults</title>
+        {greyColorWheel}
+      </svg>
+    );
   }
 
   const {data, isLoading, isError} = useData(chroma, contrastRatio);
