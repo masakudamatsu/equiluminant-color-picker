@@ -13,7 +13,7 @@ let container, getByLabelText;
 beforeEach(() => {
   return ({container, getByLabelText} = render(
     <svg>
-      <Sector fillColorCode={mockColorCode} index={9} angle={10} />
+      <Sector fillColorCode={mockColorCode} degToRotate={90} angle={10} />
     </svg>,
   ));
 });

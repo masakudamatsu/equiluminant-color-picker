@@ -15,12 +15,13 @@ function Sectors({colors, handleClick, handleKeyDown, hueName, startAngle}) {
       transform={`rotate(-${startAngle}, 250, 250)`}
     >
       {colors.map((color, i) => {
+        const degToRotate = angle * i;
         const rgbCode = `rgb(${color.red}, ${color.green}, ${color.blue})`;
         return (
           <Sector
             angle={angle}
+            degToRotate={degToRotate}
             fillColorCode={rgbCode}
-            index={i}
             key={`${hueName}${i}`}
           />
         );
