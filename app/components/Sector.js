@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function Sector({angle, degToRotate, fillColorCode}) {
+function Sector({angle, degToRotate, fillColorCode, strokeColor = 'none'}) {
   const centerX = 250;
   const centerY = 250;
   const radius = 250;
@@ -14,6 +14,7 @@ function Sector({angle, degToRotate, fillColorCode}) {
       d={`M${centerX},${centerY} l${radius},0 A${centerX},${centerY} 0,0,0 ${endPointX},${endPointY} z`}
       data-testid={'sector'}
       fill={fillColorCode}
+      stroke={strokeColor}
       transform={`rotate(-${degToRotate}, ${centerX}, ${centerY})`}
     />
   );
@@ -23,6 +24,7 @@ Sector.propTypes = {
   angle: PropTypes.number,
   degToRotate: PropTypes.number,
   fillColorCode: PropTypes.string,
+  strokeColor: PropTypes.string,
 };
 
 export default Sector;

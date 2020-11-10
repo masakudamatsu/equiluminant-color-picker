@@ -65,12 +65,14 @@ test('renders correctly', () => {
             d="M250,250 l250,0 A250,250 0,0,0 491.4814565722671,185.29523872436982 z"
             data-testid="sector"
             fill="rgb(124, 234, 12)"
+            stroke="none"
             transform="rotate(-0, 250, 250)"
           />
           <path
             d="M250,250 l250,0 A250,250 0,0,0 491.4814565722671,185.29523872436982 z"
             data-testid="sector"
             fill="rgb(24, 134, 112)"
+            stroke="none"
             transform="rotate(-15, 250, 250)"
           />
         </g>
