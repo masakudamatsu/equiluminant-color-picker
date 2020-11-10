@@ -13,13 +13,7 @@ let container, getByLabelText;
 beforeEach(() => {
   return ({container, getByLabelText} = render(
     <svg>
-      <Sector
-        fillColorCode={mockColorCode}
-        index={9}
-        angle={10}
-        endPointX={10}
-        endPointY={10}
-      />
+      <Sector fillColorCode={mockColorCode} index={9} angle={10} />
     </svg>,
   ));
 });
@@ -33,7 +27,7 @@ test('renders correctly', () => {
     <div>
       <svg>
         <path
-          d="M250,250 l250,0 A250,250 0,0,0 10,10 z"
+          d="M250,250 l250,0 A250,250 0,0,0 496.201938253052,206.58795558326742 z"
           data-testid="sector"
           fill="rgb(124, 234, 12)"
           transform="rotate(-90, 250, 250)"

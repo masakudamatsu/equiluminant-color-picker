@@ -5,12 +5,6 @@ import Sector from './Sector';
 function Sectors({colors, handleClick, handleKeyDown, hueName, startAngle}) {
   const angle = 30 / colors.length;
 
-  const centerX = 250;
-  const centerY = 250;
-  const radius = 250;
-  const angleInRadians = -(angle / 180) * Math.PI;
-  const endPointX = centerX + radius * Math.cos(angleInRadians);
-  const endPointY = centerY + radius * Math.sin(angleInRadians);
   return (
     <g
       aria-label={`equiluminant colors in ${hueName} hue`}
@@ -26,8 +20,6 @@ function Sectors({colors, handleClick, handleKeyDown, hueName, startAngle}) {
           <Sector
             angle={angle}
             fillColorCode={rgbCode}
-            endPointX={endPointX}
-            endPointY={endPointY}
             index={i}
             key={`${hueName}${i}`}
           />

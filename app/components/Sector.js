@@ -1,13 +1,22 @@
 import PropTypes from 'prop-types';
 
-function Sector({fillColorCode, index, angle, endPointX, endPointY}) {
+function Sector({fillColorCode, index, angle}) {
   const rotation = index * angle;
+
+  const centerX = 250;
+  const centerY = 250;
+  const radius = 250;
+
+  const angleInRadians = -(angle / 180) * Math.PI;
+  const endPointX = centerX + radius * Math.cos(angleInRadians);
+  const endPointY = centerY + radius * Math.sin(angleInRadians);
+
   return (
     <path
-      d={`M250,250 l250,0 A250,250 0,0,0 ${endPointX},${endPointY} z`}
+      d={`M${centerX},${centerY} l${radius},0 A${centerX},${centerY} 0,0,0 ${endPointX},${endPointY} z`}
       data-testid={'sector'}
       fill={fillColorCode}
-      transform={`rotate(-${rotation}, 250, 250)`}
+      transform={`rotate(-${rotation}, ${centerX}, ${centerY})`}
     />
   );
 }
@@ -15,8 +24,6 @@ function Sector({fillColorCode, index, angle, endPointX, endPointY}) {
 Sector.propTypes = {
   angle: PropTypes.number,
   fillColorCode: PropTypes.string,
-  endPointX: PropTypes.number,
-  endPointY: PropTypes.number,
   index: PropTypes.number,
 };
 
