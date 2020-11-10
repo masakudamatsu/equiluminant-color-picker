@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 
-function Sector({color, index, angle, endPointX, endPointY}) {
-  const rgbCode = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+function Sector({fillColorCode, index, angle, endPointX, endPointY}) {
   const rotation = index * angle;
   return (
     <path
       d={`M250,250 l250,0 A250,250 0,0,0 ${endPointX},${endPointY} z`}
       data-testid={'sector'}
-      fill={rgbCode}
+      fill={fillColorCode}
       transform={`rotate(-${rotation}, 250, 250)`}
     />
   );
@@ -15,7 +14,7 @@ function Sector({color, index, angle, endPointX, endPointY}) {
 
 Sector.propTypes = {
   angle: PropTypes.number,
-  color: PropTypes.object,
+  fillColorCode: PropTypes.string,
   endPointX: PropTypes.number,
   endPointY: PropTypes.number,
   index: PropTypes.number,

@@ -20,16 +20,19 @@ function Sectors({colors, handleClick, handleKeyDown, hueName, startAngle}) {
       tabIndex="0"
       transform={`rotate(-${startAngle}, 250, 250)`}
     >
-      {colors.map((color, i) => (
-        <Sector
-          angle={angle}
-          color={color}
-          endPointX={endPointX}
-          endPointY={endPointY}
-          index={i}
-          key={`${hueName}${i}`}
-        />
-      ))}
+      {colors.map((color, i) => {
+        const rgbCode = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+        return (
+          <Sector
+            angle={angle}
+            fillColorCode={rgbCode}
+            endPointX={endPointX}
+            endPointY={endPointY}
+            index={i}
+            key={`${hueName}${i}`}
+          />
+        );
+      })}
     </g>
   );
 }

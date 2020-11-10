@@ -7,14 +7,14 @@ import 'jest-axe/extend-expect';
 
 import Sector from '../../components/Sector';
 
-const mockColor = {red: '124', green: '234', blue: '12'};
+const mockColorCode = 'rgb(124, 234, 12)';
 
 let container, getByLabelText;
 beforeEach(() => {
   return ({container, getByLabelText} = render(
     <svg>
       <Sector
-        color={mockColor}
+        fillColorCode={mockColorCode}
         index={9}
         angle={10}
         endPointX={10}
@@ -34,6 +34,7 @@ test('renders correctly', () => {
       <svg>
         <path
           d="M250,250 l250,0 A250,250 0,0,0 10,10 z"
+          data-testid="sector"
           fill="rgb(124, 234, 12)"
           transform="rotate(-90, 250, 250)"
         />
