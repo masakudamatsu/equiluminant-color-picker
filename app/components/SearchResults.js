@@ -19,7 +19,13 @@ const MessageBox = styled.p`
   width: 100%;
 `;
 
-function SearchResults({chroma, contrastRatio, setHueToDisplay, submitted}) {
+function SearchResults({
+  chroma,
+  contrastRatio,
+  darkMode,
+  setHueToDisplay,
+  submitted,
+}) {
   const initialData = [
     {
       red: 127,
@@ -298,6 +304,7 @@ function SearchResults({chroma, contrastRatio, setHueToDisplay, submitted}) {
             return hue.data.length ? (
               <Sectors
                 colors={hue.data}
+                darkMode={darkMode}
                 handleClick={hue.handleClick}
                 handleKeyDown={hue.handleKeyDown}
                 hueName={hue.hueName}
@@ -315,6 +322,7 @@ function SearchResults({chroma, contrastRatio, setHueToDisplay, submitted}) {
 SearchResults.propTypes = {
   chroma: PropTypes.string,
   contrastRatio: PropTypes.string,
+  darkMode: PropTypes.bool,
   setHueToDisplay: PropTypes.func,
   submitted: PropTypes.bool,
 };

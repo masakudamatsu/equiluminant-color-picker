@@ -56,25 +56,37 @@ test('renders correctly', () => {
     <div>
       <svg>
         <g
-          aria-label="equiluminant colors in red hue"
-          role="button"
-          tabindex="0"
           transform="rotate(-30, 250, 250)"
         >
-          <path
-            d="M250,250 l250,0 A250,250 0,0,0 491.4814565722671,185.29523872436982 z"
-            data-testid="sector"
-            fill="rgb(124, 234, 12)"
-            stroke="none"
-            transform="rotate(-0, 250, 250)"
-          />
-          <path
-            d="M250,250 l250,0 A250,250 0,0,0 491.4814565722671,185.29523872436982 z"
-            data-testid="sector"
-            fill="rgb(24, 134, 112)"
-            stroke="none"
-            transform="rotate(-15, 250, 250)"
-          />
+          <g>
+            <path
+              d="M250,250 l250,0 A250,250 0,0,0 491.4814565722671,185.29523872436982 z"
+              data-testid="sector"
+              fill="rgb(124, 234, 12)"
+              stroke="none"
+              transform="rotate(-0, 250, 250)"
+            />
+            <path
+              d="M250,250 l250,0 A250,250 0,0,0 491.4814565722671,185.29523872436982 z"
+              data-testid="sector"
+              fill="rgb(24, 134, 112)"
+              stroke="none"
+              transform="rotate(-15, 250, 250)"
+            />
+          </g>
+          <g
+            aria-label="Show color code of equiluminant colors in red hue"
+            role="button"
+            tabindex="0"
+          >
+            <path
+              d="M250,250 l250,0 A250,250 0,0,0 466.5063509461097,125.00000000000001 z"
+              data-testid="sector"
+              fill="transparent"
+              stroke="rgb(44, 44, 44)"
+              transform="rotate(-0, 250, 250)"
+            />
+          </g>
         </g>
       </svg>
     </div>
