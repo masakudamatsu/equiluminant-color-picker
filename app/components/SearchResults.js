@@ -302,7 +302,7 @@ function SearchResults({
         <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
           <title id="SearchResults">Wheel of equiluminant colors</title>
           {hues.map((hue, i) => {
-            return hue.data.length ? (
+            return (
               <Sectors
                 colors={hue.data}
                 darkMode={darkMode}
@@ -312,7 +312,7 @@ function SearchResults({
                 key={hue.hueName}
                 startAngle={i * 30}
               />
-            ) : null;
+            );
           })}
         </svg>
       </SvgWrapper>

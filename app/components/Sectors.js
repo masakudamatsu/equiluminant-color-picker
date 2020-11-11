@@ -16,6 +16,7 @@ function Sectors({
 
   return (
     <g transform={`rotate(-${startAngle}, 250, 250)`}>
+      {colors ? (
       <g>
         {colors.map((color, i) => {
           const degToRotate = angle * i;
@@ -30,8 +31,11 @@ function Sectors({
           );
         })}
       </g>
+      ) : null}
       <g
+        aria-disabled={!colors}
         aria-label={`Show color code of equiluminant colors in ${hueName} hue`}
+        disabled={!colors}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         role="button"
