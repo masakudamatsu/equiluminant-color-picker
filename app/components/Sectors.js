@@ -9,28 +9,32 @@ function Sectors({
   handleClick,
   handleKeyDown,
   hueName,
+  opacity = 1,
   startAngle,
 }) {
   const wholeAngle = 30;
   const angle = wholeAngle / colors.length;
 
   return (
-    <g transform={`rotate(-${startAngle}, 250, 250)`}>
+    <g
+      style={{opacity: opacity}}
+      transform={`rotate(-${startAngle}, 250, 250)`}
+    >
       {colors ? (
-      <g>
-        {colors.map((color, i) => {
-          const degToRotate = angle * i;
-          const rgbCode = `rgb(${color.red}, ${color.green}, ${color.blue})`;
-          return (
-            <Sector
-              angle={angle}
-              degToRotate={degToRotate}
-              fillColorCode={rgbCode}
-              key={`${hueName}${i}`}
-            />
-          );
-        })}
-      </g>
+        <g>
+          {colors.map((color, i) => {
+            const degToRotate = angle * i;
+            const rgbCode = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+            return (
+              <Sector
+                angle={angle}
+                degToRotate={degToRotate}
+                fillColorCode={rgbCode}
+                key={`${hueName}${i}`}
+              />
+            );
+          })}
+        </g>
       ) : null}
       <g
         aria-disabled={!colors}
@@ -60,6 +64,7 @@ Sectors.propTypes = {
   handleClick: PropTypes.func,
   handleKeyDown: PropTypes.func,
   hueName: PropTypes.string,
+  opacity: PropTypes.number,
   startAngle: PropTypes.number,
 };
 

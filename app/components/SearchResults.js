@@ -4,9 +4,6 @@ import styled from 'styled-components';
 import useData from '../utils/useData';
 import Sectors from './Sectors';
 
-const Wrapper = styled.div`
-  position: relative;
-`;
 const SvgWrapper = styled.figure`
   width: 100%;
 `;
@@ -43,6 +40,7 @@ function SearchResults({
         handleKeyDown={null}
         hueName={'grey'}
         key={`grey${i}`}
+        opacity={0.4}
         startAngle={i * 30}
       />,
     );
@@ -61,7 +59,7 @@ function SearchResults({
 
   if (isLoading) {
     return (
-      <Wrapper>
+      <>
         <SvgWrapper>
           <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
             <title id="SearchResults">SearchResults</title>
@@ -69,7 +67,7 @@ function SearchResults({
           </svg>
         </SvgWrapper>
         <MessageBox>Fetching...</MessageBox>
-      </Wrapper>
+      </>
     );
   }
   if (isError) {
@@ -297,7 +295,7 @@ function SearchResults({
   });
 
   return (
-    <Wrapper>
+    <>
       <SvgWrapper>
         <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
           <title id="SearchResults">Wheel of equiluminant colors</title>
@@ -316,7 +314,7 @@ function SearchResults({
           })}
         </svg>
       </SvgWrapper>
-    </Wrapper>
+    </>
   );
 }
 

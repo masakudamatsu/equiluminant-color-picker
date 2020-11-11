@@ -48,6 +48,53 @@ export const Abbr = styled.abbr`
   }
 `;
 
+export const ButtonSubmit = styled.button`
+  background: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+  border: 1px solid
+    ${props =>
+      props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+  border-radius: 50%;
+  color: ${props =>
+    props.darkMode
+      ? color.body.background.darkMode
+      : color.body.background.lightMode};
+  cursor: pointer;
+  font-size: ${layout.button.fontSize.mobile}rem;
+  height: 100px;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  position: absolute;
+  top: 50%;
+  width: 100px;
+
+  &:focus,
+  &:hover {
+    background-color: ${props =>
+      props.darkMode
+        ? color.body.background.darkMode
+        : color.body.background.lightMode};
+    color: ${props =>
+      props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+    outline: none;
+  }
+
+  &:active {
+    background-color: 'white';
+    outline: none;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+`;
+
+export const DivPositionRelative = styled.div`
+  position: relative;
+`;
+
 export const H2 = styled.h2`
   ${textCrop.bodyText.capHeight}
 `;

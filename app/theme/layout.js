@@ -98,6 +98,14 @@ const layout = {
       desktop: baseXheight.desktop,
     },
   },
+  button: {
+    fontSize: {
+      mobile: fontSizeForXheightToBe(
+        baseXheight.mobile * modularScale(1),
+        Roboto,
+      ),
+    },
+  },
   chromaTextField: {
     fontSize: {
       mobile: fontSizeForCapHeightToBe(

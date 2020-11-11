@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import {
   Abbr,
+  ButtonSubmit,
   ChromaTextField,
   ChromaTextFieldWrapper,
+  DivPositionRelative,
   H2,
   InputRange,
   SpacerVertical,
@@ -310,20 +312,25 @@ function HomePage(props) {
           testId="chromaError"
         />
         <SpacerVertical scale="3" />
-        <button type="submit" onClick={handleSubmit}>
-          Search the color database
-        </button>
+        <H2>#3 Find equiluminant color</H2>
+        <SpacerVertical scale="2" />
+        <DivPositionRelative>
+          <ButtonSubmit
+            darkMode={props.darkMode}
+            type="submit"
+            onClick={handleSubmit}
+          >
+            {props.submitted ? null : 'Search'}
+          </ButtonSubmit>
+          <SearchResults
+            chroma={props.chroma}
+            contrastRatio={props.contrastRatio}
+            darkMode={props.darkMode}
+            setHueToDisplay={setHueToDisplay}
+            submitted={props.submitted}
+          />
+        </DivPositionRelative>
       </form>
-      <SpacerVertical scale="3" />
-      <H2>#3 Pick Hue</H2>
-      <SpacerVertical scale="2" />
-      <SearchResults
-        chroma={props.chroma}
-        contrastRatio={props.contrastRatio}
-        darkMode={props.darkMode}
-        setHueToDisplay={setHueToDisplay}
-        submitted={props.submitted}
-      />
       <SpacerVertical scale="3" />
       <H2>#4 Copy Color Code</H2>
       <SpacerVertical scale="2" />
