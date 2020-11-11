@@ -120,6 +120,14 @@ const layout = {
       mobile: ((baseXheight.mobile * modularScale(4)) / 2) * oneRemPx,
     },
   },
+  h2: {
+    fontSize: {
+      mobile: fontSizeForXheightToBe(
+        baseXheight.mobile * modularScale(1),
+        Roboto,
+      ),
+    },
+  },
   inputText: {
     borderRadiusPx: 4,
     borderWidthPx: {normal: 1, active: 2},

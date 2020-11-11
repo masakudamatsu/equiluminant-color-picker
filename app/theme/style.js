@@ -96,6 +96,7 @@ export const DivPositionRelative = styled.div`
 `;
 
 export const H2 = styled.h2`
+  font-size: ${layout.h2.fontSize.mobile}rem;
   ${textCrop.bodyText.capHeight}
 `;
 
