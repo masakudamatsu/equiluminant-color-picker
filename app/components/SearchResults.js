@@ -28,9 +28,9 @@ function SearchResults({
 }) {
   const initialData = [
     {
-      red: 127,
-      green: 127,
-      blue: 127,
+      red: darkMode ? 44 : 209,
+      green: darkMode ? 44 : 209,
+      blue: darkMode ? 44 : 209,
     },
   ];
   let greyColorWheel = [];
@@ -38,6 +38,7 @@ function SearchResults({
     greyColorWheel.push(
       <Sectors
         colors={initialData}
+        darkMode={darkMode}
         handleClick={null}
         handleKeyDown={null}
         hueName={'grey'}
