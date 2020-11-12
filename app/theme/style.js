@@ -64,10 +64,13 @@ export const ButtonSubmit = styled.button`
 
   &:focus,
   &:hover {
-    background: ${color.card.background};
-    border: 1px solid ${color.card.font};
-    color: ${color.card.font};
-    outline: none;
+    ${props =>
+      props.searched
+        ? ''
+        : `background: ${color.card.background};
+           border: 1px solid ${color.card.font};
+           color: ${color.card.font};
+           outline: none;`}
   }
 
   &:active {
@@ -76,8 +79,11 @@ export const ButtonSubmit = styled.button`
   }
 
   &[disabled] {
-    cursor: not-allowed;
-    opacity: 0.3;
+    ${props =>
+      props.searched
+        ? `cursor: default;`
+        : `cursor: not-allowed;
+           opacity: 0.3;`}
   }
 `;
 

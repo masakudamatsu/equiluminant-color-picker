@@ -29,6 +29,8 @@ import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 function HomePage(props) {
   const [userColorCode, setUserColorCode] = useState('');
   const [hueToDisplay, setHueToDisplay] = useState([]);
+  const [fetching, setFetching] = useState(false);
+  const [searched, setSearched] = useState(false);
 
   const handleBlur = event => {
     // When nothing is entered
@@ -329,16 +331,21 @@ function HomePage(props) {
           <DivPositionRelative>
             <ButtonSubmit
               darkMode={props.darkMode}
-              type="submit"
+              data-testid="submit-button"
+              disabled={fetching || searched}
               onClick={handleSubmit}
+              searched={searched}
+              type="submit"
             >
-              {props.submitted ? null : 'Search'}
+              {fetching ? 'Fetching...' : searched ? 'Choose a hue' : 'Search'}
             </ButtonSubmit>
             <SearchResults
               chroma={props.chroma}
               contrastRatio={props.contrastRatio}
               darkMode={props.darkMode}
+              setFetching={setFetching}
               setHueToDisplay={setHueToDisplay}
+              setSearched={setSearched}
               submitted={props.submitted}
             />
           </DivPositionRelative>

@@ -282,3 +282,9 @@ describe('Pressing arrow keys in the chroma value field box', () => {
 //     cy.url().should('eq', `${Cypress.config().baseUrl}/results`);
 //   });
 // });
+
+it('Clicking the Search button turns the button label into "Fetching..." and then into "Choose a hue"', () => {
+  // cy.findByRole('button', { name: 'Search' }).click();
+  // cy.findByTestId('submit-button').should('have.text', 'Fetching...');
+  // cy.findByTestId('submit-button').should('have.text', 'Choose a hue');
+});

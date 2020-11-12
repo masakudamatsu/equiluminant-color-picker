@@ -7,20 +7,13 @@ import Sectors from './Sectors';
 const SvgWrapper = styled.figure`
   width: 100%;
 `;
-const MessageBox = styled.p`
-  height: 20px;
-  margin-top: -10px;
-  position: absolute;
-  text-align: center;
-  top: 50%;
-  width: 100%;
-`;
-
 function SearchResults({
   chroma,
   contrastRatio,
   darkMode,
+  setFetching,
   setHueToDisplay,
+  setSearched,
   submitted,
 }) {
   const initialData = [
@@ -56,18 +49,17 @@ function SearchResults({
   }
 
   const {data, isLoading, isError} = useData(chroma, contrastRatio);
+  setFetching(isLoading ? true : false);
+  setSearched(data ? true : false);
 
   if (isLoading) {
     return (
-      <>
-        <SvgWrapper>
-          <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
-            <title id="SearchResults">SearchResults</title>
-            {greyColorWheel}
-          </svg>
-        </SvgWrapper>
-        <MessageBox>Fetching...</MessageBox>
-      </>
+      <SvgWrapper>
+        <svg viewBox="0 0 500 500" aria-labelledby="SearchResults">
+          <title id="SearchResults">SearchResults</title>
+          {greyColorWheel}
+        </svg>
+      </SvgWrapper>
     );
   }
   if (isError) {
@@ -322,7 +314,9 @@ SearchResults.propTypes = {
   chroma: PropTypes.string,
   contrastRatio: PropTypes.string,
   darkMode: PropTypes.bool,
+  setFetching: PropTypes.func,
   setHueToDisplay: PropTypes.func,
+  setSearched: PropTypes.func,
   submitted: PropTypes.bool,
 };
 
