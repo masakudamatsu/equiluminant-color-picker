@@ -49,16 +49,9 @@ export const Abbr = styled.abbr`
 `;
 
 export const ButtonSubmit = styled.button`
-  background: ${props =>
-    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
-  border: 1px solid
-    ${props =>
-      props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+  background: ${color.card.font};
   border-radius: 50%;
-  color: ${props =>
-    props.darkMode
-      ? color.body.background.darkMode
-      : color.body.background.lightMode};
+  color: ${color.card.background};
   cursor: pointer;
   font-size: ${layout.button.fontSize.mobile}rem;
   height: 100px;
@@ -71,12 +64,9 @@ export const ButtonSubmit = styled.button`
 
   &:focus,
   &:hover {
-    background-color: ${props =>
-      props.darkMode
-        ? color.body.background.darkMode
-        : color.body.background.lightMode};
-    color: ${props =>
-      props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
+    background: ${color.card.background};
+    border: 1px solid ${color.card.font};
+    color: ${color.card.font};
     outline: none;
   }
 

@@ -176,7 +176,7 @@ button,
 [type="submit"],
 [role="button"] {
   cursor: pointer;
-  color: inherit;
+  /* color: inherit; Removed as this somehow overrides the style defined with styled.button */
 }
 
 /* Remove inner padding and border in Firefox 4+ */
@@ -344,7 +344,7 @@ input[type=range]:focus {
 input[type=range]::-ms-track {
   cursor: pointer;
   /* Hides the slider so custom styles can be added */
-  background: transparent; 
+  background: transparent;
   border-color: transparent;
   color: transparent;
 }
