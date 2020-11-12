@@ -91,6 +91,18 @@ export const ButtonSubmit = styled.button`
   }
 `;
 
+export const Card = styled.div`
+  background: ${color.card.background};
+  border: 1px solid
+    ${props =>
+      props.darkMode
+        ? color.card.border.darkMode
+        : color.card.border.lightMode};
+  color: ${color.card.font};
+  padding: ${layout.sideMarginPx.mobile}px;
+  width: 100%;
+`;
+
 export const DivPositionRelative = styled.div`
   position: relative;
 `;

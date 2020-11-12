@@ -34,6 +34,14 @@ const color = {
       darkMode: whiteAA,
     },
   },
+  card: {
+    background: whiteAA,
+    border: {
+      lightMode: blackAA,
+      darkMode: whiteAA,
+    },
+    font: blackAA,
+  },
   chromaTextField: {
     background: {
       lightMode: whiteAAopaque,

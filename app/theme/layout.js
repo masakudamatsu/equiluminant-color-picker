@@ -175,7 +175,7 @@ const layout = {
   },
   sideMarginPx: {
     // in pixel, because we do not want it to be enlarged when the user increases the font size.
-    mobile: baseXheight.mobile * modularScale(1) * oneRemPx,
+    mobile: ((baseXheight.mobile * modularScale(1)) / 2) * oneRemPx,
   },
   slider: {
     thumb: {

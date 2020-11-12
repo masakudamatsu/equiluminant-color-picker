@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Abbr,
   ButtonSubmit,
+  Card,
   ChromaTextField,
   ChromaTextFieldWrapper,
   DivPositionRelative,
@@ -246,96 +247,112 @@ function HomePage(props) {
       </noscript>
       <SpacerVertical scale="3" />
       <form>
-        <H2>#1 Get Luminance</H2>
-        <SpacerVertical scale="2" />
-        <InputColorCode
-          textField={
-            <TextField
+        <Card darkMode={props.darkMode}>
+          <SpacerVertical scale="0" />
+          <H2>#1 Get Luminance</H2>
+          <SpacerVertical scale="2" />
+          <InputColorCode
+            textField={
+              <TextField
                 backgroundColor={props.backgroundColor}
-              darkMode={props.darkMode}
-              id="inputColorCode"
-              inputInvalid={props.inputInvalid}
-              label={colorCodeFieldLabel}
-              alertMissing={props.alertMissing}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              handleKeyDown={handleKeyDown}
-              pattern={pattern}
-              value={userColorCode}
-            />
-          }
-          helperText={<HelperText />}
-          errorText={
-            <ErrorText
-              darkMode={props.darkMode}
-              inputInvalid={props.inputInvalid}
-              alertMissing={props.alertMissing}
-              alertEnterKey={props.alertEnterKey}
-              testId="colorCodeError"
-            />
-          }
-        />{' '}
+                darkMode={props.darkMode}
+                id="inputColorCode"
+                inputInvalid={props.inputInvalid}
+                label={colorCodeFieldLabel}
+                alertMissing={props.alertMissing}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                handleKeyDown={handleKeyDown}
+                pattern={pattern}
+                value={userColorCode}
+              />
+            }
+            helperText={<HelperText />}
+            errorText={
+              <ErrorText
+                darkMode={props.darkMode}
+                inputInvalid={props.inputInvalid}
+                alertMissing={props.alertMissing}
+                alertEnterKey={props.alertEnterKey}
+                testId="colorCodeError"
+              />
+            }
+          />{' '}
+          <SpacerVertical scale="0" />
+        </Card>
         <SpacerVertical scale="3" />
-        <H2>#2 Set Saturation</H2>
-        <SpacerVertical scale="2" />
-        <ChromaTextFieldWrapper>
-          <ChromaPreview chroma={props.chroma} />
-          <ChromaTextField
+        <Card darkMode={props.darkMode}>
+          <SpacerVertical scale="0" />
+          <H2>#2 Set Saturation</H2>
+          <SpacerVertical scale="2" />
+          <ChromaTextFieldWrapper>
+            <ChromaPreview chroma={props.chroma} />
+            <ChromaTextField
+              darkMode={props.darkMode}
+              data-testid="chroma-field"
+              error={props.chromaInvalid}
+              id="chroma-field"
+              onBlur={handleBlurChroma}
+              onChange={handleChangeChroma}
+              onFocus={handleFocusChroma}
+              onKeyDown={handleKeyDownChroma}
+              pattern="1?\d?\d|2[0-4]\d|25[0-5]"
+              value={props.chroma}
+            />
+          </ChromaTextFieldWrapper>
+          <SpacerVertical scale="1" />
+          <InputRange
             darkMode={props.darkMode}
-            data-testid="chroma-field"
-            error={props.chromaInvalid}
-            id="chroma-field"
-            onBlur={handleBlurChroma}
+            data-testid="chroma-setter"
+            id="chroma-setter"
+            max="255"
+            min="0"
             onChange={handleChangeChroma}
-            onFocus={handleFocusChroma}
-            onKeyDown={handleKeyDownChroma}
-            pattern="1?\d?\d|2[0-4]\d|25[0-5]"
+            step="1"
             value={props.chroma}
           />
-        </ChromaTextFieldWrapper>
-        <SpacerVertical scale="1" />
-        <InputRange
-          darkMode={props.darkMode}
-          data-testid="chroma-setter"
-          id="chroma-setter"
-          max="255"
-          min="0"
-          onChange={handleChangeChroma}
-          step="1"
-          value={props.chroma}
-        />
-        <SpacerVertical scale="1" />
-        <p>0 for grayscale; 255 for fully-saturated color</p>
-        <ErrorText
-          chromaInvalid={props.chromaInvalid}
-          chromaMissing={props.chromaMissing}
-          darkMode={props.darkMode}
-          testId="chromaError"
-        />
-        <SpacerVertical scale="3" />
-        <H2>#3 Find equiluminant color</H2>
-        <SpacerVertical scale="2" />
-        <DivPositionRelative>
-          <ButtonSubmit
+          <SpacerVertical scale="1" />
+          <p>0 for grayscale; 255 for full saturation</p>
+          <ErrorText
+            chromaInvalid={props.chromaInvalid}
+            chromaMissing={props.chromaMissing}
             darkMode={props.darkMode}
-            type="submit"
-            onClick={handleSubmit}
-          >
-            {props.submitted ? null : 'Search'}
-          </ButtonSubmit>
-          <SearchResults
-            chroma={props.chroma}
-            contrastRatio={props.contrastRatio}
-            darkMode={props.darkMode}
-            setHueToDisplay={setHueToDisplay}
-            submitted={props.submitted}
+            testId="chromaError"
           />
-        </DivPositionRelative>
+          <SpacerVertical scale="0" />
+        </Card>
+        <SpacerVertical scale="3" />
+        <Card darkMode={props.darkMode}>
+          <SpacerVertical scale="0" />
+          <H2>#3 Find equiluminant color</H2>
+          <SpacerVertical scale="2" />
+          <DivPositionRelative>
+            <ButtonSubmit
+              darkMode={props.darkMode}
+              type="submit"
+              onClick={handleSubmit}
+            >
+              {props.submitted ? null : 'Search'}
+            </ButtonSubmit>
+            <SearchResults
+              chroma={props.chroma}
+              contrastRatio={props.contrastRatio}
+              darkMode={props.darkMode}
+              setHueToDisplay={setHueToDisplay}
+              submitted={props.submitted}
+            />
+          </DivPositionRelative>
+          <SpacerVertical scale="0" />
+        </Card>
       </form>
       <SpacerVertical scale="3" />
-      <H2>#4 Copy Color Code</H2>
-      <SpacerVertical scale="2" />
-      <Swatches colors={hueToDisplay} />
+      <Card darkMode={props.darkMode}>
+        <SpacerVertical scale="0" />
+        <H2>#4 Copy Color Code</H2>
+        <SpacerVertical scale="2" />
+        <Swatches colors={hueToDisplay} />
+        <SpacerVertical scale="0" />
+      </Card>
     </>
   );
 }
