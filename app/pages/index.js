@@ -251,6 +251,7 @@ function HomePage(props) {
         <InputColorCode
           textField={
             <TextField
+                backgroundColor={props.backgroundColor}
               darkMode={props.darkMode}
               id="inputColorCode"
               inputInvalid={props.inputInvalid}
@@ -367,6 +368,7 @@ HomePage.propTypes = {
   setSubmitted: PropTypes.func.isRequired,
   clickedColorCode: PropTypes.string,
   setClickedColorCode: PropTypes.func.isRequired,
+  backgroundColor: PropTypes.string,
 };
 
 export default HomePage;

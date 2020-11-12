@@ -104,7 +104,7 @@ export const InputText = styled.input.attrs(props => ({
   autoComplete: 'off', // to remove Webkit browser's default style that cannot be overriden. See https://stackoverflow.com/questions/2338102/overrideq-browser-form-filling-and-input-highlighting-with-html-css
   type: 'text',
 }))`
-  background-color: transparent;
+  background-color: ${props => props.backgroundColor};
   border-color: ${props => {
     if (props.darkMode) {
       return props.error
@@ -119,6 +119,8 @@ export const InputText = styled.input.attrs(props => ({
   border-style: solid;
   border-width: ${layout.inputText.borderWidthPx.normal.toFixed()}px;
   border-radius: ${layout.inputText.borderRadiusPx.toFixed()}px;
+  color: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
   font-size: ${layout.inputText.fontSize.mobile.toFixed(4)}rem;
   height: 100%; /* Without this, 10px will be added up for some reason */
   padding: ${(
@@ -214,6 +216,8 @@ export const InputRange = styled.input.attrs(props => ({
 `;
 
 export const Label = styled.label`
+  color: ${props =>
+    props.darkMode ? color.body.font.darkMode : color.body.font.lightMode};
   font-size: ${layout.label.fontSize.mobile.toFixed(4)}rem;
   position: absolute;
   top: ${(

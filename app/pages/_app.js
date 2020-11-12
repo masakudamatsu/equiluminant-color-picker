@@ -102,6 +102,7 @@ function MyApp({Component, pageProps}) {
         setSubmitted={setSubmitted}
         clickedColorCode={clickedColorCode}
         setClickedColorCode={setClickedColorCode}
+        backgroundColor={backgroundColor}
       />
       <GlobalStyle
         darkMode={darkMode}
