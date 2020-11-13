@@ -13,7 +13,11 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   list-style: none;
+  margin-top: 24px;
   width: 50%;
+  &:last-child {
+    margin-bottom: 24px; /* half of the button height */
+  }
 `;
 
 function Swatches({colors, darkMode}) {
