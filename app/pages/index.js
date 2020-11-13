@@ -283,7 +283,7 @@ function HomePage(props) {
           <SpacerVertical scale="0" />
         </Card>
         <SpacerVertical scale="3" />
-        <Card darkMode={props.darkMode}>
+        <Card darkMode={props.darkMode} flipColor>
           <SpacerVertical scale="0" />
           <H2>#2 Set Saturation</H2>
           <SpacerVertical scale="2" />
@@ -353,7 +353,7 @@ function HomePage(props) {
         </Card>
       </form>
       <SpacerVertical scale="3" />
-      <Card darkMode={props.darkMode}>
+      <Card darkMode={props.darkMode} flipColor>
         <SpacerVertical scale="0" />
         <H2>#4 Copy Color Code</H2>
         <SpacerVertical scale="2" />

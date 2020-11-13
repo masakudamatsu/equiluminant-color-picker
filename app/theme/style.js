@@ -88,13 +88,24 @@ export const ButtonSubmit = styled.button`
 `;
 
 export const Card = styled.div`
-  background: ${color.card.background};
+  background: ${props =>
+    props.darkMode
+      ? props.flipColor
+        ? color.card.background
+        : color.card.font
+      : props.flipColor
+      ? color.card.font
+      : color.card.background};
   border: 1px solid
-    ${props =>
-      props.darkMode
-        ? color.card.border.darkMode
-        : color.card.border.lightMode};
-  color: ${color.card.font};
+    ${props => (props.darkMode ? color.card.background : color.card.font)};
+  color: ${props =>
+    props.darkMode
+      ? props.flipColor
+        ? color.card.font
+        : color.card.background
+      : props.flipColor
+      ? color.card.background
+      : color.card.font};
   padding: ${layout.sideMarginPx.mobile}px;
   width: 100%;
 `;

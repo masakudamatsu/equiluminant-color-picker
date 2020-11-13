@@ -36,10 +36,6 @@ const color = {
   },
   card: {
     background: whiteAA,
-    border: {
-      lightMode: blackAA,
-      darkMode: whiteAA,
-    },
     font: blackAA,
   },
   chromaTextField: {
