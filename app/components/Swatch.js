@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import {useState} from 'react';
 
 import copyToClipboard from '../utils/copyToClipboard';
+import layout from '../theme/layout';
 
 const Button = styled.button`
   background-color: ${props => props.backgroundColor};
+  border: 1px solid black;
+  border-radius: ${layout.inputText.borderRadiusPx}px;
   color: white; /* TODO: Change according to the overall color palette */
   height: 48px; /* For clickability with a thumb */
   text-align: center;
