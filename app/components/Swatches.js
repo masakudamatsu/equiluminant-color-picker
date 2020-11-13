@@ -22,8 +22,6 @@ const Li = styled.li`
 
 function Swatches({colors, darkMode}) {
   const userNotClickedHueYet = colors.length === 0;
-  console.log(colors.length);
-  console.log(userNotClickedHueYet);
   if (userNotClickedHueYet) {
     for (let i = 0; i < 30; i++) {
       colors.push({
