@@ -357,7 +357,7 @@ function HomePage(props) {
         <SpacerVertical scale="0" />
         <H2>#4 Copy Color Code</H2>
         <SpacerVertical scale="2" />
-        <Swatches colors={hueToDisplay} />
+        <Swatches colors={hueToDisplay} darkMode={props.darkMode} />
         <SpacerVertical scale="0" />
       </Card>
     </>

@@ -10,6 +10,11 @@ const Button = styled.button`
   height: 48px; /* For clickability with a thumb */
   text-align: center;
   width: 100%;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
 `;
 
 function Swatch(props) {
@@ -27,6 +32,7 @@ function Swatch(props) {
     <Button
       backgroundColor={rgbCode}
       data-testid={`rgb-${props.r}-${props.g}-${props.b}`}
+      disabled={props.disabled}
       id={rgbCode}
       onClick={handleClick}
       type="button"
@@ -37,6 +43,7 @@ function Swatch(props) {
 }
 
 Swatch.propTypes = {
+  disabled: PropTypes.bool,
   r: PropTypes.number.isRequired,
   g: PropTypes.number.isRequired,
   b: PropTypes.number.isRequired,

@@ -16,13 +16,30 @@ const Li = styled.li`
   width: 50%;
 `;
 
-function Swatches({colors}) {
+function Swatches({colors, darkMode}) {
+  const userNotClickedHueYet = colors.length === 0;
+  console.log(colors.length);
+  console.log(userNotClickedHueYet);
+  if (userNotClickedHueYet) {
+    for (let i = 0; i < 30; i++) {
+      colors.push({
+        red: darkMode ? 44 : 209,
+        green: darkMode ? 44 : 209,
+        blue: darkMode ? 44 : 209,
+      });
+    }
+  }
   return (
     <Ul>
-      {colors.map(color => {
+      {colors.map((color, index) => {
         return (
-          <Li key={`${color.red}-${color.green}-${color.blue}`}>
-            <Swatch r={color.red} g={color.green} b={color.blue} />
+          <Li key={`${color.red}-${color.green}-${color.blue}-${index}`}>
+            <Swatch
+              disabled={userNotClickedHueYet}
+              r={color.red}
+              g={color.green}
+              b={color.blue}
+            />
           </Li>
         );
       })}
@@ -32,6 +49,7 @@ function Swatches({colors}) {
 
 Swatches.propTypes = {
   colors: PropTypes.array,
+  darkMode: PropTypes.bool,
 };
 
 export default Swatches;
