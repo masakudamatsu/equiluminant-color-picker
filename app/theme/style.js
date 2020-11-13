@@ -49,9 +49,10 @@ export const Abbr = styled.abbr`
 `;
 
 export const ButtonSubmit = styled.button`
-  background: ${color.card.font};
+  background: ${props =>
+    props.darkMode ? color.card.background : color.card.font};
   border-radius: 50%;
-  color: ${color.card.background};
+  color: ${props => (props.darkMode ? color.card.font : color.card.background)};
   cursor: pointer;
   font-size: ${layout.button.fontSize.mobile}rem;
   height: 100px;
@@ -64,13 +65,17 @@ export const ButtonSubmit = styled.button`
 
   &:focus,
   &:hover {
+    outline: none;
     ${props =>
       props.searched
         ? ''
+        : props.darkMode
+        ? `background: ${color.card.font};
+             border: 2px solid ${color.card.background};
+             color: ${color.card.background};`
         : `background: ${color.card.background};
-           border: 1px solid ${color.card.font};
-           color: ${color.card.font};
-           outline: none;`}
+             border: 2px solid ${color.card.font};
+             color: ${color.card.font};`}
   }
 
   &:active {
