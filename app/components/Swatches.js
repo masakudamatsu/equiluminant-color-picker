@@ -8,10 +8,12 @@ const Ul = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 `;
 
 const Li = styled.li`
   list-style: none;
+  width: 50%;
 `;
 
 function Swatches({colors}) {
