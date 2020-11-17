@@ -161,25 +161,25 @@ describe('Moving the slider', () => {
   });
 });
 
-describe('Typing a value in the chroma value field box', () => {
+describe.only('Typing a value in the chroma value field box', () => {
   beforeEach(() => {
     cy.visit('/');
   });
   it('changes chroma immediately', () => {
-    const newChroma = '120';
+    const newChromaString = newChroma.toString();
 
-    cy.findByTestId('chroma-field').click().clear().type(newChroma[0]);
+    cy.findByTestId('chroma-field').click().clear().type(newChromaString[0]);
 
-    cy.findByTestId('chroma-setter').should('have.value', newChroma[0]);
+    cy.findByTestId('chroma-setter').should('have.value', newChromaString[0]);
 
-    cy.findByTestId('chroma-field').type(newChroma[1]);
+    cy.findByTestId('chroma-field').type(newChromaString[1]);
 
     cy.findByTestId('chroma-setter').should(
       'have.value',
-      newChroma[0] + newChroma[1],
+      newChromaString[0] + newChromaString[1],
     );
 
-    cy.findByTestId('chroma-field').type(newChroma[2]);
+    cy.findByTestId('chroma-field').type(newChromaString[2]);
 
     cy.findByTestId('chroma-setter').should('have.value', newChroma);
   });
