@@ -81,15 +81,15 @@ describe('Landing Page shows non-interactive UI components', () => {
   it('saturation value examples', () => {
     cy.findByText(/0 for grayscale/i);
     cy.findByText(/255 for full saturation/i);
-});
+  });
 });
 
-describe.only('Interactive components show the expected initial value', () => {
-  beforeEach(() => {
+describe('Interactive components show the expected initial values', () => {
+  before(() => {
     cy.visit('/');
   });
   it('Color code text field shows no default value', () => {
-    cy.findByLabelText(/color code/i).should('have.text', '');
+    cy.findByLabelText(/enter css color code/i).should('have.text', '');
   });
   it(`Chroma text field shows ${initialChroma}`, () => {
     cy.findByTestId('chroma-field').should('have.value', initialChroma);
@@ -103,17 +103,21 @@ describe.only('Interactive components show the expected initial value', () => {
       );
     });
   });
-});
-
-describe('Initial style for search results', () => {
-  beforeEach(() => {
-    cy.visit('/');
+  it(`Slider is set at the value of ${initialChroma}`, () => {
+    cy.findByTestId('chroma-setter').should('have.value', initialChroma);
   });
   it('The greyed-out color wheel is shown', () => {
     cy.findAllByTestId('sector').should(
       'have.css',
       'fill',
-      'rgb(127, 127, 127)',
+      'rgb(209, 209, 209)',
+    );
+  });
+  it('The greyed-out color swatches are shown', () => {
+    cy.findAllByTestId('swatch').should(
+      'have.css',
+      'background-color',
+      'rgb(209, 209, 209)',
     );
   });
 });

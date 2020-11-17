@@ -34,7 +34,7 @@ function Swatch(props) {
   return (
     <Button
       backgroundColor={rgbCode}
-      data-testid={`rgb-${props.r}-${props.g}-${props.b}`}
+      data-testid="swatch"
       disabled={props.disabled}
       id={rgbCode}
       onClick={handleClick}
