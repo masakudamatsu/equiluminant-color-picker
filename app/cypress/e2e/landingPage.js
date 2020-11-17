@@ -3,6 +3,8 @@ import color from '../../theme/color';
 import nativeInputValueSetter from '../utils/nativeInputValueSetter';
 import rgbCode from '../../utils/rgbCode';
 
+// User input values
+
 const colorList = [
   {
     red: 126,
@@ -58,27 +60,31 @@ const chromaSwatches = [
 ];
 
 describe('Landing Page shows non-interactive UI components', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
-  });
+  }); // No interactions in the following tests. So we don't need to refresh each time
   it('h1 element for accessibility', () => {
     cy.get('h1').should('have.text', 'Equiluminant Color Picker');
   });
   it('h2 elements', () => {
     cy.findByRole('heading', {name: /luminance/i});
     cy.findByRole('heading', {name: /saturation/i});
-    cy.findByRole('heading', {name: /hue/i});
-    cy.findByRole('heading', {name: /color code/i});
+    cy.findByRole('heading', {name: /find/i});
+    cy.findByRole('heading', {name: /copy/i});
   });
   it('color code examples', () => {
     cy.findByText(/examples/i);
-    cy.findByText(/rgb\(/i);
-    cy.findByText(/hsl\(/i);
+    cy.findByText(/rgb\(66, 135, 245\)/i);
+    cy.findByText(/hsl\(217, 90%, 61%\)/i);
     cy.findByText('#4287f5');
   });
+  it('saturation value examples', () => {
+    cy.findByText(/0 for grayscale/i);
+    cy.findByText(/255 for full saturation/i);
+});
 });
 
-describe('Interactive components show the expected initial value', () => {
+describe.only('Interactive components show the expected initial value', () => {
   beforeEach(() => {
     cy.visit('/');
   });
