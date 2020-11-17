@@ -59,59 +59,73 @@ const chromaSwatches = [
   },
 ];
 
-describe('Type a valid color code, and the color scheme changes accordingly after blurring the text field', () => {
+describe('Typing a valid color code and then blurring the text field will change the color scheme accordingly', () => {
   beforeEach(() => {
     cy.visit('/');
   });
-  it('light color in RGB', () => {
-    cy.findByLabelText(/color code/i)
+  it('Typing alone does not change the color scheme', () => {
+    // Verify initial color scheme
+    cy.get('html').should(
+      'have.css',
+      'background-color',
+      color.html.background.initial,
+    );
+    cy.get('body').should('have.css', 'color', color.body.font.lightMode);
+    // Type
+    cy.findByLabelText(/enter css color code/i)
       .click()
-      .clear()
+      .type(colorList[0].rgbCode);
+    // Verify the color scheme doesn't change yet
+    cy.get('html').should(
+      'have.css',
+      'background-color',
+      color.html.background.initial,
+    );
+    cy.get('body').should('have.css', 'color', color.body.font.lightMode);
+  });
+  it('light color in RGB', () => {
+    cy.findByLabelText(/enter css color code/i)
+      .click()
       .type(colorList[0].rgbCode)
       .blur();
     cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
     cy.get('body').should('have.css', 'color', color.body.font.lightMode);
   });
   it('dark color in RGB', () => {
-    cy.findByLabelText(/color code/i)
+    cy.findByLabelText(/enter css color code/i)
       .click()
-      .clear()
       .type(colorList[1].rgbCode)
       .blur();
     cy.get('html').should('have.css', 'background-color', colorList[1].rgbCode);
     cy.get('body').should('have.css', 'color', color.body.font.darkMode);
   });
   it('light color in HEX', () => {
-    cy.findByLabelText(/color code/i)
+    cy.findByLabelText(/enter css color code/i)
       .click()
-      .clear()
       .type(colorList[0].hexCode)
       .blur();
     cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
     cy.get('body').should('have.css', 'color', color.body.font.lightMode);
   });
   it('dark color in HEX', () => {
-    cy.findByLabelText(/color code/i)
+    cy.findByLabelText(/enter css color code/i)
       .click()
-      .clear()
       .type(colorList[1].hexCode)
       .blur();
     cy.get('html').should('have.css', 'background-color', colorList[1].rgbCode);
     cy.get('body').should('have.css', 'color', color.body.font.darkMode);
   });
   it('light color in HSL', () => {
-    cy.findByLabelText(/color code/i)
+    cy.findByLabelText(/enter css color code/i)
       .click()
-      .clear()
       .type(colorList[0].hslCode)
       .blur();
     cy.get('html').should('have.css', 'background-color', colorList[0].rgbCode);
     cy.get('body').should('have.css', 'color', color.body.font.lightMode);
   });
   it('dark color in HSL', () => {
-    cy.findByLabelText(/color code/i)
+    cy.findByLabelText(/enter css color code/i)
       .click()
-      .clear()
       .type(colorList[1].hslCode)
       .blur();
     cy.get('html').should('have.css', 'background-color', colorList[1].rgbCode);
@@ -205,7 +219,7 @@ describe('Pressing arrow keys in the chroma value field box', () => {
 // describe('Once all inputs are provided correctly', () => {
 //   beforeEach(() => {
 //     cy.visit('/');
-//     cy.findByLabelText(/color code/i)
+//     cy.findByLabelText(/enter css color code/i)
 //       .click()
 //       .clear()
 //       .type(colorList[0].rgbCode)
