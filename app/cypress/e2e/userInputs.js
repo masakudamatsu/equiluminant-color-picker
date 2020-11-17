@@ -1,5 +1,7 @@
-import color from '../../theme/color';
 import nativeInputValueSetter from '../utils/nativeInputValueSetter';
+
+import color from '../../theme/color';
+import {getContrastRatio} from '../../utils/helpers';
 import rgbCode from '../../utils/rgbCode';
 
 // User input values
@@ -204,5 +206,40 @@ describe('Pressing arrow keys in the chroma value field box', () => {
     cy.findByTestId('chroma-field').click().type('{shift}{downarrow}');
 
     cy.findByTestId('chroma-field').should('have.value', originalChroma);
+  });
+});
+
+describe('Clicking the search button with valid inputs', () => {
+  beforeEach(() => {
+    cy.route2('POST', '**/graphql', req => {
+      req.reply(); // https://docs.cypress.io/api/commands/route2.html#Dynamically-stubbing-a-response
+    }).as('server');
+    cy.visit('/');
+    cy.findByLabelText(/enter css color code/i)
+      .click()
+      .type(colorList[0].rgbCode)
+      .blur();
+    cy.findByTestId('chroma-setter').then($range => {
+      const range = $range[0];
+      nativeInputValueSetter.call(range, Number(newChroma));
+      range.dispatchEvent(
+        new Event('change', {value: Number(newChroma), bubbles: true}),
+      );
+    });
+  });
+  it('shows the message "Fetching..." and sends the correst request data to the server', () => {
+    const expectedContrastRatio = getContrastRatio(
+      colorList[0].red,
+      colorList[0].green,
+      colorList[0].blue,
+    );
+    cy.findByRole('button', {name: /search/i}).click();
+    cy.findByText(/fetching/i);
+    cy.wait('@server')
+      .its('request.body')
+      .should(
+        'include',
+        `contrastRatio: ${expectedContrastRatio}, chroma: ${newChroma}`,
+      ); // https://docs.cypress.io/api/commands/route2.html#Using-the-yielded-object
   });
 });
