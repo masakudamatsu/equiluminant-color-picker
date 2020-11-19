@@ -1,7 +1,10 @@
 {
   "baseUrl": "http://localhost:3000",
   "experimentalNetworkStubbing": true,
-  "integrationFolder": "cypress/e2e",
+  "fixturesFolder": "__cypress__/fixtures",
+  "integrationFolder": "__cypress__/e2e",
+  "pluginsFile": "__cypress__/plugins/index.js",
+  "supportFile": "__cypress__/support/index.js",
   "viewportHeight": 568,
   "viewportWidth": 320
 }
