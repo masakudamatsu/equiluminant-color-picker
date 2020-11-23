@@ -1,9 +1,9 @@
 import cases from 'jest-in-case';
 
-import rgbCode from '../../utils/rgbCode';
+import rgbCode from './rgbCode';
 
 cases(
-  'rgbCode correctly converts chroma 0 into the CSS RGB code for each hue',
+  'converts chroma 0 into CSS RGB code for:',
   options => {
     expect(rgbCode(0)[options.hue]).toStrictEqual(options.rgbValues);
   },
@@ -18,7 +18,7 @@ cases(
 );
 
 cases(
-  'rgbCode correctly converts chroma 255 into the CSS RGB code for each hue',
+  'converts chroma 255 into CSS RGB code for:',
   options => {
     expect(rgbCode(255)[options.hue]).toStrictEqual(options.rgbValues);
   },
@@ -33,7 +33,7 @@ cases(
 );
 
 cases(
-  'rgbCode correctly converts chroma 51 into the CSS RGB code for each hue',
+  'converts chroma 51 into CSS RGB code for:',
   options => {
     expect(rgbCode(51)[options.hue]).toStrictEqual(options.rgbValues);
   },
