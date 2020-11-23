@@ -20,33 +20,99 @@ beforeEach(() => {
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
+    .c4::before,
+    .c4::after {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+    }
+
+    .c4::before {
+      margin-bottom: -0.3772em;
+    }
+
+    .c4::after {
+      margin-top: -0.4045em;
+    }
+
+    .c4:not(:first-child) {
+      padding-top: 0.8035714285714286rem;
+    }
+
+    .c1::before,
+    .c1::after {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+    }
+
+    .c1::before {
+      margin-bottom: -0.3772em;
+    }
+
+    .c1::after {
+      margin-top: -0.4045em;
+    }
+
+    .c3 {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      list-style: none;
+    }
+
+    .c0 {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      font-size: 1.0139952468972802rem;
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
+    }
+
+    .c2 {
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      width: 11.53419593345656px;
+    }
+
     <div>
       <div
-        class="style__InputExamplesWrapper-o0wbpp-11 bomJcg"
+        class="c0"
       >
         <p
-          class="style__Paragraph-o0wbpp-6 dhmbeD"
+          class="c1"
         >
           Examples:
         </p>
         <div
-          class="style__SpacerHorizontal-o0wbpp-14 gkEYjx"
+          class="c2"
         />
         <ul
-          class="style__UnorderedListInputValueExamples-o0wbpp-8 joOchR"
+          class="c3"
         >
           <li
-            class="style__ListItemInputValueExample-o0wbpp-5 jOQzzS"
+            class="c4"
           >
             rgb(66, 135, 245)
           </li>
           <li
-            class="style__ListItemInputValueExample-o0wbpp-5 jOQzzS"
+            class="c4"
           >
             hsl(217, 90%, 61%)
           </li>
           <li
-            class="style__ListItemInputValueExample-o0wbpp-5 jOQzzS"
+            class="c4"
           >
             #4287f5
           </li>

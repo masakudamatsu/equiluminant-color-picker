@@ -26,16 +26,75 @@ afterEach(() => {
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
+    .c2 {
+      background-color: rgb(123,133,23);
+      border: 1px solid black;
+      border-radius: 4px;
+      color: white;
+      height: 48px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .c2[disabled] {
+      cursor: not-allowed;
+      opacity: 0.3;
+    }
+
+    .c3 {
+      background-color: rgb(53,2,223);
+      border: 1px solid black;
+      border-radius: 4px;
+      color: white;
+      height: 48px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .c3[disabled] {
+      cursor: not-allowed;
+      opacity: 0.3;
+    }
+
+    .c0 {
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .c1 {
+      list-style: none;
+      margin-top: 24px;
+      width: 50%;
+    }
+
+    .c1:last-child {
+      margin-bottom: 24px;
+    }
+
     <div>
       <ul
-        class="Swatches__Ul-sc-2rnu0-0 bXTsDc"
+        class="c0"
       >
         <li
-          class="Swatches__Li-sc-2rnu0-1 ckfZtC"
+          class="c1"
         >
           <button
-            class="Swatch__Button-sc-1m9mdn9-0 hNTCgO"
-            data-testid="rgb-123-133-23"
+            class="c2"
+            data-testid="swatch"
             id="rgb(123, 133, 23)"
             type="button"
           >
@@ -43,11 +102,11 @@ test('renders correctly', () => {
           </button>
         </li>
         <li
-          class="Swatches__Li-sc-2rnu0-1 ckfZtC"
+          class="c1"
         >
           <button
-            class="Swatch__Button-sc-1m9mdn9-0 brMaRR"
-            data-testid="rgb-53-2-223"
+            class="c3"
+            data-testid="swatch"
             id="rgb(53, 2, 223)"
             type="button"
           >

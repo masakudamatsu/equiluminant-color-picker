@@ -57,6 +57,7 @@ test('renders correctly', () => {
     <div>
       <svg>
         <g
+          style="opacity: 1;"
           transform="rotate(-30, 250, 250)"
         >
           <g>
@@ -76,6 +77,7 @@ test('renders correctly', () => {
             />
           </g>
           <g
+            aria-disabled="false"
             aria-label="Show color code of equiluminant colors in red hue"
             role="button"
             tabindex="0"

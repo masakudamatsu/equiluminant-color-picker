@@ -69,10 +69,15 @@ test('sets the color by props.chroma', () => {
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
+    .c0 {
+      position: absolute;
+      width: 100%;
+    }
+
     <div>
       <svg
         aria-labelledby="ChromaPreview"
-        class="ChromaPreview__Svg-sc-1ccy2fs-0 bKNLsH"
+        class="c0"
         viewBox="0 0 281 187"
       >
         <title

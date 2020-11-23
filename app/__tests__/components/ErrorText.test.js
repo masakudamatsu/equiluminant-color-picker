@@ -71,9 +71,31 @@ test('shows the relevant alert if the alertEnterKey is true', () => {
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
+    .c0 {
+      color: rgb(255,0,0);
+      font-size: 1.0139952468972802rem;
+      visibility: hidden;
+    }
+
+    .c0::before,
+    .c0::after {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+    }
+
+    .c0::before {
+      margin-bottom: -0.3772em;
+    }
+
+    .c0::after {
+      margin-top: -0.4045em;
+    }
+
     <div>
       <p
-        class="style__Paragraph-o0wbpp-6 style__ParagraphErrorMessage-o0wbpp-7 gMjrsG"
+        class="style__Paragraph-o0wbpp-9 c0"
         role="alert"
       >
         <span>

@@ -78,12 +78,63 @@ test('calls handleKeyDown() each time the user hits arrow keys', () => {
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
+    .c2 {
+      border-color: rgb(44,44,44);
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 4px;
+      color: rgb(44,44,44);
+      font-size: 1.5210rem;
+      height: 100%;
+      padding: 35.0937px 10.5342px 11.3609px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .c2:active,
+    .c2:hover,
+    .c2:focus {
+      border-width: 2px;
+      outline: none;
+    }
+
+    .c1 {
+      color: rgb(44,44,44);
+      font-size: 1.0140rem;
+      position: absolute;
+      top: 15.5342px;
+      left: 12.5342px;
+    }
+
+    .c1::before,
+    .c1::after {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+    }
+
+    .c1::before {
+      margin-bottom: -0.3772em;
+    }
+
+    .c1::after {
+      margin-top: -0.4045em;
+    }
+
+    .c0 {
+      background-color: inherit;
+      height: 80.9723px;
+      position: relative;
+      width: 100%;
+    }
+
     <div>
       <div
-        class="style__InputWrapper-o0wbpp-12 hGwvwV"
+        class="c0"
       >
         <label
-          class="style__Label-o0wbpp-4 ioSAPn"
+          class="c1"
           for="mockId"
         >
           <span>
@@ -92,7 +143,7 @@ test('renders correctly', () => {
         </label>
         <input
           autocomplete="off"
-          class="style__InputText-o0wbpp-2 iUgOwH"
+          class="c2"
           id="mockId"
           pattern="#([A-Fa-f\\\\d]{3}){1,2}|rgb\\\\((1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])(,\\\\s*(1?\\\\d?\\\\d|2[0-4]\\\\d|25[0-5])){2}\\\\)|hsl\\\\((360|3[0-5]\\\\d|[1-2]?\\\\d?\\\\d)(,\\\\s*(100|[1-9]?\\\\d)%){2}\\\\)"
           type="text"

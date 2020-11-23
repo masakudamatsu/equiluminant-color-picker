@@ -50,10 +50,25 @@ test('temporarily (1.5 sec) changes the button label when clicked', async () => 
 
 test('renders correctly', () => {
   expect(container).toMatchInlineSnapshot(`
+    .c0 {
+      background-color: rgb(123,133,23);
+      border: 1px solid black;
+      border-radius: 4px;
+      color: white;
+      height: 48px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .c0[disabled] {
+      cursor: not-allowed;
+      opacity: 0.3;
+    }
+
     <div>
       <button
-        class="Swatch__Button-sc-1m9mdn9-0 hNTCgO"
-        data-testid="rgb-123-133-23"
+        class="c0"
+        data-testid="swatch"
         id="rgb(123, 133, 23)"
         type="button"
       >
