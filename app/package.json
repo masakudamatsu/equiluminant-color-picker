@@ -59,5 +59,12 @@
     "jest-styled-components": "^7.0.3",
     "prettier": "2.0.5",
     "start-server-and-test": "^1.11.3"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect",
+      "jest-styled-components",
+      "jest-axe/extend-expect"
+    ]
   }
 }
