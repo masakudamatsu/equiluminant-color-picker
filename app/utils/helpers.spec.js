@@ -1,10 +1,6 @@
 import cases from 'jest-in-case';
 
-import {
-  getContrastRatio,
-  getRgbFromHex,
-  getRgbFromHsl,
-} from '../../utils/helpers';
+import {getContrastRatio, getRgbFromHex, getRgbFromHsl} from './helpers';
 
 cases(
   'getContrastRatio returns the correct contrast ratio for:',
