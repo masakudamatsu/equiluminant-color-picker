@@ -1,10 +1,7 @@
 import React from 'react';
 import {cleanup, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom/extend-expect';
 import {axe} from 'jest-axe';
-import 'jest-axe/extend-expect';
-import 'jest-styled-components';
 
 import ErrorText from '../../components/ErrorText';
 
