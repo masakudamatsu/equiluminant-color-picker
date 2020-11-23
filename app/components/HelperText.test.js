@@ -3,7 +3,7 @@ import {cleanup, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from 'jest-axe';
 
-import HelperText from '../../components/HelperText';
+import HelperText from './HelperText';
 
 let container;
 

@@ -3,8 +3,8 @@ import {cleanup, fireEvent, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from 'jest-axe';
 
-import TextField from '../../components/TextField';
-import {regexHexText, regexRgbText, regexHslText} from '../../utils/regex';
+import TextField from './TextField';
+import {regexHexText, regexRgbText, regexHslText} from '../utils/regex';
 
 const mockLabel = <span>mock label</span>;
 

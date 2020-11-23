@@ -3,7 +3,7 @@ import {cleanup, fireEvent, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from 'jest-axe';
 
-import Swatches from '../../components/Swatches';
+import Swatches from './Swatches';
 
 const colorList = [
   {red: 123, green: 133, blue: 23},

@@ -3,7 +3,7 @@ import {cleanup, fireEvent, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from 'jest-axe';
 
-import Sectors from '../../components/Sectors';
+import Sectors from './Sectors';
 
 const mockColors = [
   {red: '124', green: '234', blue: '12'},

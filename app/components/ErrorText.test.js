@@ -3,7 +3,7 @@ import {cleanup, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from 'jest-axe';
 
-import ErrorText from '../../components/ErrorText';
+import ErrorText from './ErrorText';
 
 let container, getByText, rerender;
 

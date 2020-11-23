@@ -3,7 +3,7 @@ import {cleanup, fireEvent, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from 'jest-axe';
 
-import Sector from '../../components/Sector';
+import Sector from './Sector';
 
 const mockColorCode = 'rgb(124, 234, 12)';
 

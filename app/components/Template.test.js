@@ -12,7 +12,7 @@ import {axe} from 'jest-axe';
 // Delete lines 19 and 38 (the describe() function), which makes Jest skip to run this test file
 //
 
-import Template from '../../components/Template';
+import Template from './Template';
 
 describe.skip('Delete this line', () => {
   let container, getByLabelText;

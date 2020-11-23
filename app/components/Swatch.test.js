@@ -3,8 +3,8 @@ import {act, cleanup, fireEvent, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from 'jest-axe';
 
-import Swatch from '../../components/Swatch';
-// import * as mockCopyToClipboard from '../../utils/copyToClipboard';
+import Swatch from './Swatch';
+// import * as mockCopyToClipboard from '../utils/copyToClipboard';
 
 const mockColor = {
   red: 123,

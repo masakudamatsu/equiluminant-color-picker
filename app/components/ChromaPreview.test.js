@@ -3,8 +3,8 @@ import {cleanup, fireEvent, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from 'jest-axe';
 
-import ChromaPreview from '../../components/ChromaPreview';
-import rgbCode from '../../utils/rgbCode';
+import ChromaPreview from './ChromaPreview';
+import rgbCode from '../utils/rgbCode';
 
 const initialChroma = 128;
 const newChroma = 64;
