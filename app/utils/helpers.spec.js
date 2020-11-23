@@ -3,7 +3,7 @@ import cases from 'jest-in-case';
 import {getContrastRatio, getRgbFromHex, getRgbFromHsl} from './helpers';
 
 cases(
-  'getContrastRatio returns the correct contrast ratio for:',
+  'getContrastRatio returns contrast ratio for:',
   options => {
     expect(getContrastRatio(options.r, options.g, options.b)).toBe(
       options.contrastRatio,
@@ -38,7 +38,7 @@ cases(
 );
 
 cases(
-  'getRgbFromHex returns the correct RGB code for:',
+  'getRgbFromHex returns RGB code converted from:',
   options => {
     expect(getRgbFromHex(options.hexCode)).toBe(options.rgbCode);
   },
@@ -71,7 +71,7 @@ cases(
 );
 
 cases(
-  'getRgbFromHsl returns the correct RGB code for:',
+  'getRgbFromHsl converts HSL into RGB for:',
   options => {
     expect(getRgbFromHsl(options.hslCode)).toBe(options.rgbCode);
   },
