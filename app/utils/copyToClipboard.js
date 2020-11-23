@@ -26,7 +26,7 @@ const copyToClipboard = async textToCopy => {
     const copyResult = document.execCommand('copy');
     if (copyResult === 'successful') {
       console.log(
-        `Text "${textToCopy}" is copied onto the user's clipboard with execCommand('c opy').`,
+        `Text "${textToCopy}" is copied onto the user's clipboard with execCommand('copy').`,
       );
     } else {
       console.log(`execCommand('copy') fails to copy.`);
